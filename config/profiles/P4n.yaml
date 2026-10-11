@@ -1,0 +1,15 @@
+# Time-compressed synthetic profile. Values are NOT real-provider figures (DESIGN §2.7a).
+id: P4n
+description: "Legacy with reconciliation API, no deadlines: separates Tier S/B"
+capability:
+  idempotency: false
+  key_ttl_ms: null
+  lookup: by_client_ref
+  lookup_lag_ms: 500
+  deadline_enforced: false
+behavior:
+  overlap: reject
+  latency: {dist: lognormal, median_ms: 20, sigma: 0.25}
+  decline_rate: 0.0
+  actual_lookup_lag_ms: 200
+  seed: 0

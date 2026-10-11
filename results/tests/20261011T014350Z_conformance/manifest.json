@@ -1,0 +1,33 @@
+{
+  "created_at": "2026-10-11T01:43:50.887550+00:00",
+  "docker": {
+    "context": "colima",
+    "images": {
+      "compose_images": "[{\"ID\":\"sha256:229844a4ee60c3eea8c20f3db8df50090287e96083c0692d52f08a78d3a645ab\",\"ContainerName\":\"raeg-provider-1\",\"Repository\":\"raeg/python\",\"Tag\":\"dev\",\"Size\":187798225,\"LastTagTime\":\"2026-10-10T21:43:49.525369378-04:00\"},{\"ID\":\"sha256:ef738a34a8651d11b2bace81c55c7e2187f786b484add6c83070884340074368\",\"ContainerName\":\"raeg-provider-db-1\",\"Repository\":\"postgres\",\"Tag\":\"\",\"Size\":288124731,\"LastTagTime\":\"0001-01-01T00:00:00Z\"},{\"ID\":\"sha256:ef738a34a8651d11b2bace81c55c7e2187f786b484add6c83070884340074368\",\"ContainerName\":\"raeg-raeg-db-1\",\"Repository\":\"postgres\",\"Tag\":\"\",\"Size\":288124731,\"LastTagTime\":\"0001-01-01T00:00:00Z\"}]",
+      "raeg/python:dev": "sha256:229844a4ee60c3eea8c20f3db8df50090287e96083c0692d52f08a78d3a645ab"
+    },
+    "server_version": "27.4.0"
+  },
+  "finished_at": "2026-10-11T01:45:54.348836+00:00",
+  "git": {
+    "dirty": null,
+    "head": null
+  },
+  "host": {
+    "cpu": "Apple M1",
+    "machine": "arm64",
+    "mem_bytes": "8589934592",
+    "platform": "macOS-26.5.2-arm64-arm-64bit"
+  },
+  "kind": "test",
+  "pytest_args": [
+    "tests/conformance"
+  ],
+  "python": "3.12.7 (main, Oct  5 2024, 00:14:26) [Clang 15.0.0 (clang-1500.1.0.2.5)]",
+  "requirements_lock_sha256": "4a7cc5076d2b24fc58ca16664832866b27b231af9bbb541b72f5d75da68eb7fc",
+  "source_files": 42,
+  "source_tree_sha256": "b5b731489146adf57b68d42bce00c67e34805247ff5c4e6759edfae430735287",
+  "status": "passed",
+  "suite": "conformance",
+  "uv_lock_sha256": "0ee7212d05b396adb25cb79dbbc8d14fb3825b968c72a4c97d68b91d9100d938"
+}

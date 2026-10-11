@@ -1,0 +1,62 @@
+# Core stack (DESIGN §9). Per-system overlays are added in compose/ from M3 onward.
+name: raeg
+
+x-postgres: &postgres
+  image: postgres:16-alpine@sha256:721873c34ceb9f8d8fc265984940dc982404c105f19ad51be9fdc5970a6080ea
+  environment:
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: postgres
+  # fsync stays ON: durability is assumption S3 (DESIGN §11.1).
+  command: ["postgres", "-c", "max_connections=200"]
+  healthcheck:
+    test: ["CMD-SHELL", "pg_isready -U postgres"]
+    interval: 2s
+    timeout: 3s
+    retries: 30
+
+services:
+  provider-db:
+    <<: *postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: provider
+    ports: ["127.0.0.1:55433:5432"]
+    volumes: [provider-db:/var/lib/postgresql/data]
+
+  raeg-db:
+    <<: *postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: raeg
+    ports: ["127.0.0.1:55432:5432"]
+    volumes: [raeg-db:/var/lib/postgresql/data]
+
+  provider:
+    build: {context: ., dockerfile: docker/python.Dockerfile}
+    image: raeg/python:dev
+    command: ["python", "-m", "payment_provider.app"]
+    depends_on:
+      provider-db: {condition: service_healthy}
+    environment:
+      PROVIDER_DB_DSN: postgresql://postgres:postgres@provider-db:5432/provider
+      PROVIDER_PROFILE: /app/config/profiles/${PROVIDER_PROFILE_ID:-P1}.yaml
+      ORACLE_TOKEN: ${ORACLE_TOKEN:-local-oracle-token}
+      PROVIDER_ALLOW_RESET: ${PROVIDER_ALLOW_RESET:-0}
+      PROVIDER_PORT: "8001"
+      ORACLE_PORT: "9001"
+    ports:
+      - "127.0.0.1:18001:8001"   # public API
+      - "127.0.0.1:19001:9001"   # oracle/admin (harness only)
+    restart: unless-stopped
+    stop_grace_period: 3s
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8001/healthz', timeout=2)"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+volumes:
+  provider-db:
+  raeg-db:

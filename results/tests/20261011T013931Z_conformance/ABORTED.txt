@@ -1,0 +1,4 @@
+This run was interrupted by the user at ~58% (after test_k7_stuck_reservation_released_on_recovery).
+manifest.json still says "running" because the runner was killed before it could record a final status.
+No junit.xml was produced. The run is kept unmodified as evidence; it is not a result.
+Superseded by: results/tests/20261011T014350Z_conformance (114 passed).

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="4" failures="0" skipped="0" tests="4" time="1.614" timestamp="2026-10-10T21:18:55.309625-04:00" hostname="MacBookAir"><testcase classname="" name="tests.unit.test_fault_engine" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/unit/test_fault_engine.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/local/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/unit/test_fault_engine.py:3: in &lt;module&gt;
+    from payment_provider.faults import FaultEngine, FaultKind, FaultPlan
+E   ModuleNotFoundError: No module named 'payment_provider'</error></testcase><testcase classname="" name="tests.unit.test_fingerprint" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/unit/test_fingerprint.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/local/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/unit/test_fingerprint.py:19: in &lt;module&gt;
+    from raeg_common.fingerprint import CanonicalizationError, canonicalize, fingerprint
+E   ModuleNotFoundError: No module named 'raeg_common'</error></testcase><testcase classname="" name="tests.unit.test_models_profiles" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/unit/test_models_profiles.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/local/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/unit/test_models_profiles.py:6: in &lt;module&gt;
+    from raeg_common.models import Capability, LookupMode, PaymentPayload, ProviderProfile
+E   ModuleNotFoundError: No module named 'raeg_common'</error></testcase><testcase classname="" name="tests.unit.test_provider_client" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/unit/test_provider_client.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/local/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/unit/test_provider_client.py:11: in &lt;module&gt;
+    from raeg_common.exchange_log import ExchangeLog
+E   ModuleNotFoundError: No module named 'raeg_common'</error></testcase></testsuite></testsuites>

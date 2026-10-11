@@ -1,0 +1,139 @@
+$ /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/.venv/bin/python -m pytest -v -rA --tb=long --junitxml=/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/results/tests/20261011T014603Z_unit/junit.xml tests/unit
+
+============================= test session starts ==============================
+platform darwin -- Python 3.12.7, pytest-9.1.1, pluggy-1.6.0 -- /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/.venv/bin/python
+cachedir: .pytest_cache
+hypothesis profile 'default'
+rootdir: /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup
+configfile: pyproject.toml
+plugins: hypothesis-6.168.5, asyncio-1.4.0, anyio-4.15.1
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
+collecting ... collected 61 items
+
+tests/unit/test_fault_engine.py::test_ingress_indices_are_per_reference_and_kind PASSED [  1%]
+tests/unit/test_fingerprint.py::test_appendix_b_numbers[0000000000000000-0] PASSED [  3%]
+tests/unit/test_fingerprint.py::test_appendix_b_numbers[8000000000000000-0] PASSED [  4%]
+tests/unit/test_fingerprint.py::test_appendix_b_numbers[0000000000000001-5e-324] PASSED [  6%]
+tests/unit/test_fingerprint.py::test_appendix_b_numbers[8000000000000001--5e-324] PASSED [  8%]
+tests/unit/test_fingerprint.py::test_appendix_b_numbers[7fefffffffffffff-1.7976931348623157e+308] PASSED [  9%]
+tests/unit/test_fingerprint.py::test_appendix_b_numbers[4340000000000000-9007199254740992] PASSED [ 11%]
+tests/unit/test_fingerprint.py::test_appendix_b_numbers[4430000000000000-295147905179352830000] PASSED [ 13%]
+tests/unit/test_fingerprint.py::test_appendix_b_numbers[44b52d02c7e14af5-9.999999999999997e+22] PASSED [ 14%]
+tests/unit/test_fingerprint.py::test_appendix_b_numbers[44b52d02c7e14af6-1e+23] PASSED [ 16%]
+tests/unit/test_fingerprint.py::test_appendix_b_numbers[44b52d02c7e14af7-1.0000000000000001e+23] PASSED [ 18%]
+tests/unit/test_fingerprint.py::test_appendix_b_numbers[444b1ae4d6e2ef4e-999999999999999700000] PASSED [ 19%]
+tests/unit/test_fingerprint.py::test_appendix_b_numbers[444b1ae4d6e2ef50-1e+21] PASSED [ 21%]
+tests/unit/test_fingerprint.py::test_appendix_b_numbers[3eb0c6f7a0b5ed8c-9.999999999999997e-7] PASSED [ 22%]
+tests/unit/test_fingerprint.py::test_appendix_b_numbers[3eb0c6f7a0b5ed8d-0.000001] PASSED [ 24%]
+tests/unit/test_fingerprint.py::test_appendix_b_numbers[41b3de4355555553-333333333.3333332] PASSED [ 26%]
+tests/unit/test_fingerprint.py::test_appendix_b_numbers[41b3de4355555554-333333333.33333325] PASSED [ 27%]
+tests/unit/test_fingerprint.py::test_appendix_b_numbers[41b3de4355555557-333333333.33333343] PASSED [ 29%]
+tests/unit/test_fingerprint.py::test_appendix_b_numbers[becbf647612f3696--0.0000033333333333333333] PASSED [ 31%]
+tests/unit/test_fingerprint.py::test_appendix_b_numbers[43143ff3c1cb0959-1424953923781206.2] PASSED [ 32%]
+tests/unit/test_fingerprint.py::test_rfc_sample_3_2_2 PASSED             [ 34%]
+tests/unit/test_fingerprint.py::test_rfc_sorting_3_2_3 PASSED            [ 36%]
+tests/unit/test_fingerprint.py::test_rejects_non_canonicalizable[nan] PASSED [ 37%]
+tests/unit/test_fingerprint.py::test_rejects_non_canonicalizable[inf] PASSED [ 39%]
+tests/unit/test_fingerprint.py::test_rejects_non_canonicalizable[9007199254740992] PASSED [ 40%]
+tests/unit/test_fingerprint.py::test_rejects_non_canonicalizable[bad3] PASSED [ 42%]
+tests/unit/test_fingerprint.py::test_rejects_non_canonicalizable[bytes] PASSED [ 44%]
+tests/unit/test_fingerprint.py::test_rejects_non_canonicalizable[\ud800] PASSED [ 45%]
+tests/unit/test_fingerprint.py::test_payload_fingerprint_is_order_independent_and_sensitive PASSED [ 47%]
+tests/unit/test_fingerprint.py::test_numbers_match_ecmascript_differentially PASSED [ 49%]
+tests/unit/test_models_profiles.py::test_profiles_match_design_table PASSED [ 50%]
+tests/unit/test_models_profiles.py::test_only_client_ref_lookup_is_recovery_capable PASSED [ 52%]
+tests/unit/test_models_profiles.py::test_payload_rejects_invalid[kwargs0] PASSED [ 54%]
+tests/unit/test_models_profiles.py::test_payload_rejects_invalid[kwargs1] PASSED [ 55%]
+tests/unit/test_models_profiles.py::test_payload_rejects_invalid[kwargs2] PASSED [ 57%]
+tests/unit/test_models_profiles.py::test_payload_rejects_invalid[kwargs3] PASSED [ 59%]
+tests/unit/test_models_profiles.py::test_payload_rejects_invalid[kwargs4] PASSED [ 60%]
+tests/unit/test_models_profiles.py::test_capability_consistency_rules PASSED [ 62%]
+tests/unit/test_models_profiles.py::test_actual_lag_must_leave_headroom_below_declared_delta PASSED [ 63%]
+tests/unit/test_provider_client.py::test_classification_table[201-body0-COMMITTED] PASSED [ 65%]
+tests/unit/test_provider_client.py::test_classification_table[200-body1-COMMITTED] PASSED [ 67%]
+tests/unit/test_provider_client.py::test_classification_table[201-body2-AMBIGUOUS] PASSED [ 68%]
+tests/unit/test_provider_client.py::test_classification_table[402-body3-DECLINED] PASSED [ 70%]
+tests/unit/test_provider_client.py::test_classification_table[422-body4-DECLINED] PASSED [ 72%]
+tests/unit/test_provider_client.py::test_classification_table[422-body5-INTERNAL] PASSED [ 73%]
+tests/unit/test_provider_client.py::test_classification_table[409-body6-DEADLINE_REJECTED] PASSED [ 75%]
+tests/unit/test_provider_client.py::test_classification_table[409-body7-AMBIGUOUS] PASSED [ 77%]
+tests/unit/test_provider_client.py::test_classification_table[500-body8-AMBIGUOUS] PASSED [ 78%]
+tests/unit/test_provider_client.py::test_classification_table[503-body9-AMBIGUOUS] PASSED [ 80%]
+tests/unit/test_provider_client.py::test_classification_table[404-body10-AMBIGUOUS] PASSED [ 81%]
+tests/unit/test_provider_client.py::test_dispatch_sets_headers_and_logs PASSED [ 83%]
+tests/unit/test_provider_client.py::test_nodl_control_omits_deadline_and_no_key_when_none PASSED [ 85%]
+tests/unit/test_provider_client.py::test_transport_failures_are_ambiguous[exc0] PASSED [ 86%]
+tests/unit/test_provider_client.py::test_transport_failures_are_ambiguous[exc1] PASSED [ 88%]
+tests/unit/test_provider_client.py::test_transport_failures_are_ambiguous[exc2] PASSED [ 90%]
+tests/unit/test_provider_client.py::test_crash_hooks_fire_at_their_point[CP1] PASSED [ 91%]
+tests/unit/test_provider_client.py::test_crash_hooks_fire_at_their_point[CP3] PASSED [ 93%]
+tests/unit/test_provider_client.py::test_hooks_only_fire_for_matching_attempt PASSED [ 95%]
+tests/unit/test_provider_client.py::test_pause_hook_delays_send PASSED   [ 96%]
+tests/unit/test_provider_client.py::test_cp2_crashes_while_request_in_flight PASSED [ 98%]
+tests/unit/test_provider_client.py::test_lookup_parsing PASSED           [100%]
+
+==================================== PASSES ====================================
+- generated xml file: /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/results/tests/20261011T014603Z_unit/junit.xml -
+=========================== short test summary info ============================
+PASSED tests/unit/test_fault_engine.py::test_ingress_indices_are_per_reference_and_kind
+PASSED tests/unit/test_fingerprint.py::test_appendix_b_numbers[0000000000000000-0]
+PASSED tests/unit/test_fingerprint.py::test_appendix_b_numbers[8000000000000000-0]
+PASSED tests/unit/test_fingerprint.py::test_appendix_b_numbers[0000000000000001-5e-324]
+PASSED tests/unit/test_fingerprint.py::test_appendix_b_numbers[8000000000000001--5e-324]
+PASSED tests/unit/test_fingerprint.py::test_appendix_b_numbers[7fefffffffffffff-1.7976931348623157e+308]
+PASSED tests/unit/test_fingerprint.py::test_appendix_b_numbers[4340000000000000-9007199254740992]
+PASSED tests/unit/test_fingerprint.py::test_appendix_b_numbers[4430000000000000-295147905179352830000]
+PASSED tests/unit/test_fingerprint.py::test_appendix_b_numbers[44b52d02c7e14af5-9.999999999999997e+22]
+PASSED tests/unit/test_fingerprint.py::test_appendix_b_numbers[44b52d02c7e14af6-1e+23]
+PASSED tests/unit/test_fingerprint.py::test_appendix_b_numbers[44b52d02c7e14af7-1.0000000000000001e+23]
+PASSED tests/unit/test_fingerprint.py::test_appendix_b_numbers[444b1ae4d6e2ef4e-999999999999999700000]
+PASSED tests/unit/test_fingerprint.py::test_appendix_b_numbers[444b1ae4d6e2ef50-1e+21]
+PASSED tests/unit/test_fingerprint.py::test_appendix_b_numbers[3eb0c6f7a0b5ed8c-9.999999999999997e-7]
+PASSED tests/unit/test_fingerprint.py::test_appendix_b_numbers[3eb0c6f7a0b5ed8d-0.000001]
+PASSED tests/unit/test_fingerprint.py::test_appendix_b_numbers[41b3de4355555553-333333333.3333332]
+PASSED tests/unit/test_fingerprint.py::test_appendix_b_numbers[41b3de4355555554-333333333.33333325]
+PASSED tests/unit/test_fingerprint.py::test_appendix_b_numbers[41b3de4355555557-333333333.33333343]
+PASSED tests/unit/test_fingerprint.py::test_appendix_b_numbers[becbf647612f3696--0.0000033333333333333333]
+PASSED tests/unit/test_fingerprint.py::test_appendix_b_numbers[43143ff3c1cb0959-1424953923781206.2]
+PASSED tests/unit/test_fingerprint.py::test_rfc_sample_3_2_2
+PASSED tests/unit/test_fingerprint.py::test_rfc_sorting_3_2_3
+PASSED tests/unit/test_fingerprint.py::test_rejects_non_canonicalizable[nan]
+PASSED tests/unit/test_fingerprint.py::test_rejects_non_canonicalizable[inf]
+PASSED tests/unit/test_fingerprint.py::test_rejects_non_canonicalizable[9007199254740992]
+PASSED tests/unit/test_fingerprint.py::test_rejects_non_canonicalizable[bad3]
+PASSED tests/unit/test_fingerprint.py::test_rejects_non_canonicalizable[bytes]
+PASSED tests/unit/test_fingerprint.py::test_rejects_non_canonicalizable[\ud800]
+PASSED tests/unit/test_fingerprint.py::test_payload_fingerprint_is_order_independent_and_sensitive
+PASSED tests/unit/test_fingerprint.py::test_numbers_match_ecmascript_differentially
+PASSED tests/unit/test_models_profiles.py::test_profiles_match_design_table
+PASSED tests/unit/test_models_profiles.py::test_only_client_ref_lookup_is_recovery_capable
+PASSED tests/unit/test_models_profiles.py::test_payload_rejects_invalid[kwargs0]
+PASSED tests/unit/test_models_profiles.py::test_payload_rejects_invalid[kwargs1]
+PASSED tests/unit/test_models_profiles.py::test_payload_rejects_invalid[kwargs2]
+PASSED tests/unit/test_models_profiles.py::test_payload_rejects_invalid[kwargs3]
+PASSED tests/unit/test_models_profiles.py::test_payload_rejects_invalid[kwargs4]
+PASSED tests/unit/test_models_profiles.py::test_capability_consistency_rules
+PASSED tests/unit/test_models_profiles.py::test_actual_lag_must_leave_headroom_below_declared_delta
+PASSED tests/unit/test_provider_client.py::test_classification_table[201-body0-COMMITTED]
+PASSED tests/unit/test_provider_client.py::test_classification_table[200-body1-COMMITTED]
+PASSED tests/unit/test_provider_client.py::test_classification_table[201-body2-AMBIGUOUS]
+PASSED tests/unit/test_provider_client.py::test_classification_table[402-body3-DECLINED]
+PASSED tests/unit/test_provider_client.py::test_classification_table[422-body4-DECLINED]
+PASSED tests/unit/test_provider_client.py::test_classification_table[422-body5-INTERNAL]
+PASSED tests/unit/test_provider_client.py::test_classification_table[409-body6-DEADLINE_REJECTED]
+PASSED tests/unit/test_provider_client.py::test_classification_table[409-body7-AMBIGUOUS]
+PASSED tests/unit/test_provider_client.py::test_classification_table[500-body8-AMBIGUOUS]
+PASSED tests/unit/test_provider_client.py::test_classification_table[503-body9-AMBIGUOUS]
+PASSED tests/unit/test_provider_client.py::test_classification_table[404-body10-AMBIGUOUS]
+PASSED tests/unit/test_provider_client.py::test_dispatch_sets_headers_and_logs
+PASSED tests/unit/test_provider_client.py::test_nodl_control_omits_deadline_and_no_key_when_none
+PASSED tests/unit/test_provider_client.py::test_transport_failures_are_ambiguous[exc0]
+PASSED tests/unit/test_provider_client.py::test_transport_failures_are_ambiguous[exc1]
+PASSED tests/unit/test_provider_client.py::test_transport_failures_are_ambiguous[exc2]
+PASSED tests/unit/test_provider_client.py::test_crash_hooks_fire_at_their_point[CP1]
+PASSED tests/unit/test_provider_client.py::test_crash_hooks_fire_at_their_point[CP3]
+PASSED tests/unit/test_provider_client.py::test_hooks_only_fire_for_matching_attempt
+PASSED tests/unit/test_provider_client.py::test_pause_hook_delays_send
+PASSED tests/unit/test_provider_client.py::test_cp2_crashes_while_request_in_flight
+PASSED tests/unit/test_provider_client.py::test_lookup_parsing
+============================== 61 passed in 3.09s ==============================

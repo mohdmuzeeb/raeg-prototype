@@ -1,0 +1,59 @@
+$ /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/.venv/bin/python -m pytest -v -rA --tb=long --junitxml=/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/results/tests/20261011T011852Z_unit/junit.xml tests/unit -q
+
+============================= test session starts ==============================
+platform darwin -- Python 3.12.7, pytest-9.1.1, pluggy-1.6.0
+rootdir: /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup
+configfile: pyproject.toml
+plugins: hypothesis-6.168.5, asyncio-1.4.0, anyio-4.15.1
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
+collected 0 items / 4 errors
+
+==================================== ERRORS ====================================
+_______________ ERROR collecting tests/unit/test_fault_engine.py _______________
+ImportError while importing test module '/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/unit/test_fault_engine.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/local/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/unit/test_fault_engine.py:3: in <module>
+    from payment_provider.faults import FaultEngine, FaultKind, FaultPlan
+E   ModuleNotFoundError: No module named 'payment_provider'
+_______________ ERROR collecting tests/unit/test_fingerprint.py ________________
+ImportError while importing test module '/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/unit/test_fingerprint.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/local/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/unit/test_fingerprint.py:19: in <module>
+    from raeg_common.fingerprint import CanonicalizationError, canonicalize, fingerprint
+E   ModuleNotFoundError: No module named 'raeg_common'
+_____________ ERROR collecting tests/unit/test_models_profiles.py ______________
+ImportError while importing test module '/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/unit/test_models_profiles.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/local/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/unit/test_models_profiles.py:6: in <module>
+    from raeg_common.models import Capability, LookupMode, PaymentPayload, ProviderProfile
+E   ModuleNotFoundError: No module named 'raeg_common'
+_____________ ERROR collecting tests/unit/test_provider_client.py ______________
+ImportError while importing test module '/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/unit/test_provider_client.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/local/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/unit/test_provider_client.py:11: in <module>
+    from raeg_common.exchange_log import ExchangeLog
+E   ModuleNotFoundError: No module named 'raeg_common'
+- generated xml file: /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/results/tests/20261011T011852Z_unit/junit.xml -
+=========================== short test summary info ============================
+ERROR tests/unit/test_fault_engine.py
+ERROR tests/unit/test_fingerprint.py
+ERROR tests/unit/test_models_profiles.py
+ERROR tests/unit/test_provider_client.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 4 errors during collection !!!!!!!!!!!!!!!!!!!!
+============================== 4 errors in 1.61s ===============================

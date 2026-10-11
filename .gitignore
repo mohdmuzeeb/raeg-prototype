@@ -1,0 +1,25 @@
+# Local environments and caches
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.hypothesis/
+.mypy_cache/
+.ruff_cache/
+.DS_Store
+
+# Secrets (none are required; local test credentials live in docker-compose.yml defaults)
+.env
+.env.*
+*.pem
+*.key
+secrets/
+
+# Paper draft is kept next to, not inside, the code repository
+/ICIYTA_2026_Paper1.pdf
+
+# Large generated experiment outputs: archived separately with checksums (see results/README.md)
+results/raw/*
+!results/raw/.gitkeep
+results/derived/*
+!results/derived/.gitkeep
