@@ -1,0 +1,32 @@
+$ /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/.venv/bin/python -m pytest -v -rA --tb=long --junitxml=/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/results/tests/20261011T031143Z_property/junit.xml tests/property -q -s
+
+============================= test session starts ==============================
+platform darwin -- Python 3.12.7, pytest-9.1.1, pluggy-1.6.0
+rootdir: /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup
+configfile: pyproject.toml
+plugins: hypothesis-6.168.5, asyncio-1.4.0, anyio-4.15.1
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
+collected 10 items
+
+tests/property/test_safety_model.py ...counterexample(s): false NO_EFFECT | SAFETY VIOLATION E=2
+.counterexample(s): false NO_EFFECT | SAFETY VIOLATION E=2
+.counterexample(s): false NO_EFFECT | SAFETY VIOLATION E=2
+.counterexample(s): false NO_EFFECT | SAFETY VIOLATION E=2
+.counterexample(s): false NO_EFFECT | SAFETY VIOLATION E=2
+.counterexample(s): false NO_EFFECT | SAFETY VIOLATION E=2
+..
+
+==================================== PASSES ====================================
+- generated xml file: /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/results/tests/20261011T031143Z_property/junit.xml -
+=========================== short test summary info ============================
+PASSED tests/property/test_safety_model.py::test_tier_s_strict_is_safe_under_arbitrary_pauses_and_delays
+PASSED tests/property/test_safety_model.py::test_tier_b_bounded_is_safe_when_b1_holds
+PASSED tests/property/test_safety_model.py::test_lookup_and_deadline_profiles_never_escalate_for_lack_of_basis
+PASSED tests/property/test_safety_model.py::test_necessity_b1_bounded_mode_without_b1_can_duplicate
+PASSED tests/property/test_safety_model.py::test_b1_as_worded_in_v03_is_insufficient_without_d
+PASSED tests/property/test_safety_model.py::test_necessity_horizon_no_horizon_ablation_can_duplicate
+PASSED tests/property/test_safety_model.py::test_necessity_v1_lookup_lag_beyond_delta
+PASSED tests/property/test_safety_model.py::test_necessity_v2_deadline_not_enforced
+PASSED tests/property/test_safety_model.py::test_necessity_v3_retention_shorter_than_declared
+PASSED tests/property/test_safety_model.py::test_necessity_strict_nodl_control_is_still_safe
+============================= 10 passed in 12.08s ==============================

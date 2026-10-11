@@ -55,6 +55,8 @@ class LookupResult:
     http_status: int | None = None
     error_class: str | None = None
     latency_ms: float = 0.0
+    body: Any = None
+    headers: dict[str, str] = field(default_factory=dict)
 
 
 def classify(status: int, body: Any) -> Observation:
@@ -111,6 +113,7 @@ class ProviderClient:
         attempt_no: int,
         deadline: datetime | None,
         idempotency_key: str | None,
+        timeout_s: float | None = None,
     ) -> DispatchResult:
         headers = {SYSTEM_HEADER: self.system_id, ATTEMPT_HEADER: str(attempt_no)}
         if idempotency_key is not None:
@@ -138,7 +141,9 @@ class ProviderClient:
 
         sent_at = utc_now_iso()
         t0 = time.monotonic()
-        request = self._http.post("/payments", json=body, headers=headers)
+        request = self._http.post(
+            "/payments", json=body, headers=headers, **({"timeout": timeout_s} if timeout_s is not None else {})
+        )
         try:
             if hook and hook.point == HookPoint.CP2:
                 response = await self._send_then_crash(request, hook, base)
@@ -192,13 +197,13 @@ class ProviderClient:
         self._hooks.crash()
         return await task  # reached only when exit_fn does not terminate (tests)
 
-    async def lookup_by_reference(self, action_key: str) -> LookupResult:
-        return await self._lookup("/payments", {"client_reference": action_key}, action_key)
+    async def lookup_by_reference(self, action_key: str, timeout_s: float | None = None) -> LookupResult:
+        return await self._lookup("/payments", {"client_reference": action_key}, action_key, timeout_s)
 
     async def lookup_by_provider_id(self, provider_txn_id: str, action_key: str) -> LookupResult:
         return await self._lookup(f"/payments/{provider_txn_id}", None, action_key)
 
-    async def _lookup(self, path: str, params: dict | None, action_key: str) -> LookupResult:
+    async def _lookup(self, path: str, params: dict | None, action_key: str, timeout_s: float | None = None) -> LookupResult:
         headers = {SYSTEM_HEADER: self.system_id}
         base = {
             "kind": "lookup",
@@ -208,7 +213,9 @@ class ProviderClient:
         }
         t0 = time.monotonic()
         try:
-            response = await self._http.get(path, params=params, headers=headers)
+            response = await self._http.get(
+                path, params=params, headers=headers, **({"timeout": timeout_s} if timeout_s is not None else {})
+            )
         except (httpx.TimeoutException, httpx.TransportError) as exc:
             result = LookupResult(
                 ok=False, as_of=None, error_class=type(exc).__name__, latency_ms=(time.monotonic() - t0) * 1000
@@ -227,6 +234,8 @@ class ProviderClient:
             http_status=response.status_code,
             error_class=None if ok else f"HTTP_{response.status_code}",
             latency_ms=(time.monotonic() - t0) * 1000,
+            body=parsed,
+            headers=dict(response.headers),
         )
         self._log.write(
             {

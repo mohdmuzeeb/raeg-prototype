@@ -186,3 +186,35 @@ async def test_anomaly_and_fenced_evidence_are_recorded(store, admin) -> None:
     row = await admin.fetchrow("SELECT * FROM evidence WHERE id=$1", ev)
     assert row["fenced"] and len(row["sha256"]) == 64
     assert await admin.fetchval("SELECT kind FROM anomalies WHERE id=$1", an) == "CONTRADICTORY_EVIDENCE"
+
+
+async def test_same_state_transitions_are_whitelisted_and_audited(store, admin) -> None:
+    """TW (UNKNOWN→UNKNOWN) may only schedule; TA (SUCCEEDED→SUCCEEDED) may only annotate (N17/N18)."""
+    key, _ = await submit(store)
+    c = await store.claim(key, worker_id="w", attempt_ms=1000, basis=Basis.INITIAL)
+    await store.transition(key, "T5", worker_id="w", rule_id="AMBIG", fence=OwnerFence("w", c.lease_token, 1))
+    now = await admin.fetchval("SELECT now()")
+    with pytest.raises(IllegalTransition):
+        await store.transition(key, "TW", worker_id="w", rule_id="R-V-VB1-WAIT", patch={"escalation_reason": "x"})
+    r = await store.transition(key, "TW", worker_id="w", rule_id="R-V-VB1-WAIT", patch={"next_action_at": now + timedelta(seconds=1)})
+    assert r.applied and r.state == State.UNKNOWN
+    with pytest.raises(IllegalTransition):
+        await store.transition(key, "TA", worker_id="w", rule_id="x", patch={"duplicate_detected": True})  # not SUCCEEDED
+    await store.transition(key, "T15", worker_id="w", rule_id="LS-OK", patch={"provider_txn_id": "p1"})
+    with pytest.raises(IllegalTransition):
+        await store.transition(key, "TA", worker_id="w", rule_id="x", patch={"provider_txn_id": "other"})
+    r = await store.transition(key, "TA", worker_id="w", rule_id="LS-DUPLICATE", patch={"duplicate_detected": True})
+    assert r.applied and (await store.snapshot(key))["duplicate_detected"] is True
+    await assert_clean(admin)
+
+
+async def test_stale_version_is_recorded_rejection_not_exception(store, admin) -> None:
+    """N22: a CAS loser whose snapshot is stale gets VERSION_MISMATCH even if the move is now illegal."""
+    key, _ = await submit(store)
+    c = await store.claim(key, worker_id="w", attempt_ms=1000, basis=Basis.INITIAL)
+    await store.transition(key, "T5", worker_id="w", rule_id="AMBIG", fence=OwnerFence("w", c.lease_token, 1))
+    v = (await store.snapshot(key))["version"]
+    await store.transition(key, "T6", worker_id="a", rule_id="R-V", lease_ms=5000, expected_version=v)
+    loser = await store.transition(key, "T6", worker_id="b", rule_id="R-V", lease_ms=5000, expected_version=v)
+    assert not loser.applied and loser.reason == "VERSION_MISMATCH"
+    await assert_clean(admin)

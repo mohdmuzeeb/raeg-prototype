@@ -93,7 +93,7 @@ async def check_invariants(conn: asyncpg.Connection) -> dict[str, list[str]]:
         for e in events
         if e["from_state"] is not None
         and (
-            State(e["from_state"]) in TERMINAL
+            (State(e["from_state"]) in TERMINAL and e["transition"] != "TA")
             or (State(e["from_state"]) == State.ESCALATED and not e["transition"].startswith("T16"))
         )
     ]

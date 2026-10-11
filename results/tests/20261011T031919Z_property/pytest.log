@@ -1,0 +1,55 @@
+$ <repo>/.venv/bin/python -m pytest -v -rA --tb=long --junitxml=<repo>/results/tests/20261011T031919Z_property/junit.xml tests/property
+
+============================= test session starts ==============================
+platform darwin -- Python 3.12.7, pytest-9.1.1, pluggy-1.6.0 -- <repo>/.venv/bin/python
+cachedir: .pytest_cache
+hypothesis profile 'default'
+rootdir: <repo>
+configfile: pyproject.toml
+plugins: hypothesis-6.168.5, asyncio-1.4.0, anyio-4.15.1
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
+collecting ... collected 10 items
+
+tests/property/test_safety_model.py::test_tier_s_strict_is_safe_under_arbitrary_pauses_and_delays PASSED [ 10%]
+tests/property/test_safety_model.py::test_tier_b_bounded_is_safe_when_b1_holds PASSED [ 20%]
+tests/property/test_safety_model.py::test_lookup_and_deadline_profiles_never_escalate_for_lack_of_basis PASSED [ 30%]
+tests/property/test_safety_model.py::test_necessity_b1_bounded_mode_without_b1_can_duplicate PASSED [ 40%]
+tests/property/test_safety_model.py::test_b1_as_worded_in_v03_is_insufficient_without_d PASSED [ 50%]
+tests/property/test_safety_model.py::test_necessity_horizon_no_horizon_ablation_can_duplicate PASSED [ 60%]
+tests/property/test_safety_model.py::test_necessity_v1_lookup_lag_beyond_delta PASSED [ 70%]
+tests/property/test_safety_model.py::test_necessity_v2_deadline_not_enforced PASSED [ 80%]
+tests/property/test_safety_model.py::test_necessity_v3_retention_shorter_than_declared PASSED [ 90%]
+tests/property/test_safety_model.py::test_necessity_strict_nodl_control_is_still_safe PASSED [100%]
+
+==================================== PASSES ====================================
+___________ test_necessity_b1_bounded_mode_without_b1_can_duplicate ____________
+----------------------------- Captured stdout call -----------------------------
+counterexample(s): false NO_EFFECT | SAFETY VIOLATION E=2
+______________ test_b1_as_worded_in_v03_is_insufficient_without_d ______________
+----------------------------- Captured stdout call -----------------------------
+counterexample(s): false NO_EFFECT | SAFETY VIOLATION E=2
+___________ test_necessity_horizon_no_horizon_ablation_can_duplicate ___________
+----------------------------- Captured stdout call -----------------------------
+counterexample(s): false NO_EFFECT | SAFETY VIOLATION E=2
+__________________ test_necessity_v1_lookup_lag_beyond_delta ___________________
+----------------------------- Captured stdout call -----------------------------
+counterexample(s): false NO_EFFECT | SAFETY VIOLATION E=2
+___________________ test_necessity_v2_deadline_not_enforced ____________________
+----------------------------- Captured stdout call -----------------------------
+counterexample(s): false NO_EFFECT | SAFETY VIOLATION E=2
+______________ test_necessity_v3_retention_shorter_than_declared _______________
+----------------------------- Captured stdout call -----------------------------
+counterexample(s): false NO_EFFECT | SAFETY VIOLATION E=2
+- generated xml file: <repo>/results/tests/20261011T031919Z_property/junit.xml -
+=========================== short test summary info ============================
+PASSED tests/property/test_safety_model.py::test_tier_s_strict_is_safe_under_arbitrary_pauses_and_delays
+PASSED tests/property/test_safety_model.py::test_tier_b_bounded_is_safe_when_b1_holds
+PASSED tests/property/test_safety_model.py::test_lookup_and_deadline_profiles_never_escalate_for_lack_of_basis
+PASSED tests/property/test_safety_model.py::test_necessity_b1_bounded_mode_without_b1_can_duplicate
+PASSED tests/property/test_safety_model.py::test_b1_as_worded_in_v03_is_insufficient_without_d
+PASSED tests/property/test_safety_model.py::test_necessity_horizon_no_horizon_ablation_can_duplicate
+PASSED tests/property/test_safety_model.py::test_necessity_v1_lookup_lag_beyond_delta
+PASSED tests/property/test_safety_model.py::test_necessity_v2_deadline_not_enforced
+PASSED tests/property/test_safety_model.py::test_necessity_v3_retention_shorter_than_declared
+PASSED tests/property/test_safety_model.py::test_necessity_strict_nodl_control_is_still_safe
+============================== 10 passed in 2.64s ==============================

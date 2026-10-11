@@ -1,10 +1,18 @@
 # RAEG Prototype — Design for Review
 
-Status: **v0.3. Approved for implementation (M0–M2 authorised; M3 requires a status review).**
+Status: **v0.3.1. Approved v0.3, plus corrections found during M4 implementation (§0b). M0–M3 implemented; M4 under review.**
 Paper: *RAEG: A Recovery-Aware Execution Gateway for Fault-Tolerant AI Agents in Financial Microservices* (`ICIYTA_2026_Paper1.pdf`).
-Previous versions: `docs/archive/DESIGN-v0.1.md` and `docs/archive/DESIGN-v0.2.md`. §12 records the decisions.
+Previous versions: `docs/archive/DESIGN-v0.1.md`, `-v0.2.md`, and `-v0.3.md` (the approved text). §12 records the decisions.
 
 ---
+
+## 0b. Changes in v0.3.1 (found during M4; see `docs/IMPLEMENTATION_NOTES.md`)
+
+| # | Change | Why | Where |
+|---|---|---|---|
+| E1 | **B1 is restated to bound the effect (commit), not the arrival.** v0.3 bounded only "claim → provider arrival ≤ d_j". | The M4 model checker found Tier B duplicates under the v0.3 wording. Without D, a request that arrives before `d_j` can still commit after `d_j` through slow processing, after RAEG has "proven" absence (`tests/property`, run `20261011T031143Z_property`). B2 is folded into the new B1. Tier S is unaffected, because D is enforced at commit time. | §2.7, §11.2 |
+| E2 | The same-state transitions `TW` (UNKNOWN → UNKNOWN, scheduled wait) and `TA` (SUCCEEDED → SUCCEEDED, duplicate annotation) are added. | `WAIT` (VB1) and the DS duplicate annotation need an auditable record but no state change. Their patches are whitelisted to `next_action_at` and `duplicate_detected` respectively. | §3.2 |
+| E3 | Late evidence is consumed by the engine before `decide()` runs, instead of being checked inside it. Consumption is marked by a decision that cites the evidence id. | Keeps `decide()` pure. Equivalent ordering. | §2.10 |
 
 ## 0a. Changes from v0.2
 
@@ -125,7 +133,7 @@ r.records has no committed-succeeded entry
 ∧ r.as_of ≥ H(x) + δ
 ∧ (D ∨ mode = BOUNDED)
 ```
-Under D, every effect of an attempt so far occurs at provider time `≤ H(x)`, and under L2 it is visible by `H(x) + δ`. Both bounds are on the provider clock, so `ε` does not enter. Without D, the first conjunct relies on assumption B1 (§2.7).
+Under D, every effect of an attempt so far occurs at provider time `≤ H(x)`, and under L2 it is visible by `H(x) + δ`. Both bounds are on the provider clock, so `ε` does not enter. Without D, the first conjunct relies on assumption B1 (§2.7), which (as of v0.3.1) bounds the commit time, not just the arrival.
 
 ### 2.6 TTL guard for idempotent replay
 A **segment** is the run of attempts after the most recent proof of absence (or after submission). `anchor` is the write-ahead time of the segment's first attempt, on the RAEG database clock.
@@ -144,7 +152,7 @@ A **zombie** is a worker that claims attempt `j` and then pauses: through GC, SI
 | Tier | Mode | Claim | Requirements |
 |---|---|---|---|
 | **S** | `STRICT` (default) | `E ≤ 1` under **arbitrary** process pauses and network delay | Every retry basis must be covered by a provider-enforced mechanism: D (deadline), or `I ∧ τ = ∞`. Without D, a lookup miss is **never** authoritative, and replay is allowed only with `τ = ∞`. Otherwise RAEG escalates. |
-| **B** | `BOUNDED` (variant) | `E ≤ 1` **if** B1 holds | **B1:** for every attempt, (database-time claim → provider arrival) `≤ d_j − claim_time`. In words: no process pause plus network delay exceeds the attempt's deadline slack. RAEG checks this locally before sending, but cannot guarantee it. |
+| **B** | `BOUNDED` (variant) | `E ≤ 1` **if** B1 holds | **B1 (v0.3.1):** for every attempt, any effect it has is committed at provider time `≤ d_j − ε`. In words, process pause, network delay, and provider processing together never exceed the attempt's deadline slack. RAEG checks the part it controls (time remaining before the send), but cannot guarantee the rest. *(v0.3 bounded only arrival; that is insufficient without D. See §0b E1.)* |
 
 How D works as the fence. The deadline is chosen and **persisted before the send**, and the provider enforces it at **commit** time. Every attempt therefore has a known, durable effect horizon, however long its worker pauses. The synthetic provider implements D with a `DEFERRED` constraint trigger that checks `clock_timestamp() ≤ deadline` inside the commit transaction. Real-world analogues mostly check at receipt only; for example, AWS SigV4 enforces a request-time validity window. A provider that checks only at receipt can be modelled as D with horizon `d + Π`, but only under an extra bound `Π` on provider processing time. This is noted as a threat to validity rather than claimed.
 
@@ -645,8 +653,8 @@ This is the S-set, with `D` allowed to be false, **plus**:
 
 | # | Assumption | If violated | Coverage |
 |---|---|---|---|
-| B1 | For every attempt, (database-time claim → provider arrival) `≤ d_j − claim_time`: process pause plus delivery delay never exceeds the deadline slack | A zombie or late request commits after a "proven" absence, giving a duplicate | F7 on P4n and on the `/noDL` cells. Violations are counted from the receipt log (`arrival > d_j`). |
-| B2 | Provider processing time after arrival is at most `Π`, when D is receipt-only (§2.7a) | Same as B1 | Not modelled: the synthetic provider is commit-time D |
+| B1 | For every attempt, its effect (if any) commits at provider time `≤ d_j − ε`: pause, delivery delay, and provider processing combined never exceed the deadline slack | A zombie, late, or slowly processed request commits after a "proven" absence, giving a duplicate | Model check: `tests/property` (safe when B1 holds; counterexamples when it does not, including the arrival-only v0.3 wording). Experiments: F7 and F4 on P4n and on the `/noDL` cells. Violations are counted from the ledger (`committed_at > d_j`). |
+| ~~B2~~ | *Folded into B1 in v0.3.1.* A provider with receipt-only deadline checks satisfies B1 only if its processing time is at most `Π` and `d_j` already accounts for `Π`. | | |
 
 ### 11.3 V-set: assumption-violation experiments
 Each V experiment makes exactly **one** S-set assumption false and reports degradation, never safety claims.
@@ -657,7 +665,7 @@ Each V experiment makes exactly **one** S-set assumption false and reports degra
 | V2 | S1 (D not enforced) | possible duplicates under F4 and F7 |
 | V3 | S1 (K5: retention < τ) | possible duplicates under replay |
 | V4 | S2 (skew > ε) | possible duplicates near the TTL boundary |
-| (F7 on P4n) | B1 | reported in table B, not V, because B1 is only a Tier B assumption |
+| (F7 / F4 on P4n) | B1 | reported in table B, not V, because B1 is only a Tier B assumption |
 
 Evaluation validity (not a safety assumption): the oracle ledger is cross-checked against the provider receipt log, and both are independent of the systems under test.
 

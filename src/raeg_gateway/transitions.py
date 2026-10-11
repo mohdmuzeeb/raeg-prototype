@@ -70,10 +70,16 @@ TRANSITIONS: dict[str, Transition] = {
         _t("T16s", {S.ESCALATED}, S.SUCCEEDED, "operator resolution"),
         _t("T16d", {S.ESCALATED}, S.DECLINED, "operator resolution"),
         _t("T16n", {S.ESCALATED}, S.NOT_EXECUTED, "operator resolution"),
+        # Same-state transitions (IMPLEMENTATION_NOTES N17/N18): they change only scheduling or
+        # annotation fields, but still go through the decision + hash-chained event path.
+        _t("TW", {S.UNKNOWN}, S.UNKNOWN, "scheduled wait (R-V VB1)"),
+        _t("TA", {S.SUCCEEDED}, S.SUCCEEDED, "annotation: duplicate detected (DS audit / late success)"),
     ]
 }
 # T1 (creation) is not a state-to-state transition; the store handles it in submit().
 CLAIM_TRANSITIONS = frozenset({"T2", "T13"})
+# Patch whitelist for same-state transitions (everything else uses MUTABLE_COLUMNS).
+SAME_STATE_PATCH = {"TW": frozenset({"next_action_at"}), "TA": frozenset({"duplicate_detected"})}
 
 
 def check_transition(tid: str, current: State) -> Transition:

@@ -1,0 +1,48 @@
+$ /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/.venv/bin/python -m pytest -v -rA --tb=long --junitxml=/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/results/tests/20261011T031354Z_integration/junit.xml tests/integration -q
+
+============================= test session starts ==============================
+platform darwin -- Python 3.12.7, pytest-9.1.1, pluggy-1.6.0
+rootdir: /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup
+configfile: pyproject.toml
+plugins: hypothesis-6.168.5, asyncio-1.4.0, anyio-4.15.1
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
+collected 14 items
+
+tests/integration/test_engine_scenarios.py .......F......                [100%]
+
+=================================== FAILURES ===================================
+_____________ test_p7_replay_refused_when_retention_window_closed ______________
+
+provider = <tests.conformance.conftest.Provider object at 0x109f6be60>
+store = <raeg_gateway.store.GatewayStore object at 0x109f6bf50>
+engine = <raeg_gateway.engine.RecoveryEngine object at 0x109f51190>
+admin = <asyncpg.connection.Connection object at 0x109ec2150>
+
+    async def test_p7_replay_refused_when_retention_window_closed(provider, store, engine, admin) -> None:
+        """Timeout at ≈1.4 s: d_new + ε + m ≈ 3.05 s > anchor + τ (3.0 s) → no replay; no lookup → escalate."""
+        o = await scenario(provider, store, engine, "P7", Policy(), [rule(1, "LOST_RESPONSE")])
+>       assert (o.state, o.effects, o.attempts) == (State.ESCALATED, 1, 1)
+E       AssertionError: assert (<State.SUCCE...EEDED'>, 1, 2) == (<State.ESCAL...LATED'>, 1, 1)
+E         
+E         At index 0 diff: <State.SUCCEEDED: 'SUCCEEDED'> != <State.ESCALATED: 'ESCALATED'>
+E         Use -v to get more diff
+
+tests/integration/test_engine_scenarios.py:79: AssertionError
+==================================== PASSES ====================================
+- generated xml file: /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/results/tests/20261011T031354Z_integration/junit.xml -
+=========================== short test summary info ============================
+PASSED tests/integration/test_engine_scenarios.py::test_p1_no_fault
+PASSED tests/integration/test_engine_scenarios.py::test_p1_lost_response_resolved_by_lookup_without_redispatch
+PASSED tests/integration/test_engine_scenarios.py::test_p4_stall_verified_absent_then_safe_retry
+PASSED tests/integration/test_engine_scenarios.py::test_p4_delayed_commit_waits_for_horizon_and_finds_it
+PASSED tests/integration/test_engine_scenarios.py::test_p4_delayed_commit_no_horizon_ablation_duplicates
+PASSED tests/integration/test_engine_scenarios.py::test_p6_blind_provider_escalates_without_duplicate
+PASSED tests/integration/test_engine_scenarios.py::test_p3_idempotent_replay_with_infinite_tau
+PASSED tests/integration/test_engine_scenarios.py::test_p7_fast_ambiguity_replays_within_retention
+PASSED tests/integration/test_engine_scenarios.py::test_p4n_absence_needs_d_or_bounded_mode[STRICT-expected0]
+PASSED tests/integration/test_engine_scenarios.py::test_p4n_absence_needs_d_or_bounded_mode[BOUNDED-expected1]
+PASSED tests/integration/test_engine_scenarios.py::test_definitive_decline_on_single_attempt
+PASSED tests/integration/test_engine_scenarios.py::test_nodl_control_on_p4_cannot_prove_absence
+PASSED tests/integration/test_engine_scenarios.py::test_lookup_outage_exhausts_budget_and_escalates_safely
+FAILED tests/integration/test_engine_scenarios.py::test_p7_replay_refused_when_retention_window_closed
+======================== 1 failed, 13 passed in 23.38s =========================

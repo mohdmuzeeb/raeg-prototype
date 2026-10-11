@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="5" skipped="0" tests="9" time="46.493" timestamp="2026-10-10T23:10:09.242569-04:00" hostname="MacBookAir"><properties><property name="hypothesis-statistics-tests/property/test_safety_model.py::test_tier_s_strict_is_safe_under_arbitrary_pauses_and_delays" value="dGVzdHMvcHJvcGVydHkvdGVzdF9zYWZldHlfbW9kZWwucHk6OnRlc3RfdGllcl9zX3N0cmljdF9pc19zYWZlX3VuZGVyX2FyYml0cmFyeV9wYXVzZXNfYW5kX2RlbGF5czoKCiAgLSBkdXJpbmcgZ2VuZXJhdGUgcGhhc2UgKDAuNTcgc2Vjb25kcyk6CiAgICAtIFR5cGljYWwgcnVudGltZXM6IH4gMC0xIG1zLCBvZiB3aGljaCA8IDFtcyBpbiBkYXRhIGdlbmVyYXRpb24KICAgIC0gNDAwIHBhc3NpbmcsIDAgZmFpbGluZywgYW5kIDE2IGludmFsaWQgdGVzdCBjYXNlcwoKICAtIFN0b3BwZWQgYmVjYXVzZSBzZXR0aW5ncy5tYXhfZXhhbXBsZXM9NDAw" /><property name="hypothesis-statistics-tests/property/test_safety_model.py::test_tier_b_bounded_is_safe_when_b1_holds" value="dGVzdHMvcHJvcGVydHkvdGVzdF9zYWZldHlfbW9kZWwucHk6OnRlc3RfdGllcl9iX2JvdW5kZWRfaXNfc2FmZV93aGVuX2IxX2hvbGRzOgoKICAtIGR1cmluZyBnZW5lcmF0ZSBwaGFzZSAoMC41MCBzZWNvbmRzKToKICAgIC0gVHlwaWNhbCBydW50aW1lczogfiAwLTEgbXMsIG9mIHdoaWNoIDwgMW1zIGluIGRhdGEgZ2VuZXJhdGlvbgogICAgLSA0MDAgcGFzc2luZywgMCBmYWlsaW5nLCBhbmQgMjIgaW52YWxpZCB0ZXN0IGNhc2VzCgogIC0gU3RvcHBlZCBiZWNhdXNlIHNldHRpbmdzLm1heF9leGFtcGxlcz00MDA=" /><property name="hypothesis-statistics-tests/property/test_safety_model.py::test_lookup_and_deadline_profiles_never_escalate_for_lack_of_basis" value="dGVzdHMvcHJvcGVydHkvdGVzdF9zYWZldHlfbW9kZWwucHk6OnRlc3RfbG9va3VwX2FuZF9kZWFkbGluZV9wcm9maWxlc19uZXZlcl9lc2NhbGF0ZV9mb3JfbGFja19vZl9iYXNpczoKCiAgLSBkdXJpbmcgZ2VuZXJhdGUgcGhhc2UgKDAuNjkgc2Vjb25kcyk6CiAgICAtIFR5cGljYWwgcnVudGltZXM6IH4gMC0yIG1zLCBvZiB3aGljaCA8IDFtcyBpbiBkYXRhIGdlbmVyYXRpb24KICAgIC0gNDAwIHBhc3NpbmcsIDAgZmFpbGluZywgYW5kIDU1IGludmFsaWQgdGVzdCBjYXNlcwogICAgLSBFdmVudHM6CiAgICAgICogNi41OSUsIFJldHJpZWQgZHJhdyBmcm9tIGJ1aWxkcyhsYW1iZGEgaSwgdGF1LCBxLCBkOiBDYXBhYmlsaXR5KGlkZW1wb3RlbmN5PWksIGtleV90dGxfbXM9dGF1IGlmIGkgZWxzZSBOb25lLCBsb29rdXA9cSwgbG9va3VwX2xhZ19tcz01MDAgaWYgcSAhPSBMb29rdXBNb2RlLk5PTkUgZWxzZSBOb25lLCBkZWFkbGluZV9lbmZvcmNlZD1kKSwgYm9vbGVhbnMoKSwgc2FtcGxlZF9mcm9tKFtOb25lLCAzMDAwLCA2MDAwXSksIHNhbXBsZWRfZnJvbShbPExvb2t1cE1vZGUuTk9ORTogJ25vbmUnPiwgPExvb2t1cE1vZGUuQllfUFJPVklERVJfSUQ6ICdieV9wcm92aWRlcl9pZCc+LCA8TG9va3VwTW9kZS5CWV9DTElFTlRfUkVGOiAnYnlfY2xpZW50X3JlZic+XSksIGJvb2xlYW5zKCkpLmZpbHRlcihsYW1iZGEgYzogYy5sb29rdXAgPT0gTG9va3VwTW9kZS5CWV9DTElFTlRfUkVGIGFuZCBjLmRlYWRsaW5lX2VuZm9yY2VkKSB0byBzYXRpc2Z5IGZpbHRlcgogICAgICAqIDUuNDklLCBnYXZlIHVwIGJlY2F1c2U6IEFib3J0ZWQgdGVzdCBiZWNhdXNlIHVuYWJsZSB0byBzYXRpc2Z5IGJ1aWxkcyhsYW1iZGEgaSwgdGF1LCBxLCBkOiBDYXBhYmlsaXR5KGlkZW1wb3RlbmN5PWksIGtleV90dGxfbXM9dGF1IGlmIGkgZWxzZSBOb25lLCBsb29rdXA9cSwgbG9va3VwX2xhZ19tcz01MDAgaWYgcSAhPSBMb29rdXBNb2RlLk5PTkUgZWxzZSBOb25lLCBkZWFkbGluZV9lbmZvcmNlZD1kKSwgYm9vbGVhbnMoKSwgc2FtcGxlZF9mcm9tKFtOb25lLCAzMDAwLCA2MDAwXSksIHNhbXBsZWRfZnJvbShbPExvb2t1cE1vZGUuTk9ORTogJ25vbmUnPiwgPExvb2t1cE1vZGUuQllfUFJPVklERVJfSUQ6ICdieV9wcm92aWRlcl9pZCc+LCA8TG9va3VwTW9kZS5CWV9DTElFTlRfUkVGOiAnYnlfY2xpZW50X3JlZic+XSksIGJvb2xlYW5zKCkpLmZpbHRlcihsYW1iZGEgYzogYy5sb29rdXAgPT0gTG9va3VwTW9kZS5CWV9DTElFTlRfUkVGIGFuZCBjLmRlYWRsaW5lX2VuZm9yY2VkKQoKICAtIFN0b3BwZWQgYmVjYXVzZSBzZXR0aW5ncy5tYXhfZXhhbXBsZXM9NDAw" /></properties><testcase classname="tests.property.test_safety_model" name="test_tier_s_strict_is_safe_under_arbitrary_pauses_and_delays" time="0.574" /><testcase classname="tests.property.test_safety_model" name="test_tier_b_bounded_is_safe_when_b1_holds" time="0.499" /><testcase classname="tests.property.test_safety_model" name="test_lookup_and_deadline_profiles_never_escalate_for_lack_of_basis" time="0.693" /><testcase classname="tests.property.test_safety_model" name="test_necessity_b1_bounded_mode_without_b1_can_duplicate" time="11.615"><failure message="ExceptionGroup: Hypothesis found 2 distinct failures. (2 sub-exceptions)">+ Exception Group Traceback (most recent call last):
+  |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 86, in test_necessity_b1_bounded_mode_without_b1_can_duplicate
+  |     must_find_violation(t)
+  |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 72, in must_find_violation
+  |     test()
+  |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 83, in t
+  |     @given(data=st.data())
+  |                ^^^
+  |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/.venv/lib/python3.12/site-packages/hypothesis/core.py", line 2295, in wrapped_test
+  |     raise the_error_hypothesis_found
+  | ExceptionGroup: Hypothesis found 2 distinct failures. (2 sub-exceptions)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 85, in t
+    |     check_all(Sim(P4N, Policy(mode="BOUNDED"), data, Violations(b1=False)))
+    |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 39, in check_all
+    |     assert e == 0, f"false NO_EFFECT\n{sim.explain()}"
+    | AssertionError: false NO_EFFECT
+    |   t=0 claim attempt 1 basis=INITIAL d=1500
+    |   t=1400 DISPATCHING --T5/D-AMBIGUOUS--&gt; UNKNOWN 
+    |   t=1400 UNKNOWN --T6/R-V--&gt; VERIFYING 
+    |   t=1400 VERIFYING --T11/L-W--&gt; UNKNOWN 
+    |   t=2000 UNKNOWN --T6/R-V--&gt; VERIFYING 
+    |   t=2000 VERIFYING --T10/L-RA--&gt; RETRY_WAIT 
+    |   t=2000 claim attempt 2 basis=VERIFIED_ABSENT d=3500
+    |   t=2000 DISPATCHING --T4/D-DECLINED-DD--&gt; DECLINED SINGLE_ATTEMPT_IN_SEGMENT
+    |   ledger=[{'txn': 'pay-1-0', 'status': 'succeeded', 'commit_p': 2000, 'lag': 0, 'attempt': 1}, {'txn': 'pay-2-1', 'status': 'declined', 'commit_p': 2000, 'lag': 0, 'attempt': 2}]
+    |   anomalies=[]
+    | assert 1 == 0
+    | Failing test case: t(
+    |     # The test sometimes passed when commented parts were varied together.
+    |     data=data(...),
+    | )
+    | Draw 1 (clock_offset): 0
+    | Draw 2 (pause): 0
+    | Draw 3 (net_delay): 2000
+    | Draw 4 (lookup_error): False  # or any other generated value
+    | Draw 5 (lookup_latency): 0  # or any other generated value
+    | Draw 6 (lookup_error): False
+    | Draw 7 (lookup_latency): 0  # or any other generated value
+    | Draw 8 (pause): 0  # or any other generated value
+    | Draw 9 (net_delay): 0
+    | Draw 10 (outcome): 'commit'
+    | Draw 11 (processing): 0
+    | Draw 12 (outcome): 'decline'  # or any other generated value
+    | Draw 13 (processing): 0  # or any other generated value
+    | Draw 14 (lookup_lag): 0  # or any other generated value
+    | Draw 15 (response_lost): True  # or any other generated value
+    | Draw 16 (lookup_lag): 0  # or any other generated value
+    | Draw 17 (response_lost): False  # or any other generated value
+    | Draw 18 (response_delay): 0  # or any other generated value
+    +---------------- 2 ----------------
+    | Traceback (most recent call last):
+    |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 85, in t
+    |     check_all(Sim(P4N, Policy(mode="BOUNDED"), data, Violations(b1=False)))
+    |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 35, in check_all
+    |     assert e &lt;= 1, f"SAFETY VIOLATION E={e}\n{sim.explain()}"
+    | AssertionError: SAFETY VIOLATION E=2
+    |   t=0 claim attempt 1 basis=INITIAL d=1500
+    |   t=1400 DISPATCHING --T5/D-AMBIGUOUS--&gt; UNKNOWN 
+    |   t=1400 UNKNOWN --T6/R-V--&gt; VERIFYING 
+    |   t=1400 VERIFYING --T11/L-W--&gt; UNKNOWN 
+    |   t=2000 UNKNOWN --T6/R-V--&gt; VERIFYING 
+    |   t=2000 VERIFYING --T10/L-RA--&gt; RETRY_WAIT 
+    |   t=2000 claim attempt 2 basis=VERIFIED_ABSENT d=3500
+    |   t=2000 DISPATCHING --T3/D-COMMITTED--&gt; SUCCEEDED 
+    |   ledger=[{'txn': 'pay-1-0', 'status': 'succeeded', 'commit_p': 2000, 'lag': 0, 'attempt': 1}, {'txn': 'pay-2-1', 'status': 'succeeded', 'commit_p': 2000, 'lag': 0, 'attempt': 2}]
+    |   anomalies=[]
+    | assert 2 &lt;= 1
+    | Failing test case: t(
+    |     data=data(...),
+    | )
+    | Draw 1 (clock_offset): 0
+    | Draw 2 (pause): 0
+    | Draw 3 (net_delay): 2000
+    | Draw 4 (lookup_error): False
+    | Draw 5 (lookup_latency): 0
+    | Draw 6 (lookup_error): False
+    | Draw 7 (lookup_latency): 0
+    | Draw 8 (pause): 0
+    | Draw 9 (net_delay): 0
+    | Draw 10 (outcome): 'commit'
+    | Draw 11 (processing): 0
+    | Draw 12 (outcome): 'commit'
+    | Draw 13 (processing): 0
+    | Draw 14 (lookup_lag): 0
+    | Draw 15 (response_lost): True
+    | Draw 16 (lookup_lag): 0
+    | Draw 17 (response_lost): False
+    | Draw 18 (response_delay): 0
+    +------------------------------------</failure></testcase><testcase classname="tests.property.test_safety_model" name="test_necessity_horizon_no_horizon_ablation_can_duplicate" time="12.122"><failure message="ExceptionGroup: Hypothesis found 2 distinct failures. (2 sub-exceptions)">+ Exception Group Traceback (most recent call last):
+  |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 94, in test_necessity_horizon_no_horizon_ablation_can_duplicate
+  |     must_find_violation(t)
+  |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 72, in must_find_violation
+  |     test()
+  |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 91, in t
+  |     @given(data=st.data())
+  |                ^^^
+  |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/.venv/lib/python3.12/site-packages/hypothesis/core.py", line 2295, in wrapped_test
+  |     raise the_error_hypothesis_found
+  | ExceptionGroup: Hypothesis found 2 distinct failures. (2 sub-exceptions)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 93, in t
+    |     check_all(Sim(P4, Policy(mode="STRICT", no_horizon=True), data))
+    |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 39, in check_all
+    |     assert e == 0, f"false NO_EFFECT\n{sim.explain()}"
+    | AssertionError: false NO_EFFECT
+    |   t=0 claim attempt 1 basis=INITIAL d=1500
+    |   t=1400 DISPATCHING --T5/D-AMBIGUOUS--&gt; UNKNOWN 
+    |   t=1400 UNKNOWN --T6/R-V--&gt; VERIFYING 
+    |   t=1431 VERIFYING --T10/L-RA--&gt; RETRY_WAIT 
+    |   t=1431 claim attempt 2 basis=VERIFIED_ABSENT d=2931
+    |   t=1436 DISPATCHING --T4/D-DECLINED-DD--&gt; DECLINED SINGLE_ATTEMPT_IN_SEGMENT
+    |   ledger=[{'txn': 'pay-1-0', 'status': 'succeeded', 'commit_p': 1435, 'lag': 4, 'attempt': 1}, {'txn': 'pay-2-1', 'status': 'declined', 'commit_p': 1440, 'lag': 16, 'attempt': 2}]
+    |   anomalies=[]
+    | assert 1 == 0
+    | Failing test case: t(
+    |     data=data(...),
+    | )
+    | Draw 1 (clock_offset): 4
+    | Draw 2 (pause): 0
+    | Draw 3 (net_delay): 1350
+    | Draw 4 (outcome): 'commit'
+    | Draw 5 (processing): 50
+    | Draw 6 (lookup_error): False
+    | Draw 7 (lookup_latency): 31
+    | Draw 8 (pause): 0
+    | Draw 9 (net_delay): 4
+    | Draw 10 (lookup_lag): 4
+    | Draw 11 (response_lost): True
+    | Draw 12 (outcome): 'decline'
+    | Draw 13 (processing): 1
+    | Draw 14 (lookup_lag): 16
+    | Draw 15 (response_lost): False
+    | Draw 16 (response_delay): 0
+    +---------------- 2 ----------------
+    | Traceback (most recent call last):
+    |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 93, in t
+    |     check_all(Sim(P4, Policy(mode="STRICT", no_horizon=True), data))
+    |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 35, in check_all
+    |     assert e &lt;= 1, f"SAFETY VIOLATION E={e}\n{sim.explain()}"
+    | AssertionError: SAFETY VIOLATION E=2
+    |   t=0 claim attempt 1 basis=INITIAL d=1500
+    |   t=1400 DISPATCHING --T5/D-AMBIGUOUS--&gt; UNKNOWN 
+    |   t=1400 UNKNOWN --T6/R-V--&gt; VERIFYING 
+    |   t=1400 VERIFYING --T10/L-RA--&gt; RETRY_WAIT 
+    |   t=1400 claim attempt 2 basis=VERIFIED_ABSENT d=2900
+    |   t=1400 DISPATCHING --T3/D-COMMITTED--&gt; SUCCEEDED 
+    |   ledger=[{'txn': 'pay-1-0', 'status': 'succeeded', 'commit_p': 1400, 'lag': 0, 'attempt': 1}, {'txn': 'pay-2-1', 'status': 'succeeded', 'commit_p': 1400, 'lag': 0, 'attempt': 2}]
+    |   anomalies=[]
+    | assert 2 &lt;= 1
+    | Failing test case: t(
+    |     data=data(...),
+    | )
+    | Draw 1 (clock_offset): 0
+    | Draw 2 (pause): 0
+    | Draw 3 (net_delay): 1350
+    | Draw 4 (outcome): 'commit'
+    | Draw 5 (processing): 50
+    | Draw 6 (lookup_error): False
+    | Draw 7 (lookup_latency): 0
+    | Draw 8 (pause): 0
+    | Draw 9 (net_delay): 0
+    | Draw 10 (lookup_lag): 0
+    | Draw 11 (response_lost): True
+    | Draw 12 (outcome): 'commit'
+    | Draw 13 (processing): 0
+    | Draw 14 (lookup_lag): 0
+    | Draw 15 (response_lost): False
+    | Draw 16 (response_delay): 0
+    +------------------------------------</failure></testcase><testcase classname="tests.property.test_safety_model" name="test_necessity_v1_lookup_lag_beyond_delta" time="8.741"><failure message="ExceptionGroup: Hypothesis found 2 distinct failures. (2 sub-exceptions)">+ Exception Group Traceback (most recent call last):
+  |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 102, in test_necessity_v1_lookup_lag_beyond_delta
+  |     must_find_violation(t)
+  |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 72, in must_find_violation
+  |     test()
+  |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 99, in t
+  |     @given(data=st.data())
+  |                ^^^
+  |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/.venv/lib/python3.12/site-packages/hypothesis/core.py", line 2295, in wrapped_test
+  |     raise the_error_hypothesis_found
+  | ExceptionGroup: Hypothesis found 2 distinct failures. (2 sub-exceptions)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 101, in t
+    |     check_all(Sim(P4, Policy(mode="STRICT"), data, Violations(lookup_lag_factor=8)))
+    |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 39, in check_all
+    |     assert e == 0, f"false NO_EFFECT\n{sim.explain()}"
+    | AssertionError: false NO_EFFECT
+    |   t=0 claim attempt 1 basis=INITIAL d=1500
+    |   t=1400 DISPATCHING --T5/D-AMBIGUOUS--&gt; UNKNOWN 
+    |   t=1400 UNKNOWN --T6/R-V--&gt; VERIFYING 
+    |   t=1400 VERIFYING --T11/L-W--&gt; UNKNOWN 
+    |   t=2000 UNKNOWN --T6/R-V--&gt; VERIFYING 
+    |   t=2000 VERIFYING --T10/L-RA--&gt; RETRY_WAIT 
+    |   t=2000 claim attempt 2 basis=VERIFIED_ABSENT d=3500
+    |   t=2000 DISPATCHING --T4/D-DECLINED-DD--&gt; DECLINED SINGLE_ATTEMPT_IN_SEGMENT
+    |   ledger=[{'txn': 'pay-1-0', 'status': 'succeeded', 'commit_p': 1400, 'lag': 601, 'attempt': 1}, {'txn': 'pay-2-1', 'status': 'declined', 'commit_p': 2000, 'lag': 0, 'attempt': 2}]
+    |   anomalies=[]
+    | assert 1 == 0
+    | Failing test case: t(
+    |     # The test sometimes passed when commented parts were varied together.
+    |     data=data(...),
+    | )
+    | Draw 1 (clock_offset): 0
+    | Draw 2 (pause): 0
+    | Draw 3 (net_delay): 0  # or any other generated value
+    | Draw 4 (outcome): 'commit'
+    | Draw 5 (processing): 1400
+    | Draw 6 (lookup_error): False  # or any other generated value
+    | Draw 7 (lookup_latency): 0  # or any other generated value
+    | Draw 8 (lookup_lag): 601
+    | Draw 9 (response_lost): True  # or any other generated value
+    | Draw 10 (lookup_error): False
+    | Draw 11 (lookup_latency): 0
+    | Draw 12 (pause): 0  # or any other generated value
+    | Draw 13 (net_delay): 0  # or any other generated value
+    | Draw 14 (outcome): 'decline'
+    | Draw 15 (processing): 0  # or any other generated value
+    | Draw 16 (lookup_lag): 0  # or any other generated value
+    | Draw 17 (response_lost): False  # or any other generated value
+    | Draw 18 (response_delay): 0  # or any other generated value
+    +---------------- 2 ----------------
+    | Traceback (most recent call last):
+    |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 101, in t
+    |     check_all(Sim(P4, Policy(mode="STRICT"), data, Violations(lookup_lag_factor=8)))
+    |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 35, in check_all
+    |     assert e &lt;= 1, f"SAFETY VIOLATION E={e}\n{sim.explain()}"
+    | AssertionError: SAFETY VIOLATION E=2
+    |   t=0 claim attempt 1 basis=INITIAL d=1500
+    |   t=1400 DISPATCHING --T5/D-AMBIGUOUS--&gt; UNKNOWN 
+    |   t=1400 UNKNOWN --T6/R-V--&gt; VERIFYING 
+    |   t=1400 VERIFYING --T11/L-W--&gt; UNKNOWN 
+    |   t=2000 UNKNOWN --T6/R-V--&gt; VERIFYING 
+    |   t=2000 VERIFYING --T10/L-RA--&gt; RETRY_WAIT 
+    |   t=2000 claim attempt 2 basis=VERIFIED_ABSENT d=3500
+    |   t=2000 DISPATCHING --T3/D-COMMITTED--&gt; SUCCEEDED 
+    |   ledger=[{'txn': 'pay-1-0', 'status': 'succeeded', 'commit_p': 1400, 'lag': 601, 'attempt': 1}, {'txn': 'pay-2-1', 'status': 'succeeded', 'commit_p': 2000, 'lag': 0, 'attempt': 2}]
+    |   anomalies=[]
+    | assert 2 &lt;= 1
+    | Failing test case: t(
+    |     # The test sometimes passed when commented parts were varied together.
+    |     data=data(...),
+    | )
+    | Draw 1 (clock_offset): 0
+    | Draw 2 (pause): 0
+    | Draw 3 (net_delay): 0  # or any other generated value
+    | Draw 4 (outcome): 'commit'
+    | Draw 5 (processing): 1400
+    | Draw 6 (lookup_error): False  # or any other generated value
+    | Draw 7 (lookup_latency): 0  # or any other generated value
+    | Draw 8 (lookup_lag): 601
+    | Draw 9 (response_lost): True  # or any other generated value
+    | Draw 10 (lookup_error): False
+    | Draw 11 (lookup_latency): 0
+    | Draw 12 (pause): 0  # or any other generated value
+    | Draw 13 (net_delay): 0  # or any other generated value
+    | Draw 14 (outcome): 'commit'  # or any other generated value
+    | Draw 15 (processing): 0  # or any other generated value
+    | Draw 16 (lookup_lag): 0  # or any other generated value
+    | Draw 17 (response_lost): False  # or any other generated value
+    | Draw 18 (response_delay): 0  # or any other generated value
+    +------------------------------------</failure></testcase><testcase classname="tests.property.test_safety_model" name="test_necessity_v2_deadline_not_enforced" time="7.373"><failure message="ExceptionGroup: Hypothesis found 2 distinct failures. (2 sub-exceptions)">+ Exception Group Traceback (most recent call last):
+  |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 110, in test_necessity_v2_deadline_not_enforced
+  |     must_find_violation(t)
+  |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 72, in must_find_violation
+  |     test()
+  |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 107, in t
+  |     @given(data=st.data())
+  |                ^^^
+  |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/.venv/lib/python3.12/site-packages/hypothesis/core.py", line 2295, in wrapped_test
+  |     raise the_error_hypothesis_found
+  | ExceptionGroup: Hypothesis found 2 distinct failures. (2 sub-exceptions)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 109, in t
+    |     check_all(Sim(P4, Policy(mode="STRICT"), data, Violations(ignore_deadline=True)))
+    |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 39, in check_all
+    |     assert e == 0, f"false NO_EFFECT\n{sim.explain()}"
+    | AssertionError: false NO_EFFECT
+    |   t=0 claim attempt 1 basis=INITIAL d=1500
+    |   t=1400 DISPATCHING --T5/D-AMBIGUOUS--&gt; UNKNOWN 
+    |   t=1400 UNKNOWN --T6/R-V--&gt; VERIFYING 
+    |   t=1400 VERIFYING --T11/L-W--&gt; UNKNOWN 
+    |   t=2000 UNKNOWN --T6/R-V--&gt; VERIFYING 
+    |   t=2000 VERIFYING --T10/L-RA--&gt; RETRY_WAIT 
+    |   t=2000 claim attempt 2 basis=VERIFIED_ABSENT d=3500
+    |   t=2000 DISPATCHING --T4/D-DECLINED-DD--&gt; DECLINED SINGLE_ATTEMPT_IN_SEGMENT
+    |   ledger=[{'txn': 'pay-1-0', 'status': 'succeeded', 'commit_p': 2000, 'lag': 0, 'attempt': 1}, {'txn': 'pay-2-1', 'status': 'declined', 'commit_p': 2000, 'lag': 0, 'attempt': 2}]
+    |   anomalies=[]
+    | assert 1 == 0
+    | Failing test case: t(
+    |     data=data(...),
+    | )
+    | Draw 1 (clock_offset): 0
+    | Draw 2 (pause): 0
+    | Draw 3 (net_delay): 2000
+    | Draw 4 (lookup_error): False
+    | Draw 5 (lookup_latency): 0
+    | Draw 6 (lookup_error): False
+    | Draw 7 (lookup_latency): 0
+    | Draw 8 (pause): 0
+    | Draw 9 (net_delay): 0
+    | Draw 10 (outcome): 'commit'
+    | Draw 11 (processing): 0
+    | Draw 12 (outcome): 'decline'
+    | Draw 13 (processing): 0
+    | Draw 14 (lookup_lag): 0
+    | Draw 15 (response_lost): True
+    | Draw 16 (lookup_lag): 0
+    | Draw 17 (response_lost): False
+    | Draw 18 (response_delay): 0
+    +---------------- 2 ----------------
+    | Traceback (most recent call last):
+    |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 109, in t
+    |     check_all(Sim(P4, Policy(mode="STRICT"), data, Violations(ignore_deadline=True)))
+    |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 35, in check_all
+    |     assert e &lt;= 1, f"SAFETY VIOLATION E={e}\n{sim.explain()}"
+    | AssertionError: SAFETY VIOLATION E=2
+    |   t=0 claim attempt 1 basis=INITIAL d=1500
+    |   t=1400 DISPATCHING --T5/D-AMBIGUOUS--&gt; UNKNOWN 
+    |   t=1400 UNKNOWN --T6/R-V--&gt; VERIFYING 
+    |   t=1400 VERIFYING --T11/L-W--&gt; UNKNOWN 
+    |   t=2000 UNKNOWN --T6/R-V--&gt; VERIFYING 
+    |   t=2000 VERIFYING --T10/L-RA--&gt; RETRY_WAIT 
+    |   t=2000 claim attempt 2 basis=VERIFIED_ABSENT d=3500
+    |   t=2000 DISPATCHING --T3/D-COMMITTED--&gt; SUCCEEDED 
+    |   ledger=[{'txn': 'pay-1-0', 'status': 'succeeded', 'commit_p': 2000, 'lag': 0, 'attempt': 1}, {'txn': 'pay-2-1', 'status': 'succeeded', 'commit_p': 2000, 'lag': 0, 'attempt': 2}]
+    |   anomalies=[]
+    | assert 2 &lt;= 1
+    | Failing test case: t(
+    |     data=data(...),
+    | )
+    | Draw 1 (clock_offset): 0
+    | Draw 2 (pause): 0
+    | Draw 3 (net_delay): 2000
+    | Draw 4 (lookup_error): False
+    | Draw 5 (lookup_latency): 0
+    | Draw 6 (lookup_error): False
+    | Draw 7 (lookup_latency): 0
+    | Draw 8 (pause): 0
+    | Draw 9 (net_delay): 0
+    | Draw 10 (outcome): 'commit'
+    | Draw 11 (processing): 0
+    | Draw 12 (outcome): 'commit'
+    | Draw 13 (processing): 0
+    | Draw 14 (lookup_lag): 0
+    | Draw 15 (response_lost): True
+    | Draw 16 (lookup_lag): 0
+    | Draw 17 (response_lost): False
+    | Draw 18 (response_delay): 0
+    +------------------------------------</failure></testcase><testcase classname="tests.property.test_safety_model" name="test_necessity_v3_retention_shorter_than_declared" time="4.104"><failure message="Failed: DID NOT RAISE any of (AssertionError, Flaky)">def test_necessity_v3_retention_shorter_than_declared() -&gt; None:
+        @FIND
+        @given(data=st.data())
+        def t(data):
+            check_all(Sim(P2, Policy(mode="STRICT"), data, Violations(retention_ms=500)))
+&gt;       must_find_violation(t)
+
+tests/property/test_safety_model.py:118: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+test = &lt;function accept.&lt;locals&gt;.t at 0x1134e4b80&gt;
+
+    def must_find_violation(test) -&gt; None:
+        """Run a Hypothesis test that asserts safety; it must fail (a counterexample exists)."""
+&gt;       with pytest.raises((AssertionError, Flaky)):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE any of (AssertionError, Flaky)
+
+tests/property/test_safety_model.py:71: Failed</failure></testcase><testcase classname="tests.property.test_safety_model" name="test_necessity_strict_nodl_control_is_still_safe" time="0.465" /></testsuite></testsuites>

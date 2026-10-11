@@ -18,6 +18,8 @@ make up-test       # builds raeg/python:dev; starts provider-db, raeg-db, provid
 | `make test-unit` | `tests/unit` (no Docker needed) | `results/tests/<UTC>_unit/` |
 | `make test-conformance` | `tests/conformance` against the running provider | `results/tests/<UTC>_conformance/` (+ `compose.log`) |
 | `make test-gateway` | `tests/gateway`: M3 store transitions, concurrency, auditability, projection rebuild (needs raeg-db) | `results/tests/<UTC>_gateway/` |
+| `make test-property` | `tests/property`: model-based safety checks of the controller (Hypothesis; no Docker) | `results/tests/<UTC>_property/` |
+| `make test-integration` | `tests/integration`: engine + store + provider scenarios, real-process crashes (CP1–CP3), zombies (F7), concurrent engines | `results/tests/<UTC>_integration/` (+ `compose.log`) |
 
 `tests/conformance/test_provider_restart.py` SIGKILLs and restarts the provider container (K7). It is part of `make test-conformance`.
 
@@ -26,7 +28,7 @@ Each evidence directory contains:
 - `pytest.log`: the full output;
 - `junit.xml`.
 
-Failed runs are kept. Nothing under `results/` is edited or deleted by tooling.
+Failed runs are kept. Nothing under `results/` is edited or deleted by tooling. From M4 on, the runner writes the absolute repository path as `<repo>` and the home directory as `~` in the logs it captures, and lists these substitutions under `redactions` in `manifest.json`. Logs captured earlier are unredacted.
 
 ## Ports (bound to 127.0.0.1 only)
 | Port | Service |

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="25" time="57.294" timestamp="2026-10-10T23:15:45.234534-04:00" hostname="MacBookAir"><testcase classname="tests.integration.test_crash_zombie_concurrency" name="test_real_process_crash_then_recovery[CP1-P1]" time="2.614" /><testcase classname="tests.integration.test_crash_zombie_concurrency" name="test_real_process_crash_then_recovery[CP1-P4]" time="2.512" /><testcase classname="tests.integration.test_crash_zombie_concurrency" name="test_real_process_crash_then_recovery[CP2-P1]" time="2.521" /><testcase classname="tests.integration.test_crash_zombie_concurrency" name="test_real_process_crash_then_recovery[CP2-P4]" time="2.509" /><testcase classname="tests.integration.test_crash_zombie_concurrency" name="test_real_process_crash_then_recovery[CP3-P1]" time="1.984" /><testcase classname="tests.integration.test_crash_zombie_concurrency" name="test_real_process_crash_then_recovery[CP3-P4]" time="1.998" /><testcase classname="tests.integration.test_crash_zombie_concurrency" name="test_zombie_tier_s_deadline_fences_the_late_send" time="5.735" /><testcase classname="tests.integration.test_crash_zombie_concurrency" name="test_zombie_tier_s_strict_without_d_escalates_and_flags_late_success" time="5.742" /><testcase classname="tests.integration.test_crash_zombie_concurrency" name="test_zombie_violating_b1_in_bounded_mode_is_detected" time="5.761" /><testcase classname="tests.integration.test_crash_zombie_concurrency" name="test_concurrent_engines_process_shared_backlog_exactly_once" time="0.680"><failure message="raeg_gateway.transitions.IllegalTransition: T6 not allowed from VERIFYING (allowed: ['UNKNOWN'])">provider = &lt;tests.conformance.conftest.Provider object at 0x1089558b0&gt;
+store = &lt;raeg_gateway.store.GatewayStore object at 0x108956b10&gt;
+admin = &lt;asyncpg.connection.Connection object at 0x1087b9950&gt;
+tmp_path = PosixPath('/private/var/folders/wx/p0dw96j103n3ly6_v5r5hzx40000gn/T/pytest-of-muzeebmohammad/pytest-9/test_concurrent_engines_proces0')
+
+    async def test_concurrent_engines_process_shared_backlog_exactly_once(provider, store, admin, tmp_path) -&gt; None:
+        keys = [f"cc-{uuid.uuid4().hex[:8]}" for _ in range(20)]
+        rules = [{"client_reference": k, "ingress_index": 1, "fault": "LOST_RESPONSE", "params": {}} for k in keys[::2]]
+        prof = profile("P1")
+        await provider.configure(prof, rules)
+        clients, engines = [], []
+        for i in range(3):
+            client = ProviderClient(PUBLIC_URL, f"raeg-cc-{i}", timeout_s=10, log=ExchangeLog(str(tmp_path / f"cc{i}.jsonl")))
+            clients.append(client)
+            engines.append(RecoveryEngine(store, client, f"cc-engine-{i}"))
+        for k in keys:
+            await engines[0].submit(k, PAYLOAD, "P1", prof.capability, Policy())
+    
+        async def loop(e: RecoveryEngine) -&gt; None:
+            for _ in range(400):
+                await e.run_once(limit=50)
+                rows = await store.pool.fetch("SELECT state FROM executions WHERE action_key = ANY($1)", keys)
+                if all(State(r["state"]) in TERMINAL or r["state"] == "ESCALATED" for r in rows):
+                    return
+                await asyncio.sleep(0.05)
+    
+&gt;       await asyncio.gather(*(loop(e) for e in engines))
+
+tests/integration/test_crash_zombie_concurrency.py:135: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+e = &lt;raeg_gateway.engine.RecoveryEngine object at 0x10890aed0&gt;
+
+    async def loop(e: RecoveryEngine) -&gt; None:
+        for _ in range(400):
+&gt;           await e.run_once(limit=50)
+
+tests/integration/test_crash_zombie_concurrency.py:129: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;raeg_gateway.engine.RecoveryEngine object at 0x10890aed0&gt;, limit = 50
+
+    async def run_once(self, limit: int = 50) -&gt; int:
+        """One background-worker pass: sweep, late evidence, due actions, duplicate audits."""
+        n = await self.sweep()
+        n += await self.consume_late_evidence()
+        for key in await self.store.due_actions(limit):
+&gt;           if (await self.step(key)).progressed:
+                ^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/engine.py:74: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;raeg_gateway.engine.RecoveryEngine object at 0x10890aed0&gt;
+action_key = 'cc-7e64e964'
+
+    async def step(self, action_key: str) -&gt; StepOutcome:
+        row = await self.store.snapshot(action_key)
+        state = State(row["state"])
+        c = Capability.model_validate(row["capability"])
+        p = Policy.from_json(row["policy"])
+        now = await self.store.now()
+        if state == State.PREPARED:
+            return await self._dispatch(row, c, p, Basis.INITIAL)
+        if state == State.RETRY_WAIT:
+            if row["next_action_at"] and row["next_action_at"] &gt; now:
+                return StepOutcome(action_key, state, False)
+            return await self._dispatch(row, c, p, Basis(row["retry_basis"]))
+        if state == State.UNKNOWN:
+            if row["next_action_at"] and row["next_action_at"] &gt; now:
+                return StepOutcome(action_key, state, False)
+            if await self._late_success_for(row):
+                return StepOutcome(action_key, State((await self.store.snapshot(action_key))["state"]), True)
+            x = await self._snapshot(row)
+            reached = await self._lookups_reached_horizon(x, c)
+            decision = ctl.decide(x, c, p, now, lookups_reached_horizon=reached)
+&gt;           return await self._apply_unknown(row, x, c, p, now, decision)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/engine.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;raeg_gateway.engine.RecoveryEngine object at 0x10890aed0&gt;
+row = {'action_key': 'cc-7e64e964', 'fingerprint': 'b7c000a7b4dfd229e81953e35198500925f68868207c9d3833c1b76dd9dd3828', 'payload': {'memo': '', 'currency': 'USD', 'payee_id': 'merchant-1', 'payer_id': 'payer-1', ...}, 'profile_id': 'P1', ...}
+x = Snapshot(action_key='cc-7e64e964', fingerprint='b7c000a7b4dfd229e81953e35198500925f68868207c9d3833c1b76dd9dd3828', sta...ine=datetime.datetime(2026, 10, 11, 3, 16, 18, 505743, tzinfo=datetime.timezone.utc), segment_no=1, basis='INITIAL'),))
+c = Capability(idempotency=True, key_ttl_ms=None, lookup=&lt;LookupMode.BY_CLIENT_REF: 'by_client_ref'&gt;, lookup_lag_ms=500, deadline_enforced=True)
+p = Policy(mode='STRICT', order='verify_first', max_dispatch=3, max_verify=4, attempt_ms=1500, verify_lease_ms=2000, looku...in_send_budget_ms=200, send_deadline=True, no_verify=False, no_ttl=False, no_horizon=False, version='raeg-policy-v0.3')
+now = datetime.datetime(2026, 10, 11, 3, 16, 17, 335391, tzinfo=datetime.timezone.utc)
+d = Decision(rule_id='R-V', transition='T6', patch={'verify_attempts': 1}, basis=None, anomaly=None, detail='')
+
+    async def _apply_unknown(self, row, x: Snapshot, c: Capability, p: Policy, now: datetime, d: Decision) -&gt; StepOutcome:
+        key = row["action_key"]
+        inputs = self._inputs(x, c, p, now, detail=d.detail)
+        if d.transition == "T6":
+&gt;           res = await self.store.transition(key, "T6", worker_id=self.worker_id, rule_id=d.rule_id, inputs=inputs,
+                                              patch=d.patch, expected_version=row["version"], lease_ms=p.verify_lease_ms)
+
+src/raeg_gateway/engine.py:172: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;raeg_gateway.store.GatewayStore object at 0x108956b10&gt;
+action_key = 'cc-7e64e964', tid = 'T6', worker_id = 'cc-engine-0'
+rule_id = 'R-V'
+inputs = {'snapshot': {'action_key': 'cc-7e64e964', 'state': 'UNKNOWN', 'attempt_count': 1, 'verify_attempts': 0, ...}, 'capabi...CT', 'order': 'verify_first', 'max_dispatch': 3, 'max_verify': 4, ...}, 'now': '2026-10-11T03:16:17.335391+00:00', ...}
+patch = {'verify_attempts': 1}, evidence_ids = None, expected_version = 3
+fence = None, lease_ms = 2000
+
+    async def transition(
+        self,
+        action_key: str,
+        tid: str,
+        *,
+        worker_id: str,
+        rule_id: str,
+        inputs: dict[str, Any] | None = None,
+        patch: dict[str, Any] | None = None,
+        evidence_ids: list[int] | None = None,
+        expected_version: int | None = None,
+        fence: Fence | None = None,
+        lease_ms: int | None = None,
+    ) -&gt; TransitionResult:
+        if tid in CLAIM_TRANSITIONS:
+            raise IllegalTransition(f"{tid} must go through claim()")
+        async with self.pool.acquire() as conn, conn.transaction():
+            row = await conn.fetchrow("SELECT * FROM executions WHERE action_key = $1 FOR UPDATE", action_key)
+            if row is None:
+                raise KeyError(action_key)
+            now: datetime = await conn.fetchval("SELECT now()")
+&gt;           return await self._apply(
+                conn, dict(row), tid, now=now, worker_id=worker_id, rule_id=rule_id, inputs=inputs or {},
+                patch=patch or {}, evidence_ids=evidence_ids or [], expected_version=expected_version,
+                fence=fence, lease_ms=lease_ms,
+            )
+
+src/raeg_gateway/store.py:296: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;raeg_gateway.store.GatewayStore object at 0x108956b10&gt;
+conn = &lt;PoolConnectionProxy [released] 0x108987a60&gt;
+row = {'action_key': 'cc-7e64e964', 'fingerprint': 'b7c000a7b4dfd229e81953e35198500925f68868207c9d3833c1b76dd9dd3828', 'payload': {'memo': '', 'currency': 'USD', 'payee_id': 'merchant-1', 'payer_id': 'payer-1', ...}, 'profile_id': 'P1', ...}
+tid = 'T6'
+now = datetime.datetime(2026, 10, 11, 3, 16, 17, 340090, tzinfo=datetime.timezone.utc)
+worker_id = 'cc-engine-0', rule_id = 'R-V'
+inputs = {'snapshot': {'action_key': 'cc-7e64e964', 'state': 'UNKNOWN', 'attempt_count': 1, 'verify_attempts': 0, ...}, 'capabi...CT', 'order': 'verify_first', 'max_dispatch': 3, 'max_verify': 4, ...}, 'now': '2026-10-11T03:16:17.335391+00:00', ...}
+patch = {'verify_attempts': 1}, evidence_ids = [], expected_version = 3
+fence = None, lease_ms = 2000
+
+    async def _apply(
+        self,
+        conn: asyncpg.Connection,
+        row: dict[str, Any],
+        tid: str,
+        *,
+        now: datetime,
+        worker_id: str,
+        rule_id: str,
+        inputs: dict[str, Any],
+        patch: dict[str, Any],
+        evidence_ids: list[int],
+        expected_version: int | None,
+        fence: Fence | None,
+        lease_ms: int | None,
+    ) -&gt; TransitionResult:
+        current = State(row["state"])
+        if isinstance(fence, OwnerFence) and (current not in LEASED or row["lease_owner"] != fence.worker_id):
+            # A (possibly zombie) owner whose lease was swept or re-granted: a race, not a bug.
+            did = await self._decision(conn, row["action_key"], now, rule_id, tid,
+                                       {"state": current.value, "version": row["version"], **inputs},
+                                       evidence_ids, {"rejected": "FENCED"}, False, worker_id)
+            return TransitionResult(False, "FENCED", did, row["version"], current)
+&gt;       transition = check_transition(tid, current)  # raises IllegalTransition: a programming error
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/store.py:325: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+tid = 'T6', current = &lt;State.VERIFYING: 'VERIFYING'&gt;
+
+    def check_transition(tid: str, current: State) -&gt; Transition:
+        t = TRANSITIONS.get(tid)
+        if t is None:
+            raise IllegalTransition(f"unknown transition {tid}")
+        if current not in t.sources:
+&gt;           raise IllegalTransition(f"{tid} not allowed from {current.value} (allowed: {sorted(s.value for s in t.sources)})")
+E           raeg_gateway.transitions.IllegalTransition: T6 not allowed from VERIFYING (allowed: ['UNKNOWN'])
+
+src/raeg_gateway/transitions.py:90: IllegalTransition</failure></testcase><testcase classname="tests.integration.test_engine_scenarios" name="test_p1_no_fault" time="0.522" /><testcase classname="tests.integration.test_engine_scenarios" name="test_p1_lost_response_resolved_by_lookup_without_redispatch" time="2.586" /><testcase classname="tests.integration.test_engine_scenarios" name="test_p4_stall_verified_absent_then_safe_retry" time="2.630" /><testcase classname="tests.integration.test_engine_scenarios" name="test_p4_delayed_commit_waits_for_horizon_and_finds_it" time="3.074" /><testcase classname="tests.integration.test_engine_scenarios" name="test_p4_delayed_commit_no_horizon_ablation_duplicates" time="1.833" /><testcase classname="tests.integration.test_engine_scenarios" name="test_p6_blind_provider_escalates_without_duplicate" time="0.542" /><testcase classname="tests.integration.test_engine_scenarios" name="test_p3_idempotent_replay_with_infinite_tau" time="0.592" /><testcase classname="tests.integration.test_engine_scenarios" name="test_p7_replay_refused_when_retention_window_closed" time="1.948" /><testcase classname="tests.integration.test_engine_scenarios" name="test_p7_reset_after_commit_replays_within_retention" time="0.618" /><testcase classname="tests.integration.test_engine_scenarios" name="test_p7_fast_ambiguity_replays_within_retention" time="0.624" /><testcase classname="tests.integration.test_engine_scenarios" name="test_p4n_absence_needs_d_or_bounded_mode[STRICT-expected0]" time="1.973" /><testcase classname="tests.integration.test_engine_scenarios" name="test_p4n_absence_needs_d_or_bounded_mode[BOUNDED-expected1]" time="2.623" /><testcase classname="tests.integration.test_engine_scenarios" name="test_definitive_decline_on_single_attempt" time="0.539" /><testcase classname="tests.integration.test_engine_scenarios" name="test_nodl_control_on_p4_cannot_prove_absence" time="1.995" /><testcase classname="tests.integration.test_engine_scenarios" name="test_lookup_outage_exhausts_budget_and_escalates_safely" time="3.041" /></testsuite></testsuites>

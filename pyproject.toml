@@ -35,4 +35,5 @@ markers = [
     "conformance: requires the provider stack (docker compose) to be running",
     "gateway: requires raeg-db (docker compose) to be running",
     "restart: restarts the provider container (needs docker)",
+    "integration: engine + gateway store + provider (needs the full stack)",
 ]

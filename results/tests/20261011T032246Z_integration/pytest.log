@@ -1,0 +1,67 @@
+$ <repo>/.venv/bin/python -m pytest -v -rA --tb=long --junitxml=<repo>/results/tests/20261011T032246Z_integration/junit.xml tests/integration
+
+============================= test session starts ==============================
+platform darwin -- Python 3.12.7, pytest-9.1.1, pluggy-1.6.0 -- <repo>/.venv/bin/python
+cachedir: .pytest_cache
+hypothesis profile 'default'
+rootdir: <repo>
+configfile: pyproject.toml
+plugins: hypothesis-6.168.5, asyncio-1.4.0, anyio-4.15.1
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
+collecting ... collected 25 items
+
+tests/integration/test_crash_zombie_concurrency.py::test_real_process_crash_then_recovery[CP1-P1] PASSED [  4%]
+tests/integration/test_crash_zombie_concurrency.py::test_real_process_crash_then_recovery[CP1-P4] PASSED [  8%]
+tests/integration/test_crash_zombie_concurrency.py::test_real_process_crash_then_recovery[CP2-P1] PASSED [ 12%]
+tests/integration/test_crash_zombie_concurrency.py::test_real_process_crash_then_recovery[CP2-P4] PASSED [ 16%]
+tests/integration/test_crash_zombie_concurrency.py::test_real_process_crash_then_recovery[CP3-P1] PASSED [ 20%]
+tests/integration/test_crash_zombie_concurrency.py::test_real_process_crash_then_recovery[CP3-P4] PASSED [ 24%]
+tests/integration/test_crash_zombie_concurrency.py::test_zombie_tier_s_deadline_fences_the_late_send PASSED [ 28%]
+tests/integration/test_crash_zombie_concurrency.py::test_zombie_tier_s_strict_without_d_escalates_and_flags_late_success PASSED [ 32%]
+tests/integration/test_crash_zombie_concurrency.py::test_zombie_violating_b1_in_bounded_mode_is_detected PASSED [ 36%]
+tests/integration/test_crash_zombie_concurrency.py::test_concurrent_engines_process_shared_backlog_exactly_once PASSED [ 40%]
+tests/integration/test_engine_scenarios.py::test_p1_no_fault PASSED      [ 44%]
+tests/integration/test_engine_scenarios.py::test_p1_lost_response_resolved_by_lookup_without_redispatch PASSED [ 48%]
+tests/integration/test_engine_scenarios.py::test_p4_stall_verified_absent_then_safe_retry PASSED [ 52%]
+tests/integration/test_engine_scenarios.py::test_p4_delayed_commit_waits_for_horizon_and_finds_it PASSED [ 56%]
+tests/integration/test_engine_scenarios.py::test_p4_delayed_commit_no_horizon_ablation_duplicates PASSED [ 60%]
+tests/integration/test_engine_scenarios.py::test_p6_blind_provider_escalates_without_duplicate PASSED [ 64%]
+tests/integration/test_engine_scenarios.py::test_p3_idempotent_replay_with_infinite_tau PASSED [ 68%]
+tests/integration/test_engine_scenarios.py::test_p7_replay_refused_when_retention_window_closed PASSED [ 72%]
+tests/integration/test_engine_scenarios.py::test_p7_reset_after_commit_replays_within_retention PASSED [ 76%]
+tests/integration/test_engine_scenarios.py::test_p7_fast_ambiguity_replays_within_retention PASSED [ 80%]
+tests/integration/test_engine_scenarios.py::test_p4n_absence_needs_d_or_bounded_mode[STRICT-expected0] PASSED [ 84%]
+tests/integration/test_engine_scenarios.py::test_p4n_absence_needs_d_or_bounded_mode[BOUNDED-expected1] PASSED [ 88%]
+tests/integration/test_engine_scenarios.py::test_definitive_decline_on_single_attempt PASSED [ 92%]
+tests/integration/test_engine_scenarios.py::test_nodl_control_on_p4_cannot_prove_absence PASSED [ 96%]
+tests/integration/test_engine_scenarios.py::test_lookup_outage_exhausts_budget_and_escalates_safely PASSED [100%]
+
+==================================== PASSES ====================================
+- generated xml file: <repo>/results/tests/20261011T032246Z_integration/junit.xml -
+=========================== short test summary info ============================
+PASSED tests/integration/test_crash_zombie_concurrency.py::test_real_process_crash_then_recovery[CP1-P1]
+PASSED tests/integration/test_crash_zombie_concurrency.py::test_real_process_crash_then_recovery[CP1-P4]
+PASSED tests/integration/test_crash_zombie_concurrency.py::test_real_process_crash_then_recovery[CP2-P1]
+PASSED tests/integration/test_crash_zombie_concurrency.py::test_real_process_crash_then_recovery[CP2-P4]
+PASSED tests/integration/test_crash_zombie_concurrency.py::test_real_process_crash_then_recovery[CP3-P1]
+PASSED tests/integration/test_crash_zombie_concurrency.py::test_real_process_crash_then_recovery[CP3-P4]
+PASSED tests/integration/test_crash_zombie_concurrency.py::test_zombie_tier_s_deadline_fences_the_late_send
+PASSED tests/integration/test_crash_zombie_concurrency.py::test_zombie_tier_s_strict_without_d_escalates_and_flags_late_success
+PASSED tests/integration/test_crash_zombie_concurrency.py::test_zombie_violating_b1_in_bounded_mode_is_detected
+PASSED tests/integration/test_crash_zombie_concurrency.py::test_concurrent_engines_process_shared_backlog_exactly_once
+PASSED tests/integration/test_engine_scenarios.py::test_p1_no_fault
+PASSED tests/integration/test_engine_scenarios.py::test_p1_lost_response_resolved_by_lookup_without_redispatch
+PASSED tests/integration/test_engine_scenarios.py::test_p4_stall_verified_absent_then_safe_retry
+PASSED tests/integration/test_engine_scenarios.py::test_p4_delayed_commit_waits_for_horizon_and_finds_it
+PASSED tests/integration/test_engine_scenarios.py::test_p4_delayed_commit_no_horizon_ablation_duplicates
+PASSED tests/integration/test_engine_scenarios.py::test_p6_blind_provider_escalates_without_duplicate
+PASSED tests/integration/test_engine_scenarios.py::test_p3_idempotent_replay_with_infinite_tau
+PASSED tests/integration/test_engine_scenarios.py::test_p7_replay_refused_when_retention_window_closed
+PASSED tests/integration/test_engine_scenarios.py::test_p7_reset_after_commit_replays_within_retention
+PASSED tests/integration/test_engine_scenarios.py::test_p7_fast_ambiguity_replays_within_retention
+PASSED tests/integration/test_engine_scenarios.py::test_p4n_absence_needs_d_or_bounded_mode[STRICT-expected0]
+PASSED tests/integration/test_engine_scenarios.py::test_p4n_absence_needs_d_or_bounded_mode[BOUNDED-expected1]
+PASSED tests/integration/test_engine_scenarios.py::test_definitive_decline_on_single_attempt
+PASSED tests/integration/test_engine_scenarios.py::test_nodl_control_on_p4_cannot_prove_absence
+PASSED tests/integration/test_engine_scenarios.py::test_lookup_outage_exhausts_budget_and_escalates_safely
+============================= 25 passed in 59.28s ==============================

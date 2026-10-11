@@ -32,6 +32,7 @@ from raeg_gateway.transitions import (
     CLAIM_TRANSITIONS,
     LEASED,
     MUTABLE_COLUMNS,
+    SAME_STATE_PATCH,
     TIMESTAMP_COLUMNS,
     Basis,
     IllegalTransition,
@@ -321,7 +322,17 @@ class GatewayStore:
                                        {"state": current.value, "version": row["version"], **inputs},
                                        evidence_ids, {"rejected": "FENCED"}, False, worker_id)
             return TransitionResult(False, "FENCED", did, row["version"], current)
+        if expected_version is not None and row["version"] != expected_version:
+            # CAS caller lost a race: the row moved on since its snapshot. Refuse and record, before
+            # judging legality against a state the caller never saw.
+            did = await self._decision(conn, row["action_key"], now, rule_id, tid,
+                                       {"state": current.value, "version": row["version"],
+                                        "expected_version": expected_version, **inputs},
+                                       evidence_ids, {"rejected": "VERSION_MISMATCH"}, False, worker_id)
+            return TransitionResult(False, "VERSION_MISMATCH", did, row["version"], current)
         transition = check_transition(tid, current)  # raises IllegalTransition: a programming error
+        if tid in SAME_STATE_PATCH and not set(patch) <= SAME_STATE_PATCH[tid]:
+            raise IllegalTransition(f"{tid} may only set {sorted(SAME_STATE_PATCH[tid])}")
         bad = set(patch) - MUTABLE_COLUMNS - {"lease_owner", "lease_expires_at"}
         if bad or {"lease_owner", "lease_expires_at"} & set(patch):
             raise IllegalTransition(f"patch may not set {sorted(bad | ({'lease_owner', 'lease_expires_at'} & set(patch)))}")
@@ -538,6 +549,64 @@ class GatewayStore:
             "INSERT INTO anomalies (action_key, kind, evidence_ids, detail, at_db) VALUES ($1, $2, $3, $4, clock_timestamp()) RETURNING id",
             action_key, kind, evidence_ids, detail,
         )
+
+    async def note_decision(
+        self, action_key: str, *, worker_id: str, rule_id: str, inputs: dict[str, Any], evidence_ids: list[int],
+        output: dict[str, Any],
+    ) -> int:
+        """A decision that changes no state (e.g. late evidence consumed, audit found nothing).
+        Recorded with applied = false so I6 (one applied decision per event) is unaffected."""
+        async with self.pool.acquire() as conn:
+            now: datetime = await conn.fetchval("SELECT now()")
+            return await self._decision(conn, action_key, now, rule_id, None, inputs, evidence_ids, output, False, worker_id)
+
+    async def now(self) -> datetime:
+        return await self.pool.fetchval("SELECT now()")
+
+    async def attempts(self, action_key: str) -> list[dict[str, Any]]:
+        return [dict(r) for r in await self.pool.fetch(
+            "SELECT * FROM attempts WHERE action_key = $1 ORDER BY attempt_no", action_key)]
+
+    async def due_actions(self, limit: int = 100) -> list[str]:
+        """Actions the controller should look at: lease-free, non-terminal, and due."""
+        rows = await self.pool.fetch(
+            """SELECT action_key FROM executions
+               WHERE state IN ('PREPARED', 'UNKNOWN', 'RETRY_WAIT')
+                 AND (next_action_at IS NULL OR next_action_at <= now())
+               ORDER BY coalesce(next_action_at, updated_at) LIMIT $1""",
+            limit,
+        )
+        return [r["action_key"] for r in rows]
+
+    async def audit_candidates(self, limit: int = 100) -> list[str]:
+        """SUCCEEDED actions with >1 attempt and no duplicate audit yet (rule DS; the engine filters further)."""
+        rows = await self.pool.fetch(
+            """SELECT x.action_key FROM executions x
+               WHERE x.state = 'SUCCEEDED' AND NOT x.duplicate_detected AND x.attempt_count > 1
+                 AND NOT EXISTS (SELECT 1 FROM evidence e WHERE e.action_key = x.action_key AND e.kind = 'duplicate_audit')
+               ORDER BY x.updated_at LIMIT $1""",
+            limit,
+        )
+        return [r["action_key"] for r in rows]
+
+    async def unconsumed_late_evidence(self, limit: int = 100) -> list[dict[str, Any]]:
+        """Late responses not yet cited by any decision (applied or not)."""
+        rows = await self.pool.fetch(
+            """SELECT e.* FROM evidence e
+               WHERE e.kind = 'late_response'
+                 AND NOT EXISTS (SELECT 1 FROM decisions d WHERE d.action_key = e.action_key AND e.id = ANY (d.evidence_ids))
+               ORDER BY e.id LIMIT $1""",
+            limit,
+        )
+        return [dict(r) for r in rows]
+
+    async def evidence_rows(self, action_key: str, kind: str | None = None) -> list[dict[str, Any]]:
+        if kind is None:
+            rows = await self.pool.fetch("SELECT * FROM evidence WHERE action_key = $1 ORDER BY id", action_key)
+        else:
+            rows = await self.pool.fetch(
+                "SELECT * FROM evidence WHERE action_key = $1 AND kind = $2 ORDER BY id", action_key, kind)
+        return [dict(r) for r in rows]
 
     async def snapshot(self, action_key: str) -> dict[str, Any] | None:
         row = await self.pool.fetchrow("SELECT * FROM executions WHERE action_key = $1", action_key)
