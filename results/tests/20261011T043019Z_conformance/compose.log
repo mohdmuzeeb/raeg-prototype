@@ -1,0 +1,2 @@
+provider-1  | 2026-10-11T04:30:16.893721345Z 2026-10-11 04:30:16,893 INFO payment_provider provider ready profile=P1 migrations=['001_schema'] released_on_recovery=0
+provider-1  | 2026-10-11T04:31:01.642059299Z 2026-10-11 04:31:01,641 INFO payment_provider provider ready profile=P1 migrations=[] released_on_recovery=1

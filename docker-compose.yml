@@ -58,10 +58,11 @@ services:
       retries: 30
 
   # ---------------------------------------------------------------- M5: systems under test
-  # Started with `make up-systems` (compose profile "systems").
+  # Started with `make up-systems` (profiles "systems" + "temporal"). The harness starts "temporal"
+  # only for B3/B3L runs.
   temporal-db:
     <<: *postgres
-    profiles: [systems]
+    profiles: [temporal]
     environment:
       POSTGRES_USER: temporal
       POSTGRES_PASSWORD: temporal
@@ -69,7 +70,7 @@ services:
 
   temporal:
     image: temporalio/auto-setup:1.28.1@sha256:607d68caa111338d754771efb876c92dfcdae06d056e4530bb31cd0f37406e6a
-    profiles: [systems]
+    profiles: [temporal]
     depends_on:
       temporal-db: {condition: service_healthy}
     environment:
@@ -83,7 +84,7 @@ services:
 
   temporal-worker:
     image: raeg/python:dev
-    profiles: [systems]
+    profiles: [temporal]
     command: ["python", "-m", "systems.temporal_wf.worker"]
     depends_on: [temporal, provider]
     environment:
@@ -101,7 +102,7 @@ services:
     depends_on:
       provider: {condition: service_healthy}
       raeg-db: {condition: service_healthy}
-      temporal: {condition: service_started}
+      temporal: {condition: service_started, required: false}  # only with --profile temporal
     environment:
       PROVIDER_URL: http://provider:8001
       RAEG_DB_APP_DSN: postgresql://raeg_app:raeg_app@raeg-db:5432/raeg

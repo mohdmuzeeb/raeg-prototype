@@ -43,3 +43,19 @@ Failed runs are kept. Nothing under `results/` is edited or deleted by tooling. 
 
 ## Clock note
 The colima VM clock is not synchronised with the macOS host clock; an offset of roughly 1.5 s was observed on 2026-10-11. Every service runs in the same VM and therefore shares one kernel clock. Host-side tests and harness code must take times from `/oracle/now` (the provider clock), never from the host.
+
+## Experiments (M6)
+```sh
+make run-experiment EXP=config/experiments/m6-exit.yaml   # sets CODE_SHA to the current HEAD
+```
+- The runner, for every cell × seed:
+  - generates the workload and fault plan once;
+  - runs each listed system in a seeded random order, each on **fresh volumes** (`down -v`), with the provider reset endpoint off.
+- Each run writes `results/raw/<UTC>_<experiment>_<cell>_<system>_s<seed>/` containing:
+  - `manifest.json` (with `resolved_config`), `workload.jsonl`, `fault_plan.json`;
+  - `claims.jsonl`, `driver_exchanges.jsonl`;
+  - `oracle_ledger.csv`, `provider_receipts.csv`, `fault_log.csv`, `provider_keys.json`, `provider_config.json`;
+  - `exchange_logs/`, `raeg/*.csv` (RAEG systems), `temporal/histories/` (B3/B3L), `logs/`;
+  - `audit.json`.
+- `results/raw/` is not in git. Archive it with checksums (see `results/README.md`).
+- Configs with `excluded_from_paper: true` (for example `m6-*`) are pipeline checks only. They are never reported as results.

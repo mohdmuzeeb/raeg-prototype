@@ -14,6 +14,8 @@ Previous versions: `docs/archive/DESIGN-v0.1.md`, `-v0.2.md`, and `-v0.3.md` (th
 | E2 | The same-state transitions `TW` (UNKNOWN → UNKNOWN, scheduled wait) and `TA` (SUCCEEDED → SUCCEEDED, duplicate annotation) are added. | `WAIT` (VB1) and the DS duplicate annotation need an auditable record but no state change. Their patches are whitelisted to `next_action_at` and `duplicate_detected` respectively. | §3.2 |
 | E3 | Late evidence is consumed by the engine before `decide()` runs, instead of being checked inside it. Consumption is marked by a decision that cites the evidence id. | Keeps `decide()` pure. Equivalent ordering. | §2.10 |
 | E4 | (M5) Pessimistic rescoring maps "gave up" to a distinct claim, `NO_EFFECT(assumed_by_agent)`. | An agent's assumption must not be counted as a provider-confirmed decline. | §6.2 |
+| E6 | (M6) F9 is redefined: the original is held past its own deadline (`T_att + 1500 ms`). The v0.3 wording ("delay < d − send, so that the retry arrives first") cannot occur with the shared timing (IMPLEMENTATION_NOTES N37). | Retries come after the client timeout, which is only `m` before `d`. | §6.3 |
+| E7 | (M6) Fault keying: provider faults by `(client_reference, kind, ingress index)`; client hooks by `(k, attempt_no)` (N2). | As implemented since M2. | §6.3 |
 | E5 | (M5) The systems' deployment and native-outcome details (one service, route per system; B3 workflows return outcomes rather than failing) are recorded in IMPLEMENTATION_NOTES N27–N36. | Implementation detail; the definitions in §5.4 are unchanged. | §5.4 |
 
 ## 0a. Changes from v0.2

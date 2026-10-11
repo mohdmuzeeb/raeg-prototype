@@ -199,3 +199,22 @@ def test_reloading_hook_plan_picks_up_file_changes(tmp_path: Path) -> None:
     assert plan.lookup("k1", 1) is None
     path.unlink()
     assert plan.lookup("k1", 1) is None
+
+
+async def test_reloading_hooks_are_one_shot_across_processes(tmp_path: Path) -> None:
+    """A fired hook is durably marked; a fresh plan instance (= a restarted process) never re-fires it."""
+    from raeg_common.hooks import ReloadingHookPlan
+
+    path = tmp_path / "hooks.json"
+    path.write_text(json.dumps({"hooks": [{"action_key": "k1", "attempt_no": 1, "point": "CP1"}]}))
+    first = ReloadingHookPlan(path, exit_fn=crash)
+    client, rec, _ = make_client(tmp_path, lambda r: httpx.Response(201, json=OK_BODY), hooks=first)
+    with pytest.raises(Crashed):
+        await client.dispatch("k1", PAYLOAD, 1, None, None)
+    await client.aclose()
+    restarted = ReloadingHookPlan(path, exit_fn=crash)  # e.g. B1 after a container restart, attempt 1 again
+    client, rec, _ = make_client(tmp_path, lambda r: httpx.Response(201, json=OK_BODY), hooks=restarted)
+    assert (await client.dispatch("k1", PAYLOAD, 1, None, None)).observation is Observation.COMMITTED
+    await client.aclose()
+    assert len(rec.requests) == 1
+    assert json.loads((tmp_path / "hooks.json.fired").read_text())["point"] == "CP1"

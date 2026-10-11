@@ -1,0 +1,122 @@
+$ <repo>/.venv/bin/python -m pytest -v -rA --tb=long --junitxml=<repo>/results/tests/20261011T043225Z_gateway/junit.xml tests/gateway
+
+============================= test session starts ==============================
+platform darwin -- Python 3.12.7, pytest-9.1.1, pluggy-1.6.0 -- <repo>/.venv/bin/python
+cachedir: .pytest_cache
+hypothesis profile 'default'
+rootdir: <repo>
+configfile: pyproject.toml
+plugins: hypothesis-6.168.5, asyncio-1.4.0, anyio-4.15.1
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
+collecting ... collected 51 items
+
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-submissions] PASSED [  1%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-attempts] PASSED [  3%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-evidence] PASSED [  5%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-decisions] PASSED [  7%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-execution_events] PASSED [  9%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-anomalies] PASSED [ 11%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-submissions] PASSED [ 13%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-attempts] PASSED [ 15%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-evidence] PASSED [ 17%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-decisions] PASSED [ 19%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-execution_events] PASSED [ 21%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-anomalies] PASSED [ 23%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-submissions] PASSED [ 25%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-attempts] PASSED [ 27%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-evidence] PASSED [ 29%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-decisions] PASSED [ 31%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-execution_events] PASSED [ 33%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-anomalies] PASSED [ 35%]
+tests/gateway/test_auditability.py::test_app_role_cannot_change_identity_or_delete_executions[UPDATE executions SET fingerprint = 'x'] PASSED [ 37%]
+tests/gateway/test_auditability.py::test_app_role_cannot_change_identity_or_delete_executions[UPDATE executions SET payload = '{}'] PASSED [ 39%]
+tests/gateway/test_auditability.py::test_app_role_cannot_change_identity_or_delete_executions[UPDATE executions SET capability = '{}'] PASSED [ 41%]
+tests/gateway/test_auditability.py::test_app_role_cannot_change_identity_or_delete_executions[DELETE FROM executions] PASSED [ 43%]
+tests/gateway/test_auditability.py::test_app_role_cannot_change_identity_or_delete_executions[TRUNCATE executions CASCADE] PASSED [ 45%]
+tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[submissions] PASSED [ 47%]
+tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[attempts] PASSED [ 49%]
+tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[evidence] PASSED [ 50%]
+tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[decisions] PASSED [ 52%]
+tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[execution_events] PASSED [ 54%]
+tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[anomalies] PASSED [ 56%]
+tests/gateway/test_auditability.py::test_tampered_event_is_detected PASSED [ 58%]
+tests/gateway/test_auditability.py::test_deleted_event_breaks_the_chain PASSED [ 60%]
+tests/gateway/test_auditability.py::test_projection_rebuild_matches_and_detects_drift PASSED [ 62%]
+tests/gateway/test_concurrency.py::test_concurrent_identical_submissions_create_once PASSED [ 64%]
+tests/gateway/test_concurrency.py::test_concurrent_conflicting_fingerprints PASSED [ 66%]
+tests/gateway/test_concurrency.py::test_concurrent_claims_grant_exactly_one_attempt PASSED [ 68%]
+tests/gateway/test_concurrency.py::test_concurrent_sweepers_expire_each_lease_once PASSED [ 70%]
+tests/gateway/test_concurrency.py::test_owner_completion_races_sweeper PASSED [ 72%]
+tests/gateway/test_concurrency.py::test_randomized_stress PASSED         [ 74%]
+tests/gateway/test_store_transitions.py::test_t1_created_duplicate_conflict PASSED [ 76%]
+tests/gateway/test_store_transitions.py::test_happy_path_and_write_ahead PASSED [ 78%]
+tests/gateway/test_store_transitions.py::test_illegal_transitions_are_refused_before_any_write PASSED [ 80%]
+tests/gateway/test_store_transitions.py::test_owner_fence_rejects_stale_holders PASSED [ 82%]
+tests/gateway/test_store_transitions.py::test_sweeper_expires_leases_and_fences_late_owner PASSED [ 84%]
+tests/gateway/test_store_transitions.py::test_expired_fence_refuses_live_lease PASSED [ 86%]
+tests/gateway/test_store_transitions.py::test_segments_anchor_and_max_deadline PASSED [ 88%]
+tests/gateway/test_store_transitions.py::test_claim_guard_failure_is_t13a_and_not_due_is_refused PASSED [ 90%]
+tests/gateway/test_store_transitions.py::test_terminal_states_are_absorbing_and_escalation_is_operator_only PASSED [ 92%]
+tests/gateway/test_store_transitions.py::test_anomaly_and_fenced_evidence_are_recorded PASSED [ 94%]
+tests/gateway/test_store_transitions.py::test_same_state_transitions_are_whitelisted_and_audited PASSED [ 96%]
+tests/gateway/test_store_transitions.py::test_stale_version_is_recorded_rejection_not_exception PASSED [ 98%]
+tests/gateway/test_store_transitions.py::test_sweeper_scoped_to_its_system PASSED [100%]
+
+==================================== PASSES ====================================
+____________________________ test_randomized_stress ____________________________
+----------------------------- Captured stdout call -----------------------------
+stress counters: {'applied': 260, 'rejected': 69, 'illegal': 0, 'absorbing_refused': 595}
+- generated xml file: <repo>/results/tests/20261011T043225Z_gateway/junit.xml -
+=========================== short test summary info ============================
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-submissions]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-attempts]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-evidence]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-decisions]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-execution_events]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-anomalies]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-submissions]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-attempts]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-evidence]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-decisions]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-execution_events]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-anomalies]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-submissions]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-attempts]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-evidence]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-decisions]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-execution_events]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-anomalies]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_change_identity_or_delete_executions[UPDATE executions SET fingerprint = 'x']
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_change_identity_or_delete_executions[UPDATE executions SET payload = '{}']
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_change_identity_or_delete_executions[UPDATE executions SET capability = '{}']
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_change_identity_or_delete_executions[DELETE FROM executions]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_change_identity_or_delete_executions[TRUNCATE executions CASCADE]
+PASSED tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[submissions]
+PASSED tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[attempts]
+PASSED tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[evidence]
+PASSED tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[decisions]
+PASSED tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[execution_events]
+PASSED tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[anomalies]
+PASSED tests/gateway/test_auditability.py::test_tampered_event_is_detected
+PASSED tests/gateway/test_auditability.py::test_deleted_event_breaks_the_chain
+PASSED tests/gateway/test_auditability.py::test_projection_rebuild_matches_and_detects_drift
+PASSED tests/gateway/test_concurrency.py::test_concurrent_identical_submissions_create_once
+PASSED tests/gateway/test_concurrency.py::test_concurrent_conflicting_fingerprints
+PASSED tests/gateway/test_concurrency.py::test_concurrent_claims_grant_exactly_one_attempt
+PASSED tests/gateway/test_concurrency.py::test_concurrent_sweepers_expire_each_lease_once
+PASSED tests/gateway/test_concurrency.py::test_owner_completion_races_sweeper
+PASSED tests/gateway/test_concurrency.py::test_randomized_stress
+PASSED tests/gateway/test_store_transitions.py::test_t1_created_duplicate_conflict
+PASSED tests/gateway/test_store_transitions.py::test_happy_path_and_write_ahead
+PASSED tests/gateway/test_store_transitions.py::test_illegal_transitions_are_refused_before_any_write
+PASSED tests/gateway/test_store_transitions.py::test_owner_fence_rejects_stale_holders
+PASSED tests/gateway/test_store_transitions.py::test_sweeper_expires_leases_and_fences_late_owner
+PASSED tests/gateway/test_store_transitions.py::test_expired_fence_refuses_live_lease
+PASSED tests/gateway/test_store_transitions.py::test_segments_anchor_and_max_deadline
+PASSED tests/gateway/test_store_transitions.py::test_claim_guard_failure_is_t13a_and_not_due_is_refused
+PASSED tests/gateway/test_store_transitions.py::test_terminal_states_are_absorbing_and_escalation_is_operator_only
+PASSED tests/gateway/test_store_transitions.py::test_anomaly_and_fenced_evidence_are_recorded
+PASSED tests/gateway/test_store_transitions.py::test_same_state_transitions_are_whitelisted_and_audited
+PASSED tests/gateway/test_store_transitions.py::test_stale_version_is_recorded_rejection_not_exception
+PASSED tests/gateway/test_store_transitions.py::test_sweeper_scoped_to_its_system
+============================== 51 passed in 9.40s ==============================

@@ -131,6 +131,8 @@ class ProviderClient:
             "hook": hook.to_json() if hook else None,
         }
 
+        if hook:
+            self._hooks.mark_fired(action_key, attempt_no, hook.point)  # one-shot, durable before any crash
         if hook and hook.point == HookPoint.CP1:
             self._log.write({**base, "event": "hook_fired", "point": "CP1"})
             self._hooks.crash()

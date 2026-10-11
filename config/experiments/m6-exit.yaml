@@ -1,0 +1,22 @@
+# M6 exit check (DESIGN §10): one complete cell, P1 × F1 × all primary systems.
+# Purpose: prove the harness produces a complete raw directory and audit.json per run.
+# NOT a pilot and NOT a result: excluded from every paper table and figure.
+name: m6-exit
+purpose: "M6 harness exit check (pipeline completeness only; not a measurement)"
+excluded_from_paper: true
+seeds: [1]
+workload:
+  n_actions: 20
+  arrival_rate_per_s: 5
+  duplicate_fraction: 0.1
+  duplicate_copies: 2
+driver:
+  agent_timeout_s: 30
+  restart_backoff_ms: 1000
+  max_resubmits: 5
+  poll_ms: 250
+  horizon_s: 60
+  drain_s: 8
+cells:
+  - {profile: P1, fault: F1, fault_rate: 0.3, assumption_set: S}
+systems: [B1, B2, B3, B3L-delta, B3L-horizon, RAEG-strict, RAEG-bounded]

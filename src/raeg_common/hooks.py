@@ -67,6 +67,10 @@ class HookPlan:
     def lookup(self, action_key: str, attempt_no: int) -> HookAction | None:
         return self._entries.get((action_key, attempt_no))
 
+    def mark_fired(self, action_key: str, attempt_no: int, point: HookPoint) -> None:
+        """One-shot: a fired hook never fires again (persisted across processes by ReloadingHookPlan)."""
+        self._entries.pop((action_key, attempt_no), None)
+
     def crash(self) -> None:
         self._exit_fn()
 
@@ -77,12 +81,34 @@ class HookPlan:
 
 class ReloadingHookPlan(HookPlan):
     """A plan backed by a file that is re-read whenever its mtime changes (a missing file = no hooks).
-    Lets a harness arm hooks in long-running containers without restarting them."""
+    Lets a harness arm hooks in long-running containers without restarting them.
+
+    Hooks are ONE-SHOT per armed plan: when a hook fires, `<path>.fired` gets a durable line (fsync before
+    any crash), and a fired (action_key, attempt_no) never fires again in any process sharing the volume.
+    Without this, a stateless system that restarts its attempt numbering after a crash (B1/B2) hits the
+    same crash hook on every resubmission (found in run m6-faults/B1: one planned CP2, four crashes)."""
 
     def __init__(self, path: str | Path, exit_fn: Callable[[], None] = _hard_exit) -> None:
         super().__init__({}, exit_fn)
         self._path = Path(path)
+        self._fired_path = Path(str(path) + ".fired")
         self._mtime: float | None = None
+
+    def _fired(self) -> set[tuple[str, int]]:
+        try:
+            lines = self._fired_path.read_text(encoding="utf-8").splitlines()
+        except FileNotFoundError:
+            return set()
+        return {(r["action_key"], int(r["attempt_no"])) for r in (json.loads(x) for x in lines if x.strip())}
+
+    def mark_fired(self, action_key: str, attempt_no: int, point: HookPoint) -> None:
+        line = (json.dumps({"action_key": action_key, "attempt_no": attempt_no, "point": point.value}) + "\n").encode()
+        fd = os.open(self._fired_path, os.O_WRONLY | os.O_APPEND | os.O_CREAT, 0o644)
+        try:
+            os.write(fd, line)
+            os.fsync(fd)
+        finally:
+            os.close(fd)
 
     def lookup(self, action_key: str, attempt_no: int) -> HookAction | None:
         try:
@@ -93,5 +119,7 @@ class ReloadingHookPlan(HookPlan):
         if mtime != self._mtime:
             self._entries = HookPlan.from_file(self._path, self._exit_fn)._entries
             self._mtime = mtime
+        if (action_key, attempt_no) in self._fired():
+            return None
         return super().lookup(action_key, attempt_no)
 

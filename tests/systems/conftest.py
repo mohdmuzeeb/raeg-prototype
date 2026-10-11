@@ -29,7 +29,7 @@ pytestmark = pytest.mark.systems
 
 def compose(*args: str, stdin: str | None = None) -> subprocess.CompletedProcess:
     env = {**os.environ, "DOCKER_CONTEXT": os.environ.get("DOCKER_CONTEXT", "colima")}
-    return subprocess.run(["docker", "compose", "--profile", "systems", *args], cwd=ROOT, env=env, input=stdin,
+    return subprocess.run(["docker", "compose", "--profile", "systems", "--profile", "temporal", *args], cwd=ROOT, env=env, input=stdin,
                           capture_output=True, text=True, timeout=180)
 
 
@@ -113,12 +113,12 @@ async def wait_restarted(service: str, before: int, url: str | None = None, time
 
 
 def arm_hooks(hooks: list[dict]) -> None:
-    compose("exec", "-T", "systems", "sh", "-c", "cat > /exchange-logs/hooks.json.tmp && mv /exchange-logs/hooks.json.tmp /exchange-logs/hooks.json",
+    compose("exec", "-T", "systems", "sh", "-c", "rm -f /exchange-logs/hooks.json.fired && cat > /exchange-logs/hooks.json.tmp && mv /exchange-logs/hooks.json.tmp /exchange-logs/hooks.json",
             stdin=json.dumps({"hooks": hooks}))
 
 
 def disarm_hooks() -> None:
-    compose("exec", "-T", "systems", "rm", "-f", "/exchange-logs/hooks.json")
+    compose("exec", "-T", "systems", "rm", "-f", "/exchange-logs/hooks.json", "/exchange-logs/hooks.json.fired")
 
 
 def exchange_log(system_id: str, worker: bool = False) -> list[dict]:
