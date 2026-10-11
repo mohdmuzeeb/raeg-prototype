@@ -1,0 +1,2 @@
+provider-1  | 2026-10-11T02:46:47.302673683Z 2026-10-11 02:46:47,302 INFO payment_provider provider ready profile=P1 migrations=[] released_on_recovery=0
+provider-1  | 2026-10-11T02:47:32.396719340Z 2026-10-11 02:47:32,396 INFO payment_provider provider ready profile=P1 migrations=[] released_on_recovery=1
