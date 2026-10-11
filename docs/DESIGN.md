@@ -589,7 +589,7 @@ Not every cell is meaningful; for example, F7 against B1 only exercises the agen
   1. the main runs use the largest `N` and `R` that fit;
   2. `HYPOTHESES.md` (frozen before the main runs) and the paper both state that the precision target was not met, giving the projected and achieved CI half-widths per cell;
   3. reducing the matrix (dropping cells) is allowed only if decided and documented before `eval-freeze`, never after seeing main results.
-- The pilot's measured cost per cell and the projection are saved in `results/raw/pilot-*/projection.json`.
+- The pilot's measured cost per cell and the projection are saved in `results/derived/pilot/` and archived (`results/archive/pilot-derived-*.tar.gz`; IMPLEMENTATION_NOTES N59).
 - The chosen values, the hypotheses, and the metric code are frozen in a commit tagged `eval-freeze` before the main runs.
 
 ### 8.4 Timing parameters (M7, Q2 decision)
