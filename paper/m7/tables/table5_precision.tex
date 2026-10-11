@@ -1,68 +1,68 @@
 \begin{table*}[t]
 \centering
 \scriptsize
-\caption{Table 5. Recovery completion against the original precision target (DESIGN §8.3: R $\geq$ 5, $\geq$ 100 faulted actions per seed, 95\% CI half-width ≤ 3 pp). 56 of 56 estimates fail it; the target was not relaxed.}
+\caption{Recovery completion against the original precision target (R $\geq$ 5, $\geq$ 100 faulted actions per seed, 95\% CI half-width $\leq$ 3 pp). 56 of 56 estimates fail it; the target was not relaxed.}
 \label{tab:m7-precision}
 \begin{tabular}{llrrrrrr}
 \toprule
 Provider & Faults & System & Seeds R & Min faulted actions per seed & CI half-width (pp) & CI method & Original precision target \\
 \midrule
-P1 & F1 & B1 naive retry & 3 & 35 & 1.6 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P1 & F1 & B2 idempotency-only & 3 & 35 & 1.6 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P1 & F1 & B3 Temporal & 3 & 35 & 1.6 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P1 & F1 & B3L-$\delta$ & 3 & 35 & 1.6 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P1 & F1 & B3L-horizon & 3 & 35 & 1.6 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P1 & F1 & RAEG-strict & 3 & 35 & 1.6 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P1 & F1 & RAEG-bounded & 3 & 35 & 1.6 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P1 & FM & B1 naive retry & 3 & 39 & 1.4 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P1 & FM & B2 idempotency-only & 3 & 39 & 13.0 & cluster bootstrap & $\times$ R<5, faulted<100/seed, half-width>3pp \\
-P1 & FM & B3 Temporal & 3 & 39 & 6.7 & cluster bootstrap & $\times$ R<5, faulted<100/seed, half-width>3pp \\
-P1 & FM & B3L-$\delta$ & 3 & 39 & 1.4 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P1 & FM & B3L-horizon & 3 & 39 & 1.4 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P1 & FM & RAEG-strict & 3 & 39 & 1.4 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P1 & FM & RAEG-bounded & 3 & 39 & 1.4 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P2 & F1 & B1 naive retry & 3 & 35 & 1.6 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P2 & F1 & B2 idempotency-only & 3 & 35 & 1.6 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P2 & F1 & B3 Temporal & 3 & 35 & 1.6 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P2 & F1 & B3L-$\delta$ & 3 & 35 & 1.6 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P2 & F1 & B3L-horizon & 3 & 35 & 1.6 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P2 & F1 & RAEG-strict & 3 & 35 & 1.6 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P2 & F1 & RAEG-bounded & 3 & 35 & 1.6 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P2 & FM & B1 naive retry & 3 & 33 & 1.6 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P2 & FM & B2 idempotency-only & 3 & 33 & 13.1 & cluster bootstrap & $\times$ R<5, faulted<100/seed, half-width>3pp \\
-P2 & FM & B3 Temporal & 3 & 33 & 9.5 & cluster bootstrap & $\times$ R<5, faulted<100/seed, half-width>3pp \\
-P2 & FM & B3L-$\delta$ & 3 & 33 & 1.6 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P2 & FM & B3L-horizon & 3 & 33 & 1.6 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P2 & FM & RAEG-strict & 3 & 33 & 1.6 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P2 & FM & RAEG-bounded & 3 & 33 & 1.6 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P4 & F1 & B1 naive retry & 3 & 38 & 1.4 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P4 & F1 & B2 idempotency-only & 3 & 38 & 1.4 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P4 & F1 & B3 Temporal & 3 & 38 & 1.4 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P4 & F1 & B3L-$\delta$ & 3 & 38 & 1.4 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P4 & F1 & B3L-horizon & 3 & 38 & 1.4 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P4 & F1 & RAEG-strict & 3 & 38 & 1.4 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P4 & F1 & RAEG-bounded & 3 & 38 & 1.4 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P4 & FM & B1 naive retry & 3 & 36 & 1.6 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P4 & FM & B2 idempotency-only & 3 & 36 & 1.6 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P4 & FM & B3 Temporal & 3 & 36 & 1.6 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P4 & FM & B3L-$\delta$ & 3 & 36 & 1.6 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P4 & FM & B3L-horizon & 3 & 36 & 1.6 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P4 & FM & RAEG-strict & 3 & 36 & 1.6 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P4 & FM & RAEG-bounded & 3 & 36 & 1.6 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P6 & F1 & B1 naive retry & 3 & 33 & 1.6 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P6 & F1 & B2 idempotency-only & 3 & 33 & 1.6 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P6 & F1 & B3 Temporal & 3 & 33 & 1.6 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P6 & F1 & B3L-$\delta$ & 3 & 33 & 1.6 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P6 & F1 & B3L-horizon & 3 & 33 & 1.6 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P6 & F1 & RAEG-strict & 3 & 33 & 1.6 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P6 & F1 & RAEG-bounded & 3 & 33 & 1.6 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P6 & FM & B1 naive retry & 3 & 36 & 1.4 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P6 & FM & B2 idempotency-only & 3 & 36 & 1.4 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P6 & FM & B3 Temporal & 3 & 36 & 1.4 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P6 & FM & B3L-$\delta$ & 3 & 36 & 1.4 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P6 & FM & B3L-horizon & 3 & 36 & 1.4 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P6 & FM & RAEG-strict & 3 & 36 & 1.4 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
-P6 & FM & RAEG-bounded & 3 & 36 & 1.4 & Clopper-Pearson & $\times$ R<5, faulted<100/seed \\
+P1 & F1 & B1 naive retry & 3 & 35 & 1.6 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P1 & F1 & B2 idempotency-only & 3 & 35 & 1.6 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P1 & F1 & B3 Temporal & 3 & 35 & 1.6 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P1 & F1 & B3L-$\delta$ & 3 & 35 & 1.6 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P1 & F1 & B3L-horizon & 3 & 35 & 1.6 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P1 & F1 & RAEG-strict & 3 & 35 & 1.6 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P1 & F1 & RAEG-bounded & 3 & 35 & 1.6 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P1 & FM & B1 naive retry & 3 & 39 & 1.4 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P1 & FM & B2 idempotency-only & 3 & 39 & 13.0 & cluster bootstrap & $\times$ R$<$5, faulted$<$100/seed, half-width$>$3pp \\
+P1 & FM & B3 Temporal & 3 & 39 & 6.7 & cluster bootstrap & $\times$ R$<$5, faulted$<$100/seed, half-width$>$3pp \\
+P1 & FM & B3L-$\delta$ & 3 & 39 & 1.4 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P1 & FM & B3L-horizon & 3 & 39 & 1.4 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P1 & FM & RAEG-strict & 3 & 39 & 1.4 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P1 & FM & RAEG-bounded & 3 & 39 & 1.4 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P2 & F1 & B1 naive retry & 3 & 35 & 1.6 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P2 & F1 & B2 idempotency-only & 3 & 35 & 1.6 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P2 & F1 & B3 Temporal & 3 & 35 & 1.6 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P2 & F1 & B3L-$\delta$ & 3 & 35 & 1.6 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P2 & F1 & B3L-horizon & 3 & 35 & 1.6 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P2 & F1 & RAEG-strict & 3 & 35 & 1.6 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P2 & F1 & RAEG-bounded & 3 & 35 & 1.6 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P2 & FM & B1 naive retry & 3 & 33 & 1.6 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P2 & FM & B2 idempotency-only & 3 & 33 & 13.1 & cluster bootstrap & $\times$ R$<$5, faulted$<$100/seed, half-width$>$3pp \\
+P2 & FM & B3 Temporal & 3 & 33 & 9.5 & cluster bootstrap & $\times$ R$<$5, faulted$<$100/seed, half-width$>$3pp \\
+P2 & FM & B3L-$\delta$ & 3 & 33 & 1.6 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P2 & FM & B3L-horizon & 3 & 33 & 1.6 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P2 & FM & RAEG-strict & 3 & 33 & 1.6 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P2 & FM & RAEG-bounded & 3 & 33 & 1.6 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P4 & F1 & B1 naive retry & 3 & 38 & 1.4 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P4 & F1 & B2 idempotency-only & 3 & 38 & 1.4 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P4 & F1 & B3 Temporal & 3 & 38 & 1.4 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P4 & F1 & B3L-$\delta$ & 3 & 38 & 1.4 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P4 & F1 & B3L-horizon & 3 & 38 & 1.4 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P4 & F1 & RAEG-strict & 3 & 38 & 1.4 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P4 & F1 & RAEG-bounded & 3 & 38 & 1.4 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P4 & FM & B1 naive retry & 3 & 36 & 1.6 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P4 & FM & B2 idempotency-only & 3 & 36 & 1.6 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P4 & FM & B3 Temporal & 3 & 36 & 1.6 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P4 & FM & B3L-$\delta$ & 3 & 36 & 1.6 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P4 & FM & B3L-horizon & 3 & 36 & 1.6 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P4 & FM & RAEG-strict & 3 & 36 & 1.6 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P4 & FM & RAEG-bounded & 3 & 36 & 1.6 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P6 & F1 & B1 naive retry & 3 & 33 & 1.6 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P6 & F1 & B2 idempotency-only & 3 & 33 & 1.6 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P6 & F1 & B3 Temporal & 3 & 33 & 1.6 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P6 & F1 & B3L-$\delta$ & 3 & 33 & 1.6 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P6 & F1 & B3L-horizon & 3 & 33 & 1.6 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P6 & F1 & RAEG-strict & 3 & 33 & 1.6 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P6 & F1 & RAEG-bounded & 3 & 33 & 1.6 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P6 & FM & B1 naive retry & 3 & 36 & 1.4 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P6 & FM & B2 idempotency-only & 3 & 36 & 1.4 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P6 & FM & B3 Temporal & 3 & 36 & 1.4 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P6 & FM & B3L-$\delta$ & 3 & 36 & 1.4 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P6 & FM & B3L-horizon & 3 & 36 & 1.4 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P6 & FM & RAEG-strict & 3 & 36 & 1.4 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
+P6 & FM & RAEG-bounded & 3 & 36 & 1.4 & Clopper-Pearson & $\times$ R$<$5, faulted$<$100/seed \\
 \bottomrule
 \end{tabular}
 \end{table*}

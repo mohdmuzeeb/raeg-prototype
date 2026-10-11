@@ -1,7 +1,7 @@
 \begin{table*}[t]
 \centering
 \scriptsize
-\caption{Table 4. Driver-observed latency without faults (F0), submit to terminal answer, pooled over seeds. Temporal-based systems (B3, B3L) are marked invalid: the Temporal stack was not yet ready when the driver started (IMPLEMENTATION\_NOTES N58); in 31 of 36 Temporal F0 runs, actions arriving in the first 0.7--10.9 s took over 1 s. RAEG includes a ≤20 ms worker poll (N52).}
+\caption{Driver-observed latency without faults (F0), submit to terminal answer, pooled over seeds. Temporal-based systems (B3, B3L) are marked invalid: the Temporal stack was not yet ready when the driver started; in 31 of 36 Temporal F0 runs, actions arriving in the first 0.7--10.9 s took over 1 s. RAEG includes a $\leq$20 ms worker poll.}
 \label{tab:m7-latency}
 \begin{tabular}{llrrrr}
 \toprule
@@ -9,30 +9,30 @@ Provider & System & p50 (ms) & p95 (ms) & p99 (ms) & Actions \\
 \midrule
 P1 & B1 naive retry & 37 & 54 & 78 & 600 \\
 P1 & B2 idempotency-only & 39 & 56 & 117 & 600 \\
-P1 & B3 Temporal & invalid (N58) & invalid (N58) & invalid (N58) & -- \\
-P1 & B3L-$\delta$ & invalid (N58) & invalid (N58) & invalid (N58) & -- \\
-P1 & B3L-horizon & invalid (N58) & invalid (N58) & invalid (N58) & -- \\
+P1 & B3 Temporal & invalid & invalid & invalid & -- \\
+P1 & B3L-$\delta$ & invalid & invalid & invalid & -- \\
+P1 & B3L-horizon & invalid & invalid & invalid & -- \\
 P1 & RAEG-strict & 73 & 137 & 182 & 600 \\
 P1 & RAEG-bounded & 73 & 136 & 175 & 600 \\
 P2 & B1 naive retry & 39 & 53 & 60 & 600 \\
 P2 & B2 idempotency-only & 41 & 56 & 64 & 600 \\
-P2 & B3 Temporal & invalid (N58) & invalid (N58) & invalid (N58) & -- \\
-P2 & B3L-$\delta$ & invalid (N58) & invalid (N58) & invalid (N58) & -- \\
-P2 & B3L-horizon & invalid (N58) & invalid (N58) & invalid (N58) & -- \\
+P2 & B3 Temporal & invalid & invalid & invalid & -- \\
+P2 & B3L-$\delta$ & invalid & invalid & invalid & -- \\
+P2 & B3L-horizon & invalid & invalid & invalid & -- \\
 P2 & RAEG-strict & 75 & 120 & 155 & 600 \\
 P2 & RAEG-bounded & 76 & 134 & 205 & 600 \\
 P4 & B1 naive retry & 37 & 54 & 67 & 600 \\
 P4 & B2 idempotency-only & 37 & 54 & 76 & 600 \\
-P4 & B3 Temporal & invalid (N58) & invalid (N58) & invalid (N58) & -- \\
-P4 & B3L-$\delta$ & invalid (N58) & invalid (N58) & invalid (N58) & -- \\
-P4 & B3L-horizon & invalid (N58) & invalid (N58) & invalid (N58) & -- \\
+P4 & B3 Temporal & invalid & invalid & invalid & -- \\
+P4 & B3L-$\delta$ & invalid & invalid & invalid & -- \\
+P4 & B3L-horizon & invalid & invalid & invalid & -- \\
 P4 & RAEG-strict & 73 & 148 & 208 & 600 \\
 P4 & RAEG-bounded & 75 & 149 & 193 & 600 \\
 P6 & B1 naive retry & 36 & 52 & 83 & 600 \\
 P6 & B2 idempotency-only & 37 & 73 & 497 & 600 \\
-P6 & B3 Temporal & invalid (N58) & invalid (N58) & invalid (N58) & -- \\
-P6 & B3L-$\delta$ & invalid (N58) & invalid (N58) & invalid (N58) & -- \\
-P6 & B3L-horizon & invalid (N58) & invalid (N58) & invalid (N58) & -- \\
+P6 & B3 Temporal & invalid & invalid & invalid & -- \\
+P6 & B3L-$\delta$ & invalid & invalid & invalid & -- \\
+P6 & B3L-horizon & invalid & invalid & invalid & -- \\
 P6 & RAEG-strict & 74 & 138 & 245 & 600 \\
 P6 & RAEG-bounded & 75 & 157 & 295 & 600 \\
 \bottomrule

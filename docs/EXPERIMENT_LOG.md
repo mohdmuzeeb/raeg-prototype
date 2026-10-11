@@ -1,6 +1,6 @@
 # Experiment log
 
-Raw results are archived locally (not in git). One row per archive.
+Raw results are archived locally (not in git). One row per archive. The git HEAD column holds the SHA recorded at archiving time; see `docs/COMMIT_MAP.md` for published SHAs.
 
 | UTC | archive | sha256 | runs | files | size (bytes) | git HEAD | note |
 |---|---|---|---|---|---|---|---|

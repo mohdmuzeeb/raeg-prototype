@@ -2,4 +2,4 @@
 
 **fig1_tradeoff_FM**: Safety–completion trade-off under FM per provider profile. Each point pools 3 seeds × 200 intents; bars are 95% CIs (cluster bootstrap over seeds, or Clopper–Pearson when wider). Labels list the systems at each point; points are never jittered. Exploratory: no estimate meets the original precision target.
 
-**fig2_recovery_completion**: Recovery completion per provider: share of faulted actions with a correct SUCCESS or NO_EFFECT claim by the horizon (DESIGN §6.2). A duplicated success counts as correct, so this figure must be read with Fig. 1. RAEG on P6 is 0: it escalated every faulted action (UNRESOLVED), as no safe recovery exists without idempotency, lookup or deadlines. 95% CIs as in Fig. 1; exploratory (R = 3).
+**fig2_recovery_completion**: Recovery completion per provider: share of faulted actions with a correct SUCCESS or NO_EFFECT claim by the horizon. A duplicated success counts as correct, so this figure must be read with Fig. 1. RAEG on P6 is 0: it escalated every faulted action (UNRESOLVED), as no safe recovery exists without idempotency, lookup or deadlines. 95% CIs as in Fig. 1; exploratory (R = 3).

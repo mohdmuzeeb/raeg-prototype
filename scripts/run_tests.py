@@ -14,6 +14,7 @@ usage: uv run python scripts/run_tests.py <suite> [--compose-logs svc ...] -- <p
 from __future__ import annotations
 
 import argparse
+import getpass
 import platform
 import socket
 import subprocess
@@ -29,6 +30,7 @@ from harness.manifest import build_manifest, write_manifest  # noqa: E402
 REDACTIONS = [(str(ROOT), "<repo>"), (str(Path.home()), "~")]  # most specific first
 REDACTIONS += [(h, "<host>") for h in sorted({socket.gethostname(), socket.getfqdn(), platform.node()}, key=len, reverse=True)
                if len(h) > 3]  # junit.xml records the hostname
+REDACTIONS += [(getpass.getuser(), "<user>")]  # e.g. pytest temp dirs "pytest-of-<user>" outside the home dir (N63)
 
 
 def redact(text: str) -> str:
@@ -54,7 +56,8 @@ def main() -> int:
     manifest = build_manifest("test", {"suite": args.suite, "pytest_args": pytest_args, "status": "running",
                                        "redactions": [{"from": "<absolute repository path>", "to": "<repo>"},
                                                       {"from": "<home directory>", "to": "~"},
-                                                      {"from": "<hostname>", "to": "<host>"}]})
+                                                      {"from": "<hostname>", "to": "<host>"},
+                                                      {"from": "<username>", "to": "<user>"}]})
     write_manifest(out / "manifest.json", manifest)
 
     cmd = [sys.executable, "-m", "pytest", "-v", "-rA", "--tb=long", f"--junitxml={out / 'junit.xml'}", *pytest_args]

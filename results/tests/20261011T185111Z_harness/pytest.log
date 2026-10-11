@@ -1,0 +1,77 @@
+$ <repo>/.venv/bin/python -m pytest -v -rA --tb=long --junitxml=<repo>/results/tests/20261011T185111Z_harness/junit.xml tests/harness
+
+============================= test session starts ==============================
+platform darwin -- Python 3.12.7, pytest-9.1.1, pluggy-1.6.0 -- <repo>/.venv/bin/python
+cachedir: .pytest_cache
+hypothesis profile 'default'
+rootdir: <repo>
+configfile: pyproject.toml
+plugins: hypothesis-6.168.5, asyncio-1.4.0, anyio-4.15.1
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
+collecting ... collected 30 items
+
+tests/harness/test_harness_units.py::test_workload_is_deterministic_and_seed_sensitive PASSED [  3%]
+tests/harness/test_harness_units.py::test_workload_roundtrip PASSED      [  6%]
+tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[F1] PASSED [ 10%]
+tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[F2] PASSED [ 13%]
+tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[F3] PASSED [ 16%]
+tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[F4] PASSED [ 20%]
+tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[F6] PASSED [ 23%]
+tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[F7] PASSED [ 26%]
+tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[F8] PASSED [ 30%]
+tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[F9] PASSED [ 33%]
+tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[F10] PASSED [ 36%]
+tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[FM] PASSED [ 40%]
+tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[V1] PASSED [ 43%]
+tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[V2] PASSED [ 46%]
+tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[V3] PASSED [ 50%]
+tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[V4] PASSED [ 53%]
+tests/harness/test_harness_units.py::test_fault_parameters_follow_shared_timing PASSED [ 56%]
+tests/harness/test_harness_units.py::test_f0_and_f5_plans_are_empty PASSED [ 60%]
+tests/harness/test_harness_units.py::test_driver_resubmits_after_crash PASSED [ 63%]
+tests/harness/test_harness_units.py::test_driver_polls_pending_then_resubmits_when_state_lost PASSED [ 66%]
+tests/harness/test_harness_units.py::test_driver_horizon_marks_unresolved PASSED [ 70%]
+tests/harness/test_harness_units.py::test_driver_gives_up_after_max_resubmits PASSED [ 73%]
+tests/harness/test_harness_units.py::test_driver_concurrent_copies_and_logs PASSED [ 76%]
+tests/harness/test_harness_units.py::test_audit_passes_complete_consistent_run PASSED [ 80%]
+tests/harness/test_harness_units.py::test_audit_flags_a_hook_that_fired_twice PASSED [ 83%]
+tests/harness/test_harness_units.py::test_audit_detects_missing_claim_and_ledger_mismatch PASSED [ 86%]
+tests/harness/test_harness_units.py::test_fault_config_versions_kept PASSED [ 90%]
+tests/harness/test_harness_units.py::test_fc_plans_have_three_spaced_crashes PASSED [ 93%]
+tests/harness/test_harness_units.py::test_driver_backoff_is_exponential_until_horizon PASSED [ 96%]
+tests/harness/test_harness_units.py::test_accepted_flag PASSED           [100%]
+
+==================================== PASSES ====================================
+- generated xml file: <repo>/results/tests/20261011T185111Z_harness/junit.xml -
+=========================== short test summary info ============================
+PASSED tests/harness/test_harness_units.py::test_workload_is_deterministic_and_seed_sensitive
+PASSED tests/harness/test_harness_units.py::test_workload_roundtrip
+PASSED tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[F1]
+PASSED tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[F2]
+PASSED tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[F3]
+PASSED tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[F4]
+PASSED tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[F6]
+PASSED tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[F7]
+PASSED tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[F8]
+PASSED tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[F9]
+PASSED tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[F10]
+PASSED tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[FM]
+PASSED tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[V1]
+PASSED tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[V2]
+PASSED tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[V3]
+PASSED tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[V4]
+PASSED tests/harness/test_harness_units.py::test_fault_parameters_follow_shared_timing
+PASSED tests/harness/test_harness_units.py::test_f0_and_f5_plans_are_empty
+PASSED tests/harness/test_harness_units.py::test_driver_resubmits_after_crash
+PASSED tests/harness/test_harness_units.py::test_driver_polls_pending_then_resubmits_when_state_lost
+PASSED tests/harness/test_harness_units.py::test_driver_horizon_marks_unresolved
+PASSED tests/harness/test_harness_units.py::test_driver_gives_up_after_max_resubmits
+PASSED tests/harness/test_harness_units.py::test_driver_concurrent_copies_and_logs
+PASSED tests/harness/test_harness_units.py::test_audit_passes_complete_consistent_run
+PASSED tests/harness/test_harness_units.py::test_audit_flags_a_hook_that_fired_twice
+PASSED tests/harness/test_harness_units.py::test_audit_detects_missing_claim_and_ledger_mismatch
+PASSED tests/harness/test_harness_units.py::test_fault_config_versions_kept
+PASSED tests/harness/test_harness_units.py::test_fc_plans_have_three_spaced_crashes
+PASSED tests/harness/test_harness_units.py::test_driver_backoff_is_exponential_until_horizon
+PASSED tests/harness/test_harness_units.py::test_accepted_flag
+============================== 30 passed in 1.01s ==============================
