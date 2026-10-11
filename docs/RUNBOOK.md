@@ -17,6 +17,9 @@ make up-test       # builds raeg/python:dev; starts provider-db, raeg-db, provid
 |---|---|---|
 | `make test-unit` | `tests/unit` (no Docker needed) | `results/tests/<UTC>_unit/` |
 | `make test-conformance` | `tests/conformance` against the running provider | `results/tests/<UTC>_conformance/` (+ `compose.log`) |
+| `make test-gateway` | `tests/gateway`: M3 store transitions, concurrency, auditability, projection rebuild (needs raeg-db) | `results/tests/<UTC>_gateway/` |
+
+`tests/conformance/test_provider_restart.py` SIGKILLs and restarts the provider container (K7). It is part of `make test-conformance`.
 
 Each evidence directory contains:
 - `manifest.json`: the source-tree SHA-256, git HEAD (if any), lockfile hashes, host, Docker version, image IDs, and the pass/fail status;
@@ -31,7 +34,7 @@ Failed runs are kept. Nothing under `results/` is edited or deleted by tooling.
 | 18001 | provider public API (`/payments`) |
 | 19001 | provider oracle/admin (`/oracle/*`, `/admin/*`; header `x-oracle-token`) |
 | 55433 | provider Postgres |
-| 55432 | RAEG Postgres (unused until M3) |
+| 55432 | RAEG Postgres (gateway store; the app connects as `raeg_app`) |
 
 ## Clock note
 The colima VM clock is not synchronised with the macOS host clock; an offset of roughly 1.5 s was observed on 2026-10-11. Every service runs in the same VM and therefore shares one kernel clock. Host-side tests and harness code must take times from `/oracle/now` (the provider clock), never from the host.

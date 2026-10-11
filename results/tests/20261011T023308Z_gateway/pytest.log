@@ -1,0 +1,2056 @@
+$ /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/.venv/bin/python -m pytest -v -rA --tb=long --junitxml=/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/results/tests/20261011T023308Z_gateway/junit.xml tests/gateway
+
+============================= test session starts ==============================
+platform darwin -- Python 3.12.7, pytest-9.1.1, pluggy-1.6.0 -- /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/.venv/bin/python
+cachedir: .pytest_cache
+hypothesis profile 'default'
+rootdir: /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup
+configfile: pyproject.toml
+plugins: hypothesis-6.168.5, asyncio-1.4.0, anyio-4.15.1
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
+collecting ... collected 48 items
+
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-submissions] PASSED [  2%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-attempts] PASSED [  4%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-evidence] PASSED [  6%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-decisions] PASSED [  8%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-execution_events] PASSED [ 10%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-anomalies] PASSED [ 12%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-submissions] PASSED [ 14%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-attempts] PASSED [ 16%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-evidence] PASSED [ 18%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-decisions] PASSED [ 20%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-execution_events] PASSED [ 22%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-anomalies] PASSED [ 25%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-submissions] PASSED [ 27%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-attempts] PASSED [ 29%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-evidence] PASSED [ 31%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-decisions] PASSED [ 33%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-execution_events] PASSED [ 35%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-anomalies] PASSED [ 37%]
+tests/gateway/test_auditability.py::test_app_role_cannot_change_identity_or_delete_executions[UPDATE executions SET fingerprint = 'x'] PASSED [ 39%]
+tests/gateway/test_auditability.py::test_app_role_cannot_change_identity_or_delete_executions[UPDATE executions SET payload = '{}'] PASSED [ 41%]
+tests/gateway/test_auditability.py::test_app_role_cannot_change_identity_or_delete_executions[UPDATE executions SET capability = '{}'] PASSED [ 43%]
+tests/gateway/test_auditability.py::test_app_role_cannot_change_identity_or_delete_executions[DELETE FROM executions] PASSED [ 45%]
+tests/gateway/test_auditability.py::test_app_role_cannot_change_identity_or_delete_executions[TRUNCATE executions CASCADE] PASSED [ 47%]
+tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[submissions] PASSED [ 50%]
+tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[attempts] PASSED [ 52%]
+tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[evidence] PASSED [ 54%]
+tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[decisions] PASSED [ 56%]
+tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[execution_events] PASSED [ 58%]
+tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[anomalies] PASSED [ 60%]
+tests/gateway/test_auditability.py::test_tampered_event_is_detected FAILED [ 62%]
+tests/gateway/test_auditability.py::test_deleted_event_breaks_the_chain PASSED [ 64%]
+tests/gateway/test_auditability.py::test_projection_rebuild_matches_and_detects_drift FAILED [ 66%]
+tests/gateway/test_concurrency.py::test_concurrent_identical_submissions_create_once FAILED [ 68%]
+tests/gateway/test_concurrency.py::test_concurrent_conflicting_fingerprints FAILED [ 70%]
+tests/gateway/test_concurrency.py::test_concurrent_claims_grant_exactly_one_attempt FAILED [ 72%]
+tests/gateway/test_concurrency.py::test_concurrent_sweepers_expire_each_lease_once FAILED [ 75%]
+tests/gateway/test_concurrency.py::test_owner_completion_races_sweeper FAILED [ 77%]
+tests/gateway/test_concurrency.py::test_randomized_stress FAILED         [ 79%]
+tests/gateway/test_store_transitions.py::test_t1_created_duplicate_conflict FAILED [ 81%]
+tests/gateway/test_store_transitions.py::test_happy_path_and_write_ahead FAILED [ 83%]
+tests/gateway/test_store_transitions.py::test_illegal_transitions_are_refused_before_any_write FAILED [ 85%]
+tests/gateway/test_store_transitions.py::test_owner_fence_rejects_stale_holders FAILED [ 87%]
+tests/gateway/test_store_transitions.py::test_sweeper_expires_leases_and_fences_late_owner FAILED [ 89%]
+tests/gateway/test_store_transitions.py::test_expired_fence_refuses_live_lease FAILED [ 91%]
+tests/gateway/test_store_transitions.py::test_segments_anchor_and_max_deadline FAILED [ 93%]
+tests/gateway/test_store_transitions.py::test_claim_guard_failure_is_t13a_and_not_due_is_refused FAILED [ 95%]
+tests/gateway/test_store_transitions.py::test_terminal_states_are_absorbing_and_escalation_is_operator_only FAILED [ 97%]
+tests/gateway/test_store_transitions.py::test_anomaly_and_fenced_evidence_are_recorded PASSED [100%]
+
+=================================== FAILURES ===================================
+_______________________ test_tampered_event_is_detected ________________________
+
+store = <raeg_gateway.store.GatewayStore object at 0x109aca240>
+admin = <asyncpg.connection.Connection object at 0x109a86550>
+
+    async def test_tampered_event_is_detected(store, admin) -> None:
+        key = await populate(store)
+>       assert await verify_chains(admin) == []
+E       AssertionError: assert ['a-da7c052fb...ent altered)'] == []
+E         
+E         Left contains 3 more items, first extra item: 'a-da7c052fbe04 seq 1: hash mismatch (event content altered)'
+E         
+E         Full diff:
+E         - []
+E         + [
+E         +     'a-da7c052fbe04 seq 1: hash mismatch (event content altered)',...
+E         
+E         ...Full output truncated (3 lines hidden), use '-vv' to show
+
+tests/gateway/test_auditability.py:59: AssertionError
+______________ test_projection_rebuild_matches_and_detects_drift _______________
+
+store = <raeg_gateway.store.GatewayStore object at 0x109acba40>
+admin = <asyncpg.connection.Connection object at 0x109a86b50>
+
+    async def test_projection_rebuild_matches_and_detects_drift(store, admin) -> None:
+        keys = [await populate(store) for _ in range(5)]
+>       assert await compare_projection(admin) == []
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/gateway/test_auditability.py:84: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a86b50>
+
+    async def compare_projection(conn: asyncpg.Connection) -> list[str]:
+        """I8: the executions table equals the projection rebuilt from events, column by column."""
+        problems: list[str] = []
+>       rebuilt = await rebuild_projection(conn)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a86b50>
+
+    async def rebuild_projection(conn: asyncpg.Connection) -> dict[str, dict[str, Any]]:
+        """Fold event patches in seq order. Seq 1 (T1) carries the complete initial row."""
+        rebuilt: dict[str, dict[str, Any]] = {}
+        for r in await conn.fetch("SELECT action_key, seq, patch FROM execution_events ORDER BY action_key, seq"):
+            state = rebuilt.setdefault(r["action_key"], {})
+>           state.update(from_patch_json(r["patch"]))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:44: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+patch = '{"state": "PREPARED", "anchor": null, "policy": {"mode": "STRICT", "max_verify": 3, "max_dispatch": 3}, "payload": {"... "escalation_reason": null, "duplicate_detected": false, "pending_late_success": null, "absence_proven_through": null}'
+
+    def from_patch_json(patch: dict[str, Any]) -> dict[str, Any]:
+>       return {k: (datetime.fromisoformat(v) if k in TIMESTAMP_COLUMNS and v is not None else v) for k, v in patch.items()}
+                                                                                                              ^^^^^^^^^^^
+E       AttributeError: 'str' object has no attribute 'items'
+
+src/raeg_gateway/store.py:106: AttributeError
+______________ test_concurrent_identical_submissions_create_once _______________
+
+store = <raeg_gateway.store.GatewayStore object at 0x109aca960>
+admin = <asyncpg.connection.Connection object at 0x109a84e50>
+
+    async def test_concurrent_identical_submissions_create_once(store, admin) -> None:
+        key = new_key()
+        results = await asyncio.gather(*(submit(store, key) for _ in range(50)))
+        outcomes = sorted(r.outcome for _, r in results)
+        assert outcomes.count("created") == 1 and outcomes.count("duplicate") == 49
+        assert await admin.fetchval("SELECT count(*) FROM submissions WHERE action_key=$1", key) == 50
+        assert await admin.fetchval("SELECT count(*) FROM execution_events WHERE action_key=$1", key) == 1
+>       await assert_clean(admin)
+
+tests/gateway/test_concurrency.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+admin = <asyncpg.connection.Connection object at 0x109a84e50>
+
+    async def assert_clean(admin) -> None:
+>       report = await check_invariants(admin)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/gateway/test_concurrency.py:17: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a84e50>
+
+    async def check_invariants(conn: asyncpg.Connection) -> dict[str, list[str]]:
+        """Store-level invariants (DESIGN §3.3) that M3 can establish."""
+        out: dict[str, list[str]] = {}
+    
+        # I2: leases exist exactly in leased states (also a table CHECK), and at most one per action by construction.
+        rows = await conn.fetch("SELECT action_key, state, lease_owner, lease_expires_at FROM executions")
+        out["I2_lease_consistency"] = [
+            r["action_key"] for r in rows if (State(r["state"]) in LEASED) != (r["lease_owner"] is not None)
+        ]
+    
+        # I5: nothing leaves an absorbing terminal state; ESCALATED leaves only via T16*.
+        events = await conn.fetch("SELECT action_key, seq, from_state, to_state, transition, decision_id FROM execution_events")
+        out["I5_absorbing"] = [
+            f"{e['action_key']}#{e['seq']}"
+            for e in events
+            if e["from_state"] is not None
+            and (
+                State(e["from_state"]) in TERMINAL
+                or (State(e["from_state"]) == State.ESCALATED and not e["transition"].startswith("T16"))
+            )
+        ]
+    
+        # I6: one applied decision per event, with the same transition id; no applied decision without an event.
+        decisions = {
+            d["id"]: d for d in await conn.fetch("SELECT id, action_key, transition, applied FROM decisions")
+        }
+        problems = []
+        for e in events:
+            d = decisions.get(e["decision_id"])
+            if d is None or not d["applied"] or d["transition"] != e["transition"] or d["action_key"] != e["action_key"]:
+                problems.append(f"{e['action_key']}#{e['seq']}: decision {e['decision_id']} missing/unapplied/mismatched")
+        event_decisions = {e["decision_id"] for e in events}
+        problems += [f"decision {i} applied but has no event" for i, d in decisions.items() if d["applied"] and i not in event_decisions]
+        out["I6_decision_per_event"] = problems
+    
+        # Version = last event seq; event seqs contiguous (also checked by verify_chains).
+        seqs = {r["action_key"]: r["m"] for r in await conn.fetch("SELECT action_key, max(seq) AS m FROM execution_events GROUP BY action_key")}
+        out["version_equals_last_seq"] = [
+            r["action_key"] for r in await conn.fetch("SELECT action_key, version FROM executions") if seqs.get(r["action_key"]) != r["version"]
+        ]
+    
+        # Write-ahead bookkeeping: one attempts row per claim event, numbered 1..attempt_count.
+        claims = {}
+        for e in events:
+            if e["transition"] in CLAIM_TRANSITIONS:
+                claims[e["action_key"]] = claims.get(e["action_key"], 0) + 1
+        attempt_rows = await conn.fetch("SELECT action_key, count(*) AS n, max(attempt_no) AS m FROM attempts GROUP BY action_key")
+        counts = {r["action_key"]: r["attempt_count"] for r in await conn.fetch("SELECT action_key, attempt_count FROM executions")}
+        problems = []
+        for r in attempt_rows:
+            if not (r["n"] == r["m"] == claims.get(r["action_key"], 0) == counts.get(r["action_key"])):
+                problems.append(f"{r['action_key']}: attempts={r['n']} max={r['m']} claims={claims.get(r['action_key'])} count={counts.get(r['action_key'])}")
+        problems += [k for k, n in claims.items() if k not in {r["action_key"] for r in attempt_rows}]
+        out["attempts_match_claims"] = problems
+    
+        out["hash_chains"] = await verify_chains(conn)
+>       out["I8_projection_rebuild"] = await compare_projection(conn)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:124: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a84e50>
+
+    async def compare_projection(conn: asyncpg.Connection) -> list[str]:
+        """I8: the executions table equals the projection rebuilt from events, column by column."""
+        problems: list[str] = []
+>       rebuilt = await rebuild_projection(conn)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a84e50>
+
+    async def rebuild_projection(conn: asyncpg.Connection) -> dict[str, dict[str, Any]]:
+        """Fold event patches in seq order. Seq 1 (T1) carries the complete initial row."""
+        rebuilt: dict[str, dict[str, Any]] = {}
+        for r in await conn.fetch("SELECT action_key, seq, patch FROM execution_events ORDER BY action_key, seq"):
+            state = rebuilt.setdefault(r["action_key"], {})
+>           state.update(from_patch_json(r["patch"]))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:44: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+patch = '{"state": "PREPARED", "anchor": null, "policy": {"mode": "STRICT", "max_verify": 3, "max_dispatch": 3}, "payload": {"... "escalation_reason": null, "duplicate_detected": false, "pending_late_success": null, "absence_proven_through": null}'
+
+    def from_patch_json(patch: dict[str, Any]) -> dict[str, Any]:
+>       return {k: (datetime.fromisoformat(v) if k in TIMESTAMP_COLUMNS and v is not None else v) for k, v in patch.items()}
+                                                                                                              ^^^^^^^^^^^
+E       AttributeError: 'str' object has no attribute 'items'
+
+src/raeg_gateway/store.py:106: AttributeError
+___________________ test_concurrent_conflicting_fingerprints ___________________
+
+store = <raeg_gateway.store.GatewayStore object at 0x109d506e0>
+admin = <asyncpg.connection.Connection object at 0x109c93850>
+
+    async def test_concurrent_conflicting_fingerprints(store, admin) -> None:
+        key = new_key()
+        variants = [("fp-A", PAYLOAD), ("fp-B", {**PAYLOAD, "amount_minor": 2})] * 20
+        results = await asyncio.gather(*(submit(store, key, payload=p, fp=fp) for fp, p in variants))
+        winner = await admin.fetchval("SELECT fingerprint FROM executions WHERE action_key=$1", key)
+        created = [fp for (fp, _), (_, r) in zip(variants, results, strict=True) if r.outcome == "created"]
+        assert created == [winner]
+        for (fp, _), (_, r) in zip(variants, results, strict=True):
+            if r.outcome != "created":
+                assert r.outcome == ("duplicate" if fp == winner else "fingerprint_conflict")
+>       await assert_clean(admin)
+
+tests/gateway/test_concurrency.py:41: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+admin = <asyncpg.connection.Connection object at 0x109c93850>
+
+    async def assert_clean(admin) -> None:
+>       report = await check_invariants(admin)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/gateway/test_concurrency.py:17: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109c93850>
+
+    async def check_invariants(conn: asyncpg.Connection) -> dict[str, list[str]]:
+        """Store-level invariants (DESIGN §3.3) that M3 can establish."""
+        out: dict[str, list[str]] = {}
+    
+        # I2: leases exist exactly in leased states (also a table CHECK), and at most one per action by construction.
+        rows = await conn.fetch("SELECT action_key, state, lease_owner, lease_expires_at FROM executions")
+        out["I2_lease_consistency"] = [
+            r["action_key"] for r in rows if (State(r["state"]) in LEASED) != (r["lease_owner"] is not None)
+        ]
+    
+        # I5: nothing leaves an absorbing terminal state; ESCALATED leaves only via T16*.
+        events = await conn.fetch("SELECT action_key, seq, from_state, to_state, transition, decision_id FROM execution_events")
+        out["I5_absorbing"] = [
+            f"{e['action_key']}#{e['seq']}"
+            for e in events
+            if e["from_state"] is not None
+            and (
+                State(e["from_state"]) in TERMINAL
+                or (State(e["from_state"]) == State.ESCALATED and not e["transition"].startswith("T16"))
+            )
+        ]
+    
+        # I6: one applied decision per event, with the same transition id; no applied decision without an event.
+        decisions = {
+            d["id"]: d for d in await conn.fetch("SELECT id, action_key, transition, applied FROM decisions")
+        }
+        problems = []
+        for e in events:
+            d = decisions.get(e["decision_id"])
+            if d is None or not d["applied"] or d["transition"] != e["transition"] or d["action_key"] != e["action_key"]:
+                problems.append(f"{e['action_key']}#{e['seq']}: decision {e['decision_id']} missing/unapplied/mismatched")
+        event_decisions = {e["decision_id"] for e in events}
+        problems += [f"decision {i} applied but has no event" for i, d in decisions.items() if d["applied"] and i not in event_decisions]
+        out["I6_decision_per_event"] = problems
+    
+        # Version = last event seq; event seqs contiguous (also checked by verify_chains).
+        seqs = {r["action_key"]: r["m"] for r in await conn.fetch("SELECT action_key, max(seq) AS m FROM execution_events GROUP BY action_key")}
+        out["version_equals_last_seq"] = [
+            r["action_key"] for r in await conn.fetch("SELECT action_key, version FROM executions") if seqs.get(r["action_key"]) != r["version"]
+        ]
+    
+        # Write-ahead bookkeeping: one attempts row per claim event, numbered 1..attempt_count.
+        claims = {}
+        for e in events:
+            if e["transition"] in CLAIM_TRANSITIONS:
+                claims[e["action_key"]] = claims.get(e["action_key"], 0) + 1
+        attempt_rows = await conn.fetch("SELECT action_key, count(*) AS n, max(attempt_no) AS m FROM attempts GROUP BY action_key")
+        counts = {r["action_key"]: r["attempt_count"] for r in await conn.fetch("SELECT action_key, attempt_count FROM executions")}
+        problems = []
+        for r in attempt_rows:
+            if not (r["n"] == r["m"] == claims.get(r["action_key"], 0) == counts.get(r["action_key"])):
+                problems.append(f"{r['action_key']}: attempts={r['n']} max={r['m']} claims={claims.get(r['action_key'])} count={counts.get(r['action_key'])}")
+        problems += [k for k, n in claims.items() if k not in {r["action_key"] for r in attempt_rows}]
+        out["attempts_match_claims"] = problems
+    
+        out["hash_chains"] = await verify_chains(conn)
+>       out["I8_projection_rebuild"] = await compare_projection(conn)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:124: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109c93850>
+
+    async def compare_projection(conn: asyncpg.Connection) -> list[str]:
+        """I8: the executions table equals the projection rebuilt from events, column by column."""
+        problems: list[str] = []
+>       rebuilt = await rebuild_projection(conn)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109c93850>
+
+    async def rebuild_projection(conn: asyncpg.Connection) -> dict[str, dict[str, Any]]:
+        """Fold event patches in seq order. Seq 1 (T1) carries the complete initial row."""
+        rebuilt: dict[str, dict[str, Any]] = {}
+        for r in await conn.fetch("SELECT action_key, seq, patch FROM execution_events ORDER BY action_key, seq"):
+            state = rebuilt.setdefault(r["action_key"], {})
+>           state.update(from_patch_json(r["patch"]))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:44: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+patch = '{"state": "PREPARED", "anchor": null, "policy": {"mode": "STRICT", "max_verify": 3, "max_dispatch": 3}, "payload": {"... "escalation_reason": null, "duplicate_detected": false, "pending_late_success": null, "absence_proven_through": null}'
+
+    def from_patch_json(patch: dict[str, Any]) -> dict[str, Any]:
+>       return {k: (datetime.fromisoformat(v) if k in TIMESTAMP_COLUMNS and v is not None else v) for k, v in patch.items()}
+                                                                                                              ^^^^^^^^^^^
+E       AttributeError: 'str' object has no attribute 'items'
+
+src/raeg_gateway/store.py:106: AttributeError
+_______________ test_concurrent_claims_grant_exactly_one_attempt _______________
+
+store = <raeg_gateway.store.GatewayStore object at 0x109acba70>
+admin = <asyncpg.connection.Connection object at 0x109c92f50>
+
+    async def test_concurrent_claims_grant_exactly_one_attempt(store, admin) -> None:
+        keys = [(await submit(store))[0] for _ in range(10)]
+        for key in keys:
+            results = await asyncio.gather(
+                *(store.claim(key, worker_id=f"w{i}", attempt_ms=5000, basis=Basis.INITIAL) for i in range(30))
+            )
+            winners = [r for r in results if r.applied]
+            assert len(winners) == 1 and winners[0].attempt_no == 1
+            assert all(r.reason == "STATE_MISMATCH" for r in results if not r.applied)
+            assert await admin.fetchval("SELECT count(*) FROM attempts WHERE action_key=$1", key) == 1
+>       await assert_clean(admin)
+
+tests/gateway/test_concurrency.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+admin = <asyncpg.connection.Connection object at 0x109c92f50>
+
+    async def assert_clean(admin) -> None:
+>       report = await check_invariants(admin)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/gateway/test_concurrency.py:17: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109c92f50>
+
+    async def check_invariants(conn: asyncpg.Connection) -> dict[str, list[str]]:
+        """Store-level invariants (DESIGN §3.3) that M3 can establish."""
+        out: dict[str, list[str]] = {}
+    
+        # I2: leases exist exactly in leased states (also a table CHECK), and at most one per action by construction.
+        rows = await conn.fetch("SELECT action_key, state, lease_owner, lease_expires_at FROM executions")
+        out["I2_lease_consistency"] = [
+            r["action_key"] for r in rows if (State(r["state"]) in LEASED) != (r["lease_owner"] is not None)
+        ]
+    
+        # I5: nothing leaves an absorbing terminal state; ESCALATED leaves only via T16*.
+        events = await conn.fetch("SELECT action_key, seq, from_state, to_state, transition, decision_id FROM execution_events")
+        out["I5_absorbing"] = [
+            f"{e['action_key']}#{e['seq']}"
+            for e in events
+            if e["from_state"] is not None
+            and (
+                State(e["from_state"]) in TERMINAL
+                or (State(e["from_state"]) == State.ESCALATED and not e["transition"].startswith("T16"))
+            )
+        ]
+    
+        # I6: one applied decision per event, with the same transition id; no applied decision without an event.
+        decisions = {
+            d["id"]: d for d in await conn.fetch("SELECT id, action_key, transition, applied FROM decisions")
+        }
+        problems = []
+        for e in events:
+            d = decisions.get(e["decision_id"])
+            if d is None or not d["applied"] or d["transition"] != e["transition"] or d["action_key"] != e["action_key"]:
+                problems.append(f"{e['action_key']}#{e['seq']}: decision {e['decision_id']} missing/unapplied/mismatched")
+        event_decisions = {e["decision_id"] for e in events}
+        problems += [f"decision {i} applied but has no event" for i, d in decisions.items() if d["applied"] and i not in event_decisions]
+        out["I6_decision_per_event"] = problems
+    
+        # Version = last event seq; event seqs contiguous (also checked by verify_chains).
+        seqs = {r["action_key"]: r["m"] for r in await conn.fetch("SELECT action_key, max(seq) AS m FROM execution_events GROUP BY action_key")}
+        out["version_equals_last_seq"] = [
+            r["action_key"] for r in await conn.fetch("SELECT action_key, version FROM executions") if seqs.get(r["action_key"]) != r["version"]
+        ]
+    
+        # Write-ahead bookkeeping: one attempts row per claim event, numbered 1..attempt_count.
+        claims = {}
+        for e in events:
+            if e["transition"] in CLAIM_TRANSITIONS:
+                claims[e["action_key"]] = claims.get(e["action_key"], 0) + 1
+        attempt_rows = await conn.fetch("SELECT action_key, count(*) AS n, max(attempt_no) AS m FROM attempts GROUP BY action_key")
+        counts = {r["action_key"]: r["attempt_count"] for r in await conn.fetch("SELECT action_key, attempt_count FROM executions")}
+        problems = []
+        for r in attempt_rows:
+            if not (r["n"] == r["m"] == claims.get(r["action_key"], 0) == counts.get(r["action_key"])):
+                problems.append(f"{r['action_key']}: attempts={r['n']} max={r['m']} claims={claims.get(r['action_key'])} count={counts.get(r['action_key'])}")
+        problems += [k for k, n in claims.items() if k not in {r["action_key"] for r in attempt_rows}]
+        out["attempts_match_claims"] = problems
+    
+        out["hash_chains"] = await verify_chains(conn)
+>       out["I8_projection_rebuild"] = await compare_projection(conn)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:124: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109c92f50>
+
+    async def compare_projection(conn: asyncpg.Connection) -> list[str]:
+        """I8: the executions table equals the projection rebuilt from events, column by column."""
+        problems: list[str] = []
+>       rebuilt = await rebuild_projection(conn)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109c92f50>
+
+    async def rebuild_projection(conn: asyncpg.Connection) -> dict[str, dict[str, Any]]:
+        """Fold event patches in seq order. Seq 1 (T1) carries the complete initial row."""
+        rebuilt: dict[str, dict[str, Any]] = {}
+        for r in await conn.fetch("SELECT action_key, seq, patch FROM execution_events ORDER BY action_key, seq"):
+            state = rebuilt.setdefault(r["action_key"], {})
+>           state.update(from_patch_json(r["patch"]))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:44: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+patch = '{"state": "PREPARED", "anchor": null, "policy": {"mode": "STRICT", "max_verify": 3, "max_dispatch": 3}, "payload": {"... "escalation_reason": null, "duplicate_detected": false, "pending_late_success": null, "absence_proven_through": null}'
+
+    def from_patch_json(patch: dict[str, Any]) -> dict[str, Any]:
+>       return {k: (datetime.fromisoformat(v) if k in TIMESTAMP_COLUMNS and v is not None else v) for k, v in patch.items()}
+                                                                                                              ^^^^^^^^^^^
+E       AttributeError: 'str' object has no attribute 'items'
+
+src/raeg_gateway/store.py:106: AttributeError
+_______________ test_concurrent_sweepers_expire_each_lease_once ________________
+
+store = <raeg_gateway.store.GatewayStore object at 0x109cab710>
+admin = <asyncpg.connection.Connection object at 0x109a86350>
+
+    async def test_concurrent_sweepers_expire_each_lease_once(store, admin) -> None:
+        keys = [(await submit(store))[0] for _ in range(40)]
+        for key in keys:
+            await store.claim(key, worker_id="w", attempt_ms=20, basis=Basis.INITIAL)
+        await asyncio.sleep(0.1)
+        results = await asyncio.gather(*(store.sweep_expired(f"sweeper-{i}", limit=7) for i in range(12)))
+        applied = [r for batch in results for r in batch if r.applied]
+        assert len(applied) == 40
+        assert await admin.fetchval("SELECT count(*) FROM execution_events WHERE transition='T5'") == 40
+>       await assert_clean(admin)
+
+tests/gateway/test_concurrency.py:66: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+admin = <asyncpg.connection.Connection object at 0x109a86350>
+
+    async def assert_clean(admin) -> None:
+>       report = await check_invariants(admin)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/gateway/test_concurrency.py:17: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a86350>
+
+    async def check_invariants(conn: asyncpg.Connection) -> dict[str, list[str]]:
+        """Store-level invariants (DESIGN §3.3) that M3 can establish."""
+        out: dict[str, list[str]] = {}
+    
+        # I2: leases exist exactly in leased states (also a table CHECK), and at most one per action by construction.
+        rows = await conn.fetch("SELECT action_key, state, lease_owner, lease_expires_at FROM executions")
+        out["I2_lease_consistency"] = [
+            r["action_key"] for r in rows if (State(r["state"]) in LEASED) != (r["lease_owner"] is not None)
+        ]
+    
+        # I5: nothing leaves an absorbing terminal state; ESCALATED leaves only via T16*.
+        events = await conn.fetch("SELECT action_key, seq, from_state, to_state, transition, decision_id FROM execution_events")
+        out["I5_absorbing"] = [
+            f"{e['action_key']}#{e['seq']}"
+            for e in events
+            if e["from_state"] is not None
+            and (
+                State(e["from_state"]) in TERMINAL
+                or (State(e["from_state"]) == State.ESCALATED and not e["transition"].startswith("T16"))
+            )
+        ]
+    
+        # I6: one applied decision per event, with the same transition id; no applied decision without an event.
+        decisions = {
+            d["id"]: d for d in await conn.fetch("SELECT id, action_key, transition, applied FROM decisions")
+        }
+        problems = []
+        for e in events:
+            d = decisions.get(e["decision_id"])
+            if d is None or not d["applied"] or d["transition"] != e["transition"] or d["action_key"] != e["action_key"]:
+                problems.append(f"{e['action_key']}#{e['seq']}: decision {e['decision_id']} missing/unapplied/mismatched")
+        event_decisions = {e["decision_id"] for e in events}
+        problems += [f"decision {i} applied but has no event" for i, d in decisions.items() if d["applied"] and i not in event_decisions]
+        out["I6_decision_per_event"] = problems
+    
+        # Version = last event seq; event seqs contiguous (also checked by verify_chains).
+        seqs = {r["action_key"]: r["m"] for r in await conn.fetch("SELECT action_key, max(seq) AS m FROM execution_events GROUP BY action_key")}
+        out["version_equals_last_seq"] = [
+            r["action_key"] for r in await conn.fetch("SELECT action_key, version FROM executions") if seqs.get(r["action_key"]) != r["version"]
+        ]
+    
+        # Write-ahead bookkeeping: one attempts row per claim event, numbered 1..attempt_count.
+        claims = {}
+        for e in events:
+            if e["transition"] in CLAIM_TRANSITIONS:
+                claims[e["action_key"]] = claims.get(e["action_key"], 0) + 1
+        attempt_rows = await conn.fetch("SELECT action_key, count(*) AS n, max(attempt_no) AS m FROM attempts GROUP BY action_key")
+        counts = {r["action_key"]: r["attempt_count"] for r in await conn.fetch("SELECT action_key, attempt_count FROM executions")}
+        problems = []
+        for r in attempt_rows:
+            if not (r["n"] == r["m"] == claims.get(r["action_key"], 0) == counts.get(r["action_key"])):
+                problems.append(f"{r['action_key']}: attempts={r['n']} max={r['m']} claims={claims.get(r['action_key'])} count={counts.get(r['action_key'])}")
+        problems += [k for k, n in claims.items() if k not in {r["action_key"] for r in attempt_rows}]
+        out["attempts_match_claims"] = problems
+    
+        out["hash_chains"] = await verify_chains(conn)
+>       out["I8_projection_rebuild"] = await compare_projection(conn)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:124: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a86350>
+
+    async def compare_projection(conn: asyncpg.Connection) -> list[str]:
+        """I8: the executions table equals the projection rebuilt from events, column by column."""
+        problems: list[str] = []
+>       rebuilt = await rebuild_projection(conn)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a86350>
+
+    async def rebuild_projection(conn: asyncpg.Connection) -> dict[str, dict[str, Any]]:
+        """Fold event patches in seq order. Seq 1 (T1) carries the complete initial row."""
+        rebuilt: dict[str, dict[str, Any]] = {}
+        for r in await conn.fetch("SELECT action_key, seq, patch FROM execution_events ORDER BY action_key, seq"):
+            state = rebuilt.setdefault(r["action_key"], {})
+>           state.update(from_patch_json(r["patch"]))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:44: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+patch = '{"state": "PREPARED", "anchor": null, "policy": {"mode": "STRICT", "max_verify": 3, "max_dispatch": 3}, "payload": {"... "escalation_reason": null, "duplicate_detected": false, "pending_late_success": null, "absence_proven_through": null}'
+
+    def from_patch_json(patch: dict[str, Any]) -> dict[str, Any]:
+>       return {k: (datetime.fromisoformat(v) if k in TIMESTAMP_COLUMNS and v is not None else v) for k, v in patch.items()}
+                                                                                                              ^^^^^^^^^^^
+E       AttributeError: 'str' object has no attribute 'items'
+
+src/raeg_gateway/store.py:106: AttributeError
+_____________________ test_owner_completion_races_sweeper ______________________
+
+store = <raeg_gateway.store.GatewayStore object at 0x109bcd940>
+admin = <asyncpg.connection.Connection object at 0x109a87b50>
+
+    async def test_owner_completion_races_sweeper(store, admin) -> None:
+        keys = [(await submit(store))[0] for _ in range(40)]
+        claims = {}
+        for key in keys:
+            claims[key] = await store.claim(key, worker_id="owner", attempt_ms=30, basis=Basis.INITIAL)
+        await asyncio.sleep(0.04)
+    
+        async def owner(key: str):
+            return await store.transition(key, "T3", worker_id="owner", rule_id="RESP",
+                                          fence=OwnerFence("owner", claims[key].lease_token, 1))
+    
+        async def sweeper(i: int):
+            return await store.sweep_expired(f"sweeper-{i}", limit=50)
+    
+        tasks = [owner(k) for k in keys] + [sweeper(i) for i in range(4)]
+        random.Random(7).shuffle(tasks)
+        results = await asyncio.gather(*tasks)
+        owner_applied = sum(1 for r in results if not isinstance(r, list) and r.applied)
+        swept = sum(1 for r in results if isinstance(r, list) for x in r if x.applied)
+        assert owner_applied + swept == 40, "every action left DISPATCHING exactly once"
+        states = {r["state"] for r in await admin.fetch("SELECT state FROM executions")}
+        assert states <= {"SUCCEEDED", "UNKNOWN"}
+>       await assert_clean(admin)
+
+tests/gateway/test_concurrency.py:91: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+admin = <asyncpg.connection.Connection object at 0x109a87b50>
+
+    async def assert_clean(admin) -> None:
+>       report = await check_invariants(admin)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/gateway/test_concurrency.py:17: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a87b50>
+
+    async def check_invariants(conn: asyncpg.Connection) -> dict[str, list[str]]:
+        """Store-level invariants (DESIGN §3.3) that M3 can establish."""
+        out: dict[str, list[str]] = {}
+    
+        # I2: leases exist exactly in leased states (also a table CHECK), and at most one per action by construction.
+        rows = await conn.fetch("SELECT action_key, state, lease_owner, lease_expires_at FROM executions")
+        out["I2_lease_consistency"] = [
+            r["action_key"] for r in rows if (State(r["state"]) in LEASED) != (r["lease_owner"] is not None)
+        ]
+    
+        # I5: nothing leaves an absorbing terminal state; ESCALATED leaves only via T16*.
+        events = await conn.fetch("SELECT action_key, seq, from_state, to_state, transition, decision_id FROM execution_events")
+        out["I5_absorbing"] = [
+            f"{e['action_key']}#{e['seq']}"
+            for e in events
+            if e["from_state"] is not None
+            and (
+                State(e["from_state"]) in TERMINAL
+                or (State(e["from_state"]) == State.ESCALATED and not e["transition"].startswith("T16"))
+            )
+        ]
+    
+        # I6: one applied decision per event, with the same transition id; no applied decision without an event.
+        decisions = {
+            d["id"]: d for d in await conn.fetch("SELECT id, action_key, transition, applied FROM decisions")
+        }
+        problems = []
+        for e in events:
+            d = decisions.get(e["decision_id"])
+            if d is None or not d["applied"] or d["transition"] != e["transition"] or d["action_key"] != e["action_key"]:
+                problems.append(f"{e['action_key']}#{e['seq']}: decision {e['decision_id']} missing/unapplied/mismatched")
+        event_decisions = {e["decision_id"] for e in events}
+        problems += [f"decision {i} applied but has no event" for i, d in decisions.items() if d["applied"] and i not in event_decisions]
+        out["I6_decision_per_event"] = problems
+    
+        # Version = last event seq; event seqs contiguous (also checked by verify_chains).
+        seqs = {r["action_key"]: r["m"] for r in await conn.fetch("SELECT action_key, max(seq) AS m FROM execution_events GROUP BY action_key")}
+        out["version_equals_last_seq"] = [
+            r["action_key"] for r in await conn.fetch("SELECT action_key, version FROM executions") if seqs.get(r["action_key"]) != r["version"]
+        ]
+    
+        # Write-ahead bookkeeping: one attempts row per claim event, numbered 1..attempt_count.
+        claims = {}
+        for e in events:
+            if e["transition"] in CLAIM_TRANSITIONS:
+                claims[e["action_key"]] = claims.get(e["action_key"], 0) + 1
+        attempt_rows = await conn.fetch("SELECT action_key, count(*) AS n, max(attempt_no) AS m FROM attempts GROUP BY action_key")
+        counts = {r["action_key"]: r["attempt_count"] for r in await conn.fetch("SELECT action_key, attempt_count FROM executions")}
+        problems = []
+        for r in attempt_rows:
+            if not (r["n"] == r["m"] == claims.get(r["action_key"], 0) == counts.get(r["action_key"])):
+                problems.append(f"{r['action_key']}: attempts={r['n']} max={r['m']} claims={claims.get(r['action_key'])} count={counts.get(r['action_key'])}")
+        problems += [k for k, n in claims.items() if k not in {r["action_key"] for r in attempt_rows}]
+        out["attempts_match_claims"] = problems
+    
+        out["hash_chains"] = await verify_chains(conn)
+>       out["I8_projection_rebuild"] = await compare_projection(conn)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:124: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a87b50>
+
+    async def compare_projection(conn: asyncpg.Connection) -> list[str]:
+        """I8: the executions table equals the projection rebuilt from events, column by column."""
+        problems: list[str] = []
+>       rebuilt = await rebuild_projection(conn)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a87b50>
+
+    async def rebuild_projection(conn: asyncpg.Connection) -> dict[str, dict[str, Any]]:
+        """Fold event patches in seq order. Seq 1 (T1) carries the complete initial row."""
+        rebuilt: dict[str, dict[str, Any]] = {}
+        for r in await conn.fetch("SELECT action_key, seq, patch FROM execution_events ORDER BY action_key, seq"):
+            state = rebuilt.setdefault(r["action_key"], {})
+>           state.update(from_patch_json(r["patch"]))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:44: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+patch = '{"state": "PREPARED", "anchor": null, "policy": {"mode": "STRICT", "max_verify": 3, "max_dispatch": 3}, "payload": {"... "escalation_reason": null, "duplicate_detected": false, "pending_late_success": null, "absence_proven_through": null}'
+
+    def from_patch_json(patch: dict[str, Any]) -> dict[str, Any]:
+>       return {k: (datetime.fromisoformat(v) if k in TIMESTAMP_COLUMNS and v is not None else v) for k, v in patch.items()}
+                                                                                                              ^^^^^^^^^^^
+E       AttributeError: 'str' object has no attribute 'items'
+
+src/raeg_gateway/store.py:106: AttributeError
+____________________________ test_randomized_stress ____________________________
+
+store = <raeg_gateway.store.GatewayStore object at 0x109aca2a0>
+admin = <asyncpg.connection.Connection object at 0x109a86350>
+
+    async def test_randomized_stress(store, admin) -> None:
+        """Many workers apply random legal-looking operations with stale reads; the store must keep
+        every invariant. Illegal requests (from stale snapshots) must be refused, never applied."""
+        rng = random.Random(20261011)
+        keys = [(await submit(store))[0] for _ in range(25)]
+        held: dict[str, list] = {}  # key -> [(worker, lease_token, attempt_no)] grants seen by workers
+        counters = {"applied": 0, "rejected": 0, "illegal": 0}
+    
+        async def op(worker: str, r: random.Random) -> None:
+            key = r.choice(keys)
+            snap = await store.snapshot(key)
+            state = State(snap["state"])
+            try:
+                if state == State.PREPARED:
+                    res = await store.claim(key, worker_id=worker, attempt_ms=r.choice([5, 50, 2000]), basis=Basis.INITIAL)
+                    if res.applied:
+                        held.setdefault(key, []).append((worker, res.lease_token, res.attempt_no))
+                elif state == State.RETRY_WAIT:
+                    basis = Basis(snap["retry_basis"])
+                    guard_ok = r.random() < 0.8
+                    res = await store.claim(key, worker_id=worker, attempt_ms=r.choice([5, 50, 2000]), basis=basis,
+                                            guard=lambda *_: (guard_ok, "G", "random"))
+                    if res.applied:
+                        held.setdefault(key, []).append((worker, res.lease_token, res.attempt_no))
+                elif state in LEASED:
+                    if r.random() < 0.3:
+                        await store.sweep_expired(worker, limit=5)
+                        return
+                    grants = held.get(key) or [(worker, snap["lease_expires_at"], snap["attempt_count"])]
+                    w, token, attempt = r.choice(grants)  # possibly a stale grant
+                    tid = r.choice(["T3", "T4", "T5"] if state == State.DISPATCHING else ["T7", "T8", "T9", "T10", "T11"])
+                    patch = {"retry_basis": "VERIFIED_ABSENT"} if tid == "T10" else {}
+                    res = await store.transition(key, tid, worker_id=w, rule_id="STRESS", patch=patch,
+                                                 fence=OwnerFence(w, token, attempt if state == State.DISPATCHING else None))
+                elif state == State.UNKNOWN:
+                    tid = r.choice(["T6", "T12", "T14", "T15"])
+                    if tid == "T6":
+                        res = await store.transition(key, tid, worker_id=worker, rule_id="STRESS", lease_ms=r.choice([5, 2000]),
+                                                     expected_version=snap["version"])
+                        if res.applied:
+                            lease = (await store.snapshot(key))["lease_expires_at"]
+                            held.setdefault(key, []).append((worker, lease, None))
+                    else:
+                        patch = {"retry_basis": "IDEMPOTENT_REPLAY"} if tid == "T12" else {}
+                        res = await store.transition(key, tid, worker_id=worker, rule_id="STRESS", patch=patch,
+                                                     expected_version=snap["version"])
+                elif state == State.ESCALATED:
+                    res = await store.transition(key, r.choice(["T16s", "T16d", "T16n"]), worker_id=worker, rule_id="OP",
+                                                 expected_version=snap["version"])
+                else:  # absorbing: any request must be refused
+                    await store.transition(key, r.choice(["T5", "T6", "T12", "T14"]), worker_id=worker, rule_id="STRESS")
+                    raise AssertionError("transition out of an absorbing state was accepted")
+                counters["applied" if res.applied else "rejected"] += 1
+            except IllegalTransition:
+                counters["illegal"] += 1  # stale snapshot asked for a now-illegal move: refused before any write
+    
+        async def worker(i: int) -> None:
+            r = random.Random(rng.random())
+            for _ in range(60):
+                await op(f"w{i}", r)
+                if r.random() < 0.1:
+                    await asyncio.sleep(0.01)
+    
+        await asyncio.gather(*(worker(i) for i in range(16)))
+        await asyncio.sleep(0.06)
+        await store.sweep_expired("final", limit=1000)
+>       assert counters["applied"] > 100 and counters["rejected"] > 0, counters
+E       AssertionError: {'applied': 76, 'rejected': 64, 'illegal': 800}
+E       assert (76 > 100)
+
+tests/gateway/test_concurrency.py:160: AssertionError
+______________________ test_t1_created_duplicate_conflict ______________________
+
+store = <raeg_gateway.store.GatewayStore object at 0x109ac9760>
+admin = <asyncpg.connection.Connection object at 0x109a86850>
+
+    async def test_t1_created_duplicate_conflict(store, admin) -> None:
+        key, r1 = await submit(store)
+        _, r2 = await submit(store, key)
+        _, r3 = await submit(store, key, payload={**PAYLOAD, "amount_minor": 1}, fp="fp-other")
+        assert (r1.outcome, r2.outcome, r3.outcome) == ("created", "duplicate", "fingerprint_conflict")
+        assert r2.state == r3.state == State.PREPARED and r2.version == 1
+        outcomes = [r["outcome"] for r in await admin.fetch("SELECT outcome FROM submissions WHERE action_key=$1 ORDER BY id", key)]
+        assert outcomes == ["created", "duplicate", "fingerprint_conflict"]
+        assert await admin.fetchval("SELECT count(*) FROM execution_events WHERE action_key=$1", key) == 1
+>       await assert_clean(admin)
+
+tests/gateway/test_store_transitions.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+admin = <asyncpg.connection.Connection object at 0x109a86850>
+
+    async def assert_clean(admin) -> None:
+>       report = await check_invariants(admin)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/gateway/test_store_transitions.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a86850>
+
+    async def check_invariants(conn: asyncpg.Connection) -> dict[str, list[str]]:
+        """Store-level invariants (DESIGN §3.3) that M3 can establish."""
+        out: dict[str, list[str]] = {}
+    
+        # I2: leases exist exactly in leased states (also a table CHECK), and at most one per action by construction.
+        rows = await conn.fetch("SELECT action_key, state, lease_owner, lease_expires_at FROM executions")
+        out["I2_lease_consistency"] = [
+            r["action_key"] for r in rows if (State(r["state"]) in LEASED) != (r["lease_owner"] is not None)
+        ]
+    
+        # I5: nothing leaves an absorbing terminal state; ESCALATED leaves only via T16*.
+        events = await conn.fetch("SELECT action_key, seq, from_state, to_state, transition, decision_id FROM execution_events")
+        out["I5_absorbing"] = [
+            f"{e['action_key']}#{e['seq']}"
+            for e in events
+            if e["from_state"] is not None
+            and (
+                State(e["from_state"]) in TERMINAL
+                or (State(e["from_state"]) == State.ESCALATED and not e["transition"].startswith("T16"))
+            )
+        ]
+    
+        # I6: one applied decision per event, with the same transition id; no applied decision without an event.
+        decisions = {
+            d["id"]: d for d in await conn.fetch("SELECT id, action_key, transition, applied FROM decisions")
+        }
+        problems = []
+        for e in events:
+            d = decisions.get(e["decision_id"])
+            if d is None or not d["applied"] or d["transition"] != e["transition"] or d["action_key"] != e["action_key"]:
+                problems.append(f"{e['action_key']}#{e['seq']}: decision {e['decision_id']} missing/unapplied/mismatched")
+        event_decisions = {e["decision_id"] for e in events}
+        problems += [f"decision {i} applied but has no event" for i, d in decisions.items() if d["applied"] and i not in event_decisions]
+        out["I6_decision_per_event"] = problems
+    
+        # Version = last event seq; event seqs contiguous (also checked by verify_chains).
+        seqs = {r["action_key"]: r["m"] for r in await conn.fetch("SELECT action_key, max(seq) AS m FROM execution_events GROUP BY action_key")}
+        out["version_equals_last_seq"] = [
+            r["action_key"] for r in await conn.fetch("SELECT action_key, version FROM executions") if seqs.get(r["action_key"]) != r["version"]
+        ]
+    
+        # Write-ahead bookkeeping: one attempts row per claim event, numbered 1..attempt_count.
+        claims = {}
+        for e in events:
+            if e["transition"] in CLAIM_TRANSITIONS:
+                claims[e["action_key"]] = claims.get(e["action_key"], 0) + 1
+        attempt_rows = await conn.fetch("SELECT action_key, count(*) AS n, max(attempt_no) AS m FROM attempts GROUP BY action_key")
+        counts = {r["action_key"]: r["attempt_count"] for r in await conn.fetch("SELECT action_key, attempt_count FROM executions")}
+        problems = []
+        for r in attempt_rows:
+            if not (r["n"] == r["m"] == claims.get(r["action_key"], 0) == counts.get(r["action_key"])):
+                problems.append(f"{r['action_key']}: attempts={r['n']} max={r['m']} claims={claims.get(r['action_key'])} count={counts.get(r['action_key'])}")
+        problems += [k for k, n in claims.items() if k not in {r["action_key"] for r in attempt_rows}]
+        out["attempts_match_claims"] = problems
+    
+        out["hash_chains"] = await verify_chains(conn)
+>       out["I8_projection_rebuild"] = await compare_projection(conn)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:124: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a86850>
+
+    async def compare_projection(conn: asyncpg.Connection) -> list[str]:
+        """I8: the executions table equals the projection rebuilt from events, column by column."""
+        problems: list[str] = []
+>       rebuilt = await rebuild_projection(conn)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a86850>
+
+    async def rebuild_projection(conn: asyncpg.Connection) -> dict[str, dict[str, Any]]:
+        """Fold event patches in seq order. Seq 1 (T1) carries the complete initial row."""
+        rebuilt: dict[str, dict[str, Any]] = {}
+        for r in await conn.fetch("SELECT action_key, seq, patch FROM execution_events ORDER BY action_key, seq"):
+            state = rebuilt.setdefault(r["action_key"], {})
+>           state.update(from_patch_json(r["patch"]))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:44: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+patch = '{"state": "PREPARED", "anchor": null, "policy": {"mode": "STRICT", "max_verify": 3, "max_dispatch": 3}, "payload": {"... "escalation_reason": null, "duplicate_detected": false, "pending_late_success": null, "absence_proven_through": null}'
+
+    def from_patch_json(patch: dict[str, Any]) -> dict[str, Any]:
+>       return {k: (datetime.fromisoformat(v) if k in TIMESTAMP_COLUMNS and v is not None else v) for k, v in patch.items()}
+                                                                                                              ^^^^^^^^^^^
+E       AttributeError: 'str' object has no attribute 'items'
+
+src/raeg_gateway/store.py:106: AttributeError
+_______________________ test_happy_path_and_write_ahead ________________________
+
+store = <raeg_gateway.store.GatewayStore object at 0x109d61f10>
+admin = <asyncpg.connection.Connection object at 0x109a85c50>
+
+    async def test_happy_path_and_write_ahead(store, admin) -> None:
+        key, _ = await submit(store)
+        claim = await store.claim(key, worker_id="w1", attempt_ms=2000, basis=Basis.INITIAL)
+        assert claim.applied and claim.attempt_no == 1
+        snap = await store.snapshot(key)
+        assert snap["state"] == "DISPATCHING" and snap["lease_owner"] == "w1"
+        assert snap["lease_expires_at"] == claim.deadline == snap["max_deadline"]
+        assert snap["anchor"] == claim.deadline - timedelta(milliseconds=2000)
+        attempt = await admin.fetchrow("SELECT * FROM attempts WHERE action_key=$1", key)
+        assert attempt["deadline"] == claim.deadline and attempt["basis"] == "INITIAL"
+        ev = await store.append_evidence(key, kind="dispatch_response", worker_id="w1", attempt_no=1, http_status=201,
+                                         raw_body=b'{"status":"succeeded"}', classification="COMMITTED")
+        done = await store.transition(key, "T3", worker_id="w1", rule_id="RESP_COMMITTED", evidence_ids=[ev],
+                                      patch={"provider_txn_id": "pay_1", "outcome_source": "response"},
+                                      fence=OwnerFence("w1", claim.lease_token, 1))
+        assert done.applied and done.state == State.SUCCEEDED and done.version == 3
+        snap = await store.snapshot(key)
+        assert snap["lease_owner"] is None and snap["lease_expires_at"] is None
+        event = await admin.fetchrow("SELECT * FROM execution_events WHERE action_key=$1 AND seq=3", key)
+        assert list(event["evidence_ids"]) == [ev]
+>       await assert_clean(admin)
+
+tests/gateway/test_store_transitions.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+admin = <asyncpg.connection.Connection object at 0x109a85c50>
+
+    async def assert_clean(admin) -> None:
+>       report = await check_invariants(admin)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/gateway/test_store_transitions.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a85c50>
+
+    async def check_invariants(conn: asyncpg.Connection) -> dict[str, list[str]]:
+        """Store-level invariants (DESIGN §3.3) that M3 can establish."""
+        out: dict[str, list[str]] = {}
+    
+        # I2: leases exist exactly in leased states (also a table CHECK), and at most one per action by construction.
+        rows = await conn.fetch("SELECT action_key, state, lease_owner, lease_expires_at FROM executions")
+        out["I2_lease_consistency"] = [
+            r["action_key"] for r in rows if (State(r["state"]) in LEASED) != (r["lease_owner"] is not None)
+        ]
+    
+        # I5: nothing leaves an absorbing terminal state; ESCALATED leaves only via T16*.
+        events = await conn.fetch("SELECT action_key, seq, from_state, to_state, transition, decision_id FROM execution_events")
+        out["I5_absorbing"] = [
+            f"{e['action_key']}#{e['seq']}"
+            for e in events
+            if e["from_state"] is not None
+            and (
+                State(e["from_state"]) in TERMINAL
+                or (State(e["from_state"]) == State.ESCALATED and not e["transition"].startswith("T16"))
+            )
+        ]
+    
+        # I6: one applied decision per event, with the same transition id; no applied decision without an event.
+        decisions = {
+            d["id"]: d for d in await conn.fetch("SELECT id, action_key, transition, applied FROM decisions")
+        }
+        problems = []
+        for e in events:
+            d = decisions.get(e["decision_id"])
+            if d is None or not d["applied"] or d["transition"] != e["transition"] or d["action_key"] != e["action_key"]:
+                problems.append(f"{e['action_key']}#{e['seq']}: decision {e['decision_id']} missing/unapplied/mismatched")
+        event_decisions = {e["decision_id"] for e in events}
+        problems += [f"decision {i} applied but has no event" for i, d in decisions.items() if d["applied"] and i not in event_decisions]
+        out["I6_decision_per_event"] = problems
+    
+        # Version = last event seq; event seqs contiguous (also checked by verify_chains).
+        seqs = {r["action_key"]: r["m"] for r in await conn.fetch("SELECT action_key, max(seq) AS m FROM execution_events GROUP BY action_key")}
+        out["version_equals_last_seq"] = [
+            r["action_key"] for r in await conn.fetch("SELECT action_key, version FROM executions") if seqs.get(r["action_key"]) != r["version"]
+        ]
+    
+        # Write-ahead bookkeeping: one attempts row per claim event, numbered 1..attempt_count.
+        claims = {}
+        for e in events:
+            if e["transition"] in CLAIM_TRANSITIONS:
+                claims[e["action_key"]] = claims.get(e["action_key"], 0) + 1
+        attempt_rows = await conn.fetch("SELECT action_key, count(*) AS n, max(attempt_no) AS m FROM attempts GROUP BY action_key")
+        counts = {r["action_key"]: r["attempt_count"] for r in await conn.fetch("SELECT action_key, attempt_count FROM executions")}
+        problems = []
+        for r in attempt_rows:
+            if not (r["n"] == r["m"] == claims.get(r["action_key"], 0) == counts.get(r["action_key"])):
+                problems.append(f"{r['action_key']}: attempts={r['n']} max={r['m']} claims={claims.get(r['action_key'])} count={counts.get(r['action_key'])}")
+        problems += [k for k, n in claims.items() if k not in {r["action_key"] for r in attempt_rows}]
+        out["attempts_match_claims"] = problems
+    
+        out["hash_chains"] = await verify_chains(conn)
+>       out["I8_projection_rebuild"] = await compare_projection(conn)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:124: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a85c50>
+
+    async def compare_projection(conn: asyncpg.Connection) -> list[str]:
+        """I8: the executions table equals the projection rebuilt from events, column by column."""
+        problems: list[str] = []
+>       rebuilt = await rebuild_projection(conn)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a85c50>
+
+    async def rebuild_projection(conn: asyncpg.Connection) -> dict[str, dict[str, Any]]:
+        """Fold event patches in seq order. Seq 1 (T1) carries the complete initial row."""
+        rebuilt: dict[str, dict[str, Any]] = {}
+        for r in await conn.fetch("SELECT action_key, seq, patch FROM execution_events ORDER BY action_key, seq"):
+            state = rebuilt.setdefault(r["action_key"], {})
+>           state.update(from_patch_json(r["patch"]))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:44: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+patch = '{"state": "PREPARED", "anchor": null, "policy": {"mode": "STRICT", "max_verify": 3, "max_dispatch": 3}, "payload": {"... "escalation_reason": null, "duplicate_detected": false, "pending_late_success": null, "absence_proven_through": null}'
+
+    def from_patch_json(patch: dict[str, Any]) -> dict[str, Any]:
+>       return {k: (datetime.fromisoformat(v) if k in TIMESTAMP_COLUMNS and v is not None else v) for k, v in patch.items()}
+                                                                                                              ^^^^^^^^^^^
+E       AttributeError: 'str' object has no attribute 'items'
+
+src/raeg_gateway/store.py:106: AttributeError
+____________ test_illegal_transitions_are_refused_before_any_write _____________
+
+store = <raeg_gateway.store.GatewayStore object at 0x109cfa6f0>
+admin = <asyncpg.connection.Connection object at 0x109a85e50>
+
+    async def test_illegal_transitions_are_refused_before_any_write(store, admin) -> None:
+        key, _ = await submit(store)
+        with pytest.raises(IllegalTransition):
+            await store.transition(key, "T3", worker_id="w", rule_id="x")  # PREPARED -> SUCCEEDED
+        with pytest.raises(IllegalTransition):
+            await store.transition(key, "T2", worker_id="w", rule_id="x")  # claims only via claim()
+        claim = await store.claim(key, worker_id="w", attempt_ms=2000, basis=Basis.INITIAL)
+        with pytest.raises(IllegalTransition):
+            await store.transition(key, "T5", worker_id="w", rule_id="x")  # leaving a lease needs a fence
+        with pytest.raises(IllegalTransition):
+            await store.transition(key, "T5", worker_id="w", rule_id="x", patch={"lease_owner": "evil"},
+                                   fence=OwnerFence("w", claim.lease_token))
+        with pytest.raises(IllegalTransition):
+            await store.transition(key, "T5", worker_id="w", rule_id="x", patch={"fingerprint": "evil"},
+                                   fence=OwnerFence("w", claim.lease_token))
+        assert (await store.snapshot(key))["version"] == 2
+>       await assert_clean(admin)
+
+tests/gateway/test_store_transitions.py:73: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+admin = <asyncpg.connection.Connection object at 0x109a85e50>
+
+    async def assert_clean(admin) -> None:
+>       report = await check_invariants(admin)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/gateway/test_store_transitions.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a85e50>
+
+    async def check_invariants(conn: asyncpg.Connection) -> dict[str, list[str]]:
+        """Store-level invariants (DESIGN §3.3) that M3 can establish."""
+        out: dict[str, list[str]] = {}
+    
+        # I2: leases exist exactly in leased states (also a table CHECK), and at most one per action by construction.
+        rows = await conn.fetch("SELECT action_key, state, lease_owner, lease_expires_at FROM executions")
+        out["I2_lease_consistency"] = [
+            r["action_key"] for r in rows if (State(r["state"]) in LEASED) != (r["lease_owner"] is not None)
+        ]
+    
+        # I5: nothing leaves an absorbing terminal state; ESCALATED leaves only via T16*.
+        events = await conn.fetch("SELECT action_key, seq, from_state, to_state, transition, decision_id FROM execution_events")
+        out["I5_absorbing"] = [
+            f"{e['action_key']}#{e['seq']}"
+            for e in events
+            if e["from_state"] is not None
+            and (
+                State(e["from_state"]) in TERMINAL
+                or (State(e["from_state"]) == State.ESCALATED and not e["transition"].startswith("T16"))
+            )
+        ]
+    
+        # I6: one applied decision per event, with the same transition id; no applied decision without an event.
+        decisions = {
+            d["id"]: d for d in await conn.fetch("SELECT id, action_key, transition, applied FROM decisions")
+        }
+        problems = []
+        for e in events:
+            d = decisions.get(e["decision_id"])
+            if d is None or not d["applied"] or d["transition"] != e["transition"] or d["action_key"] != e["action_key"]:
+                problems.append(f"{e['action_key']}#{e['seq']}: decision {e['decision_id']} missing/unapplied/mismatched")
+        event_decisions = {e["decision_id"] for e in events}
+        problems += [f"decision {i} applied but has no event" for i, d in decisions.items() if d["applied"] and i not in event_decisions]
+        out["I6_decision_per_event"] = problems
+    
+        # Version = last event seq; event seqs contiguous (also checked by verify_chains).
+        seqs = {r["action_key"]: r["m"] for r in await conn.fetch("SELECT action_key, max(seq) AS m FROM execution_events GROUP BY action_key")}
+        out["version_equals_last_seq"] = [
+            r["action_key"] for r in await conn.fetch("SELECT action_key, version FROM executions") if seqs.get(r["action_key"]) != r["version"]
+        ]
+    
+        # Write-ahead bookkeeping: one attempts row per claim event, numbered 1..attempt_count.
+        claims = {}
+        for e in events:
+            if e["transition"] in CLAIM_TRANSITIONS:
+                claims[e["action_key"]] = claims.get(e["action_key"], 0) + 1
+        attempt_rows = await conn.fetch("SELECT action_key, count(*) AS n, max(attempt_no) AS m FROM attempts GROUP BY action_key")
+        counts = {r["action_key"]: r["attempt_count"] for r in await conn.fetch("SELECT action_key, attempt_count FROM executions")}
+        problems = []
+        for r in attempt_rows:
+            if not (r["n"] == r["m"] == claims.get(r["action_key"], 0) == counts.get(r["action_key"])):
+                problems.append(f"{r['action_key']}: attempts={r['n']} max={r['m']} claims={claims.get(r['action_key'])} count={counts.get(r['action_key'])}")
+        problems += [k for k, n in claims.items() if k not in {r["action_key"] for r in attempt_rows}]
+        out["attempts_match_claims"] = problems
+    
+        out["hash_chains"] = await verify_chains(conn)
+>       out["I8_projection_rebuild"] = await compare_projection(conn)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:124: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a85e50>
+
+    async def compare_projection(conn: asyncpg.Connection) -> list[str]:
+        """I8: the executions table equals the projection rebuilt from events, column by column."""
+        problems: list[str] = []
+>       rebuilt = await rebuild_projection(conn)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a85e50>
+
+    async def rebuild_projection(conn: asyncpg.Connection) -> dict[str, dict[str, Any]]:
+        """Fold event patches in seq order. Seq 1 (T1) carries the complete initial row."""
+        rebuilt: dict[str, dict[str, Any]] = {}
+        for r in await conn.fetch("SELECT action_key, seq, patch FROM execution_events ORDER BY action_key, seq"):
+            state = rebuilt.setdefault(r["action_key"], {})
+>           state.update(from_patch_json(r["patch"]))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:44: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+patch = '{"state": "PREPARED", "anchor": null, "policy": {"mode": "STRICT", "max_verify": 3, "max_dispatch": 3}, "payload": {"... "escalation_reason": null, "duplicate_detected": false, "pending_late_success": null, "absence_proven_through": null}'
+
+    def from_patch_json(patch: dict[str, Any]) -> dict[str, Any]:
+>       return {k: (datetime.fromisoformat(v) if k in TIMESTAMP_COLUMNS and v is not None else v) for k, v in patch.items()}
+                                                                                                              ^^^^^^^^^^^
+E       AttributeError: 'str' object has no attribute 'items'
+
+src/raeg_gateway/store.py:106: AttributeError
+____________________ test_owner_fence_rejects_stale_holders ____________________
+
+store = <raeg_gateway.store.GatewayStore object at 0x109d62420>
+admin = <asyncpg.connection.Connection object at 0x109a86d50>
+
+    async def test_owner_fence_rejects_stale_holders(store, admin) -> None:
+        key, _ = await submit(store)
+        claim = await store.claim(key, worker_id="w1", attempt_ms=2000, basis=Basis.INITIAL)
+        for fence in (OwnerFence("w2", claim.lease_token, 1), OwnerFence("w1", claim.lease_token + timedelta(seconds=1), 1),
+                      OwnerFence("w1", claim.lease_token, 2)):
+            r = await store.transition(key, "T3", worker_id=fence.worker_id, rule_id="RESP", fence=fence)
+            assert not r.applied and r.reason == "FENCED"
+        rejected = await admin.fetchval("SELECT count(*) FROM decisions WHERE action_key=$1 AND NOT applied", key)
+        assert rejected == 3, "rejected decisions are kept for audit"
+        assert (await store.snapshot(key))["state"] == "DISPATCHING"
+>       await assert_clean(admin)
+
+tests/gateway/test_store_transitions.py:86: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+admin = <asyncpg.connection.Connection object at 0x109a86d50>
+
+    async def assert_clean(admin) -> None:
+>       report = await check_invariants(admin)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/gateway/test_store_transitions.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a86d50>
+
+    async def check_invariants(conn: asyncpg.Connection) -> dict[str, list[str]]:
+        """Store-level invariants (DESIGN §3.3) that M3 can establish."""
+        out: dict[str, list[str]] = {}
+    
+        # I2: leases exist exactly in leased states (also a table CHECK), and at most one per action by construction.
+        rows = await conn.fetch("SELECT action_key, state, lease_owner, lease_expires_at FROM executions")
+        out["I2_lease_consistency"] = [
+            r["action_key"] for r in rows if (State(r["state"]) in LEASED) != (r["lease_owner"] is not None)
+        ]
+    
+        # I5: nothing leaves an absorbing terminal state; ESCALATED leaves only via T16*.
+        events = await conn.fetch("SELECT action_key, seq, from_state, to_state, transition, decision_id FROM execution_events")
+        out["I5_absorbing"] = [
+            f"{e['action_key']}#{e['seq']}"
+            for e in events
+            if e["from_state"] is not None
+            and (
+                State(e["from_state"]) in TERMINAL
+                or (State(e["from_state"]) == State.ESCALATED and not e["transition"].startswith("T16"))
+            )
+        ]
+    
+        # I6: one applied decision per event, with the same transition id; no applied decision without an event.
+        decisions = {
+            d["id"]: d for d in await conn.fetch("SELECT id, action_key, transition, applied FROM decisions")
+        }
+        problems = []
+        for e in events:
+            d = decisions.get(e["decision_id"])
+            if d is None or not d["applied"] or d["transition"] != e["transition"] or d["action_key"] != e["action_key"]:
+                problems.append(f"{e['action_key']}#{e['seq']}: decision {e['decision_id']} missing/unapplied/mismatched")
+        event_decisions = {e["decision_id"] for e in events}
+        problems += [f"decision {i} applied but has no event" for i, d in decisions.items() if d["applied"] and i not in event_decisions]
+        out["I6_decision_per_event"] = problems
+    
+        # Version = last event seq; event seqs contiguous (also checked by verify_chains).
+        seqs = {r["action_key"]: r["m"] for r in await conn.fetch("SELECT action_key, max(seq) AS m FROM execution_events GROUP BY action_key")}
+        out["version_equals_last_seq"] = [
+            r["action_key"] for r in await conn.fetch("SELECT action_key, version FROM executions") if seqs.get(r["action_key"]) != r["version"]
+        ]
+    
+        # Write-ahead bookkeeping: one attempts row per claim event, numbered 1..attempt_count.
+        claims = {}
+        for e in events:
+            if e["transition"] in CLAIM_TRANSITIONS:
+                claims[e["action_key"]] = claims.get(e["action_key"], 0) + 1
+        attempt_rows = await conn.fetch("SELECT action_key, count(*) AS n, max(attempt_no) AS m FROM attempts GROUP BY action_key")
+        counts = {r["action_key"]: r["attempt_count"] for r in await conn.fetch("SELECT action_key, attempt_count FROM executions")}
+        problems = []
+        for r in attempt_rows:
+            if not (r["n"] == r["m"] == claims.get(r["action_key"], 0) == counts.get(r["action_key"])):
+                problems.append(f"{r['action_key']}: attempts={r['n']} max={r['m']} claims={claims.get(r['action_key'])} count={counts.get(r['action_key'])}")
+        problems += [k for k, n in claims.items() if k not in {r["action_key"] for r in attempt_rows}]
+        out["attempts_match_claims"] = problems
+    
+        out["hash_chains"] = await verify_chains(conn)
+>       out["I8_projection_rebuild"] = await compare_projection(conn)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:124: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a86d50>
+
+    async def compare_projection(conn: asyncpg.Connection) -> list[str]:
+        """I8: the executions table equals the projection rebuilt from events, column by column."""
+        problems: list[str] = []
+>       rebuilt = await rebuild_projection(conn)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a86d50>
+
+    async def rebuild_projection(conn: asyncpg.Connection) -> dict[str, dict[str, Any]]:
+        """Fold event patches in seq order. Seq 1 (T1) carries the complete initial row."""
+        rebuilt: dict[str, dict[str, Any]] = {}
+        for r in await conn.fetch("SELECT action_key, seq, patch FROM execution_events ORDER BY action_key, seq"):
+            state = rebuilt.setdefault(r["action_key"], {})
+>           state.update(from_patch_json(r["patch"]))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:44: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+patch = '{"state": "PREPARED", "anchor": null, "policy": {"mode": "STRICT", "max_verify": 3, "max_dispatch": 3}, "payload": {"... "escalation_reason": null, "duplicate_detected": false, "pending_late_success": null, "absence_proven_through": null}'
+
+    def from_patch_json(patch: dict[str, Any]) -> dict[str, Any]:
+>       return {k: (datetime.fromisoformat(v) if k in TIMESTAMP_COLUMNS and v is not None else v) for k, v in patch.items()}
+                                                                                                              ^^^^^^^^^^^
+E       AttributeError: 'str' object has no attribute 'items'
+
+src/raeg_gateway/store.py:106: AttributeError
+______________ test_sweeper_expires_leases_and_fences_late_owner _______________
+
+store = <raeg_gateway.store.GatewayStore object at 0x109d61b80>
+admin = <asyncpg.connection.Connection object at 0x109a86150>
+
+    async def test_sweeper_expires_leases_and_fences_late_owner(store, admin) -> None:
+        key, _ = await submit(store)
+        keep, _ = await submit(store)
+        claim = await store.claim(key, worker_id="w1", attempt_ms=50, basis=Basis.INITIAL)
+        await store.claim(keep, worker_id="w1", attempt_ms=60_000, basis=Basis.INITIAL)
+        await asyncio.sleep(0.15)
+        swept = await store.sweep_expired("sweeper")
+        assert [r.state for r in swept] == [State.UNKNOWN]
+        snap = await store.snapshot(key)
+        assert snap["state"] == "UNKNOWN" and snap["ambiguity_cause"] == "LEASE_EXPIRED"
+        assert (await store.snapshot(keep))["state"] == "DISPATCHING", "unexpired leases are untouched"
+        late = await store.transition(key, "T3", worker_id="w1", rule_id="RESP", fence=OwnerFence("w1", claim.lease_token, 1))
+        assert not late.applied and late.reason == "FENCED"
+        assert (await store.snapshot(key))["state"] == "UNKNOWN"
+        assert await store.sweep_expired("sweeper") == [], "nothing left to sweep"
+>       await assert_clean(admin)
+
+tests/gateway/test_store_transitions.py:104: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+admin = <asyncpg.connection.Connection object at 0x109a86150>
+
+    async def assert_clean(admin) -> None:
+>       report = await check_invariants(admin)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/gateway/test_store_transitions.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a86150>
+
+    async def check_invariants(conn: asyncpg.Connection) -> dict[str, list[str]]:
+        """Store-level invariants (DESIGN §3.3) that M3 can establish."""
+        out: dict[str, list[str]] = {}
+    
+        # I2: leases exist exactly in leased states (also a table CHECK), and at most one per action by construction.
+        rows = await conn.fetch("SELECT action_key, state, lease_owner, lease_expires_at FROM executions")
+        out["I2_lease_consistency"] = [
+            r["action_key"] for r in rows if (State(r["state"]) in LEASED) != (r["lease_owner"] is not None)
+        ]
+    
+        # I5: nothing leaves an absorbing terminal state; ESCALATED leaves only via T16*.
+        events = await conn.fetch("SELECT action_key, seq, from_state, to_state, transition, decision_id FROM execution_events")
+        out["I5_absorbing"] = [
+            f"{e['action_key']}#{e['seq']}"
+            for e in events
+            if e["from_state"] is not None
+            and (
+                State(e["from_state"]) in TERMINAL
+                or (State(e["from_state"]) == State.ESCALATED and not e["transition"].startswith("T16"))
+            )
+        ]
+    
+        # I6: one applied decision per event, with the same transition id; no applied decision without an event.
+        decisions = {
+            d["id"]: d for d in await conn.fetch("SELECT id, action_key, transition, applied FROM decisions")
+        }
+        problems = []
+        for e in events:
+            d = decisions.get(e["decision_id"])
+            if d is None or not d["applied"] or d["transition"] != e["transition"] or d["action_key"] != e["action_key"]:
+                problems.append(f"{e['action_key']}#{e['seq']}: decision {e['decision_id']} missing/unapplied/mismatched")
+        event_decisions = {e["decision_id"] for e in events}
+        problems += [f"decision {i} applied but has no event" for i, d in decisions.items() if d["applied"] and i not in event_decisions]
+        out["I6_decision_per_event"] = problems
+    
+        # Version = last event seq; event seqs contiguous (also checked by verify_chains).
+        seqs = {r["action_key"]: r["m"] for r in await conn.fetch("SELECT action_key, max(seq) AS m FROM execution_events GROUP BY action_key")}
+        out["version_equals_last_seq"] = [
+            r["action_key"] for r in await conn.fetch("SELECT action_key, version FROM executions") if seqs.get(r["action_key"]) != r["version"]
+        ]
+    
+        # Write-ahead bookkeeping: one attempts row per claim event, numbered 1..attempt_count.
+        claims = {}
+        for e in events:
+            if e["transition"] in CLAIM_TRANSITIONS:
+                claims[e["action_key"]] = claims.get(e["action_key"], 0) + 1
+        attempt_rows = await conn.fetch("SELECT action_key, count(*) AS n, max(attempt_no) AS m FROM attempts GROUP BY action_key")
+        counts = {r["action_key"]: r["attempt_count"] for r in await conn.fetch("SELECT action_key, attempt_count FROM executions")}
+        problems = []
+        for r in attempt_rows:
+            if not (r["n"] == r["m"] == claims.get(r["action_key"], 0) == counts.get(r["action_key"])):
+                problems.append(f"{r['action_key']}: attempts={r['n']} max={r['m']} claims={claims.get(r['action_key'])} count={counts.get(r['action_key'])}")
+        problems += [k for k, n in claims.items() if k not in {r["action_key"] for r in attempt_rows}]
+        out["attempts_match_claims"] = problems
+    
+        out["hash_chains"] = await verify_chains(conn)
+>       out["I8_projection_rebuild"] = await compare_projection(conn)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:124: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a86150>
+
+    async def compare_projection(conn: asyncpg.Connection) -> list[str]:
+        """I8: the executions table equals the projection rebuilt from events, column by column."""
+        problems: list[str] = []
+>       rebuilt = await rebuild_projection(conn)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a86150>
+
+    async def rebuild_projection(conn: asyncpg.Connection) -> dict[str, dict[str, Any]]:
+        """Fold event patches in seq order. Seq 1 (T1) carries the complete initial row."""
+        rebuilt: dict[str, dict[str, Any]] = {}
+        for r in await conn.fetch("SELECT action_key, seq, patch FROM execution_events ORDER BY action_key, seq"):
+            state = rebuilt.setdefault(r["action_key"], {})
+>           state.update(from_patch_json(r["patch"]))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:44: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+patch = '{"state": "PREPARED", "anchor": null, "policy": {"mode": "STRICT", "max_verify": 3, "max_dispatch": 3}, "payload": {"... "escalation_reason": null, "duplicate_detected": false, "pending_late_success": null, "absence_proven_through": null}'
+
+    def from_patch_json(patch: dict[str, Any]) -> dict[str, Any]:
+>       return {k: (datetime.fromisoformat(v) if k in TIMESTAMP_COLUMNS and v is not None else v) for k, v in patch.items()}
+                                                                                                              ^^^^^^^^^^^
+E       AttributeError: 'str' object has no attribute 'items'
+
+src/raeg_gateway/store.py:106: AttributeError
+____________________ test_expired_fence_refuses_live_lease _____________________
+
+store = <raeg_gateway.store.GatewayStore object at 0x109d620f0>
+admin = <asyncpg.connection.Connection object at 0x109a86550>
+
+    async def test_expired_fence_refuses_live_lease(store, admin) -> None:
+        key, _ = await submit(store)
+        await store.claim(key, worker_id="w1", attempt_ms=60_000, basis=Basis.INITIAL)
+        r = await store.transition(key, "T5", worker_id="sweeper", rule_id="SWEEP", fence=ExpiredFence())
+        assert not r.applied and r.reason == "LEASE_NOT_EXPIRED"
+>       await assert_clean(admin)
+
+tests/gateway/test_store_transitions.py:112: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+admin = <asyncpg.connection.Connection object at 0x109a86550>
+
+    async def assert_clean(admin) -> None:
+>       report = await check_invariants(admin)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/gateway/test_store_transitions.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a86550>
+
+    async def check_invariants(conn: asyncpg.Connection) -> dict[str, list[str]]:
+        """Store-level invariants (DESIGN §3.3) that M3 can establish."""
+        out: dict[str, list[str]] = {}
+    
+        # I2: leases exist exactly in leased states (also a table CHECK), and at most one per action by construction.
+        rows = await conn.fetch("SELECT action_key, state, lease_owner, lease_expires_at FROM executions")
+        out["I2_lease_consistency"] = [
+            r["action_key"] for r in rows if (State(r["state"]) in LEASED) != (r["lease_owner"] is not None)
+        ]
+    
+        # I5: nothing leaves an absorbing terminal state; ESCALATED leaves only via T16*.
+        events = await conn.fetch("SELECT action_key, seq, from_state, to_state, transition, decision_id FROM execution_events")
+        out["I5_absorbing"] = [
+            f"{e['action_key']}#{e['seq']}"
+            for e in events
+            if e["from_state"] is not None
+            and (
+                State(e["from_state"]) in TERMINAL
+                or (State(e["from_state"]) == State.ESCALATED and not e["transition"].startswith("T16"))
+            )
+        ]
+    
+        # I6: one applied decision per event, with the same transition id; no applied decision without an event.
+        decisions = {
+            d["id"]: d for d in await conn.fetch("SELECT id, action_key, transition, applied FROM decisions")
+        }
+        problems = []
+        for e in events:
+            d = decisions.get(e["decision_id"])
+            if d is None or not d["applied"] or d["transition"] != e["transition"] or d["action_key"] != e["action_key"]:
+                problems.append(f"{e['action_key']}#{e['seq']}: decision {e['decision_id']} missing/unapplied/mismatched")
+        event_decisions = {e["decision_id"] for e in events}
+        problems += [f"decision {i} applied but has no event" for i, d in decisions.items() if d["applied"] and i not in event_decisions]
+        out["I6_decision_per_event"] = problems
+    
+        # Version = last event seq; event seqs contiguous (also checked by verify_chains).
+        seqs = {r["action_key"]: r["m"] for r in await conn.fetch("SELECT action_key, max(seq) AS m FROM execution_events GROUP BY action_key")}
+        out["version_equals_last_seq"] = [
+            r["action_key"] for r in await conn.fetch("SELECT action_key, version FROM executions") if seqs.get(r["action_key"]) != r["version"]
+        ]
+    
+        # Write-ahead bookkeeping: one attempts row per claim event, numbered 1..attempt_count.
+        claims = {}
+        for e in events:
+            if e["transition"] in CLAIM_TRANSITIONS:
+                claims[e["action_key"]] = claims.get(e["action_key"], 0) + 1
+        attempt_rows = await conn.fetch("SELECT action_key, count(*) AS n, max(attempt_no) AS m FROM attempts GROUP BY action_key")
+        counts = {r["action_key"]: r["attempt_count"] for r in await conn.fetch("SELECT action_key, attempt_count FROM executions")}
+        problems = []
+        for r in attempt_rows:
+            if not (r["n"] == r["m"] == claims.get(r["action_key"], 0) == counts.get(r["action_key"])):
+                problems.append(f"{r['action_key']}: attempts={r['n']} max={r['m']} claims={claims.get(r['action_key'])} count={counts.get(r['action_key'])}")
+        problems += [k for k, n in claims.items() if k not in {r["action_key"] for r in attempt_rows}]
+        out["attempts_match_claims"] = problems
+    
+        out["hash_chains"] = await verify_chains(conn)
+>       out["I8_projection_rebuild"] = await compare_projection(conn)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:124: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a86550>
+
+    async def compare_projection(conn: asyncpg.Connection) -> list[str]:
+        """I8: the executions table equals the projection rebuilt from events, column by column."""
+        problems: list[str] = []
+>       rebuilt = await rebuild_projection(conn)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a86550>
+
+    async def rebuild_projection(conn: asyncpg.Connection) -> dict[str, dict[str, Any]]:
+        """Fold event patches in seq order. Seq 1 (T1) carries the complete initial row."""
+        rebuilt: dict[str, dict[str, Any]] = {}
+        for r in await conn.fetch("SELECT action_key, seq, patch FROM execution_events ORDER BY action_key, seq"):
+            state = rebuilt.setdefault(r["action_key"], {})
+>           state.update(from_patch_json(r["patch"]))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:44: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+patch = '{"state": "PREPARED", "anchor": null, "policy": {"mode": "STRICT", "max_verify": 3, "max_dispatch": 3}, "payload": {"... "escalation_reason": null, "duplicate_detected": false, "pending_late_success": null, "absence_proven_through": null}'
+
+    def from_patch_json(patch: dict[str, Any]) -> dict[str, Any]:
+>       return {k: (datetime.fromisoformat(v) if k in TIMESTAMP_COLUMNS and v is not None else v) for k, v in patch.items()}
+                                                                                                              ^^^^^^^^^^^
+E       AttributeError: 'str' object has no attribute 'items'
+
+src/raeg_gateway/store.py:106: AttributeError
+____________________ test_segments_anchor_and_max_deadline _____________________
+
+store = <raeg_gateway.store.GatewayStore object at 0x109d20830>
+admin = <asyncpg.connection.Connection object at 0x109a87b50>
+
+    async def test_segments_anchor_and_max_deadline(store, admin) -> None:
+        key, _ = await submit(store)
+        c1 = await store.claim(key, worker_id="w", attempt_ms=1000, basis=Basis.INITIAL)
+        await store.transition(key, "T5", worker_id="w", rule_id="AMBIG", fence=OwnerFence("w", c1.lease_token, 1))
+        await store.transition(key, "T12", worker_id="w", rule_id="R-RI", patch={"retry_basis": "IDEMPOTENT_REPLAY"})
+        c2 = await store.claim(key, worker_id="w", attempt_ms=3000, basis=Basis.IDEMPOTENT_REPLAY)
+        s2 = await store.snapshot(key)
+        assert s2["segment_no"] == 1 and s2["anchor"] == c1.deadline - timedelta(milliseconds=1000), "replay keeps the segment"
+        assert s2["max_deadline"] == c2.deadline
+        await store.transition(key, "T5", worker_id="w", rule_id="AMBIG", fence=OwnerFence("w", c2.lease_token, 2))
+        v = await store.transition(key, "T6", worker_id="w", rule_id="R-V", lease_ms=5000, patch={"verify_attempts": 1})
+        lease = (await store.snapshot(key))["lease_expires_at"]
+        await store.transition(key, "T10", worker_id="w", rule_id="L-RA", fence=OwnerFence("w", lease),
+                               patch={"retry_basis": "VERIFIED_ABSENT", "absence_proven_through": s2["max_deadline"]})
+        c3 = await store.claim(key, worker_id="w", attempt_ms=500, basis=Basis.VERIFIED_ABSENT)
+        s3 = await store.snapshot(key)
+        assert v.applied and s3["segment_no"] == 2 and s3["anchor"] == c3.deadline - timedelta(milliseconds=500)
+        assert s3["max_deadline"] == max(c2.deadline, c3.deadline), "max_deadline never decreases"
+        assert [r["segment_no"] for r in await admin.fetch("SELECT segment_no FROM attempts WHERE action_key=$1 ORDER BY attempt_no", key)] == [1, 1, 2]
+>       await assert_clean(admin)
+
+tests/gateway/test_store_transitions.py:134: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+admin = <asyncpg.connection.Connection object at 0x109a87b50>
+
+    async def assert_clean(admin) -> None:
+>       report = await check_invariants(admin)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/gateway/test_store_transitions.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a87b50>
+
+    async def check_invariants(conn: asyncpg.Connection) -> dict[str, list[str]]:
+        """Store-level invariants (DESIGN §3.3) that M3 can establish."""
+        out: dict[str, list[str]] = {}
+    
+        # I2: leases exist exactly in leased states (also a table CHECK), and at most one per action by construction.
+        rows = await conn.fetch("SELECT action_key, state, lease_owner, lease_expires_at FROM executions")
+        out["I2_lease_consistency"] = [
+            r["action_key"] for r in rows if (State(r["state"]) in LEASED) != (r["lease_owner"] is not None)
+        ]
+    
+        # I5: nothing leaves an absorbing terminal state; ESCALATED leaves only via T16*.
+        events = await conn.fetch("SELECT action_key, seq, from_state, to_state, transition, decision_id FROM execution_events")
+        out["I5_absorbing"] = [
+            f"{e['action_key']}#{e['seq']}"
+            for e in events
+            if e["from_state"] is not None
+            and (
+                State(e["from_state"]) in TERMINAL
+                or (State(e["from_state"]) == State.ESCALATED and not e["transition"].startswith("T16"))
+            )
+        ]
+    
+        # I6: one applied decision per event, with the same transition id; no applied decision without an event.
+        decisions = {
+            d["id"]: d for d in await conn.fetch("SELECT id, action_key, transition, applied FROM decisions")
+        }
+        problems = []
+        for e in events:
+            d = decisions.get(e["decision_id"])
+            if d is None or not d["applied"] or d["transition"] != e["transition"] or d["action_key"] != e["action_key"]:
+                problems.append(f"{e['action_key']}#{e['seq']}: decision {e['decision_id']} missing/unapplied/mismatched")
+        event_decisions = {e["decision_id"] for e in events}
+        problems += [f"decision {i} applied but has no event" for i, d in decisions.items() if d["applied"] and i not in event_decisions]
+        out["I6_decision_per_event"] = problems
+    
+        # Version = last event seq; event seqs contiguous (also checked by verify_chains).
+        seqs = {r["action_key"]: r["m"] for r in await conn.fetch("SELECT action_key, max(seq) AS m FROM execution_events GROUP BY action_key")}
+        out["version_equals_last_seq"] = [
+            r["action_key"] for r in await conn.fetch("SELECT action_key, version FROM executions") if seqs.get(r["action_key"]) != r["version"]
+        ]
+    
+        # Write-ahead bookkeeping: one attempts row per claim event, numbered 1..attempt_count.
+        claims = {}
+        for e in events:
+            if e["transition"] in CLAIM_TRANSITIONS:
+                claims[e["action_key"]] = claims.get(e["action_key"], 0) + 1
+        attempt_rows = await conn.fetch("SELECT action_key, count(*) AS n, max(attempt_no) AS m FROM attempts GROUP BY action_key")
+        counts = {r["action_key"]: r["attempt_count"] for r in await conn.fetch("SELECT action_key, attempt_count FROM executions")}
+        problems = []
+        for r in attempt_rows:
+            if not (r["n"] == r["m"] == claims.get(r["action_key"], 0) == counts.get(r["action_key"])):
+                problems.append(f"{r['action_key']}: attempts={r['n']} max={r['m']} claims={claims.get(r['action_key'])} count={counts.get(r['action_key'])}")
+        problems += [k for k, n in claims.items() if k not in {r["action_key"] for r in attempt_rows}]
+        out["attempts_match_claims"] = problems
+    
+        out["hash_chains"] = await verify_chains(conn)
+>       out["I8_projection_rebuild"] = await compare_projection(conn)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:124: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a87b50>
+
+    async def compare_projection(conn: asyncpg.Connection) -> list[str]:
+        """I8: the executions table equals the projection rebuilt from events, column by column."""
+        problems: list[str] = []
+>       rebuilt = await rebuild_projection(conn)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a87b50>
+
+    async def rebuild_projection(conn: asyncpg.Connection) -> dict[str, dict[str, Any]]:
+        """Fold event patches in seq order. Seq 1 (T1) carries the complete initial row."""
+        rebuilt: dict[str, dict[str, Any]] = {}
+        for r in await conn.fetch("SELECT action_key, seq, patch FROM execution_events ORDER BY action_key, seq"):
+            state = rebuilt.setdefault(r["action_key"], {})
+>           state.update(from_patch_json(r["patch"]))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:44: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+patch = '{"state": "PREPARED", "anchor": null, "policy": {"mode": "STRICT", "max_verify": 3, "max_dispatch": 3}, "payload": {"... "escalation_reason": null, "duplicate_detected": false, "pending_late_success": null, "absence_proven_through": null}'
+
+    def from_patch_json(patch: dict[str, Any]) -> dict[str, Any]:
+>       return {k: (datetime.fromisoformat(v) if k in TIMESTAMP_COLUMNS and v is not None else v) for k, v in patch.items()}
+                                                                                                              ^^^^^^^^^^^
+E       AttributeError: 'str' object has no attribute 'items'
+
+src/raeg_gateway/store.py:106: AttributeError
+___________ test_claim_guard_failure_is_t13a_and_not_due_is_refused ____________
+
+store = <raeg_gateway.store.GatewayStore object at 0x109d61820>
+admin = <asyncpg.connection.Connection object at 0x109a84150>
+
+    async def test_claim_guard_failure_is_t13a_and_not_due_is_refused(store, admin) -> None:
+        key, _ = await submit(store)
+        c1 = await store.claim(key, worker_id="w", attempt_ms=1000, basis=Basis.INITIAL)
+        await store.transition(key, "T5", worker_id="w", rule_id="AMBIG", fence=OwnerFence("w", c1.lease_token, 1))
+        now = await admin.fetchval("SELECT now()")
+        await store.transition(key, "T12", worker_id="w", rule_id="R-RI",
+                               patch={"retry_basis": "IDEMPOTENT_REPLAY", "next_action_at": now + timedelta(seconds=30)})
+        not_due = await store.claim(key, worker_id="w", attempt_ms=1000, basis=Basis.IDEMPOTENT_REPLAY)
+        assert not not_due.applied and not_due.reason == "NOT_DUE"
+        key2, _ = await submit(store)
+        c = await store.claim(key2, worker_id="w", attempt_ms=1000, basis=Basis.INITIAL)
+        await store.transition(key2, "T5", worker_id="w", rule_id="AMBIG", fence=OwnerFence("w", c.lease_token, 1))
+        await store.transition(key2, "T12", worker_id="w", rule_id="R-RI", patch={"retry_basis": "IDEMPOTENT_REPLAY"})
+        failed = await store.claim(key2, worker_id="w", attempt_ms=1000, basis=Basis.IDEMPOTENT_REPLAY,
+                                   guard=lambda snap, now, d: (False, "TTL_GUARD", "d + eps + m > anchor + tau"))
+        assert not failed.applied and failed.reason == "GUARD_FAILED"
+        snap = await store.snapshot(key2)
+        assert snap["state"] == "UNKNOWN" and snap["ambiguity_cause"] == "RETRY_GUARD_FAILED:TTL_GUARD"
+        assert await admin.fetchval("SELECT count(*) FROM attempts WHERE action_key=$1", key2) == 1, "no attempt row on guard failure"
+        last = await admin.fetchrow("SELECT transition FROM execution_events WHERE action_key=$1 ORDER BY seq DESC LIMIT 1", key2)
+        assert last["transition"] == "T13a"
+>       await assert_clean(admin)
+
+tests/gateway/test_store_transitions.py:158: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+admin = <asyncpg.connection.Connection object at 0x109a84150>
+
+    async def assert_clean(admin) -> None:
+>       report = await check_invariants(admin)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/gateway/test_store_transitions.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a84150>
+
+    async def check_invariants(conn: asyncpg.Connection) -> dict[str, list[str]]:
+        """Store-level invariants (DESIGN §3.3) that M3 can establish."""
+        out: dict[str, list[str]] = {}
+    
+        # I2: leases exist exactly in leased states (also a table CHECK), and at most one per action by construction.
+        rows = await conn.fetch("SELECT action_key, state, lease_owner, lease_expires_at FROM executions")
+        out["I2_lease_consistency"] = [
+            r["action_key"] for r in rows if (State(r["state"]) in LEASED) != (r["lease_owner"] is not None)
+        ]
+    
+        # I5: nothing leaves an absorbing terminal state; ESCALATED leaves only via T16*.
+        events = await conn.fetch("SELECT action_key, seq, from_state, to_state, transition, decision_id FROM execution_events")
+        out["I5_absorbing"] = [
+            f"{e['action_key']}#{e['seq']}"
+            for e in events
+            if e["from_state"] is not None
+            and (
+                State(e["from_state"]) in TERMINAL
+                or (State(e["from_state"]) == State.ESCALATED and not e["transition"].startswith("T16"))
+            )
+        ]
+    
+        # I6: one applied decision per event, with the same transition id; no applied decision without an event.
+        decisions = {
+            d["id"]: d for d in await conn.fetch("SELECT id, action_key, transition, applied FROM decisions")
+        }
+        problems = []
+        for e in events:
+            d = decisions.get(e["decision_id"])
+            if d is None or not d["applied"] or d["transition"] != e["transition"] or d["action_key"] != e["action_key"]:
+                problems.append(f"{e['action_key']}#{e['seq']}: decision {e['decision_id']} missing/unapplied/mismatched")
+        event_decisions = {e["decision_id"] for e in events}
+        problems += [f"decision {i} applied but has no event" for i, d in decisions.items() if d["applied"] and i not in event_decisions]
+        out["I6_decision_per_event"] = problems
+    
+        # Version = last event seq; event seqs contiguous (also checked by verify_chains).
+        seqs = {r["action_key"]: r["m"] for r in await conn.fetch("SELECT action_key, max(seq) AS m FROM execution_events GROUP BY action_key")}
+        out["version_equals_last_seq"] = [
+            r["action_key"] for r in await conn.fetch("SELECT action_key, version FROM executions") if seqs.get(r["action_key"]) != r["version"]
+        ]
+    
+        # Write-ahead bookkeeping: one attempts row per claim event, numbered 1..attempt_count.
+        claims = {}
+        for e in events:
+            if e["transition"] in CLAIM_TRANSITIONS:
+                claims[e["action_key"]] = claims.get(e["action_key"], 0) + 1
+        attempt_rows = await conn.fetch("SELECT action_key, count(*) AS n, max(attempt_no) AS m FROM attempts GROUP BY action_key")
+        counts = {r["action_key"]: r["attempt_count"] for r in await conn.fetch("SELECT action_key, attempt_count FROM executions")}
+        problems = []
+        for r in attempt_rows:
+            if not (r["n"] == r["m"] == claims.get(r["action_key"], 0) == counts.get(r["action_key"])):
+                problems.append(f"{r['action_key']}: attempts={r['n']} max={r['m']} claims={claims.get(r['action_key'])} count={counts.get(r['action_key'])}")
+        problems += [k for k, n in claims.items() if k not in {r["action_key"] for r in attempt_rows}]
+        out["attempts_match_claims"] = problems
+    
+        out["hash_chains"] = await verify_chains(conn)
+>       out["I8_projection_rebuild"] = await compare_projection(conn)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:124: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a84150>
+
+    async def compare_projection(conn: asyncpg.Connection) -> list[str]:
+        """I8: the executions table equals the projection rebuilt from events, column by column."""
+        problems: list[str] = []
+>       rebuilt = await rebuild_projection(conn)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a84150>
+
+    async def rebuild_projection(conn: asyncpg.Connection) -> dict[str, dict[str, Any]]:
+        """Fold event patches in seq order. Seq 1 (T1) carries the complete initial row."""
+        rebuilt: dict[str, dict[str, Any]] = {}
+        for r in await conn.fetch("SELECT action_key, seq, patch FROM execution_events ORDER BY action_key, seq"):
+            state = rebuilt.setdefault(r["action_key"], {})
+>           state.update(from_patch_json(r["patch"]))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:44: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+patch = '{"state": "PREPARED", "anchor": null, "policy": {"mode": "STRICT", "max_verify": 3, "max_dispatch": 3}, "payload": {"... "escalation_reason": null, "duplicate_detected": false, "pending_late_success": null, "absence_proven_through": null}'
+
+    def from_patch_json(patch: dict[str, Any]) -> dict[str, Any]:
+>       return {k: (datetime.fromisoformat(v) if k in TIMESTAMP_COLUMNS and v is not None else v) for k, v in patch.items()}
+                                                                                                              ^^^^^^^^^^^
+E       AttributeError: 'str' object has no attribute 'items'
+
+src/raeg_gateway/store.py:106: AttributeError
+______ test_terminal_states_are_absorbing_and_escalation_is_operator_only ______
+
+store = <raeg_gateway.store.GatewayStore object at 0x109cf9070>
+admin = <asyncpg.connection.Connection object at 0x109a84c50>
+
+    async def test_terminal_states_are_absorbing_and_escalation_is_operator_only(store, admin) -> None:
+        key, _ = await submit(store)
+        c = await store.claim(key, worker_id="w", attempt_ms=1000, basis=Basis.INITIAL)
+        await store.transition(key, "T4", worker_id="w", rule_id="DD", fence=OwnerFence("w", c.lease_token, 1))
+        for tid in ("T5", "T6", "T7", "T12", "T14", "T15", "T16s"):
+            with pytest.raises(IllegalTransition):
+                await store.transition(key, tid, worker_id="w", rule_id="x")
+        key2, _ = await submit(store)
+        c = await store.claim(key2, worker_id="w", attempt_ms=1000, basis=Basis.INITIAL)
+        await store.transition(key2, "T5", worker_id="w", rule_id="AMBIG", fence=OwnerFence("w", c.lease_token, 1))
+        await store.transition(key2, "T14", worker_id="w", rule_id="R-E", patch={"escalation_reason": "NO_SAFE_BASIS"})
+        for tid in ("T6", "T12", "T15"):
+            with pytest.raises(IllegalTransition):
+                await store.transition(key2, tid, worker_id="w", rule_id="x")
+        ev = await store.append_evidence(key2, kind="operator_note", worker_id="operator-1", request={"note": "verified manually"})
+        r = await store.transition(key2, "T16s", worker_id="operator-1", rule_id="OPERATOR", evidence_ids=[ev],
+                                   patch={"outcome_source": "operator"})
+        assert r.applied and r.state == State.SUCCEEDED
+>       await assert_clean(admin)
+
+tests/gateway/test_store_transitions.py:179: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+admin = <asyncpg.connection.Connection object at 0x109a84c50>
+
+    async def assert_clean(admin) -> None:
+>       report = await check_invariants(admin)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/gateway/test_store_transitions.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a84c50>
+
+    async def check_invariants(conn: asyncpg.Connection) -> dict[str, list[str]]:
+        """Store-level invariants (DESIGN §3.3) that M3 can establish."""
+        out: dict[str, list[str]] = {}
+    
+        # I2: leases exist exactly in leased states (also a table CHECK), and at most one per action by construction.
+        rows = await conn.fetch("SELECT action_key, state, lease_owner, lease_expires_at FROM executions")
+        out["I2_lease_consistency"] = [
+            r["action_key"] for r in rows if (State(r["state"]) in LEASED) != (r["lease_owner"] is not None)
+        ]
+    
+        # I5: nothing leaves an absorbing terminal state; ESCALATED leaves only via T16*.
+        events = await conn.fetch("SELECT action_key, seq, from_state, to_state, transition, decision_id FROM execution_events")
+        out["I5_absorbing"] = [
+            f"{e['action_key']}#{e['seq']}"
+            for e in events
+            if e["from_state"] is not None
+            and (
+                State(e["from_state"]) in TERMINAL
+                or (State(e["from_state"]) == State.ESCALATED and not e["transition"].startswith("T16"))
+            )
+        ]
+    
+        # I6: one applied decision per event, with the same transition id; no applied decision without an event.
+        decisions = {
+            d["id"]: d for d in await conn.fetch("SELECT id, action_key, transition, applied FROM decisions")
+        }
+        problems = []
+        for e in events:
+            d = decisions.get(e["decision_id"])
+            if d is None or not d["applied"] or d["transition"] != e["transition"] or d["action_key"] != e["action_key"]:
+                problems.append(f"{e['action_key']}#{e['seq']}: decision {e['decision_id']} missing/unapplied/mismatched")
+        event_decisions = {e["decision_id"] for e in events}
+        problems += [f"decision {i} applied but has no event" for i, d in decisions.items() if d["applied"] and i not in event_decisions]
+        out["I6_decision_per_event"] = problems
+    
+        # Version = last event seq; event seqs contiguous (also checked by verify_chains).
+        seqs = {r["action_key"]: r["m"] for r in await conn.fetch("SELECT action_key, max(seq) AS m FROM execution_events GROUP BY action_key")}
+        out["version_equals_last_seq"] = [
+            r["action_key"] for r in await conn.fetch("SELECT action_key, version FROM executions") if seqs.get(r["action_key"]) != r["version"]
+        ]
+    
+        # Write-ahead bookkeeping: one attempts row per claim event, numbered 1..attempt_count.
+        claims = {}
+        for e in events:
+            if e["transition"] in CLAIM_TRANSITIONS:
+                claims[e["action_key"]] = claims.get(e["action_key"], 0) + 1
+        attempt_rows = await conn.fetch("SELECT action_key, count(*) AS n, max(attempt_no) AS m FROM attempts GROUP BY action_key")
+        counts = {r["action_key"]: r["attempt_count"] for r in await conn.fetch("SELECT action_key, attempt_count FROM executions")}
+        problems = []
+        for r in attempt_rows:
+            if not (r["n"] == r["m"] == claims.get(r["action_key"], 0) == counts.get(r["action_key"])):
+                problems.append(f"{r['action_key']}: attempts={r['n']} max={r['m']} claims={claims.get(r['action_key'])} count={counts.get(r['action_key'])}")
+        problems += [k for k, n in claims.items() if k not in {r["action_key"] for r in attempt_rows}]
+        out["attempts_match_claims"] = problems
+    
+        out["hash_chains"] = await verify_chains(conn)
+>       out["I8_projection_rebuild"] = await compare_projection(conn)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:124: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a84c50>
+
+    async def compare_projection(conn: asyncpg.Connection) -> list[str]:
+        """I8: the executions table equals the projection rebuilt from events, column by column."""
+        problems: list[str] = []
+>       rebuilt = await rebuild_projection(conn)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <asyncpg.connection.Connection object at 0x109a84c50>
+
+    async def rebuild_projection(conn: asyncpg.Connection) -> dict[str, dict[str, Any]]:
+        """Fold event patches in seq order. Seq 1 (T1) carries the complete initial row."""
+        rebuilt: dict[str, dict[str, Any]] = {}
+        for r in await conn.fetch("SELECT action_key, seq, patch FROM execution_events ORDER BY action_key, seq"):
+            state = rebuilt.setdefault(r["action_key"], {})
+>           state.update(from_patch_json(r["patch"]))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/raeg_gateway/audit.py:44: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+patch = '{"state": "PREPARED", "anchor": null, "policy": {"mode": "STRICT", "max_verify": 3, "max_dispatch": 3}, "payload": {"... "escalation_reason": null, "duplicate_detected": false, "pending_late_success": null, "absence_proven_through": null}'
+
+    def from_patch_json(patch: dict[str, Any]) -> dict[str, Any]:
+>       return {k: (datetime.fromisoformat(v) if k in TIMESTAMP_COLUMNS and v is not None else v) for k, v in patch.items()}
+                                                                                                              ^^^^^^^^^^^
+E       AttributeError: 'str' object has no attribute 'items'
+
+src/raeg_gateway/store.py:106: AttributeError
+==================================== PASSES ====================================
+- generated xml file: /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/results/tests/20261011T023308Z_gateway/junit.xml -
+=========================== short test summary info ============================
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-submissions]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-attempts]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-evidence]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-decisions]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-execution_events]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-anomalies]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-submissions]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-attempts]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-evidence]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-decisions]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-execution_events]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-anomalies]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-submissions]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-attempts]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-evidence]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-decisions]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-execution_events]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-anomalies]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_change_identity_or_delete_executions[UPDATE executions SET fingerprint = 'x']
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_change_identity_or_delete_executions[UPDATE executions SET payload = '{}']
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_change_identity_or_delete_executions[UPDATE executions SET capability = '{}']
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_change_identity_or_delete_executions[DELETE FROM executions]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_change_identity_or_delete_executions[TRUNCATE executions CASCADE]
+PASSED tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[submissions]
+PASSED tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[attempts]
+PASSED tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[evidence]
+PASSED tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[decisions]
+PASSED tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[execution_events]
+PASSED tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[anomalies]
+PASSED tests/gateway/test_auditability.py::test_deleted_event_breaks_the_chain
+PASSED tests/gateway/test_store_transitions.py::test_anomaly_and_fenced_evidence_are_recorded
+FAILED tests/gateway/test_auditability.py::test_tampered_event_is_detected - ...
+FAILED tests/gateway/test_auditability.py::test_projection_rebuild_matches_and_detects_drift
+FAILED tests/gateway/test_concurrency.py::test_concurrent_identical_submissions_create_once
+FAILED tests/gateway/test_concurrency.py::test_concurrent_conflicting_fingerprints
+FAILED tests/gateway/test_concurrency.py::test_concurrent_claims_grant_exactly_one_attempt
+FAILED tests/gateway/test_concurrency.py::test_concurrent_sweepers_expire_each_lease_once
+FAILED tests/gateway/test_concurrency.py::test_owner_completion_races_sweeper
+FAILED tests/gateway/test_concurrency.py::test_randomized_stress - AssertionE...
+FAILED tests/gateway/test_store_transitions.py::test_t1_created_duplicate_conflict
+FAILED tests/gateway/test_store_transitions.py::test_happy_path_and_write_ahead
+FAILED tests/gateway/test_store_transitions.py::test_illegal_transitions_are_refused_before_any_write
+FAILED tests/gateway/test_store_transitions.py::test_owner_fence_rejects_stale_holders
+FAILED tests/gateway/test_store_transitions.py::test_sweeper_expires_leases_and_fences_late_owner
+FAILED tests/gateway/test_store_transitions.py::test_expired_fence_refuses_live_lease
+FAILED tests/gateway/test_store_transitions.py::test_segments_anchor_and_max_deadline
+FAILED tests/gateway/test_store_transitions.py::test_claim_guard_failure_is_t13a_and_not_due_is_refused
+FAILED tests/gateway/test_store_transitions.py::test_terminal_states_are_absorbing_and_escalation_is_operator_only
+======================== 17 failed, 31 passed in 10.90s ========================

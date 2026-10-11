@@ -26,4 +26,7 @@ test-unit:       ## unit tests; logs saved under results/tests/
 test-conformance: up-test  ## provider contract conformance suite against the running stack
 	uv run python scripts/run_tests.py conformance --compose-logs provider -- tests/conformance
 
-test: test-unit test-conformance
+test: test-unit test-conformance test-gateway
+
+test-gateway: up-test  ## M3 gateway store: transitions, concurrency, auditability, projection rebuild
+	uv run python scripts/run_tests.py gateway --compose-logs raeg-db -- tests/gateway
