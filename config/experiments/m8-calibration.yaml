@@ -1,3 +1,5 @@
+# STOPPED 2026-10-11 by owner decision (PROTOCOL_CHANGES PC-5): experimentation ends at M7. Only 2 of the 35
+# runs started (1 complete, 1 interrupted); archived as m8-calibration-stopped-20261011 and never analysed.
 # M8 TIMING CALIBRATION (user instruction 2026-10-11): every cell of the focused M8 matrix × every M8
 # system × ONE calibration seed (104) = 7 × 5 = 35 runs, N = 500, after the Temporal readiness gate (N60).
 # Purpose: observed per-run wall clock for the 140-run M8 projection, and a check that the cold-start

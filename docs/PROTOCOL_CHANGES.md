@@ -31,3 +31,25 @@ violations (verified from `raeg/executions.csv`; audit misclassification fixed a
 - `config/experiments/pilot.yaml` is the revised pilot.
 - `config/experiments/pilot-calibration.yaml` ran at `ccc9314` under faults-v1 and the v1 agent model. Check out that commit to reproduce it exactly.
 - `config/experiments/pilot-recalibration.yaml` re-measures under the revised protocol.
+
+## PC-5 (end of experimentation, owner decision 2026-10-11)
+
+**Decision.** RAEG experimentation stops at M7. M8 is not run: no confirmatory evaluation, no further benchmarks,
+and no new latency experiments. The ICICyTA 2026 paper uses the existing 280-run M7 pilot dataset.
+
+**What changes relative to DESIGN §8.3.**
+
+| Before | After |
+|---|---|
+| Pilot data are excluded from paper tables and serve only to choose N and R for M8 | The M7 pilot is the paper's dataset, labelled **exploratory** everywhere it is reported |
+| Precision target (R ≥ 5, ≥ 100 faulted actions per seed, CI half-width ≤ 3 pp) to be met by M8 | **Not relaxed.** Every estimate is checked against it; all 56 recovery-completion estimates fail it (R = 3; 33–49 faulted actions per seed), and this is reported |
+| Hypotheses frozen in `HYPOTHESES.md` before M8 under the `eval-freeze` tag | No confirmatory hypotheses are tested; there is no `eval-freeze` and no `HYPOTHESES.md`. The results are descriptive |
+| Latency compared across all systems | Latency of B3, B3L-δ and B3L-horizon is **invalid** (Temporal cold start, N58) and is not reported |
+
+**Integrity.**
+- The run manifests still say `excluded_from_paper: true`, as recorded at run time; they are not edited.
+- The analysis reads only the frozen archive `pilot-20261011.tar.gz` (SHA-256 `66da0511…c23a`), after verifying every file against its `SHA256SUMS` (`scripts/analyze_paper.py`).
+- The stopped M8 calibration directories are archived separately (`m8-calibration-stopped-20261011.tar.gz`) and are not used.
+
+**Not carried out.** The readiness gate (N60) and the M8 configuration (`config/experiments/m8-calibration.yaml`)
+remain in the repository as preparation. No reported result uses them.

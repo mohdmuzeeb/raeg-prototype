@@ -1,6 +1,6 @@
 # RAEG Prototype — Design for Review
 
-Status: **v0.3.1. Approved v0.3, plus corrections found during M4–M7 (§0b). M0–M6 approved; M7 (pilot) in progress.**
+Status: **v0.3.1. Approved v0.3, plus corrections found during M4–M7 (§0b). M0–M7 complete. Experimentation ended at M7 (PC-5, 2026-10-11): M8 was not run, and the paper reports the 280-run M7 dataset as an exploratory study (`EXPERIMENTAL_RESULTS.md`).**
 Paper: *RAEG: A Recovery-Aware Execution Gateway for Fault-Tolerant AI Agents in Financial Microservices* (`ICIYTA_2026_Paper1.pdf`).
 Previous versions: `docs/archive/DESIGN-v0.1.md`, `-v0.2.md`, and `-v0.3.md` (the approved text). §12 records the decisions.
 
@@ -580,6 +580,7 @@ Not every cell is meaningful; for example, F7 against B1 only exercises the agen
 - The pilot covers cells {P1, P2, P4, P6} × {F0, F1, FM} × all systems, with `N = 200` and `R = 3`.
 - Its purpose is to calibrate timeouts, `T_att`, and `δ₀`, and to measure the wall-clock cost per cell.
 - Pilot data goes to `results/raw/pilot-*` and is **excluded from paper tables**. It may be mentioned as "pilot".
+  **Superseded by PC-5 (2026-10-11):** M8 was cancelled, and the M7 pilot became the paper's dataset, labelled exploratory; the precision rule below is reported as not met, never relaxed.
 - **Rule for choosing `N` and `R`**, fixed now: choose the smallest `R ≥ 5` and an `N` such that
   1. every faulted cell yields at least 100 faulted actions per seed, and
   2. the projected 95% bootstrap CI half-width of recovery completion is at most 3 percentage points,
@@ -648,7 +649,7 @@ All systems share these values (`config/systems.yaml` `common`; a test enforces 
 | M5 | B1, B2, B3, B3L-δ, B3L-horizon, /noDL controls | F0 smoke tests; shared client and hooks verified |
 | M6 | Harness, collector, post-run audit, claim mapping | one complete pilot cell with a full raw directory and `audit.json` |
 | M7 | Pilot (§8.3), calibration, `eval-freeze` | tag created |
-| M8 | Main matrix, V-sensitivity runs, analysis | `make analyze` regenerates every paper number from `raw/` |
+| M8 | ~~Main matrix, V-sensitivity runs, analysis~~ **Not run (PC-5).** Paper numbers are regenerated from the frozen M7 archive by `scripts/analyze_paper.py` | – |
 | (opt) | TLA+ model of §3 (decision 8) | after M8 |
 
 ---

@@ -1,0 +1,14 @@
+\begin{table*}[t]
+\centering
+\scriptsize
+\caption{Table 2. Post-run audit of every RAEG run (all faults, including FC-worker and FC-api).}
+\label{tab:m7-audit}
+\begin{tabular}{llrrrrrrrr}
+\toprule
+System & Runs & Audit pass & Tier S safety & Claims correct & Invariants I1, I3, I4 & All received actions terminal & Accepted actions with E $\geq$ 2 & Accepted actions with wrong claim & Intents never received \\
+\midrule
+RAEG-strict & 40 & 40/40 & 40/40 & 40/40 & 40/40 & 40/40 & 0 & 0 & 0 \\
+RAEG-bounded & 40 & 40/40 & 40/40 & 40/40 & 40/40 & 40/40 & 0 & 0 & 0 \\
+\bottomrule
+\end{tabular}
+\end{table*}

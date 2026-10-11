@@ -1,0 +1,24 @@
+\begin{table*}[t]
+\centering
+\scriptsize
+\caption{Table 3. Duplicate-effect actions by exposure (pooled over P1, P2, P4, P6 and seeds 1--3).}
+\label{tab:m7-dupcause}
+\begin{tabular}{llrr}
+\toprule
+System & Faults & Duplicate-effect actions & Cause of the action's exposure \\
+\midrule
+B1 naive retry & F0 & 117 & F5 concurrent submission: 117 \\
+B1 naive retry & F1 & 549 & F5 concurrent submission: 78; F5 concurrent submission + fault F1: 16; fault F1: 455 \\
+B1 naive retry & FM & 471 & F5 concurrent submission: 86; F5 concurrent submission + fault F1: 7; F5 concurrent submission + fault F3: 6; F5 concurrent submission + fault F4: 3; F5 concurrent submission + fault F9: 6; fault F1: 118; fault F4: 132; fault F9: 113 \\
+B2 idempotency-only & F0 & 57 & F5 concurrent submission: 57 \\
+B2 idempotency-only & F1 & 280 & F5 concurrent submission: 34; F5 concurrent submission + fault F1: 6; fault F1: 240 \\
+B2 idempotency-only & FM & 239 & F5 concurrent submission: 40; F5 concurrent submission + fault F1: 6; F5 concurrent submission + fault F3: 3; F5 concurrent submission + fault F4: 1; F5 concurrent submission + fault F9: 1; fault F1: 63; fault F4: 63; fault F9: 62 \\
+B3 Temporal & F1 & 246 & F5 concurrent submission + fault F1: 6; fault F1: 240 \\
+B3 Temporal & FM & 196 & F5 concurrent submission + fault F1: 6; F5 concurrent submission + fault F4: 1; F5 concurrent submission + fault F9: 1; fault F1: 63; fault F4: 63; fault F9: 62 \\
+B3L-$\delta$ & F1 & 117 & F5 concurrent submission + fault F1: 2; fault F1: 115 \\
+B3L-$\delta$ & FM & 107 & F5 concurrent submission + fault F1: 4; F5 concurrent submission + fault F9: 1; fault F1: 27; fault F4: 38; fault F9: 37 \\
+B3L-horizon & F1 & 117 & F5 concurrent submission + fault F1: 2; fault F1: 115 \\
+B3L-horizon & FM & 107 & F5 concurrent submission + fault F1: 4; F5 concurrent submission + fault F9: 1; fault F1: 27; fault F4: 38; fault F9: 37 \\
+\bottomrule
+\end{tabular}
+\end{table*}

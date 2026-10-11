@@ -14,6 +14,11 @@ dependencies = [
 ]
 
 [dependency-groups]
+analysis = [
+    "matplotlib>=3.9",
+    "numpy>=2.0",
+    "scipy>=1.13",
+]
 dev = [
     "pytest>=8.2",
     "pytest-asyncio>=0.23",

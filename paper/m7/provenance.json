@@ -1,0 +1,52 @@
+{
+ "archive": {
+  "archive": "pilot-20261011.tar.gz",
+  "files_verified": 29988,
+  "sha256": "66da0511c5879d988e49d1915461fdd3c29ab8744afde50253351d62192ac23a"
+ },
+ "audits": {
+  "pass": 280
+ },
+ "ci": {
+  "B": 10000,
+  "level": 0.95,
+  "method": "two-stage cluster bootstrap (seeds, then actions) or Clopper-Pearson, whichever is wider",
+  "rng_seed": 20261011
+ },
+ "environment": {
+  "arch": "arm64",
+  "cpu": "Apple M1",
+  "distinct_hosts": 1,
+  "docker_context": "colima",
+  "docker_server": "27.4.0",
+  "memory_gib": 8,
+  "os": "macOS",
+  "python": "3.12.7"
+ },
+ "estimates_checked": 56,
+ "estimates_failing_target": 56,
+ "git_commit_of_runs": "235ffd00124b",
+ "git_tree_dirty_in_any_run": false,
+ "latency_invalid_systems": [
+  "B3",
+  "B3L-delta",
+  "B3L-horizon"
+ ],
+ "precision_target": {
+  "R_min": 5,
+  "faulted_per_seed_min": 100,
+  "halfwidth_pp_max": 3.0
+ },
+ "runs": 280,
+ "statuses": {
+  "complete": 280
+ },
+ "temporal_warmup_evidence": {
+  "last_slow_arrival_s_range": [
+   0.7,
+   10.9
+  ],
+  "runs_with_actions_over_1s": 31,
+  "temporal_f0_runs": 36
+ }
+}
