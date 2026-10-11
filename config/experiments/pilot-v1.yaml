@@ -1,0 +1,36 @@
+# ORIGINAL pilot configuration as approved before the M7 calibration finding (kept for reproducibility;
+# superseded by pilot.yaml = faults-v2). Its FM cells use the faults-v1 mixture, selected here as "FMv1".
+# Never run. See docs/PROTOCOL_CHANGES.md (PC-1).
+# M7 pilot (DESIGN §8.3, approved 2026-10-11): {P1, P2, P4, P6} × {F0, F1, FM} × 7 primary systems × 3 seeds
+# = 252 runs, 200 actions each. Purpose: calibration and choosing N/R for M8. Pilot data are EXCLUDED
+# from paper tables (§8.3); they may be mentioned only as "pilot".
+name: pilot-v1
+purpose: "M7 pilot: calibrate timing, measure per-cell cost, project CI precision for choosing N and R"
+excluded_from_paper: true
+seeds: [1, 2, 3]
+workload:
+  n_actions: 200
+  arrival_rate_per_s: 10
+  duplicate_fraction: 0.05   # F5 duplicate submissions are part of every cell's workload
+  duplicate_copies: 2
+driver:
+  agent_timeout_s: 30
+  restart_backoff_ms: 1000
+  max_resubmits: 5
+  poll_ms: 250
+  horizon_s: 60              # ≥ W_max of RAEG's policy (≈ 52 s with the shared timing; DESIGN §2.10a)
+  drain_s: 5                 # ≥ 2× the longest provider-side delay in these faults (F3 stall 2.5 s)
+cells:
+  - {profile: P1, fault: F0, fault_rate: 0.0, assumption_set: S}
+  - {profile: P1, fault: F1, fault_rate: 0.2, assumption_set: S}
+  - {profile: P1, fault: FMv1, fault_rate: 0.2, assumption_set: S}
+  - {profile: P2, fault: F0, fault_rate: 0.0, assumption_set: S}
+  - {profile: P2, fault: F1, fault_rate: 0.2, assumption_set: S}
+  - {profile: P2, fault: FMv1, fault_rate: 0.2, assumption_set: S}
+  - {profile: P4, fault: F0, fault_rate: 0.0, assumption_set: S}
+  - {profile: P4, fault: F1, fault_rate: 0.2, assumption_set: S}
+  - {profile: P4, fault: FMv1, fault_rate: 0.2, assumption_set: S}
+  - {profile: P6, fault: F0, fault_rate: 0.0, assumption_set: S}
+  - {profile: P6, fault: F1, fault_rate: 0.2, assumption_set: S}
+  - {profile: P6, fault: FMv1, fault_rate: 0.2, assumption_set: S}
+systems: [B1, B2, B3, B3L-delta, B3L-horizon, RAEG-strict, RAEG-bounded]

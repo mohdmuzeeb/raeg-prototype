@@ -46,6 +46,8 @@ class Cell(BaseModel):
     fault: str
     fault_rate: float = Field(default=0.2, ge=0, le=1)
     assumption_set: str = "S"  # S | B | V:<id> (DESIGN §11)
+    arrival_rate_per_s: float | None = None  # per-cell override (FC needs arrivals spanning ≥ 49 s)
+    seeds: list[int] | None = None  # per-cell override of the experiment's seeds
 
     @property
     def id(self) -> str:
@@ -125,6 +127,26 @@ def arm_hooks(plan: fault_plan.FaultPlan) -> None:
                    env={**os.environ, "DOCKER_CONTEXT": os.environ.get("DOCKER_CONTEXT", "colima")})
 
 
+async def crash_api(offsets_ms: list[int], out: Path) -> None:
+    """FC-api: crash the driver-facing API process at planned offsets from the driver's start."""
+    t0 = time.monotonic()
+    log = open(out / "fc_api_crashes.jsonl", "a", encoding="utf-8")
+    async with httpx.AsyncClient(timeout=5) as c:
+        for offset in offsets_ms:
+            await asyncio.sleep(max(offset / 1000 - (time.monotonic() - t0), 0))
+            rec = {"planned_offset_ms": offset, "at_rel_ms": round((time.monotonic() - t0) * 1000, 1),
+                   "at_utc": datetime.now(UTC).isoformat()}
+            try:
+                r = await c.post(f"{SYSTEMS_URL}/admin/crash",
+                                 headers={"x-crash-token": os.environ.get("CRASH_TOKEN", "local-crash-token")})
+                rec["response"] = r.status_code
+            except httpx.TransportError as exc:  # e.g. still down from the previous crash
+                rec["error"] = type(exc).__name__
+            log.write(json.dumps(rec) + "\n")
+            log.flush()
+    log.close()
+
+
 async def drain_raeg(keys: list[str], timeout_s: float) -> None:
     import asyncpg
 
@@ -183,7 +205,11 @@ async def run_one(exp: Experiment, cell: Cell, seed: int, system_id: str, intent
         await configure_provider(prof.model_dump(mode="json"), plan)
         arm_hooks(plan)
         phase("bring_up")
-        await Driver(SYSTEMS_URL, system_id, cell.profile, exp.driver, out).run(intents)
+        driver_task = Driver(SYSTEMS_URL, system_id, cell.profile, exp.driver, out).run(intents)
+        if plan.api_crashes_ms:
+            await asyncio.gather(driver_task, crash_api(plan.api_crashes_ms, out))
+        else:
+            await driver_task
         phase("driver")
         keys = [i.action_key for i in intents]
         if cfg.kind == "raeg":
@@ -237,9 +263,12 @@ async def main() -> None:
     for cell in exp.cells:
         if args.cells and cell.id not in args.cells.split(","):
             continue
-        for seed in seeds:
+        cell_seeds = cell.seeds if (cell.seeds is not None and not args.seeds) else seeds
+        for seed in cell_seeds:
             namespace = f"{exp.name}-{cell.id}-s{seed}"
-            intents = workload.generate(seed, exp.workload, namespace)
+            wl = exp.workload if cell.arrival_rate_per_s is None else exp.workload.model_copy(
+                update={"arrival_rate_per_s": cell.arrival_rate_per_s})
+            intents = workload.generate(seed, wl, namespace)
             any_cfg = registry[systems[0]]
             cap = profiles[cell.profile].capability
             timing = fault_plan.Timing(any_cfg.attempt_ms, any_cfg.margin_ms, any_cfg.client_timeout_ms,

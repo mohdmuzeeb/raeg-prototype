@@ -3,11 +3,14 @@
 Agent model:
   * open-loop arrivals at the workload's offsets; each intent is submitted `copies` times concurrently
     (copies > 1 = F5 duplicate submissions); copy 0 is the agent's primary view used for the claim;
-  * on a transport failure (e.g. the system crashed) the agent waits `restart_backoff_ms` and resubmits
-    the SAME (k, p), up to `max_resubmits` times;
+  * on a transport failure (e.g. the system crashed) the agent resubmits the SAME (k, p) with exponential
+    backoff (restart_backoff_ms, doubling, capped at max_backoff_ms) until its horizon (M7 decision:
+    identical policy and horizon for every system); `max_resubmits` is only a safety cap;
   * if the system answers "pending" it polls; if the system no longer knows the action (in-memory state
     lost in a crash) the agent resubmits;
-  * an action with no terminal answer by arrival + horizon_s is UNRESOLVED(horizon).
+  * an action with no terminal answer by arrival + horizon_s is UNRESOLVED(horizon);
+  * `accepted` records whether the system ever answered any submission/poll for that copy (HTTP 200),
+    so outcomes can be reported over all intents and over intents the system actually accepted.
 Every HTTP exchange is appended to driver_exchanges.jsonl; one claim line per (action, copy) to claims.jsonl.
 """
 
@@ -34,8 +37,9 @@ class DriverConfig(BaseModel):
     model_config = ConfigDict(frozen=True, extra="forbid")
 
     agent_timeout_s: float = Field(default=30.0, gt=0)  # wait_s passed with each submission
-    restart_backoff_ms: int = Field(default=1000, ge=0)
-    max_resubmits: int = Field(default=5, ge=0)
+    restart_backoff_ms: int = Field(default=1000, ge=0)  # first resubmit delay
+    max_backoff_ms: int = Field(default=8000, ge=0)  # backoff cap (doubling from restart_backoff_ms)
+    max_resubmits: int = Field(default=50, ge=0)  # safety cap only; the horizon is the real bound
     poll_ms: int = Field(default=250, gt=0)
     horizon_s: float = Field(default=60.0, gt=0)  # ≥ W_max (DESIGN §2.10a)
     drain_s: float = Field(default=10.0, ge=0)
@@ -112,19 +116,25 @@ class Driver:
         horizon_at = time.monotonic() + self.cfg.horizon_s
         body = {"action_key": intent.action_key, "payload": intent.payload, "profile_id": self.profile_id,
                 "wait_s": self.cfg.agent_timeout_s}
-        resubmits, native, last_error = 0, None, None
+        posts, native, last_error = 0, None, None  # resubmits = posts − 1 (only submissions actually sent)
+        failures = 0  # consecutive transport failures, drives the backoff
+        accepted = False
         need_submit = True
         while time.monotonic() < horizon_at:
             if need_submit:
+                if posts > self.cfg.max_resubmits:  # safety cap; the horizon is the real bound
+                    break
+                posts += 1
                 native, last_error = await self._exchange(intent, copy, "POST", self.base, body)
                 need_submit = False
-                if native is None:  # transport failure / crash: the agent restarts and resubmits
-                    if resubmits >= self.cfg.max_resubmits:
-                        break
-                    resubmits += 1
-                    await asyncio.sleep(self.cfg.restart_backoff_ms / 1000)
+                if native is None:  # transport failure / crash: back off, then resubmit the same intent
+                    failures += 1
+                    delay = min(self.cfg.restart_backoff_ms * 2 ** (failures - 1), self.cfg.max_backoff_ms) / 1000
+                    await asyncio.sleep(min(delay, max(horizon_at - time.monotonic(), 0)))
                     need_submit = True
                     continue
+                failures = 0
+                accepted = True
             if native and native.get("status") in TERMINAL:
                 break
             await asyncio.sleep(self.cfg.poll_ms / 1000)
@@ -133,16 +143,16 @@ class Driver:
                 last_error = err
                 continue  # system unreachable: keep waiting (it may be restarting)
             native = polled
+            accepted = True
             if native.get("status") == "pending" and native.get("detail", {}).get("unknown_to_system"):
-                if resubmits >= self.cfg.max_resubmits:
-                    break
-                resubmits += 1
                 need_submit = True  # state was lost: resubmit the same intent
+        resubmits = max(posts - 1, 0)
         final = native if native and native.get("status") in TERMINAL else {
             "system": self.system_id, "action_key": intent.action_key, "status": "pending",
             "detail": {"driver": "no terminal answer by horizon", "last_error": last_error}}
         record = {"action_key": intent.action_key, "copy": copy, "native": final, "claim": normalize(final).value,
-                  "mapping_version": MAPPING_VERSION, "resubmits": resubmits, "arrival_rel_ms": start_rel,
+                  "mapping_version": MAPPING_VERSION, "resubmits": resubmits, "accepted": accepted,
+                  "arrival_rel_ms": start_rel,
                   "terminal_rel_ms": self._rel_ms() if final["status"] != "pending" else None,
                   "latency_ms": (self._rel_ms() - start_rel) if final["status"] != "pending" else None}
         self.claims.write(record)

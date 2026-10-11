@@ -46,7 +46,7 @@ def test_fault_plan_is_deterministic_and_system_independent(fault: str) -> None:
     if fault.startswith("V"):
         assert p1.violations and all(v is not None for v in p1.violations.values())
     if fault == "FM":
-        assert set(p1.assignments.values()) <= set(fault_plan.MIXTURE) and len(set(p1.assignments.values())) > 3
+        assert set(p1.assignments.values()) <= set(fault_plan.MIXTURE) and len(set(p1.assignments.values())) >= 3
 
 
 def test_fault_parameters_follow_shared_timing() -> None:
@@ -181,3 +181,40 @@ async def test_audit_detects_missing_claim_and_ledger_mismatch(tmp_path: Path) -
     report = await audit(make_run_dir(tmp_path, drop_claim=True, orphan_payment=True), system_kind="retry",
                          assumption_set="S", raeg_admin_dsn=None, policy=None, capability={})
     assert report["status"] == "fail" and set(report["failed_checks"]) == {"completeness", "oracle_cross_check"}
+
+
+def test_fault_config_versions_kept() -> None:
+    assert fault_plan.FAULT_CONFIG_VERSION == "faults-v2"
+    assert set(fault_plan.MIXTURES["FMv1"]) == {"F1", "F2", "F3", "F4", "F6", "F9"}, "original kept reproducible"
+    assert set(fault_plan.MIXTURES["FM"]) == {"F1", "F3", "F4", "F9"}, "M7: no process crashes in FM"
+    intents = workload.generate(1, WL, "ns")
+    v2 = fault_plan.generate(1, intents, "FM", 1.0, TIMING, "ns")
+    assert not v2.hooks and v2.fault_config_version == "faults-v2"
+    v1 = fault_plan.generate(1, intents, "FMv1", 1.0, TIMING, "ns")
+    assert {"F2", "F6"} & set(v1.assignments.values())
+
+
+def test_fc_plans_have_three_spaced_crashes() -> None:
+    slow = workload.WorkloadConfig(n_actions=200, arrival_rate_per_s=3)
+    intents = workload.generate(1, slow, "ns")
+    w = fault_plan.generate(1, intents, "FC-worker", 0.0, TIMING, "ns")
+    assert sorted(h["point"] for h in w.hooks) == ["CP1", "CP2", "CP3"] and not w.api_crashes_ms
+    by_key = {i.action_key: i.arrival_offset_ms for i in intents}
+    offsets = sorted(by_key[h["action_key"]] for h in w.hooks)
+    assert all(b - a >= 20_000 for a, b in zip(offsets, offsets[1:])), offsets
+    a = fault_plan.generate(1, intents, "FC-api", 0.0, TIMING, "ns")
+    assert a.api_crashes_ms == [5000, 27000, 49000] and not a.hooks
+    with pytest.raises(ValueError):
+        fault_plan.generate(1, workload.generate(1, WL, "ns"), "FC-worker", 0.0, TIMING, "ns")  # arrivals too short
+
+
+async def test_driver_backoff_is_exponential_until_horizon(tmp_path: Path) -> None:
+    out, fake = await drive(tmp_path, {"k": ["crash"]}, [intent("k")], horizon_s=0.4, max_backoff_ms=40)
+    # restart_backoff 1 ms doubling, capped at 40 ms: many resubmits within 0.4 s, bounded by the horizon
+    assert out[0]["claim"] == "UNRESOLVED(horizon)" and out[0]["accepted"] is False
+    assert 6 <= out[0]["resubmits"] <= 50 and len(fake.calls) == out[0]["resubmits"] + 1, "counts only sent resubmits"
+
+
+async def test_accepted_flag(tmp_path: Path) -> None:
+    out, _ = await drive(tmp_path, {"k": ["crash", {"status": "ok"}]}, [intent("k")])
+    assert out[0]["accepted"] is True and out[0]["claim"] == "SUCCESS"

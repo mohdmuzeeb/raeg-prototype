@@ -1,22 +1,26 @@
-"""RAEG behind the driver-facing contract: submit, drive to quiescence, and keep a background recovery
-loop (sweeper, controller, late evidence, duplicate audits) running for every action."""
+"""RAEG behind the driver-facing contract (API side only).
+
+Topology (DESIGN §5.1; M7): the API process only records the submission (T1) and waits for the outcome.
+All execution — claims, dispatch, recovery, late evidence, duplicate audits — runs in the separate
+`raeg-worker` process (systems/raeg_worker.py). A worker crash therefore leaves the API up, which is the
+same topology as Temporal (API shim + worker) and makes FC-worker crashes equivalent across the two.
+"""
 
 from __future__ import annotations
 
 import asyncio
 import os
-import uuid
 
 from raeg_common.models import PaymentPayload
 from raeg_common.profiles import load_all
 from raeg_gateway.controller import Policy
-from raeg_gateway.engine import RecoveryEngine
 from raeg_gateway.store import GatewayStore, create_pool, migrate
 from raeg_gateway.transitions import TERMINAL, State
-from systems.base import DECLINED, ESCALATED, NOT_EXECUTED, OK, PENDING, Native, SystemConfig, make_client
+from systems.base import DECLINED, ESCALATED, NOT_EXECUTED, OK, PENDING, Native, SystemConfig
 
 STATE_TO_NATIVE = {State.SUCCEEDED: OK, State.DECLINED: DECLINED, State.NOT_EXECUTED: NOT_EXECUTED,
                    State.ESCALATED: ESCALATED}
+WAIT_POLL_S = 0.02
 
 
 def policy_for(config: SystemConfig) -> Policy:
@@ -26,52 +30,48 @@ def policy_for(config: SystemConfig) -> Policy:
                      "send_deadline": config.send_deadline, "system_id": config.system_id, **config.policy})
 
 
+async def open_store(policy_version: str) -> GatewayStore:
+    if os.environ.get("RAEG_DB_ADMIN_DSN"):
+        await migrate(os.environ["RAEG_DB_ADMIN_DSN"])  # idempotent (advisory lock); owner role
+    pool = await create_pool(os.environ.get("RAEG_DB_APP_DSN", "postgresql://raeg_app:raeg_app@raeg-db:5432/raeg"))
+    return GatewayStore(pool, os.environ.get("CODE_SHA", "unknown"), policy_version)
+
+
 class RaegSystem:
     def __init__(self, config: SystemConfig) -> None:
         self.config = config
         self.policy = policy_for(config)
         self.profiles = load_all()
-        self.engine: RecoveryEngine | None = None
-        self._bg: asyncio.Task | None = None
+        self.store: GatewayStore | None = None
+        self._lock = asyncio.Lock()
 
     async def start(self) -> None:
-        if self.engine is not None:
-            return
-        if os.environ.get("RAEG_DB_ADMIN_DSN"):
-            await migrate(os.environ["RAEG_DB_ADMIN_DSN"])  # idempotent; runs as the owner role
-        pool = await create_pool(os.environ.get("RAEG_DB_APP_DSN", "postgresql://raeg_app:raeg_app@raeg-db:5432/raeg"))
-        store = GatewayStore(pool, os.environ.get("CODE_SHA", "unknown"), self.policy.version)
-        self.engine = RecoveryEngine(store, make_client(self.config), f"{self.config.system_id}-{uuid.uuid4().hex[:6]}",
-                                     system_id=self.config.system_id)
-        self._bg = asyncio.create_task(self._background())
-
-    async def _background(self) -> None:
-        assert self.engine is not None
-        while True:
-            try:
-                await self.engine.run_once()
-            except Exception as exc:  # keep recovering; the error is visible in container logs
-                print(f"[{self.config.system_id}] background pass error: {exc!r}", flush=True)
-            await asyncio.sleep(0.05)
+        async with self._lock:
+            if self.store is None:
+                self.store = await open_store(self.policy.version)
 
     async def stop(self) -> None:
-        if self._bg:
-            self._bg.cancel()
+        return None
 
     async def submit(self, action_key: str, payload: PaymentPayload, profile_id: str) -> Native:
         await self.start()
-        assert self.engine is not None
-        outcome = await self.engine.submit(action_key, payload, profile_id, self.profiles[profile_id].capability, self.policy)
-        state = await self.engine.run_to_quiescence(action_key, max_steps=10_000, poll_s=0.05)
-        return await self._native(action_key, extra={"submission": outcome, "state": state.value})
+        assert self.store is not None
+        cap = self.profiles[profile_id].capability
+        res = await self.store.submit(action_key, payload.model_dump(), payload.fingerprint(), profile_id,
+                                      cap.model_dump(mode="json"), self.policy.to_json(), f"{self.config.system_id}-api")
+        while True:  # the caller's wait_s bounds this (asyncio.wait_for in serve.py)
+            native = await self._native(action_key, extra={"submission": res.outcome})
+            if native.status != PENDING:
+                return native
+            await asyncio.sleep(WAIT_POLL_S)
 
     async def status(self, action_key: str) -> Native:
         await self.start()
         return await self._native(action_key)
 
     async def _native(self, action_key: str, extra: dict | None = None) -> Native:
-        assert self.engine is not None
-        row = await self.engine.store.snapshot(action_key)
+        assert self.store is not None
+        row = await self.store.snapshot(action_key)
         if row is None:
             return Native(self.config.system_id, action_key, PENDING, detail={"unknown_to_system": True})
         state = State(row["state"])

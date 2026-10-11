@@ -78,6 +78,26 @@ async def audit(run_dir: Path, *, system_kind: str, assumption_set: str, raeg_ad
     m["oracle_cross_check"] = _check(not mismatches, {"receipt_ledger_mismatches": mismatches[:20]})
 
     keys = [w["action_key"] for w in workload]
+    primary = [c for c in claims if c["copy"] == 0]
+    info["outcomes"] = {
+        "all_intents": dict(sorted(Counter(c["claim"] for c in primary).items())),
+        "accepted_intents": dict(sorted(Counter(c["claim"] for c in primary if c.get("accepted")).items())),
+        "n_all": len(primary), "n_accepted": sum(1 for c in primary if c.get("accepted")),
+        "note": "accepted = the system answered at least one submission/poll for the intent (copy 0)",
+    }
+    exchanges = _jsonl(run_dir / "driver_exchanges.jsonl")
+    errs = sorted(e["sent_rel_ms"] for e in exchanges if e.get("error"))
+    windows, start, prev = [], None, None
+    for t in errs:
+        if prev is None or t - prev > 2000:
+            if start is not None:
+                windows.append([round(start), round(prev)])
+            start = t
+        prev = t
+    if start is not None:
+        windows.append([round(start), round(prev)])
+    info["api_availability"] = {"transport_errors": len(errs), "outage_windows_rel_ms": windows,
+                                "fc_api_crashes": _jsonl(run_dir / "fc_api_crashes.jsonl")}
     effects = Counter(r["client_reference"] for r in ledger if r["status"] == "succeeded")
     e = {k: effects.get(k, 0) for k in keys}
     info["effects_per_action"] = {"histogram": dict(sorted(Counter(e.values()).items())), "by_action": e}
@@ -162,8 +182,14 @@ async def audit(run_dir: Path, *, system_kind: str, assumption_set: str, raeg_ad
                 i4.append([a["action_key"], a["attempt_no"]])
         m["absence_I4"] = _check(not i4, {"violations": i4})
 
-        non_terminal = sorted(k for k in keys if states.get(k) not in ("SUCCEEDED", "DECLINED", "NOT_EXECUTED", "ESCALATED"))
+        # Only actions RAEG actually received can be RAEG defects. Intents whose every submission failed at
+        # the transport level (e.g. the service was restarting) never reached RAEG: reported, not a defect.
+        non_terminal = sorted(k for k in keys if k in states
+                              and states[k] not in ("SUCCEEDED", "DECLINED", "NOT_EXECUTED", "ESCALATED"))
         m["raeg_terminal"] = _check(not non_terminal, {"non_terminal": non_terminal[:20]})
+        never = sorted(k for k in keys if k not in states)
+        info["never_received_by_system"] = {"n": len(never), "keys": never[:50],
+                                            "note": "every submission of these intents failed at the transport level"}
 
         if assumption_set == "S":
             m["safety_S"] = _check(all(v <= 1 for v in e.values()), {"actions_with_E_ge_2": [k for k, v in e.items() if v >= 2]})

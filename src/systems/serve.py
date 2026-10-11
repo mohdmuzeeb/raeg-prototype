@@ -12,7 +12,7 @@ import asyncio
 import os
 
 import uvicorn
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, Header, HTTPException
 from pydantic import BaseModel
 
 from raeg_common.models import PaymentPayload
@@ -46,12 +46,14 @@ def get(system_id: str) -> SystemUnderTest:
     return SYSTEMS[system_id]
 
 
-@app.on_event("startup")
-async def start_recovery_loops() -> None:
-    """RAEG recovers without traffic after a restart: start its background loops at boot."""
-    for system in SYSTEMS.values():
-        if isinstance(system, RaegSystem):
-            await system.start()
+@app.post("/admin/crash")
+async def admin_crash(x_crash_token: str = Header(default="")) -> dict:
+    """FC-api: fail-stop crash of this API process (os._exit after replying), triggered by the harness."""
+    token = os.environ.get("CRASH_TOKEN", "")
+    if not token or x_crash_token != token:
+        raise HTTPException(403, "crash token required")
+    asyncio.get_running_loop().call_later(0.05, os._exit, 137)
+    return {"crashing": True}
 
 
 @app.get("/healthz")

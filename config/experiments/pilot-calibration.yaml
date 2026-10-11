@@ -1,3 +1,5 @@
+# NOTE: ran at commit ccc9314 with the faults-v1 FM mixture and the v1 agent retry model (5 resubmits at 1 s).
+# At later commits "FM" means faults-v2; check out ccc9314 to reproduce these runs exactly (PROTOCOL_CHANGES PC-1).
 # M7 timed CALIBRATION BATCH, run before the pilot (user instruction 2026-10-11): 3 cells × 4
 # representative systems × seed 101 (disjoint from pilot seeds), 200 actions each, pilot settings.
 # Purpose: observed per-run wall-clock for the pilot runtime projection. Never reported as results.

@@ -54,20 +54,16 @@ async def test_cp3_b3_worker_crash_is_retried_by_temporal(systems, provider) -> 
     await wait_healthy("temporal-worker")
 
 
-async def test_cp3_raeg_recovers_after_restart_without_traffic(systems, provider) -> None:
+async def test_cp3_raeg_worker_crash_leaves_api_up_and_recovers(systems, provider) -> None:
+    """M7 topology: the crash hook fires in the RAEG recovery worker; the API process stays up, Docker
+    restarts the worker, and the sweeper + controller recover the action from the durable store."""
     key = new_key("RAEG-strict")
     await configure(provider, "P1", key)
-    before = restart_count("systems")
+    before_worker, before_api = restart_count("raeg-worker"), restart_count("systems")
     arm_hooks([{"action_key": key, "attempt_no": 1, "point": "CP3"}])
-    with pytest.raises(httpx.TransportError):
-        await submit(systems, "RAEG-strict", key, "P1")
-    await wait_restarted("systems", before, f"{SYSTEMS_URL}/healthz")
-    disarm_hooks()
-    assert [e["point"] for e in await crash_hooks_fired("RAEG-strict", key)] == ["CP3"]
-    for _ in range(120):  # the background loop (started at boot) sweeps the lease and verifies
-        status = (await systems.get(f"/s/RAEG-strict/v1/actions/{key}")).json()
-        if status["status"] != "pending":
-            break
-        await asyncio.sleep(0.25)
-    assert status["status"] == "ok" and status["detail"]["attempts"] == 1, status
+    native = await submit(systems, "RAEG-strict", key, "P1", wait_s=80)  # no transport error: API never went down
+    assert [e["point"] for e in await crash_hooks_fired("RAEG-strict", key, worker=True)] == ["CP3"]
+    assert restart_count("raeg-worker") > before_worker, "the worker process really died and was restarted"
+    assert restart_count("systems") == before_api, "the API process was not affected"
+    assert native["status"] == "ok" and native["detail"]["attempts"] == 1, native
     assert len(await provider.ledger(key)) == 1 and len(await provider.receipts(key)) == 1

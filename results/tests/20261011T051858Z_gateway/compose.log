@@ -1,0 +1,140 @@
+raeg-db-1  | 2026-10-11T05:14:14.420001473Z The files belonging to this database system will be owned by user "postgres".
+raeg-db-1  | 2026-10-11T05:14:14.420017889Z This user must also own the server process.
+raeg-db-1  | 2026-10-11T05:14:14.420019973Z 
+raeg-db-1  | 2026-10-11T05:14:14.420021014Z The database cluster will be initialized with locale "en_US.utf8".
+raeg-db-1  | 2026-10-11T05:14:14.420022098Z The default database encoding has accordingly been set to "UTF8".
+raeg-db-1  | 2026-10-11T05:14:14.420023139Z The default text search configuration will be set to "english".
+raeg-db-1  | 2026-10-11T05:14:14.420024098Z 
+raeg-db-1  | 2026-10-11T05:14:14.420024889Z Data page checksums are disabled.
+raeg-db-1  | 2026-10-11T05:14:14.420025764Z 
+raeg-db-1  | 2026-10-11T05:14:14.420027014Z fixing permissions on existing directory /var/lib/postgresql/data ... ok
+raeg-db-1  | 2026-10-11T05:14:14.421591511Z creating subdirectories ... ok
+raeg-db-1  | 2026-10-11T05:14:14.421928469Z selecting dynamic shared memory implementation ... posix
+raeg-db-1  | 2026-10-11T05:14:14.436237234Z selecting default max_connections ... 100
+raeg-db-1  | 2026-10-11T05:14:14.446620881Z selecting default shared_buffers ... 128MB
+raeg-db-1  | 2026-10-11T05:14:14.488365970Z selecting default time zone ... UTC
+raeg-db-1  | 2026-10-11T05:14:14.488861094Z creating configuration files ... ok
+raeg-db-1  | 2026-10-11T05:14:14.693758128Z running bootstrap script ... ok
+raeg-db-1  | 2026-10-11T05:14:14.821705514Z sh: locale: not found
+raeg-db-1  | 2026-10-11T05:14:14.821721431Z 2026-10-11 05:14:14.821 UTC [35] WARNING:  no usable system locales were found
+raeg-db-1  | 2026-10-11T05:14:15.161896033Z performing post-bootstrap initialization ... ok
+raeg-db-1  | 2026-10-11T05:14:15.338125553Z syncing data to disk ... ok
+raeg-db-1  | 2026-10-11T05:14:15.338135428Z 
+raeg-db-1  | 2026-10-11T05:14:15.338137887Z 
+raeg-db-1  | 2026-10-11T05:14:15.338138845Z Success. You can now start the database server using:
+raeg-db-1  | 2026-10-11T05:14:15.338139887Z 
+raeg-db-1  | 2026-10-11T05:14:15.338140720Z     pg_ctl -D /var/lib/postgresql/data -l logfile start
+raeg-db-1  | 2026-10-11T05:14:15.338141637Z 
+raeg-db-1  | 2026-10-11T05:14:15.338153053Z initdb: warning: enabling "trust" authentication for local connections
+raeg-db-1  | 2026-10-11T05:14:15.338175053Z initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+raeg-db-1  | 2026-10-11T05:14:15.369151388Z waiting for server to start....2026-10-11 05:14:15.369 UTC [41] LOG:  starting PostgreSQL 16.15 on aarch64-unknown-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit
+raeg-db-1  | 2026-10-11T05:14:15.370927879Z 2026-10-11 05:14:15.370 UTC [41] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+raeg-db-1  | 2026-10-11T05:14:15.375674312Z 2026-10-11 05:14:15.375 UTC [44] LOG:  database system was shut down at 2026-10-11 05:14:15 UTC
+raeg-db-1  | 2026-10-11T05:14:15.381587197Z 2026-10-11 05:14:15.381 UTC [41] LOG:  database system is ready to accept connections
+raeg-db-1  | 2026-10-11T05:14:15.453959478Z  done
+raeg-db-1  | 2026-10-11T05:14:15.453963062Z server started
+raeg-db-1  | 2026-10-11T05:14:15.516577978Z CREATE DATABASE
+raeg-db-1  | 2026-10-11T05:14:15.516981435Z 
+raeg-db-1  | 2026-10-11T05:14:15.516985810Z 
+raeg-db-1  | 2026-10-11T05:14:15.516987101Z /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+raeg-db-1  | 2026-10-11T05:14:15.516988268Z 
+raeg-db-1  | 2026-10-11T05:14:15.517363433Z waiting for server to shut down....2026-10-11 05:14:15.517 UTC [41] LOG:  received fast shutdown request
+raeg-db-1  | 2026-10-11T05:14:15.519785920Z 2026-10-11 05:14:15.518 UTC [41] LOG:  aborting any active transactions
+raeg-db-1  | 2026-10-11T05:14:15.519877336Z 2026-10-11 05:14:15.519 UTC [41] LOG:  background worker "logical replication launcher" (PID 47) exited with exit code 1
+raeg-db-1  | 2026-10-11T05:14:15.527778669Z 2026-10-11 05:14:15.527 UTC [42] LOG:  shutting down
+raeg-db-1  | 2026-10-11T05:14:15.531029235Z 2026-10-11 05:14:15.530 UTC [42] LOG:  checkpoint starting: shutdown immediate
+raeg-db-1  | 2026-10-11T05:14:15.673243144Z 2026-10-11 05:14:15.673 UTC [42] LOG:  checkpoint complete: wrote 926 buffers (5.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.110 s, sync=0.024 s, total=0.146 s; sync files=301, longest=0.004 s, average=0.001 s; distance=4283 kB, estimate=4283 kB; lsn=0/1925D50, redo lsn=0/1925D50
+raeg-db-1  | 2026-10-11T05:14:15.677085332Z 2026-10-11 05:14:15.676 UTC [41] LOG:  database system is shut down
+raeg-db-1  | 2026-10-11T05:14:15.720274561Z  done
+raeg-db-1  | 2026-10-11T05:14:15.720294644Z server stopped
+raeg-db-1  | 2026-10-11T05:14:15.721331555Z 
+raeg-db-1  | 2026-10-11T05:14:15.721338222Z PostgreSQL init process complete; ready for start up.
+raeg-db-1  | 2026-10-11T05:14:15.721339638Z 
+raeg-db-1  | 2026-10-11T05:14:15.741418782Z 2026-10-11 05:14:15.741 UTC [1] LOG:  starting PostgreSQL 16.15 on aarch64-unknown-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit
+raeg-db-1  | 2026-10-11T05:14:15.741499656Z 2026-10-11 05:14:15.741 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+raeg-db-1  | 2026-10-11T05:14:15.741523698Z 2026-10-11 05:14:15.741 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+raeg-db-1  | 2026-10-11T05:14:15.742911607Z 2026-10-11 05:14:15.742 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+raeg-db-1  | 2026-10-11T05:14:15.745527593Z 2026-10-11 05:14:15.745 UTC [57] LOG:  database system was shut down at 2026-10-11 05:14:15 UTC
+raeg-db-1  | 2026-10-11T05:14:15.748229120Z 2026-10-11 05:14:15.748 UTC [1] LOG:  database system is ready to accept connections
+raeg-db-1  | 2026-10-11T05:18:59.192921576Z 2026-10-11 05:18:59.192 UTC [1086] ERROR:  permission denied for table submissions
+raeg-db-1  | 2026-10-11T05:18:59.193009993Z 2026-10-11 05:18:59.192 UTC [1086] STATEMENT:  UPDATE submissions SET action_key = action_key
+raeg-db-1  | 2026-10-11T05:18:59.302917190Z 2026-10-11 05:18:59.302 UTC [1091] ERROR:  permission denied for table attempts
+raeg-db-1  | 2026-10-11T05:18:59.302938190Z 2026-10-11 05:18:59.302 UTC [1091] STATEMENT:  UPDATE attempts SET action_key = action_key
+raeg-db-1  | 2026-10-11T05:18:59.406551074Z 2026-10-11 05:18:59.406 UTC [1096] ERROR:  permission denied for table evidence
+raeg-db-1  | 2026-10-11T05:18:59.406572241Z 2026-10-11 05:18:59.406 UTC [1096] STATEMENT:  UPDATE evidence SET action_key = action_key
+raeg-db-1  | 2026-10-11T05:18:59.537338339Z 2026-10-11 05:18:59.537 UTC [1101] ERROR:  permission denied for table decisions
+raeg-db-1  | 2026-10-11T05:18:59.537397673Z 2026-10-11 05:18:59.537 UTC [1101] STATEMENT:  UPDATE decisions SET action_key = action_key
+raeg-db-1  | 2026-10-11T05:18:59.730460353Z 2026-10-11 05:18:59.730 UTC [1106] ERROR:  permission denied for table execution_events
+raeg-db-1  | 2026-10-11T05:18:59.730503061Z 2026-10-11 05:18:59.730 UTC [1106] STATEMENT:  UPDATE execution_events SET action_key = action_key
+raeg-db-1  | 2026-10-11T05:18:59.861136868Z 2026-10-11 05:18:59.860 UTC [1111] ERROR:  permission denied for table anomalies
+raeg-db-1  | 2026-10-11T05:18:59.861165201Z 2026-10-11 05:18:59.860 UTC [1111] STATEMENT:  UPDATE anomalies SET action_key = action_key
+raeg-db-1  | 2026-10-11T05:18:59.965361671Z 2026-10-11 05:18:59.965 UTC [1116] ERROR:  permission denied for table submissions
+raeg-db-1  | 2026-10-11T05:18:59.965396588Z 2026-10-11 05:18:59.965 UTC [1116] STATEMENT:  DELETE FROM submissions
+raeg-db-1  | 2026-10-11T05:19:00.070271627Z 2026-10-11 05:19:00.070 UTC [1121] ERROR:  permission denied for table attempts
+raeg-db-1  | 2026-10-11T05:19:00.070292336Z 2026-10-11 05:19:00.070 UTC [1121] STATEMENT:  DELETE FROM attempts
+raeg-db-1  | 2026-10-11T05:19:00.176427328Z 2026-10-11 05:19:00.176 UTC [1126] ERROR:  permission denied for table evidence
+raeg-db-1  | 2026-10-11T05:19:00.176446078Z 2026-10-11 05:19:00.176 UTC [1126] STATEMENT:  DELETE FROM evidence
+raeg-db-1  | 2026-10-11T05:19:00.274583554Z 2026-10-11 05:19:00.274 UTC [1131] ERROR:  permission denied for table decisions
+raeg-db-1  | 2026-10-11T05:19:00.274601680Z 2026-10-11 05:19:00.274 UTC [1131] STATEMENT:  DELETE FROM decisions
+raeg-db-1  | 2026-10-11T05:19:00.379132793Z 2026-10-11 05:19:00.379 UTC [1136] ERROR:  permission denied for table execution_events
+raeg-db-1  | 2026-10-11T05:19:00.379148169Z 2026-10-11 05:19:00.379 UTC [1136] STATEMENT:  DELETE FROM execution_events
+raeg-db-1  | 2026-10-11T05:19:00.478820982Z 2026-10-11 05:19:00.478 UTC [1141] ERROR:  permission denied for table anomalies
+raeg-db-1  | 2026-10-11T05:19:00.478836315Z 2026-10-11 05:19:00.478 UTC [1141] STATEMENT:  DELETE FROM anomalies
+raeg-db-1  | 2026-10-11T05:19:00.580187006Z 2026-10-11 05:19:00.580 UTC [1146] ERROR:  permission denied for table submissions
+raeg-db-1  | 2026-10-11T05:19:00.580219465Z 2026-10-11 05:19:00.580 UTC [1146] STATEMENT:  TRUNCATE submissions CASCADE
+raeg-db-1  | 2026-10-11T05:19:00.680071945Z 2026-10-11 05:19:00.679 UTC [1151] ERROR:  permission denied for table attempts
+raeg-db-1  | 2026-10-11T05:19:00.680087695Z 2026-10-11 05:19:00.679 UTC [1151] STATEMENT:  TRUNCATE attempts CASCADE
+raeg-db-1  | 2026-10-11T05:19:00.777595796Z 2026-10-11 05:19:00.777 UTC [1156] ERROR:  permission denied for table evidence
+raeg-db-1  | 2026-10-11T05:19:00.777612004Z 2026-10-11 05:19:00.777 UTC [1156] STATEMENT:  TRUNCATE evidence CASCADE
+raeg-db-1  | 2026-10-11T05:19:00.894702725Z 2026-10-11 05:19:00.893 UTC [1161] ERROR:  permission denied for table decisions
+raeg-db-1  | 2026-10-11T05:19:00.894727933Z 2026-10-11 05:19:00.893 UTC [1161] STATEMENT:  TRUNCATE decisions CASCADE
+raeg-db-1  | 2026-10-11T05:19:01.015793557Z 2026-10-11 05:19:01.015 UTC [1172] ERROR:  permission denied for table execution_events
+raeg-db-1  | 2026-10-11T05:19:01.015822974Z 2026-10-11 05:19:01.015 UTC [1172] STATEMENT:  TRUNCATE execution_events CASCADE
+raeg-db-1  | 2026-10-11T05:19:01.120082232Z 2026-10-11 05:19:01.119 UTC [1177] ERROR:  permission denied for table anomalies
+raeg-db-1  | 2026-10-11T05:19:01.120098941Z 2026-10-11 05:19:01.119 UTC [1177] STATEMENT:  TRUNCATE anomalies CASCADE
+raeg-db-1  | 2026-10-11T05:19:01.220246531Z 2026-10-11 05:19:01.220 UTC [1182] ERROR:  permission denied for table executions
+raeg-db-1  | 2026-10-11T05:19:01.220262322Z 2026-10-11 05:19:01.220 UTC [1182] STATEMENT:  UPDATE executions SET fingerprint = 'x'
+raeg-db-1  | 2026-10-11T05:19:01.321643663Z 2026-10-11 05:19:01.321 UTC [1187] ERROR:  permission denied for table executions
+raeg-db-1  | 2026-10-11T05:19:01.321672954Z 2026-10-11 05:19:01.321 UTC [1187] STATEMENT:  UPDATE executions SET payload = '{}'
+raeg-db-1  | 2026-10-11T05:19:01.422443836Z 2026-10-11 05:19:01.422 UTC [1192] ERROR:  permission denied for table executions
+raeg-db-1  | 2026-10-11T05:19:01.422460920Z 2026-10-11 05:19:01.422 UTC [1192] STATEMENT:  UPDATE executions SET capability = '{}'
+raeg-db-1  | 2026-10-11T05:19:01.526825720Z 2026-10-11 05:19:01.526 UTC [1197] ERROR:  permission denied for table executions
+raeg-db-1  | 2026-10-11T05:19:01.526841886Z 2026-10-11 05:19:01.526 UTC [1197] STATEMENT:  DELETE FROM executions
+raeg-db-1  | 2026-10-11T05:19:01.640644191Z 2026-10-11 05:19:01.640 UTC [1202] ERROR:  permission denied for table executions
+raeg-db-1  | 2026-10-11T05:19:01.640666941Z 2026-10-11 05:19:01.640 UTC [1202] STATEMENT:  TRUNCATE executions CASCADE
+raeg-db-1  | 2026-10-11T05:19:01.762283041Z 2026-10-11 05:19:01.762 UTC [1204] ERROR:  table submissions is append-only
+raeg-db-1  | 2026-10-11T05:19:01.762298500Z 2026-10-11 05:19:01.762 UTC [1204] CONTEXT:  PL/pgSQL function reject_mutation() line 3 at RAISE
+raeg-db-1  | 2026-10-11T05:19:01.762300166Z 2026-10-11 05:19:01.762 UTC [1204] STATEMENT:  UPDATE submissions SET action_key = action_key
+raeg-db-1  | 2026-10-11T05:19:01.762714292Z 2026-10-11 05:19:01.762 UTC [1204] ERROR:  table submissions is append-only
+raeg-db-1  | 2026-10-11T05:19:01.762721708Z 2026-10-11 05:19:01.762 UTC [1204] CONTEXT:  PL/pgSQL function reject_mutation() line 3 at RAISE
+raeg-db-1  | 2026-10-11T05:19:01.762723167Z 2026-10-11 05:19:01.762 UTC [1204] STATEMENT:  DELETE FROM submissions
+raeg-db-1  | 2026-10-11T05:19:01.855392919Z 2026-10-11 05:19:01.855 UTC [1208] ERROR:  table attempts is append-only
+raeg-db-1  | 2026-10-11T05:19:01.855408586Z 2026-10-11 05:19:01.855 UTC [1208] CONTEXT:  PL/pgSQL function reject_mutation() line 3 at RAISE
+raeg-db-1  | 2026-10-11T05:19:01.855410253Z 2026-10-11 05:19:01.855 UTC [1208] STATEMENT:  UPDATE attempts SET action_key = action_key
+raeg-db-1  | 2026-10-11T05:19:01.855771878Z 2026-10-11 05:19:01.855 UTC [1208] ERROR:  table attempts is append-only
+raeg-db-1  | 2026-10-11T05:19:01.855779545Z 2026-10-11 05:19:01.855 UTC [1208] CONTEXT:  PL/pgSQL function reject_mutation() line 3 at RAISE
+raeg-db-1  | 2026-10-11T05:19:01.855781378Z 2026-10-11 05:19:01.855 UTC [1208] STATEMENT:  DELETE FROM attempts
+raeg-db-1  | 2026-10-11T05:19:01.953833592Z 2026-10-11 05:19:01.953 UTC [1212] ERROR:  table evidence is append-only
+raeg-db-1  | 2026-10-11T05:19:01.953855550Z 2026-10-11 05:19:01.953 UTC [1212] CONTEXT:  PL/pgSQL function reject_mutation() line 3 at RAISE
+raeg-db-1  | 2026-10-11T05:19:01.953862342Z 2026-10-11 05:19:01.953 UTC [1212] STATEMENT:  UPDATE evidence SET action_key = action_key
+raeg-db-1  | 2026-10-11T05:19:01.954141342Z 2026-10-11 05:19:01.954 UTC [1212] ERROR:  table evidence is append-only
+raeg-db-1  | 2026-10-11T05:19:01.954146175Z 2026-10-11 05:19:01.954 UTC [1212] CONTEXT:  PL/pgSQL function reject_mutation() line 3 at RAISE
+raeg-db-1  | 2026-10-11T05:19:01.954147675Z 2026-10-11 05:19:01.954 UTC [1212] STATEMENT:  DELETE FROM evidence
+raeg-db-1  | 2026-10-11T05:19:02.049809486Z 2026-10-11 05:19:02.049 UTC [1216] ERROR:  table decisions is append-only
+raeg-db-1  | 2026-10-11T05:19:02.049828153Z 2026-10-11 05:19:02.049 UTC [1216] CONTEXT:  PL/pgSQL function reject_mutation() line 3 at RAISE
+raeg-db-1  | 2026-10-11T05:19:02.049829778Z 2026-10-11 05:19:02.049 UTC [1216] STATEMENT:  UPDATE decisions SET action_key = action_key
+raeg-db-1  | 2026-10-11T05:19:02.050195236Z 2026-10-11 05:19:02.050 UTC [1216] ERROR:  table decisions is append-only
+raeg-db-1  | 2026-10-11T05:19:02.050198819Z 2026-10-11 05:19:02.050 UTC [1216] CONTEXT:  PL/pgSQL function reject_mutation() line 3 at RAISE
+raeg-db-1  | 2026-10-11T05:19:02.050199902Z 2026-10-11 05:19:02.050 UTC [1216] STATEMENT:  DELETE FROM decisions
+raeg-db-1  | 2026-10-11T05:19:02.143054192Z 2026-10-11 05:19:02.142 UTC [1220] ERROR:  table execution_events is append-only
+raeg-db-1  | 2026-10-11T05:19:02.143070567Z 2026-10-11 05:19:02.142 UTC [1220] CONTEXT:  PL/pgSQL function reject_mutation() line 3 at RAISE
+raeg-db-1  | 2026-10-11T05:19:02.143072109Z 2026-10-11 05:19:02.142 UTC [1220] STATEMENT:  UPDATE execution_events SET action_key = action_key
+raeg-db-1  | 2026-10-11T05:19:02.143568692Z 2026-10-11 05:19:02.143 UTC [1220] ERROR:  table execution_events is append-only
+raeg-db-1  | 2026-10-11T05:19:02.143575067Z 2026-10-11 05:19:02.143 UTC [1220] CONTEXT:  PL/pgSQL function reject_mutation() line 3 at RAISE
+raeg-db-1  | 2026-10-11T05:19:02.143576234Z 2026-10-11 05:19:02.143 UTC [1220] STATEMENT:  DELETE FROM execution_events
+raeg-db-1  | 2026-10-11T05:19:02.236531649Z 2026-10-11 05:19:02.236 UTC [1224] ERROR:  table anomalies is append-only
+raeg-db-1  | 2026-10-11T05:19:02.236551982Z 2026-10-11 05:19:02.236 UTC [1224] CONTEXT:  PL/pgSQL function reject_mutation() line 3 at RAISE
+raeg-db-1  | 2026-10-11T05:19:02.236553649Z 2026-10-11 05:19:02.236 UTC [1224] STATEMENT:  UPDATE anomalies SET action_key = action_key
+raeg-db-1  | 2026-10-11T05:19:02.236970023Z 2026-10-11 05:19:02.236 UTC [1224] ERROR:  table anomalies is append-only
+raeg-db-1  | 2026-10-11T05:19:02.236974190Z 2026-10-11 05:19:02.236 UTC [1224] CONTEXT:  PL/pgSQL function reject_mutation() line 3 at RAISE
+raeg-db-1  | 2026-10-11T05:19:02.236975356Z 2026-10-11 05:19:02.236 UTC [1224] STATEMENT:  DELETE FROM anomalies

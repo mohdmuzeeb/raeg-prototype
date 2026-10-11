@@ -19,8 +19,17 @@ from typing import Any
 
 from harness.workload import Intent
 
+# Fault-configuration versions (M7: both kept so every run stays reproducible).
+#   faults-v1: FM = {F1, F2, F3, F4, F6, F9}  (as approved in DESIGN v0.3; used by m6-* and pilot-calibration)
+#   faults-v2: FM = {F1, F3, F4, F9}          (M7 decision: process crashes moved to FC-worker / FC-api)
+# F5 (concurrent duplicates) comes from the workload in both versions. "FMv1" selects the v1 mixture.
+FAULT_CONFIG_VERSION = "faults-v2"
 SINGLE_FAULTS = ("F1", "F2", "F3", "F4", "F6", "F7", "F8", "F9", "F10")
-MIXTURE = ("F1", "F2", "F3", "F4", "F6", "F9")  # FM (DESIGN §6.3); F5 comes from workload duplicates
+MIXTURES = {"FMv1": ("F1", "F2", "F3", "F4", "F6", "F9"), "FM": ("F1", "F3", "F4", "F9")}
+MIXTURE = MIXTURES["FM"]
+# FC: three planned crashes per run, ≥ 20 s apart (M7 decision). Offsets are from the first arrival.
+FC_CRASH_OFFSETS_MS = (5_000, 27_000, 49_000)
+FC_CRASH_POINTS = ("CP1", "CP2", "CP3")
 VIOLATIONS = {
     "V1": {"lookup_lag_exceeds_declared_ms": None},  # filled from δ below
     "V2": {"ignore_deadline": True},
@@ -49,11 +58,14 @@ class FaultPlan:
     assignments: dict[str, str] = field(default_factory=dict)  # action_key -> fault id
     violations: dict[str, Any] = field(default_factory=dict)
     notes: list[str] = field(default_factory=list)
+    api_crashes_ms: list[int] = field(default_factory=list)  # FC-api: harness-triggered API-process crashes
+    fault_config_version: str = FAULT_CONFIG_VERSION
 
     def to_json(self) -> dict:
         return {"plan_id": self.plan_id, "cell_fault": self.cell_fault, "fault_rate": self.fault_rate,
                 "provider_rules": self.provider_rules, "hooks": self.hooks, "assignments": self.assignments,
-                "violations": self.violations, "notes": self.notes}
+                "violations": self.violations, "notes": self.notes, "api_crashes_ms": self.api_crashes_ms,
+                "fault_config_version": self.fault_config_version}
 
     def provider_plan(self) -> dict:
         return {"plan_id": self.plan_id, "rules": self.provider_rules}
@@ -118,10 +130,39 @@ def generate(seed: int, intents: list[Intent], cell_fault: str, fault_rate: floa
         base = cell_fault
     if base in ("F0", "F5"):
         return plan
+    if base in ("FC-worker", "FC-api"):
+        return _crash_plan(plan, intents, base, rng)
     for intent in intents:
         if rng.random() >= fault_rate:
             continue
-        fault = rng.choice(MIXTURE) if base == "FM" else base
+        fault = rng.choice(MIXTURES[base]) if base in MIXTURES else base
         plan.assignments[intent.action_key] = fault
         _apply(fault, intent.action_key, timing, rng, plan)
+    return plan
+
+
+def _crash_plan(plan: FaultPlan, intents: list[Intent], kind: str, rng: random.Random) -> FaultPlan:
+    """FC: exactly three planned crashes per run, at FC_CRASH_OFFSETS_MS (≥ 20 s apart).
+
+    FC-worker: crash the process EXECUTING the attempt (shared-client hooks CP1/CP2/CP3 on the intent arriving
+               nearest each offset): RAEG's recovery worker, the Temporal worker; for B1/B2 — which have no
+               separate worker — this is their API process (reported as such).
+    FC-api:    the harness crashes the driver-facing API process at each offset (topology-dependent availability).
+    """
+    last = intents[-1].arrival_offset_ms
+    if last < FC_CRASH_OFFSETS_MS[-1]:
+        raise ValueError(f"FC needs arrivals spanning ≥ {FC_CRASH_OFFSETS_MS[-1]} ms (got {last}); lower arrival_rate_per_s")
+    if kind == "FC-api":
+        plan.api_crashes_ms = list(FC_CRASH_OFFSETS_MS)
+        return plan
+    points = list(FC_CRASH_POINTS)
+    rng.shuffle(points)
+    for offset, point in zip(FC_CRASH_OFFSETS_MS, points, strict=True):
+        target = min((i for i in intents if i.action_key not in plan.assignments),
+                     key=lambda i: abs(i.arrival_offset_ms - offset))
+        hook = {"action_key": target.action_key, "attempt_no": 1, "point": point}
+        if point == "CP2":
+            hook["after_send_ms"] = 5
+        plan.hooks.append(hook)
+        plan.assignments[target.action_key] = f"FC-worker:{point}"
     return plan

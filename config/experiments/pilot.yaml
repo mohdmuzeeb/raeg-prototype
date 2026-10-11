@@ -1,5 +1,6 @@
-# M7 pilot (DESIGN §8.3, approved 2026-10-11): {P1, P2, P4, P6} × {F0, F1, FM} × 7 primary systems × 3 seeds
-# = 252 runs, 200 actions each. Purpose: calibration and choosing N/R for M8. Pilot data are EXCLUDED
+# M7 pilot, REVISED protocol (docs/PROTOCOL_CHANGES.md PC-1..PC-4, approved 2026-10-11):
+#   {P1, P2, P4, P6} × {F0, F1, FM(faults-v2)} × 7 primary systems × 3 seeds = 252 runs, 200 actions each
+#   + FC calibration: {P1, P4} × {FC-worker, FC-api} × 7 systems × 1 seed = 28 runs (arrivals at 3/s ≥ 49 s). Purpose: calibration and choosing N/R for M8. Pilot data are EXCLUDED
 # from paper tables (§8.3); they may be mentioned only as "pilot".
 name: pilot
 purpose: "M7 pilot: calibrate timing, measure per-cell cost, project CI precision for choosing N and R"
@@ -12,10 +13,12 @@ workload:
   duplicate_copies: 2
 driver:
   agent_timeout_s: 30
-  restart_backoff_ms: 1000
-  max_resubmits: 5
+  restart_backoff_ms: 1000   # agent retry: 1 s, doubling, capped at 8 s, until the agent horizon (PC-2)
+  max_backoff_ms: 8000
+  max_resubmits: 50          # safety cap only
   poll_ms: 250
-  horizon_s: 60              # ≥ W_max of RAEG's policy (≈ 52 s with the shared timing; DESIGN §2.10a)
+  horizon_s: 60              # AGENT HORIZON (PC-2): per intent, from first submission; same for every system;
+                             # ≥ W_max of RAEG's policy (≈ 52 s with the shared timing; DESIGN §2.10a)
   drain_s: 5                 # ≥ 2× the longest provider-side delay in these faults (F3 stall 2.5 s)
 cells:
   - {profile: P1, fault: F0, fault_rate: 0.0, assumption_set: S}
@@ -30,4 +33,8 @@ cells:
   - {profile: P6, fault: F0, fault_rate: 0.0, assumption_set: S}
   - {profile: P6, fault: F1, fault_rate: 0.2, assumption_set: S}
   - {profile: P6, fault: FM, fault_rate: 0.2, assumption_set: S}
+  - {profile: P1, fault: FC-worker, fault_rate: 0.0, assumption_set: S, arrival_rate_per_s: 3, seeds: [1]}
+  - {profile: P4, fault: FC-worker, fault_rate: 0.0, assumption_set: S, arrival_rate_per_s: 3, seeds: [1]}
+  - {profile: P1, fault: FC-api, fault_rate: 0.0, assumption_set: S, arrival_rate_per_s: 3, seeds: [1]}
+  - {profile: P4, fault: FC-api, fault_rate: 0.0, assumption_set: S, arrival_rate_per_s: 3, seeds: [1]}
 systems: [B1, B2, B3, B3L-delta, B3L-horizon, RAEG-strict, RAEG-bounded]

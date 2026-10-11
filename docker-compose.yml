@@ -112,6 +112,7 @@ services:
       HOOK_PLAN: /exchange-logs/hooks.json   # re-read on change; absent = no hooks
       CODE_SHA: ${CODE_SHA:-unknown}
       SYSTEMS: ${SYSTEMS:-}
+      CRASH_TOKEN: ${CRASH_TOKEN:-local-crash-token}   # FC-api (harness only)
       PORT: "8080"
     ports: ["127.0.0.1:18080:8080"]
     volumes: [exchange-logs:/exchange-logs]
@@ -121,6 +122,24 @@ services:
       interval: 2s
       timeout: 3s
       retries: 30
+
+  raeg-worker:   # RAEG recovery worker (DESIGN §5.1); crash hooks fire here (FC-worker)
+    image: raeg/python:dev
+    profiles: [systems]
+    command: ["python", "-m", "systems.raeg_worker"]
+    depends_on:
+      provider: {condition: service_healthy}
+      raeg-db: {condition: service_healthy}
+    environment:
+      PROVIDER_URL: http://provider:8001
+      RAEG_DB_APP_DSN: postgresql://raeg_app:raeg_app@raeg-db:5432/raeg
+      RAEG_DB_ADMIN_DSN: postgresql://postgres:postgres@raeg-db:5432/raeg
+      EXCHANGE_LOG_DIR: /exchange-logs
+      HOOK_PLAN: /exchange-logs/hooks.json
+      CODE_SHA: ${CODE_SHA:-unknown}
+      SYSTEMS: ${SYSTEMS:-}
+    volumes: [exchange-logs:/exchange-logs]
+    restart: unless-stopped
 
 volumes:
   provider-db:

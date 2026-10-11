@@ -17,6 +17,7 @@ Previous versions: `docs/archive/DESIGN-v0.1.md`, `-v0.2.md`, and `-v0.3.md` (th
 | E6 | (M6) F9 is redefined: the original is held past its own deadline (`T_att + 1500 ms`). The v0.3 wording ("delay < d − send, so that the retry arrives first") cannot occur with the shared timing (IMPLEMENTATION_NOTES N37). | Retries come after the client timeout, which is only `m` before `d`. | §6.3 |
 | E7 | (M6) Fault keying: provider faults by `(client_reference, kind, ingress index)`; client hooks by `(k, attempt_no)` (N2). | As implemented since M2. | §6.3 |
 | E8 | (M7) Shared `client_timeout_ms` = 600 ms, below `T_att` (Q2). F9 returns to its v0.3 meaning (overtaken before `d`), superseding E6. See §8.4. | Makes B3L-δ and B3L-horizon distinguishable and F4/F9 meaningful. | §8.4 |
+| E9 | (M7) Protocol changes PC-1…PC-4 (docs/PROTOCOL_CHANGES.md): FM = {F1, F3, F4, F9} + F5 (faults-v2; v1 kept as `FMv1`); agent retries with backoff 1→8 s until a 60 s agent horizon; new crash experiment FC-worker / FC-api (3 crashes per run, ≥ 20 s apart); RAEG API and recovery worker in separate processes. | Calibration showed FM's process crashes turned into outage storms that dominated the measurement and hit architectures unevenly. | §5.1, §5.5, §6.3 |
 | E5 | (M5) The systems' deployment and native-outcome details (one service, route per system; B3 workflows return outcomes rather than failing) are recorded in IMPLEMENTATION_NOTES N27–N36. | Implementation detail; the definitions in §5.4 are unchanged. | §5.4 |
 
 ## 0a. Changes from v0.2

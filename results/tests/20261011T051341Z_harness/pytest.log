@@ -1,0 +1,61 @@
+$ <repo>/.venv/bin/python -m pytest -v -rA --tb=long --junitxml=<repo>/results/tests/20261011T051341Z_harness/junit.xml tests/harness -q
+
+============================= test session starts ==============================
+platform darwin -- Python 3.12.7, pytest-9.1.1, pluggy-1.6.0
+rootdir: <repo>
+configfile: pyproject.toml
+plugins: hypothesis-6.168.5, asyncio-1.4.0, anyio-4.15.1
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
+collected 30 items
+
+tests/harness/test_harness_units.py ............................F.       [100%]
+
+=================================== FAILURES ===================================
+_______________ test_driver_backoff_is_exponential_until_horizon _______________
+
+tmp_path = PosixPath('<tmp>/pytest-of-<user>/pytest-39/test_driver_backoff_is_exponen0')
+
+    async def test_driver_backoff_is_exponential_until_horizon(tmp_path: Path) -> None:
+        out, fake = await drive(tmp_path, {"k": ["crash"]}, [intent("k")], horizon_s=0.4, max_backoff_ms=40)
+        # restart_backoff 1 ms doubling, capped at 40 ms: many resubmits within 0.4 s, bounded by the horizon
+        assert out[0]["claim"] == "UNRESOLVED(horizon)" and out[0]["accepted"] is False
+>       assert 6 <= out[0]["resubmits"] <= 50 and len(fake.calls) == out[0]["resubmits"] + 1
+E       AssertionError: assert (15 <= 50 and 15 == (15 + 1))
+E        +  where 15 = len([('POST', 'k'), ('POST', 'k'), ('POST', 'k'), ('POST', 'k'), ('POST', 'k'), ('POST', 'k'), ...])
+E        +    where [('POST', 'k'), ('POST', 'k'), ('POST', 'k'), ('POST', 'k'), ('POST', 'k'), ('POST', 'k'), ...] = <tests.harness.test_harness_units.FakeSystem object at 0x1098e28d0>.calls
+
+tests/harness/test_harness_units.py:215: AssertionError
+==================================== PASSES ====================================
+- generated xml file: <repo>/results/tests/20261011T051341Z_harness/junit.xml -
+=========================== short test summary info ============================
+PASSED tests/harness/test_harness_units.py::test_workload_is_deterministic_and_seed_sensitive
+PASSED tests/harness/test_harness_units.py::test_workload_roundtrip
+PASSED tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[F1]
+PASSED tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[F2]
+PASSED tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[F3]
+PASSED tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[F4]
+PASSED tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[F6]
+PASSED tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[F7]
+PASSED tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[F8]
+PASSED tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[F9]
+PASSED tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[F10]
+PASSED tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[FM]
+PASSED tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[V1]
+PASSED tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[V2]
+PASSED tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[V3]
+PASSED tests/harness/test_harness_units.py::test_fault_plan_is_deterministic_and_system_independent[V4]
+PASSED tests/harness/test_harness_units.py::test_fault_parameters_follow_shared_timing
+PASSED tests/harness/test_harness_units.py::test_f0_and_f5_plans_are_empty
+PASSED tests/harness/test_harness_units.py::test_driver_resubmits_after_crash
+PASSED tests/harness/test_harness_units.py::test_driver_polls_pending_then_resubmits_when_state_lost
+PASSED tests/harness/test_harness_units.py::test_driver_horizon_marks_unresolved
+PASSED tests/harness/test_harness_units.py::test_driver_gives_up_after_max_resubmits
+PASSED tests/harness/test_harness_units.py::test_driver_concurrent_copies_and_logs
+PASSED tests/harness/test_harness_units.py::test_audit_passes_complete_consistent_run
+PASSED tests/harness/test_harness_units.py::test_audit_flags_a_hook_that_fired_twice
+PASSED tests/harness/test_harness_units.py::test_audit_detects_missing_claim_and_ledger_mismatch
+PASSED tests/harness/test_harness_units.py::test_fault_config_versions_kept
+PASSED tests/harness/test_harness_units.py::test_fc_plans_have_three_spaced_crashes
+PASSED tests/harness/test_harness_units.py::test_accepted_flag
+FAILED tests/harness/test_harness_units.py::test_driver_backoff_is_exponential_until_horizon
+========================= 1 failed, 29 passed in 0.83s =========================
