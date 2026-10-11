@@ -1,0 +1,2759 @@
+$ <repo>/.venv/bin/python -m pytest -v -rA --tb=long --junitxml=<repo>/results/tests/20261011T143831Z_conformance/junit.xml tests/conformance
+
+============================= test session starts ==============================
+platform darwin -- Python 3.12.7, pytest-9.1.1, pluggy-1.6.0 -- <repo>/.venv/bin/python
+cachedir: .pytest_cache
+hypothesis profile 'default'
+rootdir: <repo>
+configfile: pyproject.toml
+plugins: hypothesis-6.168.5, asyncio-1.4.0, anyio-4.15.1
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
+collecting ... collected 115 items
+
+tests/conformance/test_declared_capabilities.py::test_commit_is_recorded_in_ledger_and_receipt_log[P1] ERROR [  0%]
+tests/conformance/test_declared_capabilities.py::test_commit_is_recorded_in_ledger_and_receipt_log[P2] ERROR [  1%]
+tests/conformance/test_declared_capabilities.py::test_commit_is_recorded_in_ledger_and_receipt_log[P3] ERROR [  2%]
+tests/conformance/test_declared_capabilities.py::test_commit_is_recorded_in_ledger_and_receipt_log[P4] PASSED [  3%]
+tests/conformance/test_declared_capabilities.py::test_commit_is_recorded_in_ledger_and_receipt_log[P4n] PASSED [  4%]
+tests/conformance/test_declared_capabilities.py::test_commit_is_recorded_in_ledger_and_receipt_log[P5] PASSED [  5%]
+tests/conformance/test_declared_capabilities.py::test_commit_is_recorded_in_ledger_and_receipt_log[P6] PASSED [  6%]
+tests/conformance/test_declared_capabilities.py::test_commit_is_recorded_in_ledger_and_receipt_log[P7] PASSED [  6%]
+tests/conformance/test_declared_capabilities.py::test_idempotency_matches_declaration[P1] PASSED [  7%]
+tests/conformance/test_declared_capabilities.py::test_idempotency_matches_declaration[P2] PASSED [  8%]
+tests/conformance/test_declared_capabilities.py::test_idempotency_matches_declaration[P3] PASSED [  9%]
+tests/conformance/test_declared_capabilities.py::test_idempotency_matches_declaration[P4] PASSED [ 10%]
+tests/conformance/test_declared_capabilities.py::test_idempotency_matches_declaration[P4n] PASSED [ 11%]
+tests/conformance/test_declared_capabilities.py::test_idempotency_matches_declaration[P5] PASSED [ 12%]
+tests/conformance/test_declared_capabilities.py::test_idempotency_matches_declaration[P6] PASSED [ 13%]
+tests/conformance/test_declared_capabilities.py::test_idempotency_matches_declaration[P7] PASSED [ 13%]
+tests/conformance/test_declared_capabilities.py::test_lookup_modes_match_declaration[P1] PASSED [ 14%]
+tests/conformance/test_declared_capabilities.py::test_lookup_modes_match_declaration[P2] PASSED [ 15%]
+tests/conformance/test_declared_capabilities.py::test_lookup_modes_match_declaration[P3] PASSED [ 16%]
+tests/conformance/test_declared_capabilities.py::test_lookup_modes_match_declaration[P4] PASSED [ 17%]
+tests/conformance/test_declared_capabilities.py::test_lookup_modes_match_declaration[P4n] PASSED [ 18%]
+tests/conformance/test_declared_capabilities.py::test_lookup_modes_match_declaration[P5] PASSED [ 19%]
+tests/conformance/test_declared_capabilities.py::test_lookup_modes_match_declaration[P6] PASSED [ 20%]
+tests/conformance/test_declared_capabilities.py::test_lookup_modes_match_declaration[P7] PASSED [ 20%]
+tests/conformance/test_declared_capabilities.py::test_deadline_at_receipt_matches_declaration[P1] PASSED [ 21%]
+tests/conformance/test_declared_capabilities.py::test_deadline_at_receipt_matches_declaration[P2] PASSED [ 22%]
+tests/conformance/test_declared_capabilities.py::test_deadline_at_receipt_matches_declaration[P3] PASSED [ 23%]
+tests/conformance/test_declared_capabilities.py::test_deadline_at_receipt_matches_declaration[P4] PASSED [ 24%]
+tests/conformance/test_declared_capabilities.py::test_deadline_at_receipt_matches_declaration[P4n] PASSED [ 25%]
+tests/conformance/test_declared_capabilities.py::test_deadline_at_receipt_matches_declaration[P5] PASSED [ 26%]
+tests/conformance/test_declared_capabilities.py::test_deadline_at_receipt_matches_declaration[P6] PASSED [ 26%]
+tests/conformance/test_declared_capabilities.py::test_deadline_at_receipt_matches_declaration[P7] PASSED [ 27%]
+tests/conformance/test_declared_capabilities.py::test_invalid_deadline_header_is_rejected_without_effect PASSED [ 28%]
+tests/conformance/test_declared_capabilities.py::test_invalid_body_is_rejected_without_effect PASSED [ 29%]
+tests/conformance/test_faults_violations_evidence.py::test_f1_lost_response_reset_after_commit PASSED [ 30%]
+tests/conformance/test_faults_violations_evidence.py::test_f1_lost_response_blackhole PASSED [ 31%]
+tests/conformance/test_faults_violations_evidence.py::test_f3_pre_commit_stall_never_commits PASSED [ 32%]
+tests/conformance/test_faults_violations_evidence.py::test_f4_delayed_commit_after_client_timeout PASSED [ 33%]
+tests/conformance/test_faults_violations_evidence.py::test_f9_ingress_hold_delays_arrival PASSED [ 33%]
+tests/conformance/test_faults_violations_evidence.py::test_insufficient_funds_decline_after_ambiguous_commit PASSED [ 34%]
+tests/conformance/test_faults_violations_evidence.py::test_deterministic_decline_rate PASSED [ 35%]
+tests/conformance/test_faults_violations_evidence.py::test_v1_lookup_lag_exceeding_delta_breaks_l2 PASSED [ 36%]
+tests/conformance/test_faults_violations_evidence.py::test_v2_declared_deadline_not_enforced PASSED [ 37%]
+tests/conformance/test_faults_violations_evidence.py::test_v3_retention_shorter_than_declared PASSED [ 38%]
+tests/conformance/test_faults_violations_evidence.py::test_v4_clock_offset PASSED [ 39%]
+tests/conformance/test_faults_violations_evidence.py::test_evidence_tables_are_append_only[UPDATE payments SET amount_minor = 1] PASSED [ 40%]
+tests/conformance/test_faults_violations_evidence.py::test_evidence_tables_are_append_only[DELETE FROM payments] PASSED [ 40%]
+tests/conformance/test_faults_violations_evidence.py::test_evidence_tables_are_append_only[UPDATE receipts SET held_ms = 1] PASSED [ 41%]
+tests/conformance/test_faults_violations_evidence.py::test_evidence_tables_are_append_only[DELETE FROM receipt_outcomes] PASSED [ 42%]
+tests/conformance/test_faults_violations_evidence.py::test_evidence_tables_are_append_only[DELETE FROM key_events] PASSED [ 43%]
+tests/conformance/test_faults_violations_evidence.py::test_evidence_tables_are_append_only[DELETE FROM fault_log] PASSED [ 44%]
+tests/conformance/test_faults_violations_evidence.py::test_evidence_tables_are_append_only[UPDATE config_log SET config = '{}'] PASSED [ 45%]
+tests/conformance/test_faults_violations_evidence.py::test_oracle_requires_token PASSED [ 46%]
+tests/conformance/test_faults_violations_evidence.py::test_ledger_and_receipt_log_cross_check PASSED [ 46%]
+tests/conformance/test_idempotency_contract.py::test_k2_overlapping_request_has_no_effect[P1-reject] PASSED [ 47%]
+tests/conformance/test_idempotency_contract.py::test_k2_overlapping_request_has_no_effect[P1-serialize] PASSED [ 48%]
+tests/conformance/test_idempotency_contract.py::test_k2_overlapping_request_has_no_effect[P2-reject] PASSED [ 49%]
+tests/conformance/test_idempotency_contract.py::test_k2_overlapping_request_has_no_effect[P2-serialize] PASSED [ 50%]
+tests/conformance/test_idempotency_contract.py::test_k1_concurrent_first_requests_commit_once[P1-reject] PASSED [ 51%]
+tests/conformance/test_idempotency_contract.py::test_k1_concurrent_first_requests_commit_once[P1-serialize] PASSED [ 52%]
+tests/conformance/test_idempotency_contract.py::test_k1_concurrent_first_requests_commit_once[P2-reject] PASSED [ 53%]
+tests/conformance/test_idempotency_contract.py::test_k1_concurrent_first_requests_commit_once[P2-serialize] PASSED [ 53%]
+tests/conformance/test_idempotency_contract.py::test_k3_decline_is_replayed_not_reexecuted PASSED [ 54%]
+tests/conformance/test_idempotency_contract.py::test_k4_mismatched_body_is_rejected_without_effect PASSED [ 55%]
+tests/conformance/test_idempotency_contract.py::test_k6_pre_commit_abort_releases_reservation[fault0] PASSED [ 56%]
+tests/conformance/test_idempotency_contract.py::test_k6_pre_commit_abort_releases_reservation[fault1] PASSED [ 57%]
+tests/conformance/test_idempotency_contract.py::test_k7_stuck_reservation_released_on_recovery PASSED [ 58%]
+tests/conformance/test_idempotency_contract.py::test_no_key_header_means_no_deduplication_even_with_I PASSED [ 59%]
+tests/conformance/test_lookup_and_deadline.py::test_l1_in_flight_payment_is_never_returned[P1] PASSED [ 60%]
+tests/conformance/test_lookup_and_deadline.py::test_l1_in_flight_payment_is_never_returned[P2] PASSED [ 60%]
+tests/conformance/test_lookup_and_deadline.py::test_l1_in_flight_payment_is_never_returned[P4] PASSED [ 61%]
+tests/conformance/test_lookup_and_deadline.py::test_l1_in_flight_payment_is_never_returned[P4n] PASSED [ 62%]
+tests/conformance/test_lookup_and_deadline.py::test_l2_complete_after_delta_and_l3_as_of_on_provider_clock[P1] PASSED [ 63%]
+tests/conformance/test_lookup_and_deadline.py::test_l2_complete_after_delta_and_l3_as_of_on_provider_clock[P2] PASSED [ 64%]
+tests/conformance/test_lookup_and_deadline.py::test_l2_complete_after_delta_and_l3_as_of_on_provider_clock[P4] PASSED [ 65%]
+tests/conformance/test_lookup_and_deadline.py::test_l2_complete_after_delta_and_l3_as_of_on_provider_clock[P4n] PASSED [ 66%]
+tests/conformance/test_lookup_and_deadline.py::test_l4_all_matching_records_including_declines[P1] PASSED [ 66%]
+tests/conformance/test_lookup_and_deadline.py::test_l4_all_matching_records_including_declines[P2] PASSED [ 67%]
+tests/conformance/test_lookup_and_deadline.py::test_l4_all_matching_records_including_declines[P4] PASSED [ 68%]
+tests/conformance/test_lookup_and_deadline.py::test_l4_all_matching_records_including_declines[P4n] PASSED [ 69%]
+tests/conformance/test_lookup_and_deadline.py::test_l5_lookup_scoped_to_reference PASSED [ 70%]
+tests/conformance/test_lookup_and_deadline.py::test_f8_lookup_unavailable_then_recovers PASSED [ 71%]
+tests/conformance/test_lookup_and_deadline.py::test_d_commit_after_deadline_is_rolled_back_and_key_released[P1] PASSED [ 72%]
+tests/conformance/test_lookup_and_deadline.py::test_d_commit_after_deadline_is_rolled_back_and_key_released[P2] PASSED [ 73%]
+tests/conformance/test_lookup_and_deadline.py::test_d_commit_after_deadline_is_rolled_back_and_key_released[P4] PASSED [ 73%]
+tests/conformance/test_lookup_and_deadline.py::test_d_commit_after_deadline_is_rolled_back_and_key_released[P7] PASSED [ 74%]
+tests/conformance/test_lookup_and_deadline.py::test_no_d_means_deadline_header_is_ignored[P3] PASSED [ 75%]
+tests/conformance/test_lookup_and_deadline.py::test_no_d_means_deadline_header_is_ignored[P4n] PASSED [ 76%]
+tests/conformance/test_lookup_and_deadline.py::test_no_d_means_deadline_header_is_ignored[P5] PASSED [ 77%]
+tests/conformance/test_lookup_and_deadline.py::test_no_d_means_deadline_header_is_ignored[P6] PASSED [ 78%]
+tests/conformance/test_provider_restart.py::test_k7_sigkill_with_in_progress_reservation PASSED [ 79%]
+tests/conformance/test_retention_boundary.py::test_kb1_replay_just_before_expiry[P2-reject] PASSED [ 80%]
+tests/conformance/test_retention_boundary.py::test_kb1_replay_just_before_expiry[P2-serialize] PASSED [ 80%]
+tests/conformance/test_retention_boundary.py::test_kb1_replay_just_before_expiry[P7-reject] PASSED [ 81%]
+tests/conformance/test_retention_boundary.py::test_kb1_replay_just_before_expiry[P7-serialize] PASSED [ 82%]
+tests/conformance/test_retention_boundary.py::test_kb2_after_expiry_is_processed_as_new[P2-reject] PASSED [ 83%]
+tests/conformance/test_retention_boundary.py::test_kb2_after_expiry_is_processed_as_new[P2-serialize] PASSED [ 84%]
+tests/conformance/test_retention_boundary.py::test_kb2_after_expiry_is_processed_as_new[P7-reject] PASSED [ 85%]
+tests/conformance/test_retention_boundary.py::test_kb2_after_expiry_is_processed_as_new[P7-serialize] PASSED [ 86%]
+tests/conformance/test_retention_boundary.py::test_kb3_delayed_original_overtaken_within_retention[P2-reject] PASSED [ 86%]
+tests/conformance/test_retention_boundary.py::test_kb3_delayed_original_overtaken_within_retention[P2-serialize] PASSED [ 87%]
+tests/conformance/test_retention_boundary.py::test_kb3_delayed_original_overtaken_within_retention[P7-reject] PASSED [ 88%]
+tests/conformance/test_retention_boundary.py::test_kb3_delayed_original_overtaken_within_retention[P7-serialize] PASSED [ 89%]
+tests/conformance/test_retention_boundary.py::test_kb4_delayed_original_after_retention_creates_second_effect[P2-reject] PASSED [ 90%]
+tests/conformance/test_retention_boundary.py::test_kb4_delayed_original_after_retention_creates_second_effect[P2-serialize] PASSED [ 91%]
+tests/conformance/test_retention_boundary.py::test_kb4_delayed_original_after_retention_creates_second_effect[P7-reject] PASSED [ 92%]
+tests/conformance/test_retention_boundary.py::test_kb4_delayed_original_after_retention_creates_second_effect[P7-serialize] PASSED [ 93%]
+tests/conformance/test_retention_boundary.py::test_kb5_deadline_bounds_the_delayed_original[P2-reject] PASSED [ 93%]
+tests/conformance/test_retention_boundary.py::test_kb5_deadline_bounds_the_delayed_original[P2-serialize] PASSED [ 94%]
+tests/conformance/test_retention_boundary.py::test_kb5_deadline_bounds_the_delayed_original[P7-reject] PASSED [ 95%]
+tests/conformance/test_retention_boundary.py::test_kb5_deadline_bounds_the_delayed_original[P7-serialize] PASSED [ 96%]
+tests/conformance/test_retention_boundary.py::test_kb6_in_progress_record_never_expires[P2-reject] PASSED [ 97%]
+tests/conformance/test_retention_boundary.py::test_kb6_in_progress_record_never_expires[P2-serialize] PASSED [ 98%]
+tests/conformance/test_retention_boundary.py::test_kb6_in_progress_record_never_expires[P7-reject] PASSED [ 99%]
+tests/conformance/test_retention_boundary.py::test_kb6_in_progress_record_never_expires[P7-serialize] PASSED [100%]
+
+==================================== ERRORS ====================================
+___ ERROR at setup of test_commit_is_recorded_in_ledger_and_receipt_log[P1] ____
+
+    @contextlib.contextmanager
+    def map_httpcore_exceptions() -> typing.Iterator[None]:
+        global HTTPCORE_EXC_MAP
+        if len(HTTPCORE_EXC_MAP) == 0:
+            HTTPCORE_EXC_MAP = _load_httpcore_exceptions()
+        try:
+>           yield
+
+.venv/lib/python3.12/site-packages/httpx/_transports/default.py:101: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <httpx.AsyncHTTPTransport object at 0x10ac11520>
+request = <Request('GET', 'http://127.0.0.1:19001/healthz')>
+
+    async def handle_async_request(
+        self,
+        request: Request,
+    ) -> Response:
+        assert isinstance(request.stream, AsyncByteStream)
+        import httpcore
+    
+        req = httpcore.Request(
+            method=request.method,
+            url=httpcore.URL(
+                scheme=request.url.raw_scheme,
+                host=request.url.raw_host,
+                port=request.url.port,
+                target=request.url.raw_path,
+            ),
+            headers=request.headers.raw,
+            content=request.stream,
+            extensions=request.extensions,
+        )
+        with map_httpcore_exceptions():
+>           resp = await self._pool.handle_async_request(req)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/httpx/_transports/default.py:394: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <AsyncConnectionPool [Requests: 0 active, 0 queued | Connections: 0 active, 0 idle]>
+request = <Request [b'GET']>
+
+    async def handle_async_request(self, request: Request) -> Response:
+        """
+        Send an HTTP request, and return an HTTP response.
+    
+        This is the core implementation that is called into by `.request()` or `.stream()`.
+        """
+        scheme = request.url.scheme.decode()
+        if scheme == "":
+            raise UnsupportedProtocol(
+                "Request URL is missing an 'http://' or 'https://' protocol."
+            )
+        if scheme not in ("http", "https", "ws", "wss"):
+            raise UnsupportedProtocol(
+                f"Request URL has an unsupported protocol '{scheme}://'."
+            )
+    
+        timeouts = request.extensions.get("timeout", {})
+        timeout = timeouts.get("pool", None)
+    
+        with self._optional_thread_lock:
+            # Add the incoming request to our request queue.
+            pool_request = AsyncPoolRequest(request)
+            self._requests.append(pool_request)
+    
+        try:
+            while True:
+                with self._optional_thread_lock:
+                    # Assign incoming requests to available connections,
+                    # closing or creating new connections as required.
+                    closing = self._assign_requests_to_connections()
+                await self._close_connections(closing)
+    
+                # Wait until this request has an assigned connection.
+                connection = await pool_request.wait_for_connection(timeout=timeout)
+    
+                try:
+                    # Send the request on the assigned connection.
+                    response = await connection.handle_async_request(
+                        pool_request.request
+                    )
+                except ConnectionNotAvailable:
+                    # In some cases a connection may initially be available to
+                    # handle a request, but then become unavailable.
+                    #
+                    # In this case we clear the connection and try again.
+                    pool_request.clear_connection()
+                else:
+                    break  # pragma: nocover
+    
+        except BaseException as exc:
+            with self._optional_thread_lock:
+                # For any exception or cancellation we remove the request from
+                # the queue, and then re-assign requests to connections.
+                self._requests.remove(pool_request)
+                closing = self._assign_requests_to_connections()
+    
+            await self._close_connections(closing)
+>           raise exc from None
+
+.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py:256: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <AsyncConnectionPool [Requests: 0 active, 0 queued | Connections: 0 active, 0 idle]>
+request = <Request [b'GET']>
+
+    async def handle_async_request(self, request: Request) -> Response:
+        """
+        Send an HTTP request, and return an HTTP response.
+    
+        This is the core implementation that is called into by `.request()` or `.stream()`.
+        """
+        scheme = request.url.scheme.decode()
+        if scheme == "":
+            raise UnsupportedProtocol(
+                "Request URL is missing an 'http://' or 'https://' protocol."
+            )
+        if scheme not in ("http", "https", "ws", "wss"):
+            raise UnsupportedProtocol(
+                f"Request URL has an unsupported protocol '{scheme}://'."
+            )
+    
+        timeouts = request.extensions.get("timeout", {})
+        timeout = timeouts.get("pool", None)
+    
+        with self._optional_thread_lock:
+            # Add the incoming request to our request queue.
+            pool_request = AsyncPoolRequest(request)
+            self._requests.append(pool_request)
+    
+        try:
+            while True:
+                with self._optional_thread_lock:
+                    # Assign incoming requests to available connections,
+                    # closing or creating new connections as required.
+                    closing = self._assign_requests_to_connections()
+                await self._close_connections(closing)
+    
+                # Wait until this request has an assigned connection.
+                connection = await pool_request.wait_for_connection(timeout=timeout)
+    
+                try:
+                    # Send the request on the assigned connection.
+>                   response = await connection.handle_async_request(
+                        pool_request.request
+                    )
+
+.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py:236: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <AsyncHTTPConnection [CONNECTION FAILED]>, request = <Request [b'GET']>
+
+    async def handle_async_request(self, request: Request) -> Response:
+        if not self.can_handle_request(request.url.origin):
+            raise RuntimeError(
+                f"Attempted to send request to {request.url.origin} on connection to {self._origin}"
+            )
+    
+        try:
+            async with self._request_lock:
+                if self._connection is None:
+                    stream = await self._connect(request)
+    
+                    ssl_object = stream.get_extra_info("ssl_object")
+                    http2_negotiated = (
+                        ssl_object is not None
+                        and ssl_object.selected_alpn_protocol() == "h2"
+                    )
+                    if http2_negotiated or (self._http2 and not self._http1):
+                        from .http2 import AsyncHTTP2Connection
+    
+                        self._connection = AsyncHTTP2Connection(
+                            origin=self._origin,
+                            stream=stream,
+                            keepalive_expiry=self._keepalive_expiry,
+                        )
+                    else:
+                        self._connection = AsyncHTTP11Connection(
+                            origin=self._origin,
+                            stream=stream,
+                            keepalive_expiry=self._keepalive_expiry,
+                        )
+        except BaseException as exc:
+            self._connect_failed = True
+>           raise exc
+
+.venv/lib/python3.12/site-packages/httpcore/_async/connection.py:101: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <AsyncHTTPConnection [CONNECTION FAILED]>, request = <Request [b'GET']>
+
+    async def handle_async_request(self, request: Request) -> Response:
+        if not self.can_handle_request(request.url.origin):
+            raise RuntimeError(
+                f"Attempted to send request to {request.url.origin} on connection to {self._origin}"
+            )
+    
+        try:
+            async with self._request_lock:
+                if self._connection is None:
+>                   stream = await self._connect(request)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/httpcore/_async/connection.py:78: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <AsyncHTTPConnection [CONNECTION FAILED]>, request = <Request [b'GET']>
+
+    async def _connect(self, request: Request) -> AsyncNetworkStream:
+        timeouts = request.extensions.get("timeout", {})
+        sni_hostname = request.extensions.get("sni_hostname", None)
+        timeout = timeouts.get("connect", None)
+    
+        retries_left = self._retries
+        delays = exponential_backoff(factor=RETRIES_BACKOFF_FACTOR)
+    
+        while True:
+            try:
+                if self._uds is None:
+                    kwargs = {
+                        "host": self._origin.host.decode("ascii"),
+                        "port": self._origin.port,
+                        "local_address": self._local_address,
+                        "timeout": timeout,
+                        "socket_options": self._socket_options,
+                    }
+                    async with Trace("connect_tcp", logger, request, kwargs) as trace:
+>                       stream = await self._network_backend.connect_tcp(**kwargs)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/httpcore/_async/connection.py:124: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <httpcore._backends.auto.AutoBackend object at 0x10ac11610>
+host = '127.0.0.1', port = 19001, timeout = 30, local_address = None
+socket_options = None
+
+    async def connect_tcp(
+        self,
+        host: str,
+        port: int,
+        timeout: float | None = None,
+        local_address: str | None = None,
+        socket_options: typing.Iterable[SOCKET_OPTION] | None = None,
+    ) -> AsyncNetworkStream:
+        await self._init_backend()
+>       return await self._backend.connect_tcp(
+            host,
+            port,
+            timeout=timeout,
+            local_address=local_address,
+            socket_options=socket_options,
+        )
+
+.venv/lib/python3.12/site-packages/httpcore/_backends/auto.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <httpcore.AnyIOBackend object at 0x10ac11b80>, host = '127.0.0.1'
+port = 19001, timeout = 30, local_address = None, socket_options = []
+
+    async def connect_tcp(
+        self,
+        host: str,
+        port: int,
+        timeout: float | None = None,
+        local_address: str | None = None,
+        socket_options: typing.Iterable[SOCKET_OPTION] | None = None,
+    ) -> AsyncNetworkStream:  # pragma: nocover
+        if socket_options is None:
+            socket_options = []
+        exc_map = {
+            TimeoutError: ConnectTimeout,
+            OSError: ConnectError,
+            anyio.BrokenResourceError: ConnectError,
+        }
+>       with map_exceptions(exc_map):
+             ^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/httpcore/_backends/anyio.py:113: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <contextlib._GeneratorContextManager object at 0x10ac11c40>
+typ = <class 'OSError'>, value = OSError('All connection attempts failed')
+traceback = <traceback object at 0x10ac1d000>
+
+    def __exit__(self, typ, value, traceback):
+        if typ is None:
+            try:
+                next(self.gen)
+            except StopIteration:
+                return False
+            else:
+                try:
+                    raise RuntimeError("generator didn't stop")
+                finally:
+                    self.gen.close()
+        else:
+            if value is None:
+                # Need to force instantiation so we can reliably
+                # tell if we get the same exception back
+                value = typ()
+            try:
+>               self.gen.throw(value)
+
+/opt/local/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/contextlib.py:158: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+map = {<class 'TimeoutError'>: <class 'httpcore.ConnectTimeout'>, <class 'OSError'>: <class 'httpcore.ConnectError'>, <class 'anyio.BrokenResourceError'>: <class 'httpcore.ConnectError'>}
+
+    @contextlib.contextmanager
+    def map_exceptions(map: ExceptionMapping) -> typing.Iterator[None]:
+        try:
+            yield
+        except Exception as exc:  # noqa: PIE786
+            for from_exc, to_exc in map.items():
+                if isinstance(exc, from_exc):
+>                   raise to_exc(exc) from exc
+E                   httpcore.ConnectError: All connection attempts failed
+
+.venv/lib/python3.12/site-packages/httpcore/_exceptions.py:14: ConnectError
+
+The above exception was the direct cause of the following exception:
+
+    @pytest.fixture
+    async def provider():
+        p = Provider()
+        try:
+>           r = await p.admin.get("/healthz")
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/conformance/conftest.py:152: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <httpx.AsyncClient object at 0x10ab59910>, url = '/healthz'
+params = None, headers = None, cookies = None
+auth = <httpx._client.UseClientDefault object at 0x108426a20>
+follow_redirects = <httpx._client.UseClientDefault object at 0x108426a20>
+timeout = <httpx._client.UseClientDefault object at 0x108426a20>
+extensions = None
+
+    async def get(
+        self,
+        url: URL | str,
+        *,
+        params: QueryParamTypes | None = None,
+        headers: HeaderTypes | None = None,
+        cookies: CookieTypes | None = None,
+        auth: AuthTypes | UseClientDefault | None = USE_CLIENT_DEFAULT,
+        follow_redirects: bool | UseClientDefault = USE_CLIENT_DEFAULT,
+        timeout: TimeoutTypes | UseClientDefault = USE_CLIENT_DEFAULT,
+        extensions: RequestExtensions | None = None,
+    ) -> Response:
+        """
+        Send a `GET` request.
+    
+        **Parameters**: See `httpx.request`.
+        """
+>       return await self.request(
+            "GET",
+            url,
+            params=params,
+            headers=headers,
+            cookies=cookies,
+            auth=auth,
+            follow_redirects=follow_redirects,
+            timeout=timeout,
+            extensions=extensions,
+        )
+
+.venv/lib/python3.12/site-packages/httpx/_client.py:1768: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <httpx.AsyncClient object at 0x10ab59910>, method = 'GET'
+url = '/healthz', content = None, data = None, files = None, json = None
+params = None, headers = None, cookies = None
+auth = <httpx._client.UseClientDefault object at 0x108426a20>
+follow_redirects = <httpx._client.UseClientDefault object at 0x108426a20>
+timeout = <httpx._client.UseClientDefault object at 0x108426a20>
+extensions = None
+
+    async def request(
+        self,
+        method: str,
+        url: URL | str,
+        *,
+        content: RequestContent | None = None,
+        data: RequestData | None = None,
+        files: RequestFiles | None = None,
+        json: typing.Any | None = None,
+        params: QueryParamTypes | None = None,
+        headers: HeaderTypes | None = None,
+        cookies: CookieTypes | None = None,
+        auth: AuthTypes | UseClientDefault | None = USE_CLIENT_DEFAULT,
+        follow_redirects: bool | UseClientDefault = USE_CLIENT_DEFAULT,
+        timeout: TimeoutTypes | UseClientDefault = USE_CLIENT_DEFAULT,
+        extensions: RequestExtensions | None = None,
+    ) -> Response:
+        """
+        Build and send a request.
+    
+        Equivalent to:
+    
+        ```python
+        request = client.build_request(...)
+        response = await client.send(request, ...)
+        ```
+    
+        See `AsyncClient.build_request()`, `AsyncClient.send()`
+        and [Merging of configuration][0] for how the various parameters
+        are merged with client-level configuration.
+    
+        [0]: /advanced/clients/#merging-of-configuration
+        """
+    
+        if cookies is not None:  # pragma: no cover
+            message = (
+                "Setting per-request cookies=<...> is being deprecated, because "
+                "the expected behaviour on cookie persistence is ambiguous. Set "
+                "cookies directly on the client instance instead."
+            )
+            warnings.warn(message, DeprecationWarning, stacklevel=2)
+    
+        request = self.build_request(
+            method=method,
+            url=url,
+            content=content,
+            data=data,
+            files=files,
+            json=json,
+            params=params,
+            headers=headers,
+            cookies=cookies,
+            timeout=timeout,
+            extensions=extensions,
+        )
+>       return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/httpx/_client.py:1540: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <httpx.AsyncClient object at 0x10ab59910>
+request = <Request('GET', 'http://127.0.0.1:19001/healthz')>, stream = False
+auth = <httpx.Auth object at 0x10ab596d0>, follow_redirects = False
+
+    async def send(
+        self,
+        request: Request,
+        *,
+        stream: bool = False,
+        auth: AuthTypes | UseClientDefault | None = USE_CLIENT_DEFAULT,
+        follow_redirects: bool | UseClientDefault = USE_CLIENT_DEFAULT,
+    ) -> Response:
+        """
+        Send a request.
+    
+        The request is sent as-is, unmodified.
+    
+        Typically you'll want to build one with `AsyncClient.build_request()`
+        so that any client-level configuration is merged into the request,
+        but passing an explicit `httpx.Request()` is supported as well.
+    
+        See also: [Request instances][0]
+    
+        [0]: /advanced/clients/#request-instances
+        """
+        if self._state == ClientState.CLOSED:
+            raise RuntimeError("Cannot send a request, as the client has been closed.")
+    
+        self._state = ClientState.OPENED
+        follow_redirects = (
+            self.follow_redirects
+            if isinstance(follow_redirects, UseClientDefault)
+            else follow_redirects
+        )
+    
+        self._set_timeout(request)
+    
+        auth = self._build_request_auth(request, auth)
+    
+>       response = await self._send_handling_auth(
+            request,
+            auth=auth,
+            follow_redirects=follow_redirects,
+            history=[],
+        )
+
+.venv/lib/python3.12/site-packages/httpx/_client.py:1629: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <httpx.AsyncClient object at 0x10ab59910>
+request = <Request('GET', 'http://127.0.0.1:19001/healthz')>
+auth = <httpx.Auth object at 0x10ab596d0>, follow_redirects = False
+history = []
+
+    async def _send_handling_auth(
+        self,
+        request: Request,
+        auth: Auth,
+        follow_redirects: bool,
+        history: list[Response],
+    ) -> Response:
+        auth_flow = auth.async_auth_flow(request)
+        try:
+            request = await auth_flow.__anext__()
+    
+            while True:
+>               response = await self._send_handling_redirects(
+                    request,
+                    follow_redirects=follow_redirects,
+                    history=history,
+                )
+
+.venv/lib/python3.12/site-packages/httpx/_client.py:1657: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <httpx.AsyncClient object at 0x10ab59910>
+request = <Request('GET', 'http://127.0.0.1:19001/healthz')>
+follow_redirects = False, history = []
+
+    async def _send_handling_redirects(
+        self,
+        request: Request,
+        follow_redirects: bool,
+        history: list[Response],
+    ) -> Response:
+        while True:
+            if len(history) > self.max_redirects:
+                raise TooManyRedirects(
+                    "Exceeded maximum allowed redirects.", request=request
+                )
+    
+            for hook in self._event_hooks["request"]:
+                await hook(request)
+    
+>           response = await self._send_single_request(request)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/httpx/_client.py:1694: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <httpx.AsyncClient object at 0x10ab59910>
+request = <Request('GET', 'http://127.0.0.1:19001/healthz')>
+
+    async def _send_single_request(self, request: Request) -> Response:
+        """
+        Sends a single request, without handling any redirections.
+        """
+        transport = self._transport_for_url(request.url)
+        start = time.perf_counter()
+    
+        if not isinstance(request.stream, AsyncByteStream):
+            raise RuntimeError(
+                "Attempted to send an sync request with an AsyncClient instance."
+            )
+    
+        with request_context(request=request):
+>           response = await transport.handle_async_request(request)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/httpx/_client.py:1730: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <httpx.AsyncHTTPTransport object at 0x10ac11520>
+request = <Request('GET', 'http://127.0.0.1:19001/healthz')>
+
+    async def handle_async_request(
+        self,
+        request: Request,
+    ) -> Response:
+        assert isinstance(request.stream, AsyncByteStream)
+        import httpcore
+    
+        req = httpcore.Request(
+            method=request.method,
+            url=httpcore.URL(
+                scheme=request.url.raw_scheme,
+                host=request.url.raw_host,
+                port=request.url.port,
+                target=request.url.raw_path,
+            ),
+            headers=request.headers.raw,
+            content=request.stream,
+            extensions=request.extensions,
+        )
+>       with map_httpcore_exceptions():
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/httpx/_transports/default.py:393: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <contextlib._GeneratorContextManager object at 0x10ac11ac0>
+typ = <class 'httpcore.ConnectError'>
+value = ConnectError(OSError('All connection attempts failed'))
+traceback = <traceback object at 0x10ac1d300>
+
+    def __exit__(self, typ, value, traceback):
+        if typ is None:
+            try:
+                next(self.gen)
+            except StopIteration:
+                return False
+            else:
+                try:
+                    raise RuntimeError("generator didn't stop")
+                finally:
+                    self.gen.close()
+        else:
+            if value is None:
+                # Need to force instantiation so we can reliably
+                # tell if we get the same exception back
+                value = typ()
+            try:
+>               self.gen.throw(value)
+
+/opt/local/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/contextlib.py:158: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    @contextlib.contextmanager
+    def map_httpcore_exceptions() -> typing.Iterator[None]:
+        global HTTPCORE_EXC_MAP
+        if len(HTTPCORE_EXC_MAP) == 0:
+            HTTPCORE_EXC_MAP = _load_httpcore_exceptions()
+        try:
+            yield
+        except Exception as exc:
+            mapped_exc = None
+    
+            for from_exc, to_exc in HTTPCORE_EXC_MAP.items():
+                if not isinstance(exc, from_exc):
+                    continue
+                # We want to map to the most specific exception we can find.
+                # Eg if `exc` is an `httpcore.ReadTimeout`, we want to map to
+                # `httpx.ReadTimeout`, not just `httpx.TimeoutException`.
+                if mapped_exc is None or issubclass(to_exc, mapped_exc):
+                    mapped_exc = to_exc
+    
+            if mapped_exc is None:  # pragma: no cover
+                raise
+    
+            message = str(exc)
+>           raise mapped_exc(message) from exc
+E           httpx.ConnectError: All connection attempts failed
+
+.venv/lib/python3.12/site-packages/httpx/_transports/default.py:118: ConnectError
+
+During handling of the above exception, another exception occurred:
+
+self = <Coroutine test_commit_is_recorded_in_ledger_and_receipt_log[P1]>
+
+    def setup(self) -> None:
+        runner_fixture_id = f"_{self._loop_scope}_scoped_runner"
+        if runner_fixture_id not in self.fixturenames:
+            self.fixturenames.append(runner_fixture_id)
+        # When loop factories are configured, resolve the loop factory
+        # fixture early so that a factory variant change cascades cache
+        # invalidation before any async fixture checks its cache.
+        hook_caller = self.config.hook.pytest_asyncio_loop_factories
+        if hook_caller.get_hookimpls():
+            _ = self._request.getfixturevalue(_asyncio_loop_factory.__name__)
+>       return super().setup()
+               ^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:558: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+fixturedef = <FixtureDef argname='provider' scope='function' baseid='tests/conformance'>
+request = <SubRequest 'provider' for <Coroutine test_commit_is_recorded_in_ledger_and_receipt_log[P1]>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        if (
+            fixturedef.argname == "event_loop_policy"
+            and fixturedef.func.__module__ != __name__
+        ):
+            warnings.warn(
+                PytestDeprecationWarning(_EVENT_LOOP_POLICY_FIXTURE_DEPRECATION_WARNING),
+            )
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+                return (yield)
+            if not _is_coroutine_or_asyncgen(fixturedef.func):
+                return (yield)
+        default_loop_scope = request.config.getini("asyncio_default_fixture_loop_scope")
+        loop_scope = (
+            getattr(fixturedef.func, "_loop_scope", None)
+            or default_loop_scope
+            or fixturedef.scope
+        )
+        runner_fixture_id = f"_{loop_scope}_scoped_runner"
+        runner = request.getfixturevalue(runner_fixture_id)
+        # Prevent the runner closing before the fixture's async teardown.
+        runner_fixturedef = request._get_active_fixturedef(runner_fixture_id)
+        runner_fixturedef.addfinalizer(
+            functools.partial(fixturedef.finish, request=request)
+        )
+        synchronizer = _fixture_synchronizer(fixturedef, runner, request)
+        _make_asyncio_fixture_function(synchronizer, loop_scope)
+        with MonkeyPatch.context() as c:
+            c.setattr(fixturedef, "func", synchronizer)
+>           hook_result = yield
+                          ^^^^^
+
+.venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:944: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+args = (), kwargs = {}
+
+    @functools.wraps(fixture_function)
+    def _asyncgen_fixture_wrapper(
+        *args: AsyncGenFixtureParams.args,
+        **kwargs: AsyncGenFixtureParams.kwargs,
+    ):
+        gen_obj = fixture_function(*args, **kwargs)
+    
+        async def setup():
+            res = await gen_obj.__anext__()
+            return res
+    
+        context = contextvars.copy_context()
+>       result = runner.run(setup(), context=context)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:407: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <asyncio.runners.Runner object at 0x10ab37b00>
+coro = <coroutine object _wrap_asyncgen_fixture.<locals>._asyncgen_fixture_wrapper.<locals>.setup at 0x10ab06cf0>
+context = <_contextvars.Context object at 0x10a9fa6c0>
+
+    def run(self, coro, *, context=None):
+        """Run a coroutine inside the embedded event loop."""
+        if not coroutines.iscoroutine(coro):
+            raise ValueError("a coroutine was expected, got {!r}".format(coro))
+    
+        if events._get_running_loop() is not None:
+            # fail fast with short traceback
+            raise RuntimeError(
+                "Runner.run() cannot be called from a running event loop")
+    
+        self._lazy_init()
+    
+        if context is None:
+            context = self._context
+        task = self._loop.create_task(coro, context=context)
+    
+        if (threading.current_thread() is threading.main_thread()
+            and signal.getsignal(signal.SIGINT) is signal.default_int_handler
+        ):
+            sigint_handler = functools.partial(self._on_sigint, main_task=task)
+            try:
+                signal.signal(signal.SIGINT, sigint_handler)
+            except ValueError:
+                # `signal.signal` may throw if `threading.main_thread` does
+                # not support signals (e.g. embedded interpreter with signals
+                # not registered - see gh-91880)
+                sigint_handler = None
+        else:
+            sigint_handler = None
+    
+        self._interrupt_count = 0
+        try:
+>           return self._loop.run_until_complete(task)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+/opt/local/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/runners.py:118: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <_UnixSelectorEventLoop running=False closed=False debug=False>
+future = <Task finished name='Task-1' coro=<_wrap_asyncgen_fixture.<locals>._asyncgen_fixture_wrapper.<locals>.setup() done, de...ion=provider stack not reachable at http://127.0.0.1:19001 — run `make up-test` first (All connection attempts failed)>
+
+    def run_until_complete(self, future):
+        """Run until the Future is done.
+    
+        If the argument is a coroutine, it is wrapped in a Task.
+    
+        WARNING: It would be disastrous to call run_until_complete()
+        with the same coroutine twice -- it would wrap it in two
+        different Tasks and that can't be good.
+    
+        Return the Future's result, or raise its exception.
+        """
+        self._check_closed()
+        self._check_running()
+    
+        new_task = not futures.isfuture(future)
+        future = tasks.ensure_future(future, loop=self)
+        if new_task:
+            # An exception is raised if the future didn't complete, so there
+            # is no need to log the "destroy pending task" message
+            future._log_destroy_pending = False
+    
+        future.add_done_callback(_run_until_complete_cb)
+        try:
+            self.run_forever()
+        except:
+            if new_task and future.done() and not future.cancelled():
+                # The coroutine raised a BaseException. Consume the exception
+                # to not log a warning, the caller doesn't have access to the
+                # local task.
+                future.exception()
+            raise
+        finally:
+            future.remove_done_callback(_run_until_complete_cb)
+        if not future.done():
+            raise RuntimeError('Event loop stopped before Future completed.')
+    
+>       return future.result()
+               ^^^^^^^^^^^^^^^
+
+/opt/local/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py:687: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    async def setup():
+>       res = await gen_obj.__anext__()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:403: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    @pytest.fixture
+    async def provider():
+        p = Provider()
+        try:
+            r = await p.admin.get("/healthz")
+        except httpx.TransportError as exc:
+>           pytest.fail(f"provider stack not reachable at {ORACLE_URL} — run `make up-test` first ({exc})")
+E           Failed: provider stack not reachable at http://127.0.0.1:19001 — run `make up-test` first (All connection attempts failed)
+
+tests/conformance/conftest.py:154: Failed
+___ ERROR at setup of test_commit_is_recorded_in_ledger_and_receipt_log[P2] ____
+
+    @contextlib.contextmanager
+    def map_httpcore_exceptions() -> typing.Iterator[None]:
+        global HTTPCORE_EXC_MAP
+        if len(HTTPCORE_EXC_MAP) == 0:
+            HTTPCORE_EXC_MAP = _load_httpcore_exceptions()
+        try:
+>           yield
+
+.venv/lib/python3.12/site-packages/httpx/_transports/default.py:101: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <httpx.AsyncHTTPTransport object at 0x10ac74ce0>
+request = <Request('GET', 'http://127.0.0.1:19001/healthz')>
+
+    async def handle_async_request(
+        self,
+        request: Request,
+    ) -> Response:
+        assert isinstance(request.stream, AsyncByteStream)
+        import httpcore
+    
+        req = httpcore.Request(
+            method=request.method,
+            url=httpcore.URL(
+                scheme=request.url.raw_scheme,
+                host=request.url.raw_host,
+                port=request.url.port,
+                target=request.url.raw_path,
+            ),
+            headers=request.headers.raw,
+            content=request.stream,
+            extensions=request.extensions,
+        )
+        with map_httpcore_exceptions():
+>           resp = await self._pool.handle_async_request(req)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/httpx/_transports/default.py:394: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <AsyncConnectionPool [Requests: 0 active, 0 queued | Connections: 0 active, 0 idle]>
+request = <Request [b'GET']>
+
+    async def handle_async_request(self, request: Request) -> Response:
+        """
+        Send an HTTP request, and return an HTTP response.
+    
+        This is the core implementation that is called into by `.request()` or `.stream()`.
+        """
+        scheme = request.url.scheme.decode()
+        if scheme == "":
+            raise UnsupportedProtocol(
+                "Request URL is missing an 'http://' or 'https://' protocol."
+            )
+        if scheme not in ("http", "https", "ws", "wss"):
+            raise UnsupportedProtocol(
+                f"Request URL has an unsupported protocol '{scheme}://'."
+            )
+    
+        timeouts = request.extensions.get("timeout", {})
+        timeout = timeouts.get("pool", None)
+    
+        with self._optional_thread_lock:
+            # Add the incoming request to our request queue.
+            pool_request = AsyncPoolRequest(request)
+            self._requests.append(pool_request)
+    
+        try:
+            while True:
+                with self._optional_thread_lock:
+                    # Assign incoming requests to available connections,
+                    # closing or creating new connections as required.
+                    closing = self._assign_requests_to_connections()
+                await self._close_connections(closing)
+    
+                # Wait until this request has an assigned connection.
+                connection = await pool_request.wait_for_connection(timeout=timeout)
+    
+                try:
+                    # Send the request on the assigned connection.
+                    response = await connection.handle_async_request(
+                        pool_request.request
+                    )
+                except ConnectionNotAvailable:
+                    # In some cases a connection may initially be available to
+                    # handle a request, but then become unavailable.
+                    #
+                    # In this case we clear the connection and try again.
+                    pool_request.clear_connection()
+                else:
+                    break  # pragma: nocover
+    
+        except BaseException as exc:
+            with self._optional_thread_lock:
+                # For any exception or cancellation we remove the request from
+                # the queue, and then re-assign requests to connections.
+                self._requests.remove(pool_request)
+                closing = self._assign_requests_to_connections()
+    
+            await self._close_connections(closing)
+>           raise exc from None
+
+.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py:256: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <AsyncConnectionPool [Requests: 0 active, 0 queued | Connections: 0 active, 0 idle]>
+request = <Request [b'GET']>
+
+    async def handle_async_request(self, request: Request) -> Response:
+        """
+        Send an HTTP request, and return an HTTP response.
+    
+        This is the core implementation that is called into by `.request()` or `.stream()`.
+        """
+        scheme = request.url.scheme.decode()
+        if scheme == "":
+            raise UnsupportedProtocol(
+                "Request URL is missing an 'http://' or 'https://' protocol."
+            )
+        if scheme not in ("http", "https", "ws", "wss"):
+            raise UnsupportedProtocol(
+                f"Request URL has an unsupported protocol '{scheme}://'."
+            )
+    
+        timeouts = request.extensions.get("timeout", {})
+        timeout = timeouts.get("pool", None)
+    
+        with self._optional_thread_lock:
+            # Add the incoming request to our request queue.
+            pool_request = AsyncPoolRequest(request)
+            self._requests.append(pool_request)
+    
+        try:
+            while True:
+                with self._optional_thread_lock:
+                    # Assign incoming requests to available connections,
+                    # closing or creating new connections as required.
+                    closing = self._assign_requests_to_connections()
+                await self._close_connections(closing)
+    
+                # Wait until this request has an assigned connection.
+                connection = await pool_request.wait_for_connection(timeout=timeout)
+    
+                try:
+                    # Send the request on the assigned connection.
+>                   response = await connection.handle_async_request(
+                        pool_request.request
+                    )
+
+.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py:236: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <AsyncHTTPConnection [CONNECTION FAILED]>, request = <Request [b'GET']>
+
+    async def handle_async_request(self, request: Request) -> Response:
+        if not self.can_handle_request(request.url.origin):
+            raise RuntimeError(
+                f"Attempted to send request to {request.url.origin} on connection to {self._origin}"
+            )
+    
+        try:
+            async with self._request_lock:
+                if self._connection is None:
+                    stream = await self._connect(request)
+    
+                    ssl_object = stream.get_extra_info("ssl_object")
+                    http2_negotiated = (
+                        ssl_object is not None
+                        and ssl_object.selected_alpn_protocol() == "h2"
+                    )
+                    if http2_negotiated or (self._http2 and not self._http1):
+                        from .http2 import AsyncHTTP2Connection
+    
+                        self._connection = AsyncHTTP2Connection(
+                            origin=self._origin,
+                            stream=stream,
+                            keepalive_expiry=self._keepalive_expiry,
+                        )
+                    else:
+                        self._connection = AsyncHTTP11Connection(
+                            origin=self._origin,
+                            stream=stream,
+                            keepalive_expiry=self._keepalive_expiry,
+                        )
+        except BaseException as exc:
+            self._connect_failed = True
+>           raise exc
+
+.venv/lib/python3.12/site-packages/httpcore/_async/connection.py:101: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <AsyncHTTPConnection [CONNECTION FAILED]>, request = <Request [b'GET']>
+
+    async def handle_async_request(self, request: Request) -> Response:
+        if not self.can_handle_request(request.url.origin):
+            raise RuntimeError(
+                f"Attempted to send request to {request.url.origin} on connection to {self._origin}"
+            )
+    
+        try:
+            async with self._request_lock:
+                if self._connection is None:
+>                   stream = await self._connect(request)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/httpcore/_async/connection.py:78: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <AsyncHTTPConnection [CONNECTION FAILED]>, request = <Request [b'GET']>
+
+    async def _connect(self, request: Request) -> AsyncNetworkStream:
+        timeouts = request.extensions.get("timeout", {})
+        sni_hostname = request.extensions.get("sni_hostname", None)
+        timeout = timeouts.get("connect", None)
+    
+        retries_left = self._retries
+        delays = exponential_backoff(factor=RETRIES_BACKOFF_FACTOR)
+    
+        while True:
+            try:
+                if self._uds is None:
+                    kwargs = {
+                        "host": self._origin.host.decode("ascii"),
+                        "port": self._origin.port,
+                        "local_address": self._local_address,
+                        "timeout": timeout,
+                        "socket_options": self._socket_options,
+                    }
+                    async with Trace("connect_tcp", logger, request, kwargs) as trace:
+>                       stream = await self._network_backend.connect_tcp(**kwargs)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/httpcore/_async/connection.py:124: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <httpcore._backends.auto.AutoBackend object at 0x10ac74f80>
+host = '127.0.0.1', port = 19001, timeout = 30, local_address = None
+socket_options = None
+
+    async def connect_tcp(
+        self,
+        host: str,
+        port: int,
+        timeout: float | None = None,
+        local_address: str | None = None,
+        socket_options: typing.Iterable[SOCKET_OPTION] | None = None,
+    ) -> AsyncNetworkStream:
+        await self._init_backend()
+>       return await self._backend.connect_tcp(
+            host,
+            port,
+            timeout=timeout,
+            local_address=local_address,
+            socket_options=socket_options,
+        )
+
+.venv/lib/python3.12/site-packages/httpcore/_backends/auto.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <httpcore.AnyIOBackend object at 0x10ac74ec0>, host = '127.0.0.1'
+port = 19001, timeout = 30, local_address = None, socket_options = []
+
+    async def connect_tcp(
+        self,
+        host: str,
+        port: int,
+        timeout: float | None = None,
+        local_address: str | None = None,
+        socket_options: typing.Iterable[SOCKET_OPTION] | None = None,
+    ) -> AsyncNetworkStream:  # pragma: nocover
+        if socket_options is None:
+            socket_options = []
+        exc_map = {
+            TimeoutError: ConnectTimeout,
+            OSError: ConnectError,
+            anyio.BrokenResourceError: ConnectError,
+        }
+>       with map_exceptions(exc_map):
+             ^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/httpcore/_backends/anyio.py:113: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <contextlib._GeneratorContextManager object at 0x10ac74f20>
+typ = <class 'OSError'>, value = OSError('All connection attempts failed')
+traceback = <traceback object at 0x10f62d300>
+
+    def __exit__(self, typ, value, traceback):
+        if typ is None:
+            try:
+                next(self.gen)
+            except StopIteration:
+                return False
+            else:
+                try:
+                    raise RuntimeError("generator didn't stop")
+                finally:
+                    self.gen.close()
+        else:
+            if value is None:
+                # Need to force instantiation so we can reliably
+                # tell if we get the same exception back
+                value = typ()
+            try:
+>               self.gen.throw(value)
+
+/opt/local/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/contextlib.py:158: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+map = {<class 'TimeoutError'>: <class 'httpcore.ConnectTimeout'>, <class 'OSError'>: <class 'httpcore.ConnectError'>, <class 'anyio.BrokenResourceError'>: <class 'httpcore.ConnectError'>}
+
+    @contextlib.contextmanager
+    def map_exceptions(map: ExceptionMapping) -> typing.Iterator[None]:
+        try:
+            yield
+        except Exception as exc:  # noqa: PIE786
+            for from_exc, to_exc in map.items():
+                if isinstance(exc, from_exc):
+>                   raise to_exc(exc) from exc
+E                   httpcore.ConnectError: All connection attempts failed
+
+.venv/lib/python3.12/site-packages/httpcore/_exceptions.py:14: ConnectError
+
+The above exception was the direct cause of the following exception:
+
+    @pytest.fixture
+    async def provider():
+        p = Provider()
+        try:
+>           r = await p.admin.get("/healthz")
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/conformance/conftest.py:152: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <httpx.AsyncClient object at 0x10ac74590>, url = '/healthz'
+params = None, headers = None, cookies = None
+auth = <httpx._client.UseClientDefault object at 0x108426a20>
+follow_redirects = <httpx._client.UseClientDefault object at 0x108426a20>
+timeout = <httpx._client.UseClientDefault object at 0x108426a20>
+extensions = None
+
+    async def get(
+        self,
+        url: URL | str,
+        *,
+        params: QueryParamTypes | None = None,
+        headers: HeaderTypes | None = None,
+        cookies: CookieTypes | None = None,
+        auth: AuthTypes | UseClientDefault | None = USE_CLIENT_DEFAULT,
+        follow_redirects: bool | UseClientDefault = USE_CLIENT_DEFAULT,
+        timeout: TimeoutTypes | UseClientDefault = USE_CLIENT_DEFAULT,
+        extensions: RequestExtensions | None = None,
+    ) -> Response:
+        """
+        Send a `GET` request.
+    
+        **Parameters**: See `httpx.request`.
+        """
+>       return await self.request(
+            "GET",
+            url,
+            params=params,
+            headers=headers,
+            cookies=cookies,
+            auth=auth,
+            follow_redirects=follow_redirects,
+            timeout=timeout,
+            extensions=extensions,
+        )
+
+.venv/lib/python3.12/site-packages/httpx/_client.py:1768: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <httpx.AsyncClient object at 0x10ac74590>, method = 'GET'
+url = '/healthz', content = None, data = None, files = None, json = None
+params = None, headers = None, cookies = None
+auth = <httpx._client.UseClientDefault object at 0x108426a20>
+follow_redirects = <httpx._client.UseClientDefault object at 0x108426a20>
+timeout = <httpx._client.UseClientDefault object at 0x108426a20>
+extensions = None
+
+    async def request(
+        self,
+        method: str,
+        url: URL | str,
+        *,
+        content: RequestContent | None = None,
+        data: RequestData | None = None,
+        files: RequestFiles | None = None,
+        json: typing.Any | None = None,
+        params: QueryParamTypes | None = None,
+        headers: HeaderTypes | None = None,
+        cookies: CookieTypes | None = None,
+        auth: AuthTypes | UseClientDefault | None = USE_CLIENT_DEFAULT,
+        follow_redirects: bool | UseClientDefault = USE_CLIENT_DEFAULT,
+        timeout: TimeoutTypes | UseClientDefault = USE_CLIENT_DEFAULT,
+        extensions: RequestExtensions | None = None,
+    ) -> Response:
+        """
+        Build and send a request.
+    
+        Equivalent to:
+    
+        ```python
+        request = client.build_request(...)
+        response = await client.send(request, ...)
+        ```
+    
+        See `AsyncClient.build_request()`, `AsyncClient.send()`
+        and [Merging of configuration][0] for how the various parameters
+        are merged with client-level configuration.
+    
+        [0]: /advanced/clients/#merging-of-configuration
+        """
+    
+        if cookies is not None:  # pragma: no cover
+            message = (
+                "Setting per-request cookies=<...> is being deprecated, because "
+                "the expected behaviour on cookie persistence is ambiguous. Set "
+                "cookies directly on the client instance instead."
+            )
+            warnings.warn(message, DeprecationWarning, stacklevel=2)
+    
+        request = self.build_request(
+            method=method,
+            url=url,
+            content=content,
+            data=data,
+            files=files,
+            json=json,
+            params=params,
+            headers=headers,
+            cookies=cookies,
+            timeout=timeout,
+            extensions=extensions,
+        )
+>       return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/httpx/_client.py:1540: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <httpx.AsyncClient object at 0x10ac74590>
+request = <Request('GET', 'http://127.0.0.1:19001/healthz')>, stream = False
+auth = <httpx.Auth object at 0x10ac759a0>, follow_redirects = False
+
+    async def send(
+        self,
+        request: Request,
+        *,
+        stream: bool = False,
+        auth: AuthTypes | UseClientDefault | None = USE_CLIENT_DEFAULT,
+        follow_redirects: bool | UseClientDefault = USE_CLIENT_DEFAULT,
+    ) -> Response:
+        """
+        Send a request.
+    
+        The request is sent as-is, unmodified.
+    
+        Typically you'll want to build one with `AsyncClient.build_request()`
+        so that any client-level configuration is merged into the request,
+        but passing an explicit `httpx.Request()` is supported as well.
+    
+        See also: [Request instances][0]
+    
+        [0]: /advanced/clients/#request-instances
+        """
+        if self._state == ClientState.CLOSED:
+            raise RuntimeError("Cannot send a request, as the client has been closed.")
+    
+        self._state = ClientState.OPENED
+        follow_redirects = (
+            self.follow_redirects
+            if isinstance(follow_redirects, UseClientDefault)
+            else follow_redirects
+        )
+    
+        self._set_timeout(request)
+    
+        auth = self._build_request_auth(request, auth)
+    
+>       response = await self._send_handling_auth(
+            request,
+            auth=auth,
+            follow_redirects=follow_redirects,
+            history=[],
+        )
+
+.venv/lib/python3.12/site-packages/httpx/_client.py:1629: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <httpx.AsyncClient object at 0x10ac74590>
+request = <Request('GET', 'http://127.0.0.1:19001/healthz')>
+auth = <httpx.Auth object at 0x10ac759a0>, follow_redirects = False
+history = []
+
+    async def _send_handling_auth(
+        self,
+        request: Request,
+        auth: Auth,
+        follow_redirects: bool,
+        history: list[Response],
+    ) -> Response:
+        auth_flow = auth.async_auth_flow(request)
+        try:
+            request = await auth_flow.__anext__()
+    
+            while True:
+>               response = await self._send_handling_redirects(
+                    request,
+                    follow_redirects=follow_redirects,
+                    history=history,
+                )
+
+.venv/lib/python3.12/site-packages/httpx/_client.py:1657: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <httpx.AsyncClient object at 0x10ac74590>
+request = <Request('GET', 'http://127.0.0.1:19001/healthz')>
+follow_redirects = False, history = []
+
+    async def _send_handling_redirects(
+        self,
+        request: Request,
+        follow_redirects: bool,
+        history: list[Response],
+    ) -> Response:
+        while True:
+            if len(history) > self.max_redirects:
+                raise TooManyRedirects(
+                    "Exceeded maximum allowed redirects.", request=request
+                )
+    
+            for hook in self._event_hooks["request"]:
+                await hook(request)
+    
+>           response = await self._send_single_request(request)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/httpx/_client.py:1694: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <httpx.AsyncClient object at 0x10ac74590>
+request = <Request('GET', 'http://127.0.0.1:19001/healthz')>
+
+    async def _send_single_request(self, request: Request) -> Response:
+        """
+        Sends a single request, without handling any redirections.
+        """
+        transport = self._transport_for_url(request.url)
+        start = time.perf_counter()
+    
+        if not isinstance(request.stream, AsyncByteStream):
+            raise RuntimeError(
+                "Attempted to send an sync request with an AsyncClient instance."
+            )
+    
+        with request_context(request=request):
+>           response = await transport.handle_async_request(request)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/httpx/_client.py:1730: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <httpx.AsyncHTTPTransport object at 0x10ac74ce0>
+request = <Request('GET', 'http://127.0.0.1:19001/healthz')>
+
+    async def handle_async_request(
+        self,
+        request: Request,
+    ) -> Response:
+        assert isinstance(request.stream, AsyncByteStream)
+        import httpcore
+    
+        req = httpcore.Request(
+            method=request.method,
+            url=httpcore.URL(
+                scheme=request.url.raw_scheme,
+                host=request.url.raw_host,
+                port=request.url.port,
+                target=request.url.raw_path,
+            ),
+            headers=request.headers.raw,
+            content=request.stream,
+            extensions=request.extensions,
+        )
+>       with map_httpcore_exceptions():
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/httpx/_transports/default.py:393: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <contextlib._GeneratorContextManager object at 0x10ac74cb0>
+typ = <class 'httpcore.ConnectError'>
+value = ConnectError(OSError('All connection attempts failed'))
+traceback = <traceback object at 0x10f62d240>
+
+    def __exit__(self, typ, value, traceback):
+        if typ is None:
+            try:
+                next(self.gen)
+            except StopIteration:
+                return False
+            else:
+                try:
+                    raise RuntimeError("generator didn't stop")
+                finally:
+                    self.gen.close()
+        else:
+            if value is None:
+                # Need to force instantiation so we can reliably
+                # tell if we get the same exception back
+                value = typ()
+            try:
+>               self.gen.throw(value)
+
+/opt/local/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/contextlib.py:158: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    @contextlib.contextmanager
+    def map_httpcore_exceptions() -> typing.Iterator[None]:
+        global HTTPCORE_EXC_MAP
+        if len(HTTPCORE_EXC_MAP) == 0:
+            HTTPCORE_EXC_MAP = _load_httpcore_exceptions()
+        try:
+            yield
+        except Exception as exc:
+            mapped_exc = None
+    
+            for from_exc, to_exc in HTTPCORE_EXC_MAP.items():
+                if not isinstance(exc, from_exc):
+                    continue
+                # We want to map to the most specific exception we can find.
+                # Eg if `exc` is an `httpcore.ReadTimeout`, we want to map to
+                # `httpx.ReadTimeout`, not just `httpx.TimeoutException`.
+                if mapped_exc is None or issubclass(to_exc, mapped_exc):
+                    mapped_exc = to_exc
+    
+            if mapped_exc is None:  # pragma: no cover
+                raise
+    
+            message = str(exc)
+>           raise mapped_exc(message) from exc
+E           httpx.ConnectError: All connection attempts failed
+
+.venv/lib/python3.12/site-packages/httpx/_transports/default.py:118: ConnectError
+
+During handling of the above exception, another exception occurred:
+
+self = <Coroutine test_commit_is_recorded_in_ledger_and_receipt_log[P2]>
+
+    def setup(self) -> None:
+        runner_fixture_id = f"_{self._loop_scope}_scoped_runner"
+        if runner_fixture_id not in self.fixturenames:
+            self.fixturenames.append(runner_fixture_id)
+        # When loop factories are configured, resolve the loop factory
+        # fixture early so that a factory variant change cascades cache
+        # invalidation before any async fixture checks its cache.
+        hook_caller = self.config.hook.pytest_asyncio_loop_factories
+        if hook_caller.get_hookimpls():
+            _ = self._request.getfixturevalue(_asyncio_loop_factory.__name__)
+>       return super().setup()
+               ^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:558: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+fixturedef = <FixtureDef argname='provider' scope='function' baseid='tests/conformance'>
+request = <SubRequest 'provider' for <Coroutine test_commit_is_recorded_in_ledger_and_receipt_log[P2]>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        if (
+            fixturedef.argname == "event_loop_policy"
+            and fixturedef.func.__module__ != __name__
+        ):
+            warnings.warn(
+                PytestDeprecationWarning(_EVENT_LOOP_POLICY_FIXTURE_DEPRECATION_WARNING),
+            )
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+                return (yield)
+            if not _is_coroutine_or_asyncgen(fixturedef.func):
+                return (yield)
+        default_loop_scope = request.config.getini("asyncio_default_fixture_loop_scope")
+        loop_scope = (
+            getattr(fixturedef.func, "_loop_scope", None)
+            or default_loop_scope
+            or fixturedef.scope
+        )
+        runner_fixture_id = f"_{loop_scope}_scoped_runner"
+        runner = request.getfixturevalue(runner_fixture_id)
+        # Prevent the runner closing before the fixture's async teardown.
+        runner_fixturedef = request._get_active_fixturedef(runner_fixture_id)
+        runner_fixturedef.addfinalizer(
+            functools.partial(fixturedef.finish, request=request)
+        )
+        synchronizer = _fixture_synchronizer(fixturedef, runner, request)
+        _make_asyncio_fixture_function(synchronizer, loop_scope)
+        with MonkeyPatch.context() as c:
+            c.setattr(fixturedef, "func", synchronizer)
+>           hook_result = yield
+                          ^^^^^
+
+.venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:944: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+args = (), kwargs = {}
+
+    @functools.wraps(fixture_function)
+    def _asyncgen_fixture_wrapper(
+        *args: AsyncGenFixtureParams.args,
+        **kwargs: AsyncGenFixtureParams.kwargs,
+    ):
+        gen_obj = fixture_function(*args, **kwargs)
+    
+        async def setup():
+            res = await gen_obj.__anext__()
+            return res
+    
+        context = contextvars.copy_context()
+>       result = runner.run(setup(), context=context)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:407: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <asyncio.runners.Runner object at 0x10ac13230>
+coro = <coroutine object _wrap_asyncgen_fixture.<locals>._asyncgen_fixture_wrapper.<locals>.setup at 0x10f544110>
+context = <_contextvars.Context object at 0x10ac1d240>
+
+    def run(self, coro, *, context=None):
+        """Run a coroutine inside the embedded event loop."""
+        if not coroutines.iscoroutine(coro):
+            raise ValueError("a coroutine was expected, got {!r}".format(coro))
+    
+        if events._get_running_loop() is not None:
+            # fail fast with short traceback
+            raise RuntimeError(
+                "Runner.run() cannot be called from a running event loop")
+    
+        self._lazy_init()
+    
+        if context is None:
+            context = self._context
+        task = self._loop.create_task(coro, context=context)
+    
+        if (threading.current_thread() is threading.main_thread()
+            and signal.getsignal(signal.SIGINT) is signal.default_int_handler
+        ):
+            sigint_handler = functools.partial(self._on_sigint, main_task=task)
+            try:
+                signal.signal(signal.SIGINT, sigint_handler)
+            except ValueError:
+                # `signal.signal` may throw if `threading.main_thread` does
+                # not support signals (e.g. embedded interpreter with signals
+                # not registered - see gh-91880)
+                sigint_handler = None
+        else:
+            sigint_handler = None
+    
+        self._interrupt_count = 0
+        try:
+>           return self._loop.run_until_complete(task)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+/opt/local/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/runners.py:118: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <_UnixSelectorEventLoop running=False closed=False debug=False>
+future = <Task finished name='Task-6' coro=<_wrap_asyncgen_fixture.<locals>._asyncgen_fixture_wrapper.<locals>.setup() done, de...ion=provider stack not reachable at http://127.0.0.1:19001 — run `make up-test` first (All connection attempts failed)>
+
+    def run_until_complete(self, future):
+        """Run until the Future is done.
+    
+        If the argument is a coroutine, it is wrapped in a Task.
+    
+        WARNING: It would be disastrous to call run_until_complete()
+        with the same coroutine twice -- it would wrap it in two
+        different Tasks and that can't be good.
+    
+        Return the Future's result, or raise its exception.
+        """
+        self._check_closed()
+        self._check_running()
+    
+        new_task = not futures.isfuture(future)
+        future = tasks.ensure_future(future, loop=self)
+        if new_task:
+            # An exception is raised if the future didn't complete, so there
+            # is no need to log the "destroy pending task" message
+            future._log_destroy_pending = False
+    
+        future.add_done_callback(_run_until_complete_cb)
+        try:
+            self.run_forever()
+        except:
+            if new_task and future.done() and not future.cancelled():
+                # The coroutine raised a BaseException. Consume the exception
+                # to not log a warning, the caller doesn't have access to the
+                # local task.
+                future.exception()
+            raise
+        finally:
+            future.remove_done_callback(_run_until_complete_cb)
+        if not future.done():
+            raise RuntimeError('Event loop stopped before Future completed.')
+    
+>       return future.result()
+               ^^^^^^^^^^^^^^^
+
+/opt/local/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py:687: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    async def setup():
+>       res = await gen_obj.__anext__()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:403: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    @pytest.fixture
+    async def provider():
+        p = Provider()
+        try:
+            r = await p.admin.get("/healthz")
+        except httpx.TransportError as exc:
+>           pytest.fail(f"provider stack not reachable at {ORACLE_URL} — run `make up-test` first ({exc})")
+E           Failed: provider stack not reachable at http://127.0.0.1:19001 — run `make up-test` first (All connection attempts failed)
+
+tests/conformance/conftest.py:154: Failed
+___ ERROR at setup of test_commit_is_recorded_in_ledger_and_receipt_log[P3] ____
+
+    @contextlib.contextmanager
+    def map_httpcore_exceptions() -> typing.Iterator[None]:
+        global HTTPCORE_EXC_MAP
+        if len(HTTPCORE_EXC_MAP) == 0:
+            HTTPCORE_EXC_MAP = _load_httpcore_exceptions()
+        try:
+>           yield
+
+.venv/lib/python3.12/site-packages/httpx/_transports/default.py:101: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <httpx.AsyncHTTPTransport object at 0x10ad0ef60>
+request = <Request('GET', 'http://127.0.0.1:19001/healthz')>
+
+    async def handle_async_request(
+        self,
+        request: Request,
+    ) -> Response:
+        assert isinstance(request.stream, AsyncByteStream)
+        import httpcore
+    
+        req = httpcore.Request(
+            method=request.method,
+            url=httpcore.URL(
+                scheme=request.url.raw_scheme,
+                host=request.url.raw_host,
+                port=request.url.port,
+                target=request.url.raw_path,
+            ),
+            headers=request.headers.raw,
+            content=request.stream,
+            extensions=request.extensions,
+        )
+        with map_httpcore_exceptions():
+>           resp = await self._pool.handle_async_request(req)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/httpx/_transports/default.py:394: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <AsyncConnectionPool [Requests: 0 active, 0 queued | Connections: 0 active, 0 idle]>
+request = <Request [b'GET']>
+
+    async def handle_async_request(self, request: Request) -> Response:
+        """
+        Send an HTTP request, and return an HTTP response.
+    
+        This is the core implementation that is called into by `.request()` or `.stream()`.
+        """
+        scheme = request.url.scheme.decode()
+        if scheme == "":
+            raise UnsupportedProtocol(
+                "Request URL is missing an 'http://' or 'https://' protocol."
+            )
+        if scheme not in ("http", "https", "ws", "wss"):
+            raise UnsupportedProtocol(
+                f"Request URL has an unsupported protocol '{scheme}://'."
+            )
+    
+        timeouts = request.extensions.get("timeout", {})
+        timeout = timeouts.get("pool", None)
+    
+        with self._optional_thread_lock:
+            # Add the incoming request to our request queue.
+            pool_request = AsyncPoolRequest(request)
+            self._requests.append(pool_request)
+    
+        try:
+            while True:
+                with self._optional_thread_lock:
+                    # Assign incoming requests to available connections,
+                    # closing or creating new connections as required.
+                    closing = self._assign_requests_to_connections()
+                await self._close_connections(closing)
+    
+                # Wait until this request has an assigned connection.
+                connection = await pool_request.wait_for_connection(timeout=timeout)
+    
+                try:
+                    # Send the request on the assigned connection.
+                    response = await connection.handle_async_request(
+                        pool_request.request
+                    )
+                except ConnectionNotAvailable:
+                    # In some cases a connection may initially be available to
+                    # handle a request, but then become unavailable.
+                    #
+                    # In this case we clear the connection and try again.
+                    pool_request.clear_connection()
+                else:
+                    break  # pragma: nocover
+    
+        except BaseException as exc:
+            with self._optional_thread_lock:
+                # For any exception or cancellation we remove the request from
+                # the queue, and then re-assign requests to connections.
+                self._requests.remove(pool_request)
+                closing = self._assign_requests_to_connections()
+    
+            await self._close_connections(closing)
+>           raise exc from None
+
+.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py:256: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <AsyncConnectionPool [Requests: 0 active, 0 queued | Connections: 0 active, 0 idle]>
+request = <Request [b'GET']>
+
+    async def handle_async_request(self, request: Request) -> Response:
+        """
+        Send an HTTP request, and return an HTTP response.
+    
+        This is the core implementation that is called into by `.request()` or `.stream()`.
+        """
+        scheme = request.url.scheme.decode()
+        if scheme == "":
+            raise UnsupportedProtocol(
+                "Request URL is missing an 'http://' or 'https://' protocol."
+            )
+        if scheme not in ("http", "https", "ws", "wss"):
+            raise UnsupportedProtocol(
+                f"Request URL has an unsupported protocol '{scheme}://'."
+            )
+    
+        timeouts = request.extensions.get("timeout", {})
+        timeout = timeouts.get("pool", None)
+    
+        with self._optional_thread_lock:
+            # Add the incoming request to our request queue.
+            pool_request = AsyncPoolRequest(request)
+            self._requests.append(pool_request)
+    
+        try:
+            while True:
+                with self._optional_thread_lock:
+                    # Assign incoming requests to available connections,
+                    # closing or creating new connections as required.
+                    closing = self._assign_requests_to_connections()
+                await self._close_connections(closing)
+    
+                # Wait until this request has an assigned connection.
+                connection = await pool_request.wait_for_connection(timeout=timeout)
+    
+                try:
+                    # Send the request on the assigned connection.
+>                   response = await connection.handle_async_request(
+                        pool_request.request
+                    )
+
+.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py:236: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <AsyncHTTPConnection [CONNECTION FAILED]>, request = <Request [b'GET']>
+
+    async def handle_async_request(self, request: Request) -> Response:
+        if not self.can_handle_request(request.url.origin):
+            raise RuntimeError(
+                f"Attempted to send request to {request.url.origin} on connection to {self._origin}"
+            )
+    
+        try:
+            async with self._request_lock:
+                if self._connection is None:
+                    stream = await self._connect(request)
+    
+                    ssl_object = stream.get_extra_info("ssl_object")
+                    http2_negotiated = (
+                        ssl_object is not None
+                        and ssl_object.selected_alpn_protocol() == "h2"
+                    )
+                    if http2_negotiated or (self._http2 and not self._http1):
+                        from .http2 import AsyncHTTP2Connection
+    
+                        self._connection = AsyncHTTP2Connection(
+                            origin=self._origin,
+                            stream=stream,
+                            keepalive_expiry=self._keepalive_expiry,
+                        )
+                    else:
+                        self._connection = AsyncHTTP11Connection(
+                            origin=self._origin,
+                            stream=stream,
+                            keepalive_expiry=self._keepalive_expiry,
+                        )
+        except BaseException as exc:
+            self._connect_failed = True
+>           raise exc
+
+.venv/lib/python3.12/site-packages/httpcore/_async/connection.py:101: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <AsyncHTTPConnection [CONNECTION FAILED]>, request = <Request [b'GET']>
+
+    async def handle_async_request(self, request: Request) -> Response:
+        if not self.can_handle_request(request.url.origin):
+            raise RuntimeError(
+                f"Attempted to send request to {request.url.origin} on connection to {self._origin}"
+            )
+    
+        try:
+            async with self._request_lock:
+                if self._connection is None:
+>                   stream = await self._connect(request)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/httpcore/_async/connection.py:78: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <AsyncHTTPConnection [CONNECTION FAILED]>, request = <Request [b'GET']>
+
+    async def _connect(self, request: Request) -> AsyncNetworkStream:
+        timeouts = request.extensions.get("timeout", {})
+        sni_hostname = request.extensions.get("sni_hostname", None)
+        timeout = timeouts.get("connect", None)
+    
+        retries_left = self._retries
+        delays = exponential_backoff(factor=RETRIES_BACKOFF_FACTOR)
+    
+        while True:
+            try:
+                if self._uds is None:
+                    kwargs = {
+                        "host": self._origin.host.decode("ascii"),
+                        "port": self._origin.port,
+                        "local_address": self._local_address,
+                        "timeout": timeout,
+                        "socket_options": self._socket_options,
+                    }
+                    async with Trace("connect_tcp", logger, request, kwargs) as trace:
+>                       stream = await self._network_backend.connect_tcp(**kwargs)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/httpcore/_async/connection.py:124: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <httpcore._backends.auto.AutoBackend object at 0x10ad0c500>
+host = '127.0.0.1', port = 19001, timeout = 30, local_address = None
+socket_options = None
+
+    async def connect_tcp(
+        self,
+        host: str,
+        port: int,
+        timeout: float | None = None,
+        local_address: str | None = None,
+        socket_options: typing.Iterable[SOCKET_OPTION] | None = None,
+    ) -> AsyncNetworkStream:
+        await self._init_backend()
+>       return await self._backend.connect_tcp(
+            host,
+            port,
+            timeout=timeout,
+            local_address=local_address,
+            socket_options=socket_options,
+        )
+
+.venv/lib/python3.12/site-packages/httpcore/_backends/auto.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <httpcore.AnyIOBackend object at 0x10ad0c3e0>, host = '127.0.0.1'
+port = 19001, timeout = 30, local_address = None, socket_options = []
+
+    async def connect_tcp(
+        self,
+        host: str,
+        port: int,
+        timeout: float | None = None,
+        local_address: str | None = None,
+        socket_options: typing.Iterable[SOCKET_OPTION] | None = None,
+    ) -> AsyncNetworkStream:  # pragma: nocover
+        if socket_options is None:
+            socket_options = []
+        exc_map = {
+            TimeoutError: ConnectTimeout,
+            OSError: ConnectError,
+            anyio.BrokenResourceError: ConnectError,
+        }
+>       with map_exceptions(exc_map):
+             ^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/httpcore/_backends/anyio.py:113: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <contextlib._GeneratorContextManager object at 0x10ad0c470>
+typ = <class 'OSError'>, value = OSError('All connection attempts failed')
+traceback = <traceback object at 0x10f36a180>
+
+    def __exit__(self, typ, value, traceback):
+        if typ is None:
+            try:
+                next(self.gen)
+            except StopIteration:
+                return False
+            else:
+                try:
+                    raise RuntimeError("generator didn't stop")
+                finally:
+                    self.gen.close()
+        else:
+            if value is None:
+                # Need to force instantiation so we can reliably
+                # tell if we get the same exception back
+                value = typ()
+            try:
+>               self.gen.throw(value)
+
+/opt/local/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/contextlib.py:158: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+map = {<class 'TimeoutError'>: <class 'httpcore.ConnectTimeout'>, <class 'OSError'>: <class 'httpcore.ConnectError'>, <class 'anyio.BrokenResourceError'>: <class 'httpcore.ConnectError'>}
+
+    @contextlib.contextmanager
+    def map_exceptions(map: ExceptionMapping) -> typing.Iterator[None]:
+        try:
+            yield
+        except Exception as exc:  # noqa: PIE786
+            for from_exc, to_exc in map.items():
+                if isinstance(exc, from_exc):
+>                   raise to_exc(exc) from exc
+E                   httpcore.ConnectError: All connection attempts failed
+
+.venv/lib/python3.12/site-packages/httpcore/_exceptions.py:14: ConnectError
+
+The above exception was the direct cause of the following exception:
+
+    @pytest.fixture
+    async def provider():
+        p = Provider()
+        try:
+>           r = await p.admin.get("/healthz")
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/conformance/conftest.py:152: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <httpx.AsyncClient object at 0x10ad0d100>, url = '/healthz'
+params = None, headers = None, cookies = None
+auth = <httpx._client.UseClientDefault object at 0x108426a20>
+follow_redirects = <httpx._client.UseClientDefault object at 0x108426a20>
+timeout = <httpx._client.UseClientDefault object at 0x108426a20>
+extensions = None
+
+    async def get(
+        self,
+        url: URL | str,
+        *,
+        params: QueryParamTypes | None = None,
+        headers: HeaderTypes | None = None,
+        cookies: CookieTypes | None = None,
+        auth: AuthTypes | UseClientDefault | None = USE_CLIENT_DEFAULT,
+        follow_redirects: bool | UseClientDefault = USE_CLIENT_DEFAULT,
+        timeout: TimeoutTypes | UseClientDefault = USE_CLIENT_DEFAULT,
+        extensions: RequestExtensions | None = None,
+    ) -> Response:
+        """
+        Send a `GET` request.
+    
+        **Parameters**: See `httpx.request`.
+        """
+>       return await self.request(
+            "GET",
+            url,
+            params=params,
+            headers=headers,
+            cookies=cookies,
+            auth=auth,
+            follow_redirects=follow_redirects,
+            timeout=timeout,
+            extensions=extensions,
+        )
+
+.venv/lib/python3.12/site-packages/httpx/_client.py:1768: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <httpx.AsyncClient object at 0x10ad0d100>, method = 'GET'
+url = '/healthz', content = None, data = None, files = None, json = None
+params = None, headers = None, cookies = None
+auth = <httpx._client.UseClientDefault object at 0x108426a20>
+follow_redirects = <httpx._client.UseClientDefault object at 0x108426a20>
+timeout = <httpx._client.UseClientDefault object at 0x108426a20>
+extensions = None
+
+    async def request(
+        self,
+        method: str,
+        url: URL | str,
+        *,
+        content: RequestContent | None = None,
+        data: RequestData | None = None,
+        files: RequestFiles | None = None,
+        json: typing.Any | None = None,
+        params: QueryParamTypes | None = None,
+        headers: HeaderTypes | None = None,
+        cookies: CookieTypes | None = None,
+        auth: AuthTypes | UseClientDefault | None = USE_CLIENT_DEFAULT,
+        follow_redirects: bool | UseClientDefault = USE_CLIENT_DEFAULT,
+        timeout: TimeoutTypes | UseClientDefault = USE_CLIENT_DEFAULT,
+        extensions: RequestExtensions | None = None,
+    ) -> Response:
+        """
+        Build and send a request.
+    
+        Equivalent to:
+    
+        ```python
+        request = client.build_request(...)
+        response = await client.send(request, ...)
+        ```
+    
+        See `AsyncClient.build_request()`, `AsyncClient.send()`
+        and [Merging of configuration][0] for how the various parameters
+        are merged with client-level configuration.
+    
+        [0]: /advanced/clients/#merging-of-configuration
+        """
+    
+        if cookies is not None:  # pragma: no cover
+            message = (
+                "Setting per-request cookies=<...> is being deprecated, because "
+                "the expected behaviour on cookie persistence is ambiguous. Set "
+                "cookies directly on the client instance instead."
+            )
+            warnings.warn(message, DeprecationWarning, stacklevel=2)
+    
+        request = self.build_request(
+            method=method,
+            url=url,
+            content=content,
+            data=data,
+            files=files,
+            json=json,
+            params=params,
+            headers=headers,
+            cookies=cookies,
+            timeout=timeout,
+            extensions=extensions,
+        )
+>       return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/httpx/_client.py:1540: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <httpx.AsyncClient object at 0x10ad0d100>
+request = <Request('GET', 'http://127.0.0.1:19001/healthz')>, stream = False
+auth = <httpx.Auth object at 0x10ad0c260>, follow_redirects = False
+
+    async def send(
+        self,
+        request: Request,
+        *,
+        stream: bool = False,
+        auth: AuthTypes | UseClientDefault | None = USE_CLIENT_DEFAULT,
+        follow_redirects: bool | UseClientDefault = USE_CLIENT_DEFAULT,
+    ) -> Response:
+        """
+        Send a request.
+    
+        The request is sent as-is, unmodified.
+    
+        Typically you'll want to build one with `AsyncClient.build_request()`
+        so that any client-level configuration is merged into the request,
+        but passing an explicit `httpx.Request()` is supported as well.
+    
+        See also: [Request instances][0]
+    
+        [0]: /advanced/clients/#request-instances
+        """
+        if self._state == ClientState.CLOSED:
+            raise RuntimeError("Cannot send a request, as the client has been closed.")
+    
+        self._state = ClientState.OPENED
+        follow_redirects = (
+            self.follow_redirects
+            if isinstance(follow_redirects, UseClientDefault)
+            else follow_redirects
+        )
+    
+        self._set_timeout(request)
+    
+        auth = self._build_request_auth(request, auth)
+    
+>       response = await self._send_handling_auth(
+            request,
+            auth=auth,
+            follow_redirects=follow_redirects,
+            history=[],
+        )
+
+.venv/lib/python3.12/site-packages/httpx/_client.py:1629: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <httpx.AsyncClient object at 0x10ad0d100>
+request = <Request('GET', 'http://127.0.0.1:19001/healthz')>
+auth = <httpx.Auth object at 0x10ad0c260>, follow_redirects = False
+history = []
+
+    async def _send_handling_auth(
+        self,
+        request: Request,
+        auth: Auth,
+        follow_redirects: bool,
+        history: list[Response],
+    ) -> Response:
+        auth_flow = auth.async_auth_flow(request)
+        try:
+            request = await auth_flow.__anext__()
+    
+            while True:
+>               response = await self._send_handling_redirects(
+                    request,
+                    follow_redirects=follow_redirects,
+                    history=history,
+                )
+
+.venv/lib/python3.12/site-packages/httpx/_client.py:1657: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <httpx.AsyncClient object at 0x10ad0d100>
+request = <Request('GET', 'http://127.0.0.1:19001/healthz')>
+follow_redirects = False, history = []
+
+    async def _send_handling_redirects(
+        self,
+        request: Request,
+        follow_redirects: bool,
+        history: list[Response],
+    ) -> Response:
+        while True:
+            if len(history) > self.max_redirects:
+                raise TooManyRedirects(
+                    "Exceeded maximum allowed redirects.", request=request
+                )
+    
+            for hook in self._event_hooks["request"]:
+                await hook(request)
+    
+>           response = await self._send_single_request(request)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/httpx/_client.py:1694: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <httpx.AsyncClient object at 0x10ad0d100>
+request = <Request('GET', 'http://127.0.0.1:19001/healthz')>
+
+    async def _send_single_request(self, request: Request) -> Response:
+        """
+        Sends a single request, without handling any redirections.
+        """
+        transport = self._transport_for_url(request.url)
+        start = time.perf_counter()
+    
+        if not isinstance(request.stream, AsyncByteStream):
+            raise RuntimeError(
+                "Attempted to send an sync request with an AsyncClient instance."
+            )
+    
+        with request_context(request=request):
+>           response = await transport.handle_async_request(request)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/httpx/_client.py:1730: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <httpx.AsyncHTTPTransport object at 0x10ad0ef60>
+request = <Request('GET', 'http://127.0.0.1:19001/healthz')>
+
+    async def handle_async_request(
+        self,
+        request: Request,
+    ) -> Response:
+        assert isinstance(request.stream, AsyncByteStream)
+        import httpcore
+    
+        req = httpcore.Request(
+            method=request.method,
+            url=httpcore.URL(
+                scheme=request.url.raw_scheme,
+                host=request.url.raw_host,
+                port=request.url.port,
+                target=request.url.raw_path,
+            ),
+            headers=request.headers.raw,
+            content=request.stream,
+            extensions=request.extensions,
+        )
+>       with map_httpcore_exceptions():
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/httpx/_transports/default.py:393: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <contextlib._GeneratorContextManager object at 0x10ad0c170>
+typ = <class 'httpcore.ConnectError'>
+value = ConnectError(OSError('All connection attempts failed'))
+traceback = <traceback object at 0x10f36a1c0>
+
+    def __exit__(self, typ, value, traceback):
+        if typ is None:
+            try:
+                next(self.gen)
+            except StopIteration:
+                return False
+            else:
+                try:
+                    raise RuntimeError("generator didn't stop")
+                finally:
+                    self.gen.close()
+        else:
+            if value is None:
+                # Need to force instantiation so we can reliably
+                # tell if we get the same exception back
+                value = typ()
+            try:
+>               self.gen.throw(value)
+
+/opt/local/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/contextlib.py:158: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    @contextlib.contextmanager
+    def map_httpcore_exceptions() -> typing.Iterator[None]:
+        global HTTPCORE_EXC_MAP
+        if len(HTTPCORE_EXC_MAP) == 0:
+            HTTPCORE_EXC_MAP = _load_httpcore_exceptions()
+        try:
+            yield
+        except Exception as exc:
+            mapped_exc = None
+    
+            for from_exc, to_exc in HTTPCORE_EXC_MAP.items():
+                if not isinstance(exc, from_exc):
+                    continue
+                # We want to map to the most specific exception we can find.
+                # Eg if `exc` is an `httpcore.ReadTimeout`, we want to map to
+                # `httpx.ReadTimeout`, not just `httpx.TimeoutException`.
+                if mapped_exc is None or issubclass(to_exc, mapped_exc):
+                    mapped_exc = to_exc
+    
+            if mapped_exc is None:  # pragma: no cover
+                raise
+    
+            message = str(exc)
+>           raise mapped_exc(message) from exc
+E           httpx.ConnectError: All connection attempts failed
+
+.venv/lib/python3.12/site-packages/httpx/_transports/default.py:118: ConnectError
+
+During handling of the above exception, another exception occurred:
+
+self = <Coroutine test_commit_is_recorded_in_ledger_and_receipt_log[P3]>
+
+    def setup(self) -> None:
+        runner_fixture_id = f"_{self._loop_scope}_scoped_runner"
+        if runner_fixture_id not in self.fixturenames:
+            self.fixturenames.append(runner_fixture_id)
+        # When loop factories are configured, resolve the loop factory
+        # fixture early so that a factory variant change cascades cache
+        # invalidation before any async fixture checks its cache.
+        hook_caller = self.config.hook.pytest_asyncio_loop_factories
+        if hook_caller.get_hookimpls():
+            _ = self._request.getfixturevalue(_asyncio_loop_factory.__name__)
+>       return super().setup()
+               ^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:558: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+fixturedef = <FixtureDef argname='provider' scope='function' baseid='tests/conformance'>
+request = <SubRequest 'provider' for <Coroutine test_commit_is_recorded_in_ledger_and_receipt_log[P3]>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        if (
+            fixturedef.argname == "event_loop_policy"
+            and fixturedef.func.__module__ != __name__
+        ):
+            warnings.warn(
+                PytestDeprecationWarning(_EVENT_LOOP_POLICY_FIXTURE_DEPRECATION_WARNING),
+            )
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+                return (yield)
+            if not _is_coroutine_or_asyncgen(fixturedef.func):
+                return (yield)
+        default_loop_scope = request.config.getini("asyncio_default_fixture_loop_scope")
+        loop_scope = (
+            getattr(fixturedef.func, "_loop_scope", None)
+            or default_loop_scope
+            or fixturedef.scope
+        )
+        runner_fixture_id = f"_{loop_scope}_scoped_runner"
+        runner = request.getfixturevalue(runner_fixture_id)
+        # Prevent the runner closing before the fixture's async teardown.
+        runner_fixturedef = request._get_active_fixturedef(runner_fixture_id)
+        runner_fixturedef.addfinalizer(
+            functools.partial(fixturedef.finish, request=request)
+        )
+        synchronizer = _fixture_synchronizer(fixturedef, runner, request)
+        _make_asyncio_fixture_function(synchronizer, loop_scope)
+        with MonkeyPatch.context() as c:
+            c.setattr(fixturedef, "func", synchronizer)
+>           hook_result = yield
+                          ^^^^^
+
+.venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:944: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+args = (), kwargs = {}
+
+    @functools.wraps(fixture_function)
+    def _asyncgen_fixture_wrapper(
+        *args: AsyncGenFixtureParams.args,
+        **kwargs: AsyncGenFixtureParams.kwargs,
+    ):
+        gen_obj = fixture_function(*args, **kwargs)
+    
+        async def setup():
+            res = await gen_obj.__anext__()
+            return res
+    
+        context = contextvars.copy_context()
+>       result = runner.run(setup(), context=context)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:407: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <asyncio.runners.Runner object at 0x10ac76600>
+coro = <coroutine object _wrap_asyncgen_fixture.<locals>._asyncgen_fixture_wrapper.<locals>.setup at 0x10f079150>
+context = <_contextvars.Context object at 0x10ac1d200>
+
+    def run(self, coro, *, context=None):
+        """Run a coroutine inside the embedded event loop."""
+        if not coroutines.iscoroutine(coro):
+            raise ValueError("a coroutine was expected, got {!r}".format(coro))
+    
+        if events._get_running_loop() is not None:
+            # fail fast with short traceback
+            raise RuntimeError(
+                "Runner.run() cannot be called from a running event loop")
+    
+        self._lazy_init()
+    
+        if context is None:
+            context = self._context
+        task = self._loop.create_task(coro, context=context)
+    
+        if (threading.current_thread() is threading.main_thread()
+            and signal.getsignal(signal.SIGINT) is signal.default_int_handler
+        ):
+            sigint_handler = functools.partial(self._on_sigint, main_task=task)
+            try:
+                signal.signal(signal.SIGINT, sigint_handler)
+            except ValueError:
+                # `signal.signal` may throw if `threading.main_thread` does
+                # not support signals (e.g. embedded interpreter with signals
+                # not registered - see gh-91880)
+                sigint_handler = None
+        else:
+            sigint_handler = None
+    
+        self._interrupt_count = 0
+        try:
+>           return self._loop.run_until_complete(task)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+/opt/local/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/runners.py:118: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <_UnixSelectorEventLoop running=False closed=False debug=False>
+future = <Task finished name='Task-11' coro=<_wrap_asyncgen_fixture.<locals>._asyncgen_fixture_wrapper.<locals>.setup() done, d...ion=provider stack not reachable at http://127.0.0.1:19001 — run `make up-test` first (All connection attempts failed)>
+
+    def run_until_complete(self, future):
+        """Run until the Future is done.
+    
+        If the argument is a coroutine, it is wrapped in a Task.
+    
+        WARNING: It would be disastrous to call run_until_complete()
+        with the same coroutine twice -- it would wrap it in two
+        different Tasks and that can't be good.
+    
+        Return the Future's result, or raise its exception.
+        """
+        self._check_closed()
+        self._check_running()
+    
+        new_task = not futures.isfuture(future)
+        future = tasks.ensure_future(future, loop=self)
+        if new_task:
+            # An exception is raised if the future didn't complete, so there
+            # is no need to log the "destroy pending task" message
+            future._log_destroy_pending = False
+    
+        future.add_done_callback(_run_until_complete_cb)
+        try:
+            self.run_forever()
+        except:
+            if new_task and future.done() and not future.cancelled():
+                # The coroutine raised a BaseException. Consume the exception
+                # to not log a warning, the caller doesn't have access to the
+                # local task.
+                future.exception()
+            raise
+        finally:
+            future.remove_done_callback(_run_until_complete_cb)
+        if not future.done():
+            raise RuntimeError('Event loop stopped before Future completed.')
+    
+>       return future.result()
+               ^^^^^^^^^^^^^^^
+
+/opt/local/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py:687: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    async def setup():
+>       res = await gen_obj.__anext__()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:403: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    @pytest.fixture
+    async def provider():
+        p = Provider()
+        try:
+            r = await p.admin.get("/healthz")
+        except httpx.TransportError as exc:
+>           pytest.fail(f"provider stack not reachable at {ORACLE_URL} — run `make up-test` first ({exc})")
+E           Failed: provider stack not reachable at http://127.0.0.1:19001 — run `make up-test` first (All connection attempts failed)
+
+tests/conformance/conftest.py:154: Failed
+==================================== PASSES ====================================
+- generated xml file: <repo>/results/tests/20261011T143831Z_conformance/junit.xml -
+=========================== short test summary info ============================
+PASSED tests/conformance/test_declared_capabilities.py::test_commit_is_recorded_in_ledger_and_receipt_log[P4]
+PASSED tests/conformance/test_declared_capabilities.py::test_commit_is_recorded_in_ledger_and_receipt_log[P4n]
+PASSED tests/conformance/test_declared_capabilities.py::test_commit_is_recorded_in_ledger_and_receipt_log[P5]
+PASSED tests/conformance/test_declared_capabilities.py::test_commit_is_recorded_in_ledger_and_receipt_log[P6]
+PASSED tests/conformance/test_declared_capabilities.py::test_commit_is_recorded_in_ledger_and_receipt_log[P7]
+PASSED tests/conformance/test_declared_capabilities.py::test_idempotency_matches_declaration[P1]
+PASSED tests/conformance/test_declared_capabilities.py::test_idempotency_matches_declaration[P2]
+PASSED tests/conformance/test_declared_capabilities.py::test_idempotency_matches_declaration[P3]
+PASSED tests/conformance/test_declared_capabilities.py::test_idempotency_matches_declaration[P4]
+PASSED tests/conformance/test_declared_capabilities.py::test_idempotency_matches_declaration[P4n]
+PASSED tests/conformance/test_declared_capabilities.py::test_idempotency_matches_declaration[P5]
+PASSED tests/conformance/test_declared_capabilities.py::test_idempotency_matches_declaration[P6]
+PASSED tests/conformance/test_declared_capabilities.py::test_idempotency_matches_declaration[P7]
+PASSED tests/conformance/test_declared_capabilities.py::test_lookup_modes_match_declaration[P1]
+PASSED tests/conformance/test_declared_capabilities.py::test_lookup_modes_match_declaration[P2]
+PASSED tests/conformance/test_declared_capabilities.py::test_lookup_modes_match_declaration[P3]
+PASSED tests/conformance/test_declared_capabilities.py::test_lookup_modes_match_declaration[P4]
+PASSED tests/conformance/test_declared_capabilities.py::test_lookup_modes_match_declaration[P4n]
+PASSED tests/conformance/test_declared_capabilities.py::test_lookup_modes_match_declaration[P5]
+PASSED tests/conformance/test_declared_capabilities.py::test_lookup_modes_match_declaration[P6]
+PASSED tests/conformance/test_declared_capabilities.py::test_lookup_modes_match_declaration[P7]
+PASSED tests/conformance/test_declared_capabilities.py::test_deadline_at_receipt_matches_declaration[P1]
+PASSED tests/conformance/test_declared_capabilities.py::test_deadline_at_receipt_matches_declaration[P2]
+PASSED tests/conformance/test_declared_capabilities.py::test_deadline_at_receipt_matches_declaration[P3]
+PASSED tests/conformance/test_declared_capabilities.py::test_deadline_at_receipt_matches_declaration[P4]
+PASSED tests/conformance/test_declared_capabilities.py::test_deadline_at_receipt_matches_declaration[P4n]
+PASSED tests/conformance/test_declared_capabilities.py::test_deadline_at_receipt_matches_declaration[P5]
+PASSED tests/conformance/test_declared_capabilities.py::test_deadline_at_receipt_matches_declaration[P6]
+PASSED tests/conformance/test_declared_capabilities.py::test_deadline_at_receipt_matches_declaration[P7]
+PASSED tests/conformance/test_declared_capabilities.py::test_invalid_deadline_header_is_rejected_without_effect
+PASSED tests/conformance/test_declared_capabilities.py::test_invalid_body_is_rejected_without_effect
+PASSED tests/conformance/test_faults_violations_evidence.py::test_f1_lost_response_reset_after_commit
+PASSED tests/conformance/test_faults_violations_evidence.py::test_f1_lost_response_blackhole
+PASSED tests/conformance/test_faults_violations_evidence.py::test_f3_pre_commit_stall_never_commits
+PASSED tests/conformance/test_faults_violations_evidence.py::test_f4_delayed_commit_after_client_timeout
+PASSED tests/conformance/test_faults_violations_evidence.py::test_f9_ingress_hold_delays_arrival
+PASSED tests/conformance/test_faults_violations_evidence.py::test_insufficient_funds_decline_after_ambiguous_commit
+PASSED tests/conformance/test_faults_violations_evidence.py::test_deterministic_decline_rate
+PASSED tests/conformance/test_faults_violations_evidence.py::test_v1_lookup_lag_exceeding_delta_breaks_l2
+PASSED tests/conformance/test_faults_violations_evidence.py::test_v2_declared_deadline_not_enforced
+PASSED tests/conformance/test_faults_violations_evidence.py::test_v3_retention_shorter_than_declared
+PASSED tests/conformance/test_faults_violations_evidence.py::test_v4_clock_offset
+PASSED tests/conformance/test_faults_violations_evidence.py::test_evidence_tables_are_append_only[UPDATE payments SET amount_minor = 1]
+PASSED tests/conformance/test_faults_violations_evidence.py::test_evidence_tables_are_append_only[DELETE FROM payments]
+PASSED tests/conformance/test_faults_violations_evidence.py::test_evidence_tables_are_append_only[UPDATE receipts SET held_ms = 1]
+PASSED tests/conformance/test_faults_violations_evidence.py::test_evidence_tables_are_append_only[DELETE FROM receipt_outcomes]
+PASSED tests/conformance/test_faults_violations_evidence.py::test_evidence_tables_are_append_only[DELETE FROM key_events]
+PASSED tests/conformance/test_faults_violations_evidence.py::test_evidence_tables_are_append_only[DELETE FROM fault_log]
+PASSED tests/conformance/test_faults_violations_evidence.py::test_evidence_tables_are_append_only[UPDATE config_log SET config = '{}']
+PASSED tests/conformance/test_faults_violations_evidence.py::test_oracle_requires_token
+PASSED tests/conformance/test_faults_violations_evidence.py::test_ledger_and_receipt_log_cross_check
+PASSED tests/conformance/test_idempotency_contract.py::test_k2_overlapping_request_has_no_effect[P1-reject]
+PASSED tests/conformance/test_idempotency_contract.py::test_k2_overlapping_request_has_no_effect[P1-serialize]
+PASSED tests/conformance/test_idempotency_contract.py::test_k2_overlapping_request_has_no_effect[P2-reject]
+PASSED tests/conformance/test_idempotency_contract.py::test_k2_overlapping_request_has_no_effect[P2-serialize]
+PASSED tests/conformance/test_idempotency_contract.py::test_k1_concurrent_first_requests_commit_once[P1-reject]
+PASSED tests/conformance/test_idempotency_contract.py::test_k1_concurrent_first_requests_commit_once[P1-serialize]
+PASSED tests/conformance/test_idempotency_contract.py::test_k1_concurrent_first_requests_commit_once[P2-reject]
+PASSED tests/conformance/test_idempotency_contract.py::test_k1_concurrent_first_requests_commit_once[P2-serialize]
+PASSED tests/conformance/test_idempotency_contract.py::test_k3_decline_is_replayed_not_reexecuted
+PASSED tests/conformance/test_idempotency_contract.py::test_k4_mismatched_body_is_rejected_without_effect
+PASSED tests/conformance/test_idempotency_contract.py::test_k6_pre_commit_abort_releases_reservation[fault0]
+PASSED tests/conformance/test_idempotency_contract.py::test_k6_pre_commit_abort_releases_reservation[fault1]
+PASSED tests/conformance/test_idempotency_contract.py::test_k7_stuck_reservation_released_on_recovery
+PASSED tests/conformance/test_idempotency_contract.py::test_no_key_header_means_no_deduplication_even_with_I
+PASSED tests/conformance/test_lookup_and_deadline.py::test_l1_in_flight_payment_is_never_returned[P1]
+PASSED tests/conformance/test_lookup_and_deadline.py::test_l1_in_flight_payment_is_never_returned[P2]
+PASSED tests/conformance/test_lookup_and_deadline.py::test_l1_in_flight_payment_is_never_returned[P4]
+PASSED tests/conformance/test_lookup_and_deadline.py::test_l1_in_flight_payment_is_never_returned[P4n]
+PASSED tests/conformance/test_lookup_and_deadline.py::test_l2_complete_after_delta_and_l3_as_of_on_provider_clock[P1]
+PASSED tests/conformance/test_lookup_and_deadline.py::test_l2_complete_after_delta_and_l3_as_of_on_provider_clock[P2]
+PASSED tests/conformance/test_lookup_and_deadline.py::test_l2_complete_after_delta_and_l3_as_of_on_provider_clock[P4]
+PASSED tests/conformance/test_lookup_and_deadline.py::test_l2_complete_after_delta_and_l3_as_of_on_provider_clock[P4n]
+PASSED tests/conformance/test_lookup_and_deadline.py::test_l4_all_matching_records_including_declines[P1]
+PASSED tests/conformance/test_lookup_and_deadline.py::test_l4_all_matching_records_including_declines[P2]
+PASSED tests/conformance/test_lookup_and_deadline.py::test_l4_all_matching_records_including_declines[P4]
+PASSED tests/conformance/test_lookup_and_deadline.py::test_l4_all_matching_records_including_declines[P4n]
+PASSED tests/conformance/test_lookup_and_deadline.py::test_l5_lookup_scoped_to_reference
+PASSED tests/conformance/test_lookup_and_deadline.py::test_f8_lookup_unavailable_then_recovers
+PASSED tests/conformance/test_lookup_and_deadline.py::test_d_commit_after_deadline_is_rolled_back_and_key_released[P1]
+PASSED tests/conformance/test_lookup_and_deadline.py::test_d_commit_after_deadline_is_rolled_back_and_key_released[P2]
+PASSED tests/conformance/test_lookup_and_deadline.py::test_d_commit_after_deadline_is_rolled_back_and_key_released[P4]
+PASSED tests/conformance/test_lookup_and_deadline.py::test_d_commit_after_deadline_is_rolled_back_and_key_released[P7]
+PASSED tests/conformance/test_lookup_and_deadline.py::test_no_d_means_deadline_header_is_ignored[P3]
+PASSED tests/conformance/test_lookup_and_deadline.py::test_no_d_means_deadline_header_is_ignored[P4n]
+PASSED tests/conformance/test_lookup_and_deadline.py::test_no_d_means_deadline_header_is_ignored[P5]
+PASSED tests/conformance/test_lookup_and_deadline.py::test_no_d_means_deadline_header_is_ignored[P6]
+PASSED tests/conformance/test_provider_restart.py::test_k7_sigkill_with_in_progress_reservation
+PASSED tests/conformance/test_retention_boundary.py::test_kb1_replay_just_before_expiry[P2-reject]
+PASSED tests/conformance/test_retention_boundary.py::test_kb1_replay_just_before_expiry[P2-serialize]
+PASSED tests/conformance/test_retention_boundary.py::test_kb1_replay_just_before_expiry[P7-reject]
+PASSED tests/conformance/test_retention_boundary.py::test_kb1_replay_just_before_expiry[P7-serialize]
+PASSED tests/conformance/test_retention_boundary.py::test_kb2_after_expiry_is_processed_as_new[P2-reject]
+PASSED tests/conformance/test_retention_boundary.py::test_kb2_after_expiry_is_processed_as_new[P2-serialize]
+PASSED tests/conformance/test_retention_boundary.py::test_kb2_after_expiry_is_processed_as_new[P7-reject]
+PASSED tests/conformance/test_retention_boundary.py::test_kb2_after_expiry_is_processed_as_new[P7-serialize]
+PASSED tests/conformance/test_retention_boundary.py::test_kb3_delayed_original_overtaken_within_retention[P2-reject]
+PASSED tests/conformance/test_retention_boundary.py::test_kb3_delayed_original_overtaken_within_retention[P2-serialize]
+PASSED tests/conformance/test_retention_boundary.py::test_kb3_delayed_original_overtaken_within_retention[P7-reject]
+PASSED tests/conformance/test_retention_boundary.py::test_kb3_delayed_original_overtaken_within_retention[P7-serialize]
+PASSED tests/conformance/test_retention_boundary.py::test_kb4_delayed_original_after_retention_creates_second_effect[P2-reject]
+PASSED tests/conformance/test_retention_boundary.py::test_kb4_delayed_original_after_retention_creates_second_effect[P2-serialize]
+PASSED tests/conformance/test_retention_boundary.py::test_kb4_delayed_original_after_retention_creates_second_effect[P7-reject]
+PASSED tests/conformance/test_retention_boundary.py::test_kb4_delayed_original_after_retention_creates_second_effect[P7-serialize]
+PASSED tests/conformance/test_retention_boundary.py::test_kb5_deadline_bounds_the_delayed_original[P2-reject]
+PASSED tests/conformance/test_retention_boundary.py::test_kb5_deadline_bounds_the_delayed_original[P2-serialize]
+PASSED tests/conformance/test_retention_boundary.py::test_kb5_deadline_bounds_the_delayed_original[P7-reject]
+PASSED tests/conformance/test_retention_boundary.py::test_kb5_deadline_bounds_the_delayed_original[P7-serialize]
+PASSED tests/conformance/test_retention_boundary.py::test_kb6_in_progress_record_never_expires[P2-reject]
+PASSED tests/conformance/test_retention_boundary.py::test_kb6_in_progress_record_never_expires[P2-serialize]
+PASSED tests/conformance/test_retention_boundary.py::test_kb6_in_progress_record_never_expires[P7-reject]
+PASSED tests/conformance/test_retention_boundary.py::test_kb6_in_progress_record_never_expires[P7-serialize]
+ERROR tests/conformance/test_declared_capabilities.py::test_commit_is_recorded_in_ledger_and_receipt_log[P1]
+ERROR tests/conformance/test_declared_capabilities.py::test_commit_is_recorded_in_ledger_and_receipt_log[P2]
+ERROR tests/conformance/test_declared_capabilities.py::test_commit_is_recorded_in_ledger_and_receipt_log[P3]
+================== 112 passed, 3 errors in 126.53s (0:02:06) ===================

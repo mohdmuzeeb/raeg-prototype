@@ -11,6 +11,7 @@ from __future__ import annotations
 import asyncio
 import os
 import subprocess
+import sys
 from pathlib import Path
 
 import pytest
@@ -44,6 +45,9 @@ async def test_k7_sigkill_with_in_progress_reservation(provider) -> None:
     crashed = await in_flight
     assert crashed.status is None and crashed.error is not None, "the client saw the crash as a transport failure"
     compose("up", "-d", "--wait", "provider")
+    # `--wait` is container-side health; the host port forward can lag behind it (N56).
+    subprocess.run([sys.executable, str(ROOT / "scripts" / "wait_ready.py"), "http://127.0.0.1:18001/healthz",
+                    "http://127.0.0.1:19001/healthz"], check=True, timeout=300)
 
     ready = [line for line in compose("logs", "--no-color", "provider").stdout.splitlines() if "provider ready" in line]
     assert ready and ready[-1].endswith("released_on_recovery=1"), ready[-1:]

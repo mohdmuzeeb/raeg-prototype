@@ -2,6 +2,7 @@
 export DOCKER_CONTEXT ?= colima
 COMPOSE := docker compose -f docker-compose.yml
 ALL_PROFILES := --profile systems --profile temporal
+WAIT_PROVIDER := uv run python scripts/wait_ready.py http://127.0.0.1:18001/healthz http://127.0.0.1:19001/healthz
 
 .PHONY: lock up up-test down clean test-unit test-property test-conformance test-gateway test-integration test-systems up-systems run-experiment test-harness test
 
@@ -11,15 +12,18 @@ lock:            ## re-lock Python deps and export hashed requirements for image
 
 up:              ## start databases and provider (experiment mode: reset disabled)
 	$(COMPOSE) up -d --build --wait
+	$(WAIT_PROVIDER)
 
 up-test:         ## start the stack with the test-only reset endpoint enabled
 	PROVIDER_ALLOW_RESET=1 $(COMPOSE) up -d --build --wait
+	$(WAIT_PROVIDER)
 
 down:
 	$(COMPOSE) $(ALL_PROFILES) down
 
 up-systems:      ## M5: also start Temporal, its worker, and the systems service (reset endpoint ON)
 	PROVIDER_ALLOW_RESET=1 CODE_SHA=$$(git rev-parse HEAD) $(COMPOSE) $(ALL_PROFILES) up -d --build --wait
+	$(WAIT_PROVIDER) http://127.0.0.1:18080/healthz
 
 clean:           ## remove containers AND volumes (fresh state)
 	$(COMPOSE) $(ALL_PROFILES) down -v

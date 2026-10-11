@@ -5,8 +5,8 @@ and, with --compose-logs, the docker compose logs of the named services.
 Failed runs are kept and marked as failed; nothing is deleted or overwritten.
 
 Path redaction at capture time: the absolute repository path is written as `<repo>` and the home
-directory as `~` in pytest.log, junit.xml and compose.log. The substitutions are listed in
-manifest.json (`redactions`). Nothing else is altered.
+directory as `~`, and the machine's hostname as `<host>` (from 2026-10-11, N57), in pytest.log, junit.xml
+and compose.log. The substitutions are listed in manifest.json (`redactions`). Nothing else is altered.
 
 usage: uv run python scripts/run_tests.py <suite> [--compose-logs svc ...] -- <pytest args>
 """
@@ -14,6 +14,8 @@ usage: uv run python scripts/run_tests.py <suite> [--compose-logs svc ...] -- <p
 from __future__ import annotations
 
 import argparse
+import platform
+import socket
 import subprocess
 import sys
 from datetime import UTC, datetime
@@ -25,6 +27,8 @@ sys.path.insert(0, str(ROOT / "src"))
 from harness.manifest import build_manifest, write_manifest  # noqa: E402
 
 REDACTIONS = [(str(ROOT), "<repo>"), (str(Path.home()), "~")]  # most specific first
+REDACTIONS += [(h, "<host>") for h in sorted({socket.gethostname(), socket.getfqdn(), platform.node()}, key=len, reverse=True)
+               if len(h) > 3]  # junit.xml records the hostname
 
 
 def redact(text: str) -> str:
@@ -49,7 +53,8 @@ def main() -> int:
     out.mkdir(parents=True, exist_ok=False)
     manifest = build_manifest("test", {"suite": args.suite, "pytest_args": pytest_args, "status": "running",
                                        "redactions": [{"from": "<absolute repository path>", "to": "<repo>"},
-                                                      {"from": "<home directory>", "to": "~"}]})
+                                                      {"from": "<home directory>", "to": "~"},
+                                                      {"from": "<hostname>", "to": "<host>"}]})
     write_manifest(out / "manifest.json", manifest)
 
     cmd = [sys.executable, "-m", "pytest", "-v", "-rA", "--tb=long", f"--junitxml={out / 'junit.xml'}", *pytest_args]

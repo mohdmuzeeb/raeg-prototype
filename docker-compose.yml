@@ -9,10 +9,14 @@ x-postgres: &postgres
   # fsync stays ON: durability is assumption S3 (DESIGN §11.1).
   command: ["postgres", "-c", "max_connections=200"]
   healthcheck:
-    test: ["CMD-SHELL", "pg_isready -U postgres"]
+    # TCP check: the image's init-time temporary server listens on the unix socket only, so this cannot
+    # report ready before the final server is up (stricter than the socket check). M7 note N56.
+    test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U postgres"]
     interval: 2s
     timeout: 3s
     retries: 30
+    start_period: 30s      # during start-up only: probe every 250 ms (readiness itself unchanged)
+    start_interval: 250ms
 
 services:
   provider-db:
@@ -52,10 +56,13 @@ services:
     restart: unless-stopped
     stop_grace_period: 3s
     healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8001/healthz', timeout=2)"]
+      # Both servers must answer: the oracle port (harness/tests) can bind after the public one (N56).
+      test: ["CMD", "python", "-c", "import urllib.request as u; u.urlopen('http://127.0.0.1:8001/healthz', timeout=2); u.urlopen('http://127.0.0.1:9001/healthz', timeout=2)"]
       interval: 2s
       timeout: 3s
       retries: 30
+      start_period: 30s      # start-up only: probe every 250 ms (N56)
+      start_interval: 250ms
 
   # ---------------------------------------------------------------- M5: systems under test
   # Started with `make up-systems` (profiles "systems" + "temporal"). The harness starts "temporal"
@@ -86,6 +93,9 @@ services:
     image: raeg/python:dev
     profiles: [temporal]
     command: ["python", "-m", "systems.temporal_wf.worker"]
+    # Teardown only: the worker (PID 1, no SIGTERM handler) ignored SIGTERM and was SIGKILLed after
+    # docker's 10 s timeout anyway; send SIGKILL directly. Crash hooks are unaffected (N56).
+    stop_signal: SIGKILL
     depends_on: [temporal, provider]
     environment:
       TEMPORAL_ADDRESS: temporal:7233
@@ -122,11 +132,16 @@ services:
       interval: 2s
       timeout: 3s
       retries: 30
+      start_period: 30s      # start-up only: probe every 250 ms (N56)
+      start_interval: 250ms
 
   raeg-worker:   # RAEG recovery worker (DESIGN §5.1); crash hooks fire here (FC-worker)
     image: raeg/python:dev
     profiles: [systems]
     command: ["python", "-m", "systems.raeg_worker"]
+    # Teardown only: the worker (PID 1, no SIGTERM handler) ignored SIGTERM and was SIGKILLed after
+    # docker's 10 s timeout anyway; send SIGKILL directly. Crash hooks are unaffected (N56).
+    stop_signal: SIGKILL
     depends_on:
       provider: {condition: service_healthy}
       raeg-db: {condition: service_healthy}

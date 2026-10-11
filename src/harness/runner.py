@@ -16,6 +16,7 @@ import hashlib
 import json
 import os
 import random
+import sys
 import time
 import traceback
 from datetime import UTC, datetime
@@ -36,6 +37,7 @@ from systems.raeg_system import policy_for
 ROOT = Path(__file__).resolve().parents[2]
 SYSTEMS_URL = os.environ.get("SYSTEMS_URL", "http://127.0.0.1:18080")
 ORACLE_URL = collector.ORACLE_URL
+PROVIDER_PUBLIC_URL = os.environ.get("PROVIDER_PUBLIC_URL", "http://127.0.0.1:18001")
 ORACLE_TOKEN = collector.ORACLE_TOKEN
 
 
@@ -72,14 +74,16 @@ def stamp() -> str:
 
 
 async def wait_http(url: str, timeout_s: float = 240) -> None:
+    """Host-side readiness: `up --wait` checks inside the containers, but the host port forward (colima)
+    can lag behind container health (N56), so every endpoint the harness uses is probed from the host."""
     async with httpx.AsyncClient(timeout=3) as c:
-        for _ in range(int(timeout_s / 0.5)):
+        for _ in range(int(timeout_s / 0.1)):
             try:
                 if (await c.get(url)).status_code == 200:
                     return
             except httpx.TransportError:
                 pass
-            await asyncio.sleep(0.5)
+            await asyncio.sleep(0.1)
     raise RuntimeError(f"{url} not healthy after {timeout_s}s")
 
 
@@ -184,7 +188,11 @@ async def run_one(exp: Experiment, cell: Cell, seed: int, system_id: str, intent
                           "systems_yaml_sha256": sha256_file(ROOT / "config" / "systems.yaml"),
                           "profile_file_sha256": sha256_file(ROOT / "config" / "profiles" / f"{cell.profile}.yaml"),
                           "workload_sha256": sha256_json([i.to_json() for i in intents]),
-                          "fault_plan_sha256": sha256_json(plan.to_json())},
+                          "fault_plan_sha256": sha256_json(plan.to_json()),
+                          "docker_compose_sha256": sha256_file(ROOT / "docker-compose.yml")},
+        # N55: argv (repo-relative, no interpreter path) and whether the host-sleep guard was held.
+        "invocation": {"argv": ["python", "-m", "harness.runner", *sys.argv[1:]],
+                       "sleep_guard": os.environ.get("RAEG_SLEEP_GUARD", "none")},
         "phase_timings_s": {}})
     write_manifest(out / "manifest.json", manifest)
     workload.write(out / "workload.jsonl", intents)
@@ -201,7 +209,8 @@ async def run_one(exp: Experiment, cell: Cell, seed: int, system_id: str, intent
 
     try:
         bring_up(cell.profile, system_id, temporal=cfg.kind == "temporal")
-        await wait_http(f"{SYSTEMS_URL}/healthz")
+        for url in (f"{SYSTEMS_URL}/healthz", f"{ORACLE_URL}/healthz", f"{PROVIDER_PUBLIC_URL}/healthz"):
+            await wait_http(url)
         await configure_provider(prof.model_dump(mode="json"), plan)
         arm_hooks(plan)
         phase("bring_up")
