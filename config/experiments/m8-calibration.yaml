@@ -1,0 +1,30 @@
+# M8 TIMING CALIBRATION (user instruction 2026-10-11): every cell of the focused M8 matrix × every M8
+# system × ONE calibration seed (104) = 7 × 5 = 35 runs, N = 500, after the Temporal readiness gate (N60).
+# Purpose: observed per-run wall clock for the 140-run M8 projection, and a check that the cold-start
+# artifact (N58) is gone. Never reported as results; seed 104 is disjoint from all M7 and M8 seeds.
+name: m8-calibration
+purpose: "M8 timing calibration at N=500 after the Temporal readiness gate (N60)"
+excluded_from_paper: true
+seeds: [104]
+workload:
+  n_actions: 500
+  arrival_rate_per_s: 10
+  duplicate_fraction: 0.05
+  duplicate_copies: 2
+driver:
+  agent_timeout_s: 30
+  restart_backoff_ms: 1000
+  max_backoff_ms: 8000
+  max_resubmits: 50
+  poll_ms: 250
+  horizon_s: 60
+  drain_s: 5
+cells:
+  - {profile: P1, fault: F0, fault_rate: 0.0, assumption_set: S}
+  - {profile: P1, fault: F1, fault_rate: 0.2, assumption_set: S}
+  - {profile: P1, fault: FM, fault_rate: 0.2, assumption_set: S}
+  - {profile: P2, fault: FM, fault_rate: 0.2, assumption_set: S}
+  - {profile: P4, fault: FM, fault_rate: 0.2, assumption_set: S}
+  - {profile: P6, fault: F1, fault_rate: 0.2, assumption_set: S}
+  - {profile: P6, fault: FM, fault_rate: 0.2, assumption_set: S}
+systems: [B1, B2, B3, B3L-horizon, RAEG-strict]

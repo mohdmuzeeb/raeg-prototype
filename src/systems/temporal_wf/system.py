@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import os
+import uuid
+from datetime import timedelta
 
 from temporalio.client import Client, WorkflowExecutionStatus
 from temporalio.common import WorkflowIDConflictPolicy, WorkflowIDReusePolicy
@@ -12,7 +14,7 @@ from raeg_common.models import PaymentPayload
 from raeg_common.profiles import load_all
 from systems.base import PENDING, Native, SystemConfig
 from systems.temporal_wf.worker import TASK_QUEUE
-from systems.temporal_wf.workflows import PaymentWorkflow
+from systems.temporal_wf.workflows import PaymentWorkflow, ReadinessProbeWorkflow
 
 
 class TemporalSystem:
@@ -27,6 +29,13 @@ class TemporalSystem:
 
     async def stop(self) -> None:
         return None
+
+    async def probe(self) -> dict:
+        """N60: one end-to-end readiness probe through this system's client and task queue."""
+        await self.start()
+        assert self.client is not None
+        return await self.client.execute_workflow(ReadinessProbeWorkflow.run, id=f"readiness-probe-{uuid.uuid4()}",
+                                                  task_queue=TASK_QUEUE, execution_timeout=timedelta(seconds=10))
 
     def _input(self, action_key: str, payload: PaymentPayload, profile_id: str) -> dict:
         c = self.config

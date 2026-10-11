@@ -8,16 +8,16 @@ import os
 from temporalio.client import Client
 from temporalio.worker import Worker
 
-from systems.temporal_wf.activities import dispatch_payment, lookup_payment
-from systems.temporal_wf.workflows import PaymentWorkflow
+from systems.temporal_wf.activities import dispatch_payment, lookup_payment, readiness_probe
+from systems.temporal_wf.workflows import PaymentWorkflow, ReadinessProbeWorkflow
 
 TASK_QUEUE = "raeg-baselines"
 
 
 async def main() -> None:
     client = await Client.connect(os.environ.get("TEMPORAL_ADDRESS", "temporal:7233"), namespace="default")
-    worker = Worker(client, task_queue=TASK_QUEUE, workflows=[PaymentWorkflow],
-                    activities=[dispatch_payment, lookup_payment])
+    worker = Worker(client, task_queue=TASK_QUEUE, workflows=[PaymentWorkflow, ReadinessProbeWorkflow],
+                    activities=[dispatch_payment, lookup_payment, readiness_probe])
     print("temporal worker ready", flush=True)
     await worker.run()
 

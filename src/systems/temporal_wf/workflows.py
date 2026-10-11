@@ -16,7 +16,8 @@ from temporalio.common import RetryPolicy
 from temporalio.exceptions import ActivityError, ApplicationError
 
 with workflow.unsafe.imports_passed_through():
-    from systems.temporal_wf.activities import DispatchInput, LookupInput, dispatch_payment, lookup_payment
+    from systems.temporal_wf.activities import (DispatchInput, LookupInput, dispatch_payment, lookup_payment,
+                                                readiness_probe)
 
 
 def _cause_type(err: ActivityError) -> str:
@@ -85,3 +86,13 @@ class PaymentWorkflow:
                 if any(r.get("status") == "declined" for r in mine):
                     return {"status": "declined", "detail": {"found_by": "lookup", "after_attempt": n}}
         return {"status": "not_found_after_retries", "detail": {"attempts": inp["max_dispatch"]}}
+
+
+@workflow.defn
+class ReadinessProbeWorkflow:
+    """N60: harness readiness gate. Exercises the workflow-task and activity-task paths of the same task
+    queue as PaymentWorkflow, without contacting the provider. Its ids never collide with action keys."""
+
+    @workflow.run
+    async def run(self) -> dict:
+        return await workflow.execute_activity(readiness_probe, start_to_close_timeout=timedelta(seconds=5))

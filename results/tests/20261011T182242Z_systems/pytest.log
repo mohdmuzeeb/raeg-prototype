@@ -1,0 +1,121 @@
+$ <repo>/.venv/bin/python -m pytest -v -rA --tb=long --junitxml=<repo>/results/tests/20261011T182242Z_systems/junit.xml tests/systems
+
+============================= test session starts ==============================
+platform darwin -- Python 3.12.7, pytest-9.1.1, pluggy-1.6.0 -- <repo>/.venv/bin/python
+cachedir: .pytest_cache
+hypothesis profile 'default'
+rootdir: <repo>
+configfile: pyproject.toml
+plugins: hypothesis-6.168.5, asyncio-1.4.0, anyio-4.15.1
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
+collecting ... collected 52 items
+
+tests/systems/test_baseline_definitions.py::test_b1_resends_without_key PASSED [  1%]
+tests/systems/test_baseline_definitions.py::test_b2_resends_with_key_and_gets_replay PASSED [  3%]
+tests/systems/test_baseline_definitions.py::test_b2_key_is_ignored_by_provider_without_idempotency PASSED [  5%]
+tests/systems/test_baseline_definitions.py::test_retry_baselines_give_up_with_error_after_budget PASSED [  7%]
+tests/systems/test_baseline_definitions.py::test_retry_baselines_stop_on_decline PASSED [  9%]
+tests/systems/test_baseline_definitions.py::test_b1_has_no_local_deduplication PASSED [ 11%]
+tests/systems/test_baseline_definitions.py::test_b3_activity_retry_reuses_key PASSED [ 13%]
+tests/systems/test_baseline_definitions.py::test_b3_decline_is_non_retryable PASSED [ 15%]
+tests/systems/test_baseline_definitions.py::test_b3_retry_policy_exhausts_after_max_dispatch PASSED [ 17%]
+tests/systems/test_baseline_definitions.py::test_b3_workflow_id_deduplicates_submissions PASSED [ 19%]
+tests/systems/test_baseline_definitions.py::test_b3l_delta_waits_delta_then_redispatches_after_miss PASSED [ 21%]
+tests/systems/test_baseline_definitions.py::test_b3l_horizon_waits_until_deadline_plus_delta PASSED [ 23%]
+tests/systems/test_baseline_definitions.py::test_b3l_finds_lost_response_without_redispatch PASSED [ 25%]
+tests/systems/test_baseline_definitions.py::test_b3l_believes_misses_and_reports_not_found PASSED [ 26%]
+tests/systems/test_baseline_definitions.py::test_raeg_concurrent_submissions_create_one_effect PASSED [ 28%]
+tests/systems/test_baseline_definitions.py::test_raeg_escalation_maps_to_unresolved PASSED [ 30%]
+tests/systems/test_contract_smoke.py::test_f0_every_system[B1] PASSED    [ 32%]
+tests/systems/test_contract_smoke.py::test_f0_every_system[B2] PASSED    [ 34%]
+tests/systems/test_contract_smoke.py::test_f0_every_system[B3] PASSED    [ 36%]
+tests/systems/test_contract_smoke.py::test_f0_every_system[B3-noDL] PASSED [ 38%]
+tests/systems/test_contract_smoke.py::test_f0_every_system[B3L-delta] PASSED [ 40%]
+tests/systems/test_contract_smoke.py::test_f0_every_system[B3L-horizon] PASSED [ 42%]
+tests/systems/test_contract_smoke.py::test_f0_every_system[B3L-horizon-noDL] PASSED [ 44%]
+tests/systems/test_contract_smoke.py::test_f0_every_system[RAEG-bounded] PASSED [ 46%]
+tests/systems/test_contract_smoke.py::test_f0_every_system[RAEG-strict] PASSED [ 48%]
+tests/systems/test_contract_smoke.py::test_f0_every_system[RAEG-strict-no-horizon] PASSED [ 50%]
+tests/systems/test_contract_smoke.py::test_f0_every_system[RAEG-strict-no-ttl] PASSED [ 51%]
+tests/systems/test_contract_smoke.py::test_f0_every_system[RAEG-strict-no-verify] PASSED [ 53%]
+tests/systems/test_contract_smoke.py::test_f0_every_system[RAEG-strict-noDL] PASSED [ 55%]
+tests/systems/test_contract_smoke.py::test_f0_every_system[RAEG-strict-retry-first] PASSED [ 57%]
+tests/systems/test_contract_smoke.py::test_unknown_system_is_404 PASSED  [ 59%]
+tests/systems/test_contract_smoke.py::test_registry_timing_is_identical_across_systems PASSED [ 61%]
+tests/systems/test_contract_smoke.py::test_systems_use_only_the_shared_client PASSED [ 63%]
+tests/systems/test_hooks_across_systems.py::test_cp3_b1_in_memory_state_is_lost PASSED [ 65%]
+tests/systems/test_hooks_across_systems.py::test_cp3_b3_worker_crash_is_retried_by_temporal PASSED [ 67%]
+tests/systems/test_hooks_across_systems.py::test_cp3_raeg_worker_crash_leaves_api_up_and_recovers PASSED [ 69%]
+tests/systems/test_readiness_probe.py::test_ready_endpoint[B1] PASSED    [ 71%]
+tests/systems/test_readiness_probe.py::test_ready_endpoint[B2] PASSED    [ 73%]
+tests/systems/test_readiness_probe.py::test_ready_endpoint[B3] PASSED    [ 75%]
+tests/systems/test_readiness_probe.py::test_ready_endpoint[B3-noDL] PASSED [ 76%]
+tests/systems/test_readiness_probe.py::test_ready_endpoint[B3L-delta] PASSED [ 78%]
+tests/systems/test_readiness_probe.py::test_ready_endpoint[B3L-horizon] PASSED [ 80%]
+tests/systems/test_readiness_probe.py::test_ready_endpoint[B3L-horizon-noDL] PASSED [ 82%]
+tests/systems/test_readiness_probe.py::test_ready_endpoint[RAEG-bounded] PASSED [ 84%]
+tests/systems/test_readiness_probe.py::test_ready_endpoint[RAEG-strict] PASSED [ 86%]
+tests/systems/test_readiness_probe.py::test_ready_endpoint[RAEG-strict-no-horizon] PASSED [ 88%]
+tests/systems/test_readiness_probe.py::test_ready_endpoint[RAEG-strict-no-ttl] PASSED [ 90%]
+tests/systems/test_readiness_probe.py::test_ready_endpoint[RAEG-strict-no-verify] PASSED [ 92%]
+tests/systems/test_readiness_probe.py::test_ready_endpoint[RAEG-strict-noDL] PASSED [ 94%]
+tests/systems/test_readiness_probe.py::test_ready_endpoint[RAEG-strict-retry-first] PASSED [ 96%]
+tests/systems/test_readiness_probe.py::test_probe_never_contacts_provider PASSED [ 98%]
+tests/systems/test_readiness_probe.py::test_unknown_system_is_404 PASSED [100%]
+
+==================================== PASSES ====================================
+- generated xml file: <repo>/results/tests/20261011T182242Z_systems/junit.xml -
+=========================== short test summary info ============================
+PASSED tests/systems/test_baseline_definitions.py::test_b1_resends_without_key
+PASSED tests/systems/test_baseline_definitions.py::test_b2_resends_with_key_and_gets_replay
+PASSED tests/systems/test_baseline_definitions.py::test_b2_key_is_ignored_by_provider_without_idempotency
+PASSED tests/systems/test_baseline_definitions.py::test_retry_baselines_give_up_with_error_after_budget
+PASSED tests/systems/test_baseline_definitions.py::test_retry_baselines_stop_on_decline
+PASSED tests/systems/test_baseline_definitions.py::test_b1_has_no_local_deduplication
+PASSED tests/systems/test_baseline_definitions.py::test_b3_activity_retry_reuses_key
+PASSED tests/systems/test_baseline_definitions.py::test_b3_decline_is_non_retryable
+PASSED tests/systems/test_baseline_definitions.py::test_b3_retry_policy_exhausts_after_max_dispatch
+PASSED tests/systems/test_baseline_definitions.py::test_b3_workflow_id_deduplicates_submissions
+PASSED tests/systems/test_baseline_definitions.py::test_b3l_delta_waits_delta_then_redispatches_after_miss
+PASSED tests/systems/test_baseline_definitions.py::test_b3l_horizon_waits_until_deadline_plus_delta
+PASSED tests/systems/test_baseline_definitions.py::test_b3l_finds_lost_response_without_redispatch
+PASSED tests/systems/test_baseline_definitions.py::test_b3l_believes_misses_and_reports_not_found
+PASSED tests/systems/test_baseline_definitions.py::test_raeg_concurrent_submissions_create_one_effect
+PASSED tests/systems/test_baseline_definitions.py::test_raeg_escalation_maps_to_unresolved
+PASSED tests/systems/test_contract_smoke.py::test_f0_every_system[B1]
+PASSED tests/systems/test_contract_smoke.py::test_f0_every_system[B2]
+PASSED tests/systems/test_contract_smoke.py::test_f0_every_system[B3]
+PASSED tests/systems/test_contract_smoke.py::test_f0_every_system[B3-noDL]
+PASSED tests/systems/test_contract_smoke.py::test_f0_every_system[B3L-delta]
+PASSED tests/systems/test_contract_smoke.py::test_f0_every_system[B3L-horizon]
+PASSED tests/systems/test_contract_smoke.py::test_f0_every_system[B3L-horizon-noDL]
+PASSED tests/systems/test_contract_smoke.py::test_f0_every_system[RAEG-bounded]
+PASSED tests/systems/test_contract_smoke.py::test_f0_every_system[RAEG-strict]
+PASSED tests/systems/test_contract_smoke.py::test_f0_every_system[RAEG-strict-no-horizon]
+PASSED tests/systems/test_contract_smoke.py::test_f0_every_system[RAEG-strict-no-ttl]
+PASSED tests/systems/test_contract_smoke.py::test_f0_every_system[RAEG-strict-no-verify]
+PASSED tests/systems/test_contract_smoke.py::test_f0_every_system[RAEG-strict-noDL]
+PASSED tests/systems/test_contract_smoke.py::test_f0_every_system[RAEG-strict-retry-first]
+PASSED tests/systems/test_contract_smoke.py::test_unknown_system_is_404
+PASSED tests/systems/test_contract_smoke.py::test_registry_timing_is_identical_across_systems
+PASSED tests/systems/test_contract_smoke.py::test_systems_use_only_the_shared_client
+PASSED tests/systems/test_hooks_across_systems.py::test_cp3_b1_in_memory_state_is_lost
+PASSED tests/systems/test_hooks_across_systems.py::test_cp3_b3_worker_crash_is_retried_by_temporal
+PASSED tests/systems/test_hooks_across_systems.py::test_cp3_raeg_worker_crash_leaves_api_up_and_recovers
+PASSED tests/systems/test_readiness_probe.py::test_ready_endpoint[B1]
+PASSED tests/systems/test_readiness_probe.py::test_ready_endpoint[B2]
+PASSED tests/systems/test_readiness_probe.py::test_ready_endpoint[B3]
+PASSED tests/systems/test_readiness_probe.py::test_ready_endpoint[B3-noDL]
+PASSED tests/systems/test_readiness_probe.py::test_ready_endpoint[B3L-delta]
+PASSED tests/systems/test_readiness_probe.py::test_ready_endpoint[B3L-horizon]
+PASSED tests/systems/test_readiness_probe.py::test_ready_endpoint[B3L-horizon-noDL]
+PASSED tests/systems/test_readiness_probe.py::test_ready_endpoint[RAEG-bounded]
+PASSED tests/systems/test_readiness_probe.py::test_ready_endpoint[RAEG-strict]
+PASSED tests/systems/test_readiness_probe.py::test_ready_endpoint[RAEG-strict-no-horizon]
+PASSED tests/systems/test_readiness_probe.py::test_ready_endpoint[RAEG-strict-no-ttl]
+PASSED tests/systems/test_readiness_probe.py::test_ready_endpoint[RAEG-strict-no-verify]
+PASSED tests/systems/test_readiness_probe.py::test_ready_endpoint[RAEG-strict-noDL]
+PASSED tests/systems/test_readiness_probe.py::test_ready_endpoint[RAEG-strict-retry-first]
+PASSED tests/systems/test_readiness_probe.py::test_probe_never_contacts_provider
+PASSED tests/systems/test_readiness_probe.py::test_unknown_system_is_404
+============================= 52 passed in 54.64s ==============================

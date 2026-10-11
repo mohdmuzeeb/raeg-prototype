@@ -67,3 +67,9 @@ async def lookup_payment(inp: LookupInput) -> dict:
         raise ApplicationError(f"lookup failed: {r.error_class}", type="LookupError",
                                non_retryable=r.http_status == 501)
     return {"as_of": r.as_of, "records": r.records}
+
+
+@activity.defn
+async def readiness_probe() -> dict:
+    """N60: no-op activity for the end-to-end readiness probe (never contacts the provider)."""
+    return {"ok": True}

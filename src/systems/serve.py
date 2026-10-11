@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import asyncio
 import os
+import time
 
 import uvicorn
 from fastapi import FastAPI, Header, HTTPException
@@ -54,6 +55,21 @@ async def admin_crash(x_crash_token: str = Header(default="")) -> dict:
         raise HTTPException(403, "crash token required")
     asyncio.get_running_loop().call_later(0.05, os._exit, 137)
     return {"crashing": True}
+
+
+@app.get("/admin/ready/{system_id}")
+async def admin_ready(system_id: str) -> dict:
+    """N60: end-to-end readiness. Temporal systems run one probe workflow (workflow + activity task) through
+    the same client and task queue; other systems are ready when this process answers."""
+    system = get(system_id)
+    if not isinstance(system, TemporalSystem):
+        return {"ready": True, "probe": None}
+    t0 = time.monotonic()
+    try:
+        await asyncio.wait_for(system.probe(), 10)
+    except Exception as exc:  # not ready yet: report, the harness retries
+        raise HTTPException(503, f"probe failed: {type(exc).__name__}: {exc}") from exc
+    return {"ready": True, "probe": "temporal_workflow", "probe_ms": round((time.monotonic() - t0) * 1000, 1)}
 
 
 @app.get("/healthz")

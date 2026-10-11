@@ -113,6 +113,40 @@ def bring_up(profile_id: str, system_id: str, temporal: bool) -> None:
     BUILT = True
 
 
+READY_CONSECUTIVE = 3        # N60: consecutive end-to-end probes required ...
+READY_MAX_PROBE_MS = 500     # ... each completing within this round trip
+
+
+async def wait_system_ready(system_id: str, out: Path, timeout_s: float = 240) -> None:
+    """N60: end-to-end readiness gate before the driver starts. Every probe is recorded in readiness.json."""
+    probes: list[dict] = []
+    t0 = time.monotonic()
+    ok = 0
+    async with httpx.AsyncClient(timeout=15) as c:
+        while time.monotonic() - t0 < timeout_s:
+            ts = time.monotonic()
+            try:
+                r = await c.get(f"{SYSTEMS_URL}/admin/ready/{system_id}")
+                body = r.json() if r.headers.get("content-type", "").startswith("application/json") else {"_raw": r.text}
+            except httpx.TransportError as exc:
+                r, body = None, {"error": type(exc).__name__}
+            rtt = (time.monotonic() - ts) * 1000
+            good = r is not None and r.status_code == 200 and rtt <= READY_MAX_PROBE_MS
+            probes.append({"t_s": round(ts - t0, 3), "status": None if r is None else r.status_code,
+                           "rtt_ms": round(rtt, 1), "counted": good, "response": body})
+            ok = ok + 1 if good else 0
+            if ok >= READY_CONSECUTIVE:
+                break
+            if not good:
+                await asyncio.sleep(0.1)
+    ready = ok >= READY_CONSECUTIVE
+    (out / "readiness.json").write_text(json.dumps(
+        {"rule": f"{READY_CONSECUTIVE} consecutive probes, each HTTP 200 within {READY_MAX_PROBE_MS} ms",
+         "ready": ready, "elapsed_s": round(time.monotonic() - t0, 3), "probes": probes}, indent=1) + "\n")
+    if not ready:
+        raise RuntimeError(f"{system_id} not ready after {timeout_s}s (readiness.json)")
+
+
 async def configure_provider(profile: dict, plan: fault_plan.FaultPlan) -> None:
     prof = {**profile, "violations": {**profile.get("violations", {}), **plan.violations}}
     async with httpx.AsyncClient(base_url=ORACLE_URL, headers={"x-oracle-token": ORACLE_TOKEN}, timeout=30) as c:
@@ -211,6 +245,7 @@ async def run_one(exp: Experiment, cell: Cell, seed: int, system_id: str, intent
         bring_up(cell.profile, system_id, temporal=cfg.kind == "temporal")
         for url in (f"{SYSTEMS_URL}/healthz", f"{ORACLE_URL}/healthz", f"{PROVIDER_PUBLIC_URL}/healthz"):
             await wait_http(url)
+        await wait_system_ready(system_id, out)
         await configure_provider(prof.model_dump(mode="json"), plan)
         arm_hooks(plan)
         phase("bring_up")
