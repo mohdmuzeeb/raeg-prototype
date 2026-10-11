@@ -29,6 +29,7 @@ class DispatchInput:
     payload: dict
     attempt_ms: int
     margin_ms: int
+    client_timeout_ms: int
     idempotency_key: str | None
     deadline_iso: str | None = None  # B3L: fixed by the workflow; B3: per activity attempt
     attempt_no: int | None = None  # B3L: workflow loop counter; B3: Temporal's attempt number
@@ -39,7 +40,7 @@ async def dispatch_payment(inp: DispatchInput) -> dict:
     now = datetime.now(UTC)
     deadline = datetime.fromisoformat(inp.deadline_iso) if inp.deadline_iso else now + timedelta(milliseconds=inp.attempt_ms)
     attempt_no = inp.attempt_no or activity.info().attempt
-    timeout = max((deadline - now).total_seconds() - inp.margin_ms / 1000, 0.05)
+    timeout = max(min((deadline - now).total_seconds() - inp.margin_ms / 1000, inp.client_timeout_ms / 1000), 0.05)
     r = await client_for(inp.system_id).dispatch(
         inp.action_key, PaymentPayload.model_validate(inp.payload), attempt_no, deadline, inp.idempotency_key,
         timeout_s=timeout)

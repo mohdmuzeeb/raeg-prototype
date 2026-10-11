@@ -32,7 +32,7 @@ class RetryBaseline:
             deadline = start + timedelta(milliseconds=c.attempt_ms)
             r = await self.client.dispatch(
                 action_key, payload, n, deadline, action_key if c.idempotency_key else None,
-                timeout_s=(c.attempt_ms - c.margin_ms) / 1000,
+                timeout_s=min(c.client_timeout_ms, c.attempt_ms - c.margin_ms) / 1000,
             )
             last = r
             if r.observation == Observation.COMMITTED:

@@ -28,6 +28,7 @@ class SystemConfig:
     kind: str
     attempt_ms: int
     margin_ms: int
+    client_timeout_ms: int
     max_dispatch: int
     backoff_base_ms: int
     max_backoff_ms: int
@@ -83,7 +84,7 @@ def make_client(config: SystemConfig, *, provider_url: str | None = None, worker
     return ProviderClient(
         provider_url or os.environ.get("PROVIDER_URL", "http://provider:8001"),
         config.system_id,
-        timeout_s=config.attempt_ms / 1000,
+        timeout_s=config.client_timeout_ms / 1000,
         hooks=ReloadingHookPlan(hooks_path) if hooks_path else HookPlan(),
         log=ExchangeLog(os.path.join(log_dir, f"client_exchanges-{config.system_id}{worker_tag}.jsonl") if log_dir else None),
         send_deadline=config.send_deadline,

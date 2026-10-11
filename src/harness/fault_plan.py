@@ -33,6 +33,7 @@ VIOLATIONS = {
 class Timing:
     attempt_ms: int
     margin_ms: int
+    client_timeout_ms: int
     lookup_lag_ms: int | None
     key_ttl_ms: int | None
     clock_skew_ms: int = 50
@@ -69,7 +70,7 @@ def _rule(key: str, idx: int, fault: str, kind: str = "dispatch", **params) -> d
 
 
 def _apply(fault: str, key: str, t: Timing, rng: random.Random, plan: FaultPlan) -> None:
-    timeout = t.attempt_ms - t.margin_ms  # every system's HTTP timeout for attempt 1
+    timeout = min(t.client_timeout_ms, t.attempt_ms - t.margin_ms)  # every system's HTTP timeout
     if fault == "F1":  # lost response after commit
         plan.provider_rules.append(_rule(key, 1, "LOST_RESPONSE", mode="reset"))
     elif fault == "F2":  # crash after the response, before persisting it
@@ -77,7 +78,7 @@ def _apply(fault: str, key: str, t: Timing, rng: random.Random, plan: FaultPlan)
     elif fault == "F3":  # stall past every client timeout; never commits
         plan.provider_rules.append(_rule(key, 1, "PRE_COMMIT_STALL", stall_ms=t.attempt_ms + 1000))
     elif fault == "F4":  # commit after the client timeout but before the deadline
-        plan.provider_rules.append(_rule(key, 1, "DELAYED_COMMIT", delay_ms=timeout + t.margin_ms // 2))
+        plan.provider_rules.append(_rule(key, 1, "DELAYED_COMMIT", delay_ms=(timeout + t.attempt_ms) // 2))
     elif fault == "F6":  # crash before send (CP1) or while in flight (CP2)
         point = rng.choice(["CP1", "CP2"])
         hook = {"action_key": key, "attempt_no": 1, "point": point}
@@ -88,8 +89,8 @@ def _apply(fault: str, key: str, t: Timing, rng: random.Random, plan: FaultPlan)
         plan.hooks.append({"action_key": key, "attempt_no": 1, "point": "PAUSE", "pause_ms": t.attempt_ms + 3500})
     elif fault == "F8":  # lookups unavailable (first three per action)
         plan.provider_rules.extend(_rule(key, i, "LOOKUP_UNAVAILABLE", kind="lookup_ref") for i in (1, 2, 3))
-    elif fault == "F9":  # delivery delay: the original reaches the provider after a retry (and after d)
-        plan.provider_rules.append(_rule(key, 1, "INGRESS_HOLD", hold_ms=t.attempt_ms + 1500))
+    elif fault == "F9":  # overtaking: the original is held so a quick retry can arrive first, still before d
+        plan.provider_rules.append(_rule(key, 1, "INGRESS_HOLD", hold_ms=min(timeout + 400, t.attempt_ms - t.margin_ms)))
     elif fault == "F10":  # retention-boundary overlap (short-τ profiles); sub-case by seed
         if t.key_ttl_ms is None:
             plan.notes.append(f"F10 skipped for {key}: profile has τ = ∞")

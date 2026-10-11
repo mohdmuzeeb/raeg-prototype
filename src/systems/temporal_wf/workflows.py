@@ -31,7 +31,8 @@ class PaymentWorkflow:
         variant = inp["variant"]
         ms = lambda n: timedelta(milliseconds=n)  # noqa: E731
         base = dict(system_id=inp["system_id"], action_key=inp["action_key"], payload=inp["payload"],
-                    attempt_ms=inp["attempt_ms"], margin_ms=inp["margin_ms"], idempotency_key=inp["action_key"])
+                    attempt_ms=inp["attempt_ms"], margin_ms=inp["margin_ms"],
+                    client_timeout_ms=inp["client_timeout_ms"], idempotency_key=inp["action_key"])
         if variant == "plain":
             try:
                 res = await workflow.execute_activity(

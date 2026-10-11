@@ -1,0 +1,24 @@
+# M7 timed CALIBRATION BATCH, run before the pilot (user instruction 2026-10-11): 3 cells × 4
+# representative systems × seed 101 (disjoint from pilot seeds), 200 actions each, pilot settings.
+# Purpose: observed per-run wall-clock for the pilot runtime projection. Never reported as results.
+name: pilot-calibration
+purpose: "M7 timed calibration batch before the pilot: measure per-run wall-clock incl. a slow-recovery cell"
+excluded_from_paper: true
+seeds: [101]   # disjoint from pilot seeds
+workload:
+  n_actions: 200
+  arrival_rate_per_s: 10
+  duplicate_fraction: 0.05   # F5 duplicate submissions are part of every cell's workload
+  duplicate_copies: 2
+driver:
+  agent_timeout_s: 30
+  restart_backoff_ms: 1000
+  max_resubmits: 5
+  poll_ms: 250
+  horizon_s: 60              # ≥ W_max of RAEG's policy (≈ 52 s with the shared timing; DESIGN §2.10a)
+  drain_s: 5                 # ≥ 2× the longest provider-side delay in these faults (F3 stall 2.5 s)
+cells:
+  - {profile: P1, fault: F0, fault_rate: 0.0, assumption_set: S}   # fast path
+  - {profile: P4, fault: FM, fault_rate: 0.2, assumption_set: S}   # slow recovery: stalls, delayed commits, overtaking
+  - {profile: P6, fault: FM, fault_rate: 0.2, assumption_set: S}   # escalation-heavy (no lookup, no idempotency)
+systems: [B1, B3, B3L-horizon, RAEG-strict]   # one representative per system family

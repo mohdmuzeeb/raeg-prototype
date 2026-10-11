@@ -40,7 +40,7 @@ async def test_unknown_system_is_404(systems) -> None:
 
 
 def test_registry_timing_is_identical_across_systems() -> None:
-    fields = ("attempt_ms", "margin_ms", "max_dispatch", "backoff_base_ms", "max_backoff_ms")
+    fields = ("attempt_ms", "margin_ms", "client_timeout_ms", "max_dispatch", "backoff_base_ms", "max_backoff_ms")
     assert len({tuple(getattr(c, f) for f in fields) for c in REGISTRY.values()}) == 1
 
 

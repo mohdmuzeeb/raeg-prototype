@@ -18,7 +18,7 @@ tests/unit/test_provider_client.py .......................F              [100%]
 =================================== FAILURES ===================================
 ______________ test_reloading_hooks_are_one_shot_across_processes ______________
 
-tmp_path = PosixPath('/private/var/folders/wx/p0dw96j103n3ly6_v5r5hzx40000gn/T/pytest-of-muzeebmohammad/pytest-26/test_reloading_hooks_are_one_s0')
+tmp_path = PosixPath('<tmp>/pytest-of-<user>/pytest-26/test_reloading_hooks_are_one_s0')
 
     async def test_reloading_hooks_are_one_shot_across_processes(tmp_path: Path) -> None:
         """A fired hook is durably marked; a fresh plan instance (= a restarted process) never re-fires it."""

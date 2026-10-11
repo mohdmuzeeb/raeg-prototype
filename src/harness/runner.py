@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+import hashlib
 import json
 import os
 import random
@@ -80,6 +81,17 @@ async def wait_http(url: str, timeout_s: float = 240) -> None:
     raise RuntimeError(f"{url} not healthy after {timeout_s}s")
 
 
+BUILT = False
+
+
+def sha256_json(obj) -> str:
+    return hashlib.sha256(json.dumps(obj, sort_keys=True, default=str).encode()).hexdigest()
+
+
+def sha256_file(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
 def bring_up(profile_id: str, system_id: str, temporal: bool) -> None:
     collector.compose("down", "-v", "--remove-orphans")
     env_profile = ["--profile", "systems"] + (["--profile", "temporal"] if temporal else [])
@@ -88,8 +100,11 @@ def bring_up(profile_id: str, system_id: str, temporal: bool) -> None:
            "CODE_SHA": os.environ.get("CODE_SHA", "unknown")}
     import subprocess
 
-    subprocess.run(["docker", "compose", *env_profile, "up", "-d", "--build", "--wait"], cwd=ROOT, env=env,
+    global BUILT
+    build = [] if BUILT else ["--build"]  # build once per runner invocation; every run still gets fresh volumes
+    subprocess.run(["docker", "compose", *env_profile, "up", "-d", *build, "--wait"], cwd=ROOT, env=env,
                    capture_output=True, text=True, timeout=900, check=True)
+    BUILT = True
 
 
 async def configure_provider(profile: dict, plan: fault_plan.FaultPlan) -> None:
@@ -127,7 +142,7 @@ async def drain_raeg(keys: list[str], timeout_s: float) -> None:
 
 
 async def run_one(exp: Experiment, cell: Cell, seed: int, system_id: str, intents: list, plan: fault_plan.FaultPlan,
-                  order: list[str]) -> Path:
+                  order: list[str], config_path: Path) -> Path:
     systems = load_systems()
     cfg = systems[system_id]
     profiles = load_all()
@@ -139,22 +154,42 @@ async def run_one(exp: Experiment, cell: Cell, seed: int, system_id: str, intent
                 "seed": seed, "system": system_id, "system_config": cfg.__dict__, "system_order_this_seed": order,
                 "profile": prof.model_dump(mode="json"),
                 "raeg_policy": policy_for(cfg).to_json() if cfg.kind == "raeg" else None}
-    manifest = build_manifest("experiment", {"run_id": run_id, "status": "running", "resolved_config": resolved,
-                                             "excluded_from_paper": exp.excluded_from_paper})
+    manifest = build_manifest("experiment", {
+        "run_id": run_id, "status": "running", "resolved_config": resolved,
+        "excluded_from_paper": exp.excluded_from_paper,
+        "config_hashes": {"resolved_config_sha256": sha256_json(resolved),
+                          "experiment_file": str(config_path), "experiment_file_sha256": sha256_file(config_path),
+                          "systems_yaml_sha256": sha256_file(ROOT / "config" / "systems.yaml"),
+                          "profile_file_sha256": sha256_file(ROOT / "config" / "profiles" / f"{cell.profile}.yaml"),
+                          "workload_sha256": sha256_json([i.to_json() for i in intents]),
+                          "fault_plan_sha256": sha256_json(plan.to_json())},
+        "phase_timings_s": {}})
     write_manifest(out / "manifest.json", manifest)
     workload.write(out / "workload.jsonl", intents)
     plan.write(out / "fault_plan.json")
     t_start = time.monotonic()
+    phases = manifest["phase_timings_s"]
+    mark = time.monotonic()
+
+    def phase(name: str) -> None:
+        nonlocal mark
+        now = time.monotonic()
+        phases[name] = round(now - mark, 2)
+        mark = now
+
     try:
         bring_up(cell.profile, system_id, temporal=cfg.kind == "temporal")
         await wait_http(f"{SYSTEMS_URL}/healthz")
         await configure_provider(prof.model_dump(mode="json"), plan)
         arm_hooks(plan)
+        phase("bring_up")
         await Driver(SYSTEMS_URL, system_id, cell.profile, exp.driver, out).run(intents)
+        phase("driver")
         keys = [i.action_key for i in intents]
         if cfg.kind == "raeg":
             await drain_raeg(keys, exp.driver.drain_s + 30)
-        await asyncio.sleep(exp.driver.drain_s)  # provider-side stalls / zombie sends finish
+        await asyncio.sleep(exp.driver.drain_s)  # provider-side stalls / held deliveries finish
+        phase("drain")
         await collector.collect_oracle(out)
         collector.collect_exchange_logs(out)
         if cfg.kind == "raeg":
@@ -162,11 +197,13 @@ async def run_one(exp: Experiment, cell: Cell, seed: int, system_id: str, intent
         if cfg.kind == "temporal":
             await collector.collect_temporal(out, keys)
         collector.collect_container_logs(out)
+        phase("collect")
         report = await audit(out, system_kind=cfg.kind, assumption_set=cell.assumption_set,
                              raeg_admin_dsn=collector.RAEG_ADMIN_DSN if cfg.kind == "raeg" else None,
                              policy=policy_for(cfg).to_json() if cfg.kind == "raeg" else None,
                              capability=prof.capability.model_dump(mode="json"))
         (out / "audit.json").write_text(json.dumps(report, indent=1, sort_keys=True, default=str) + "\n", encoding="utf-8")
+        phase("audit")
         manifest["status"] = "complete"
         manifest["audit_status"] = report["status"]
         manifest["audit_failed_checks"] = report["failed_checks"]
@@ -205,12 +242,13 @@ async def main() -> None:
             intents = workload.generate(seed, exp.workload, namespace)
             any_cfg = registry[systems[0]]
             cap = profiles[cell.profile].capability
-            timing = fault_plan.Timing(any_cfg.attempt_ms, any_cfg.margin_ms, cap.lookup_lag_ms, cap.key_ttl_ms)
+            timing = fault_plan.Timing(any_cfg.attempt_ms, any_cfg.margin_ms, any_cfg.client_timeout_ms,
+                                       cap.lookup_lag_ms, cap.key_ttl_ms)
             plan = fault_plan.generate(seed, intents, cell.fault, cell.fault_rate, timing, plan_id=namespace)
             order = list(systems)
             random.Random(f"order|{seed}|{namespace}").shuffle(order)
             for system_id in order:
-                await run_one(exp, cell, seed, system_id, intents, plan, order)
+                await run_one(exp, cell, seed, system_id, intents, plan, order, Path(args.config))
     collector.compose("down", "-v", "--remove-orphans", check=False)
 
 

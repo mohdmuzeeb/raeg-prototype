@@ -132,7 +132,8 @@ class RecoveryEngine:
         else:
             response = await self.client.dispatch(
                 key, payload, claim.attempt_no, claim.deadline if p.send_deadline else None, idem_key,
-                timeout_s=max(budget_s - p.margin_ms / 1000, 0.05),
+                timeout_s=max(min(budget_s - p.margin_ms / 1000,
+                                  (p.client_timeout_ms or 10**9) / 1000), 0.05),
             )
             ev = await self._dispatch_evidence(key, claim.attempt_no, response, fenced=False)
             evidence_ids = [ev]

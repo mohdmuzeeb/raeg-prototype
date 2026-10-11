@@ -1,8 +1,8 @@
-$ /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/.venv/bin/python -m pytest -v -rA --tb=long --junitxml=/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/results/tests/20261011T030219Z_unit/junit.xml tests/unit -q -p no:cacheprovider
+$ <repo>/.venv/bin/python -m pytest -v -rA --tb=long --junitxml=<repo>/results/tests/20261011T030219Z_unit/junit.xml tests/unit -q -p no:cacheprovider
 
 ============================= test session starts ==============================
 platform darwin -- Python 3.12.7, pytest-9.1.1, pluggy-1.6.0
-rootdir: /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup
+rootdir: <repo>
 configfile: pyproject.toml
 plugins: hypothesis-6.168.5, asyncio-1.4.0, anyio-4.15.1
 asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
@@ -386,7 +386,7 @@ E        +  and   8 = len([Policy(mode='STRICT', order='verify_first', max_dispa
 
 tests/unit/test_controller_table.py:78: AssertionError
 ==================================== PASSES ====================================
-- generated xml file: /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/results/tests/20261011T030219Z_unit/junit.xml -
+- generated xml file: <repo>/results/tests/20261011T030219Z_unit/junit.xml -
 =========================== short test summary info ============================
 PASSED tests/unit/test_controller_table.py::test_decide_table[0-0-1-0--20000-500-None]
 PASSED tests/unit/test_controller_table.py::test_decide_table[0-0-1-0--20000-500-ABSENCE_UNPROVABLE]

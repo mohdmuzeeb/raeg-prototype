@@ -1,10 +1,10 @@
-$ /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/.venv/bin/python -m pytest -v -rA --tb=long --junitxml=/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/results/tests/20261011T022744Z_conformance/junit.xml tests/conformance
+$ <repo>/.venv/bin/python -m pytest -v -rA --tb=long --junitxml=<repo>/results/tests/20261011T022744Z_conformance/junit.xml tests/conformance
 
 ============================= test session starts ==============================
-platform darwin -- Python 3.12.7, pytest-9.1.1, pluggy-1.6.0 -- /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/.venv/bin/python
+platform darwin -- Python 3.12.7, pytest-9.1.1, pluggy-1.6.0 -- <repo>/.venv/bin/python
 cachedir: .pytest_cache
 hypothesis profile 'default'
-rootdir: /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup
+rootdir: <repo>
 configfile: pyproject.toml
 plugins: hypothesis-6.168.5, asyncio-1.4.0, anyio-4.15.1
 asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
@@ -126,7 +126,7 @@ tests/conformance/test_retention_boundary.py::test_kb6_in_progress_record_never_
 tests/conformance/test_retention_boundary.py::test_kb6_in_progress_record_never_expires[P7-serialize] PASSED [100%]
 
 ==================================== PASSES ====================================
-- generated xml file: /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/results/tests/20261011T022744Z_conformance/junit.xml -
+- generated xml file: <repo>/results/tests/20261011T022744Z_conformance/junit.xml -
 =========================== short test summary info ============================
 PASSED tests/conformance/test_declared_capabilities.py::test_commit_is_recorded_in_ledger_and_receipt_log[P1]
 PASSED tests/conformance/test_declared_capabilities.py::test_commit_is_recorded_in_ledger_and_receipt_log[P2]

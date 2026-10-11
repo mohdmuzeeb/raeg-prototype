@@ -1,0 +1,297 @@
+provider-1  | 2026-10-11T04:48:10.876345336Z 2026-10-11 04:48:10,876 INFO payment_provider provider ready profile=P1 migrations=[] released_on_recovery=0
+provider-1  | 2026-10-11T04:48:30.630232906Z ERROR:    Exception in ASGI application
+provider-1  | 2026-10-11T04:48:30.630311266Z Traceback (most recent call last):
+provider-1  | 2026-10-11T04:48:30.630314432Z   File "/usr/local/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 411, in run_asgi
+provider-1  | 2026-10-11T04:48:30.630317057Z     result = await app(  # type: ignore[func-returns-value]
+provider-1  | 2026-10-11T04:48:30.630321181Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:48:30.630322347Z   File "/usr/local/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+provider-1  | 2026-10-11T04:48:30.630323639Z     return await self.app(scope, receive, send)
+provider-1  | 2026-10-11T04:48:30.630324805Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:48:30.630325930Z   File "/usr/local/lib/python3.12/site-packages/fastapi/applications.py", line 1216, in __call__
+provider-1  | 2026-10-11T04:48:30.630327221Z     await super().__call__(scope, receive, send)
+provider-1  | 2026-10-11T04:48:30.630328304Z   File "/usr/local/lib/python3.12/site-packages/starlette/applications.py", line 96, in __call__
+provider-1  | 2026-10-11T04:48:30.630329512Z     await self.middleware_stack(scope, receive, send)
+provider-1  | 2026-10-11T04:48:30.630330679Z   File "/usr/local/lib/python3.12/site-packages/starlette/middleware/errors.py", line 186, in __call__
+provider-1  | 2026-10-11T04:48:30.630332304Z     raise exc
+provider-1  | 2026-10-11T04:48:30.630333428Z   File "/usr/local/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+provider-1  | 2026-10-11T04:48:30.630334636Z     await self.app(scope, receive, _send)
+provider-1  | 2026-10-11T04:48:30.630335803Z   File "/usr/local/lib/python3.12/site-packages/fastapi/telemetry/_asgi.py", line 151, in __call__
+provider-1  | 2026-10-11T04:48:30.630337178Z     await self.app(scope, receive, send)
+provider-1  | 2026-10-11T04:48:30.630338261Z   File "/usr/local/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+provider-1  | 2026-10-11T04:48:30.630340052Z     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+provider-1  | 2026-10-11T04:48:30.630341427Z   File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+provider-1  | 2026-10-11T04:48:30.630346551Z     raise exc
+provider-1  | 2026-10-11T04:48:30.630347551Z   File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+provider-1  | 2026-10-11T04:48:30.630348800Z     await app(scope, receive, sender)
+provider-1  | 2026-10-11T04:48:30.630349925Z   File "/usr/local/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+provider-1  | 2026-10-11T04:48:30.630351758Z     await self.app(scope, receive, send)
+provider-1  | 2026-10-11T04:48:30.630353300Z   File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 676, in __call__
+provider-1  | 2026-10-11T04:48:30.630357882Z     await self.middleware_stack(scope, receive, send)
+provider-1  | 2026-10-11T04:48:30.630368713Z   File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 2786, in app
+provider-1  | 2026-10-11T04:48:30.630373712Z     await route.handle(scope, receive, send)
+provider-1  | 2026-10-11T04:48:30.630374754Z   File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 1310, in handle
+provider-1  | 2026-10-11T04:48:30.630375712Z     await super().handle(scope, receive, send)
+provider-1  | 2026-10-11T04:48:30.630376587Z   File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 282, in handle
+provider-1  | 2026-10-11T04:48:30.630378086Z     await self.app(scope, receive, send)
+provider-1  | 2026-10-11T04:48:30.630382419Z   File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 165, in app
+provider-1  | 2026-10-11T04:48:30.630384710Z     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+provider-1  | 2026-10-11T04:48:30.630385710Z   File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+provider-1  | 2026-10-11T04:48:30.630386668Z     raise exc
+provider-1  | 2026-10-11T04:48:30.630387460Z   File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+provider-1  | 2026-10-11T04:48:30.630389126Z     await app(scope, receive, sender)
+provider-1  | 2026-10-11T04:48:30.630389959Z   File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 151, in app
+provider-1  | 2026-10-11T04:48:30.630393458Z     response = await f(request)
+provider-1  | 2026-10-11T04:48:30.630408830Z                ^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:48:30.630412246Z   File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 727, in app
+provider-1  | 2026-10-11T04:48:30.630415871Z     raw_response = await run_endpoint_function(
+provider-1  | 2026-10-11T04:48:30.630419912Z                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:48:30.630420786Z   File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 360, in run_endpoint_function
+provider-1  | 2026-10-11T04:48:30.630421744Z     return await dependant.call(**values)
+provider-1  | 2026-10-11T04:48:30.630422619Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:48:30.630423494Z   File "/app/src/payment_provider/app.py", line 330, in create_payment
+provider-1  | 2026-10-11T04:48:30.630424452Z     return await abort("stalled_no_commit", 503, "UNAVAILABLE", "processing stalled; nothing committed")
+provider-1  | 2026-10-11T04:48:30.630425577Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:48:30.630426910Z   File "/app/src/payment_provider/app.py", line 321, in abort
+provider-1  | 2026-10-11T04:48:30.630428077Z     await finish(receipt_id, disposition, status)
+provider-1  | 2026-10-11T04:48:30.630428951Z   File "/app/src/payment_provider/app.py", line 168, in finish
+provider-1  | 2026-10-11T04:48:30.630432701Z     await STATE.pool.execute(
+provider-1  | 2026-10-11T04:48:30.630434159Z   File "/usr/local/lib/python3.12/site-packages/asyncpg/pool.py", line 709, in execute
+provider-1  | 2026-10-11T04:48:30.630435242Z     return await con.execute(query, *args, timeout=timeout)
+provider-1  | 2026-10-11T04:48:30.630439408Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:48:30.630440366Z   File "/usr/local/lib/python3.12/site-packages/asyncpg/connection.py", line 380, in execute
+provider-1  | 2026-10-11T04:48:30.630443157Z     _, status, _ = await self._execute(
+provider-1  | 2026-10-11T04:48:30.630446198Z                    ^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:48:30.630447073Z   File "/usr/local/lib/python3.12/site-packages/asyncpg/connection.py", line 1904, in _execute
+provider-1  | 2026-10-11T04:48:30.630448656Z     result, _ = await self.__execute(
+provider-1  | 2026-10-11T04:48:30.630449489Z                 ^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:48:30.630450864Z   File "/usr/local/lib/python3.12/site-packages/asyncpg/connection.py", line 2003, in __execute
+provider-1  | 2026-10-11T04:48:30.630454155Z     result, stmt = await self._do_execute(
+provider-1  | 2026-10-11T04:48:30.630455030Z                    ^^^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:48:30.630456571Z   File "/usr/local/lib/python3.12/site-packages/asyncpg/connection.py", line 2066, in _do_execute
+provider-1  | 2026-10-11T04:48:30.630457529Z     result = await executor(stmt, None)
+provider-1  | 2026-10-11T04:48:30.630461153Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:48:30.630462153Z   File "asyncpg/protocol/protocol.pyx", line 197, in bind_execute
+provider-1  | 2026-10-11T04:48:30.630463111Z asyncpg.exceptions.ForeignKeyViolationError: insert or update on table "receipt_outcomes" violates foreign key constraint "receipt_outcomes_receipt_id_fkey"
+provider-1  | 2026-10-11T04:48:30.630464320Z DETAIL:  Key (receipt_id)=(1) is not present in table "receipts".
+provider-1  | 2026-10-11T04:48:41.333761867Z ERROR:    Exception in ASGI application
+provider-1  | 2026-10-11T04:48:41.333998071Z Traceback (most recent call last):
+provider-1  | 2026-10-11T04:48:41.334005777Z   File "/usr/local/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 411, in run_asgi
+provider-1  | 2026-10-11T04:48:41.334008069Z     result = await app(  # type: ignore[func-returns-value]
+provider-1  | 2026-10-11T04:48:41.334011485Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:48:41.334016609Z   File "/usr/local/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+provider-1  | 2026-10-11T04:48:41.334018067Z     return await self.app(scope, receive, send)
+provider-1  | 2026-10-11T04:48:41.334019233Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:48:41.334020483Z   File "/usr/local/lib/python3.12/site-packages/fastapi/applications.py", line 1216, in __call__
+provider-1  | 2026-10-11T04:48:41.334021816Z     await super().__call__(scope, receive, send)
+provider-1  | 2026-10-11T04:48:41.334022941Z   File "/usr/local/lib/python3.12/site-packages/starlette/applications.py", line 96, in __call__
+provider-1  | 2026-10-11T04:48:41.334024649Z     await self.middleware_stack(scope, receive, send)
+provider-1  | 2026-10-11T04:48:41.334025898Z   File "/usr/local/lib/python3.12/site-packages/starlette/middleware/errors.py", line 186, in __call__
+provider-1  | 2026-10-11T04:48:41.334027190Z     raise exc
+provider-1  | 2026-10-11T04:48:41.334039021Z   File "/usr/local/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+provider-1  | 2026-10-11T04:48:41.334040229Z     await self.app(scope, receive, _send)
+provider-1  | 2026-10-11T04:48:41.334041145Z   File "/usr/local/lib/python3.12/site-packages/fastapi/telemetry/_asgi.py", line 151, in __call__
+provider-1  | 2026-10-11T04:48:41.334042187Z     await self.app(scope, receive, send)
+provider-1  | 2026-10-11T04:48:41.334043020Z   File "/usr/local/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+provider-1  | 2026-10-11T04:48:41.334044020Z     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+provider-1  | 2026-10-11T04:48:41.334044978Z   File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+provider-1  | 2026-10-11T04:48:41.334076305Z     raise exc
+provider-1  | 2026-10-11T04:48:41.334080929Z   File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+provider-1  | 2026-10-11T04:48:41.334082346Z     await app(scope, receive, sender)
+provider-1  | 2026-10-11T04:48:41.334083387Z   File "/usr/local/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+provider-1  | 2026-10-11T04:48:41.334085553Z     await self.app(scope, receive, send)
+provider-1  | 2026-10-11T04:48:41.334088511Z   File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 676, in __call__
+provider-1  | 2026-10-11T04:48:41.334090219Z     await self.middleware_stack(scope, receive, send)
+provider-1  | 2026-10-11T04:48:41.334093510Z   File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 2786, in app
+provider-1  | 2026-10-11T04:48:41.334095760Z     await route.handle(scope, receive, send)
+provider-1  | 2026-10-11T04:48:41.334096718Z   File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 1310, in handle
+provider-1  | 2026-10-11T04:48:41.334097801Z     await super().handle(scope, receive, send)
+provider-1  | 2026-10-11T04:48:41.334098676Z   File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 282, in handle
+provider-1  | 2026-10-11T04:48:41.334099676Z     await self.app(scope, receive, send)
+provider-1  | 2026-10-11T04:48:41.334100509Z   File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 165, in app
+provider-1  | 2026-10-11T04:48:41.334101467Z     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+provider-1  | 2026-10-11T04:48:41.334102384Z   File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+provider-1  | 2026-10-11T04:48:41.334103758Z     raise exc
+provider-1  | 2026-10-11T04:48:41.334104800Z   File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+provider-1  | 2026-10-11T04:48:41.334106466Z     await app(scope, receive, sender)
+provider-1  | 2026-10-11T04:48:41.334107383Z   File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 151, in app
+provider-1  | 2026-10-11T04:48:41.334108299Z     response = await f(request)
+provider-1  | 2026-10-11T04:48:41.334109174Z                ^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:48:41.334110049Z   File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 727, in app
+provider-1  | 2026-10-11T04:48:41.334117214Z     raw_response = await run_endpoint_function(
+provider-1  | 2026-10-11T04:48:41.334119297Z                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:48:41.334120172Z   File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 360, in run_endpoint_function
+provider-1  | 2026-10-11T04:48:41.334121130Z     return await dependant.call(**values)
+provider-1  | 2026-10-11T04:48:41.334122088Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:48:41.334123004Z   File "/app/src/payment_provider/app.py", line 330, in create_payment
+provider-1  | 2026-10-11T04:48:41.334123963Z     return await abort("stalled_no_commit", 503, "UNAVAILABLE", "processing stalled; nothing committed")
+provider-1  | 2026-10-11T04:48:41.334127379Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:48:41.334129378Z   File "/app/src/payment_provider/app.py", line 321, in abort
+provider-1  | 2026-10-11T04:48:41.334130378Z     await finish(receipt_id, disposition, status)
+provider-1  | 2026-10-11T04:48:41.334131253Z   File "/app/src/payment_provider/app.py", line 168, in finish
+provider-1  | 2026-10-11T04:48:41.334132169Z     await STATE.pool.execute(
+provider-1  | 2026-10-11T04:48:41.334133086Z   File "/usr/local/lib/python3.12/site-packages/asyncpg/pool.py", line 709, in execute
+provider-1  | 2026-10-11T04:48:41.334134211Z     return await con.execute(query, *args, timeout=timeout)
+provider-1  | 2026-10-11T04:48:41.334135127Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:48:41.334136460Z   File "/usr/local/lib/python3.12/site-packages/asyncpg/connection.py", line 380, in execute
+provider-1  | 2026-10-11T04:48:41.334138710Z     _, status, _ = await self._execute(
+provider-1  | 2026-10-11T04:48:41.334143084Z                    ^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:48:41.334146500Z   File "/usr/local/lib/python3.12/site-packages/asyncpg/connection.py", line 1904, in _execute
+provider-1  | 2026-10-11T04:48:41.334148708Z     result, _ = await self.__execute(
+provider-1  | 2026-10-11T04:48:41.334149541Z                 ^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:48:41.334151707Z   File "/usr/local/lib/python3.12/site-packages/asyncpg/connection.py", line 2003, in __execute
+provider-1  | 2026-10-11T04:48:41.334154457Z     result, stmt = await self._do_execute(
+provider-1  | 2026-10-11T04:48:41.334155373Z                    ^^^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:48:41.334156248Z   File "/usr/local/lib/python3.12/site-packages/asyncpg/connection.py", line 2066, in _do_execute
+provider-1  | 2026-10-11T04:48:41.334157248Z     result = await executor(stmt, None)
+provider-1  | 2026-10-11T04:48:41.334158164Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:48:41.334159081Z   File "asyncpg/protocol/protocol.pyx", line 197, in bind_execute
+provider-1  | 2026-10-11T04:48:41.334160039Z asyncpg.exceptions.ForeignKeyViolationError: insert or update on table "receipt_outcomes" violates foreign key constraint "receipt_outcomes_receipt_id_fkey"
+provider-1  | 2026-10-11T04:48:41.334161330Z DETAIL:  Key (receipt_id)=(5) is not present in table "receipts".
+provider-1  | 2026-10-11T04:49:58.827083146Z ERROR:    Exception in ASGI application
+provider-1  | 2026-10-11T04:49:58.827151716Z Traceback (most recent call last):
+provider-1  | 2026-10-11T04:49:58.827156923Z   File "/usr/local/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 411, in run_asgi
+provider-1  | 2026-10-11T04:49:58.827158506Z     result = await app(  # type: ignore[func-returns-value]
+provider-1  | 2026-10-11T04:49:58.827159714Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:49:58.827161047Z   File "/usr/local/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+provider-1  | 2026-10-11T04:49:58.827162547Z     return await self.app(scope, receive, send)
+provider-1  | 2026-10-11T04:49:58.827163672Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:49:58.827164755Z   File "/usr/local/lib/python3.12/site-packages/fastapi/applications.py", line 1216, in __call__
+provider-1  | 2026-10-11T04:49:58.827166046Z     await super().__call__(scope, receive, send)
+provider-1  | 2026-10-11T04:49:58.827167171Z   File "/usr/local/lib/python3.12/site-packages/starlette/applications.py", line 96, in __call__
+provider-1  | 2026-10-11T04:49:58.827168421Z     await self.middleware_stack(scope, receive, send)
+provider-1  | 2026-10-11T04:49:58.827169546Z   File "/usr/local/lib/python3.12/site-packages/starlette/middleware/errors.py", line 186, in __call__
+provider-1  | 2026-10-11T04:49:58.827170796Z     raise exc
+provider-1  | 2026-10-11T04:49:58.827171879Z   File "/usr/local/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+provider-1  | 2026-10-11T04:49:58.827173128Z     await self.app(scope, receive, _send)
+provider-1  | 2026-10-11T04:49:58.827174212Z   File "/usr/local/lib/python3.12/site-packages/fastapi/telemetry/_asgi.py", line 151, in __call__
+provider-1  | 2026-10-11T04:49:58.827175503Z     await self.app(scope, receive, send)
+provider-1  | 2026-10-11T04:49:58.827176586Z   File "/usr/local/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+provider-1  | 2026-10-11T04:49:58.827177877Z     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+provider-1  | 2026-10-11T04:49:58.827179044Z   File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+provider-1  | 2026-10-11T04:49:58.827180252Z     raise exc
+provider-1  | 2026-10-11T04:49:58.827181335Z   File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+provider-1  | 2026-10-11T04:49:58.827182543Z     await app(scope, receive, sender)
+provider-1  | 2026-10-11T04:49:58.827183668Z   File "/usr/local/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+provider-1  | 2026-10-11T04:49:58.827184876Z     await self.app(scope, receive, send)
+provider-1  | 2026-10-11T04:49:58.827185959Z   File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 676, in __call__
+provider-1  | 2026-10-11T04:49:58.827187667Z     await self.middleware_stack(scope, receive, send)
+provider-1  | 2026-10-11T04:49:58.827188792Z   File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 2786, in app
+provider-1  | 2026-10-11T04:49:58.827200956Z     await route.handle(scope, receive, send)
+provider-1  | 2026-10-11T04:49:58.827210663Z   File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 1310, in handle
+provider-1  | 2026-10-11T04:49:58.827211787Z     await super().handle(scope, receive, send)
+provider-1  | 2026-10-11T04:49:58.827215162Z   File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 282, in handle
+provider-1  | 2026-10-11T04:49:58.827218786Z     await self.app(scope, receive, send)
+provider-1  | 2026-10-11T04:49:58.827219661Z   File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 165, in app
+provider-1  | 2026-10-11T04:49:58.827220619Z     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+provider-1  | 2026-10-11T04:49:58.827221577Z   File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+provider-1  | 2026-10-11T04:49:58.827222535Z     raise exc
+provider-1  | 2026-10-11T04:49:58.827223410Z   File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+provider-1  | 2026-10-11T04:49:58.827224410Z     await app(scope, receive, sender)
+provider-1  | 2026-10-11T04:49:58.827225285Z   File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 151, in app
+provider-1  | 2026-10-11T04:49:58.827226201Z     response = await f(request)
+provider-1  | 2026-10-11T04:49:58.827227159Z                ^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:49:58.827227993Z   File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 727, in app
+provider-1  | 2026-10-11T04:49:58.827228951Z     raw_response = await run_endpoint_function(
+provider-1  | 2026-10-11T04:49:58.827229826Z                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:49:58.827236033Z   File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 360, in run_endpoint_function
+provider-1  | 2026-10-11T04:49:58.827237407Z     return await dependant.call(**values)
+provider-1  | 2026-10-11T04:49:58.827238282Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:49:58.827239115Z   File "/app/src/payment_provider/app.py", line 330, in create_payment
+provider-1  | 2026-10-11T04:49:58.827240074Z     return await abort("stalled_no_commit", 503, "UNAVAILABLE", "processing stalled; nothing committed")
+provider-1  | 2026-10-11T04:49:58.827241323Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:49:58.827242281Z   File "/app/src/payment_provider/app.py", line 321, in abort
+provider-1  | 2026-10-11T04:49:58.827243323Z     await finish(receipt_id, disposition, status)
+provider-1  | 2026-10-11T04:49:58.827244198Z   File "/app/src/payment_provider/app.py", line 168, in finish
+provider-1  | 2026-10-11T04:49:58.827245114Z     await STATE.pool.execute(
+provider-1  | 2026-10-11T04:49:58.827245947Z   File "/usr/local/lib/python3.12/site-packages/asyncpg/pool.py", line 709, in execute
+provider-1  | 2026-10-11T04:49:58.827246864Z     return await con.execute(query, *args, timeout=timeout)
+provider-1  | 2026-10-11T04:49:58.827247780Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:49:58.827251113Z   File "/usr/local/lib/python3.12/site-packages/asyncpg/connection.py", line 380, in execute
+provider-1  | 2026-10-11T04:49:58.827252904Z     _, status, _ = await self._execute(
+provider-1  | 2026-10-11T04:49:58.827253779Z                    ^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:49:58.827254654Z   File "/usr/local/lib/python3.12/site-packages/asyncpg/connection.py", line 1904, in _execute
+provider-1  | 2026-10-11T04:49:58.827255654Z     result, _ = await self.__execute(
+provider-1  | 2026-10-11T04:49:58.827257445Z                 ^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:49:58.827258278Z   File "/usr/local/lib/python3.12/site-packages/asyncpg/connection.py", line 2003, in __execute
+provider-1  | 2026-10-11T04:49:58.827259320Z     result, stmt = await self._do_execute(
+provider-1  | 2026-10-11T04:49:58.827260195Z                    ^^^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:49:58.827261069Z   File "/usr/local/lib/python3.12/site-packages/asyncpg/connection.py", line 2066, in _do_execute
+provider-1  | 2026-10-11T04:49:58.827262028Z     result = await executor(stmt, None)
+provider-1  | 2026-10-11T04:49:58.827262902Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:49:58.827263736Z   File "asyncpg/protocol/protocol.pyx", line 197, in bind_execute
+provider-1  | 2026-10-11T04:49:58.827264652Z asyncpg.exceptions.UniqueViolationError: duplicate key value violates unique constraint "receipt_outcomes_pkey"
+provider-1  | 2026-10-11T04:49:58.827265694Z DETAIL:  Key (receipt_id)=(1) already exists.
+provider-1  | 2026-10-11T04:50:04.196916870Z ERROR:    Exception in ASGI application
+provider-1  | 2026-10-11T04:50:04.197018516Z Traceback (most recent call last):
+provider-1  | 2026-10-11T04:50:04.197023599Z   File "/usr/local/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 411, in run_asgi
+provider-1  | 2026-10-11T04:50:04.197025515Z     result = await app(  # type: ignore[func-returns-value]
+provider-1  | 2026-10-11T04:50:04.197026765Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:50:04.197027889Z   File "/usr/local/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+provider-1  | 2026-10-11T04:50:04.197029139Z     return await self.app(scope, receive, send)
+provider-1  | 2026-10-11T04:50:04.197030264Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:50:04.197031347Z   File "/usr/local/lib/python3.12/site-packages/fastapi/applications.py", line 1216, in __call__
+provider-1  | 2026-10-11T04:50:04.197038554Z     await super().__call__(scope, receive, send)
+provider-1  | 2026-10-11T04:50:04.197039720Z   File "/usr/local/lib/python3.12/site-packages/starlette/applications.py", line 96, in __call__
+provider-1  | 2026-10-11T04:50:04.197040970Z     await self.middleware_stack(scope, receive, send)
+provider-1  | 2026-10-11T04:50:04.197042137Z   File "/usr/local/lib/python3.12/site-packages/starlette/middleware/errors.py", line 186, in __call__
+provider-1  | 2026-10-11T04:50:04.197043386Z     raise exc
+provider-1  | 2026-10-11T04:50:04.197044470Z   File "/usr/local/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+provider-1  | 2026-10-11T04:50:04.197092210Z     await self.app(scope, receive, _send)
+provider-1  | 2026-10-11T04:50:04.197095126Z   File "/usr/local/lib/python3.12/site-packages/fastapi/telemetry/_asgi.py", line 151, in __call__
+provider-1  | 2026-10-11T04:50:04.197096376Z     await self.app(scope, receive, send)
+provider-1  | 2026-10-11T04:50:04.197097501Z   File "/usr/local/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+provider-1  | 2026-10-11T04:50:04.197098792Z     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+provider-1  | 2026-10-11T04:50:04.197099917Z   File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+provider-1  | 2026-10-11T04:50:04.197101167Z     raise exc
+provider-1  | 2026-10-11T04:50:04.197102167Z   File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+provider-1  | 2026-10-11T04:50:04.197103375Z     await app(scope, receive, sender)
+provider-1  | 2026-10-11T04:50:04.197104458Z   File "/usr/local/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+provider-1  | 2026-10-11T04:50:04.197105666Z     await self.app(scope, receive, send)
+provider-1  | 2026-10-11T04:50:04.197106707Z   File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 676, in __call__
+provider-1  | 2026-10-11T04:50:04.197107915Z     await self.middleware_stack(scope, receive, send)
+provider-1  | 2026-10-11T04:50:04.197109040Z   File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 2786, in app
+provider-1  | 2026-10-11T04:50:04.197111123Z     await route.handle(scope, receive, send)
+provider-1  | 2026-10-11T04:50:04.197112290Z   File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 1310, in handle
+provider-1  | 2026-10-11T04:50:04.197113498Z     await super().handle(scope, receive, send)
+provider-1  | 2026-10-11T04:50:04.197114539Z   File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 282, in handle
+provider-1  | 2026-10-11T04:50:04.197115664Z     await self.app(scope, receive, send)
+provider-1  | 2026-10-11T04:50:04.197116747Z   File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 165, in app
+provider-1  | 2026-10-11T04:50:04.197117913Z     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+provider-1  | 2026-10-11T04:50:04.197119080Z   File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+provider-1  | 2026-10-11T04:50:04.197120330Z     raise exc
+provider-1  | 2026-10-11T04:50:04.197121413Z   File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+provider-1  | 2026-10-11T04:50:04.197122579Z     await app(scope, receive, sender)
+provider-1  | 2026-10-11T04:50:04.197123662Z   File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 151, in app
+provider-1  | 2026-10-11T04:50:04.197129911Z     response = await f(request)
+provider-1  | 2026-10-11T04:50:04.197130994Z                ^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:50:04.197132036Z   File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 727, in app
+provider-1  | 2026-10-11T04:50:04.197135702Z     raw_response = await run_endpoint_function(
+provider-1  | 2026-10-11T04:50:04.197136826Z                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:50:04.197137909Z   File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 360, in run_endpoint_function
+provider-1  | 2026-10-11T04:50:04.197139118Z     return await dependant.call(**values)
+provider-1  | 2026-10-11T04:50:04.197140201Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:50:04.197141367Z   File "/app/src/payment_provider/app.py", line 330, in create_payment
+provider-1  | 2026-10-11T04:50:04.197142534Z     return await abort("stalled_no_commit", 503, "UNAVAILABLE", "processing stalled; nothing committed")
+provider-1  | 2026-10-11T04:50:04.197143992Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:50:04.197145241Z   File "/app/src/payment_provider/app.py", line 321, in abort
+provider-1  | 2026-10-11T04:50:04.197146408Z     await finish(receipt_id, disposition, status)
+provider-1  | 2026-10-11T04:50:04.197147491Z   File "/app/src/payment_provider/app.py", line 168, in finish
+provider-1  | 2026-10-11T04:50:04.197148574Z     await STATE.pool.execute(
+provider-1  | 2026-10-11T04:50:04.197149657Z   File "/usr/local/lib/python3.12/site-packages/asyncpg/pool.py", line 709, in execute
+provider-1  | 2026-10-11T04:50:04.197150824Z     return await con.execute(query, *args, timeout=timeout)
+provider-1  | 2026-10-11T04:50:04.197151907Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:50:04.197153031Z   File "/usr/local/lib/python3.12/site-packages/asyncpg/connection.py", line 380, in execute
+provider-1  | 2026-10-11T04:50:04.197154406Z     _, status, _ = await self._execute(
+provider-1  | 2026-10-11T04:50:04.197155489Z                    ^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:50:04.197156531Z   File "/usr/local/lib/python3.12/site-packages/asyncpg/connection.py", line 1904, in _execute
+provider-1  | 2026-10-11T04:50:04.197157739Z     result, _ = await self.__execute(
+provider-1  | 2026-10-11T04:50:04.197158739Z                 ^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:50:04.197159780Z   File "/usr/local/lib/python3.12/site-packages/asyncpg/connection.py", line 2003, in __execute
+provider-1  | 2026-10-11T04:50:04.197160988Z     result, stmt = await self._do_execute(
+provider-1  | 2026-10-11T04:50:04.197162071Z                    ^^^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:50:04.197163113Z   File "/usr/local/lib/python3.12/site-packages/asyncpg/connection.py", line 2066, in _do_execute
+provider-1  | 2026-10-11T04:50:04.197164321Z     result = await executor(stmt, None)
+provider-1  | 2026-10-11T04:50:04.197165404Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+provider-1  | 2026-10-11T04:50:04.197166404Z   File "asyncpg/protocol/protocol.pyx", line 197, in bind_execute
+provider-1  | 2026-10-11T04:50:04.197167529Z asyncpg.exceptions.UniqueViolationError: duplicate key value violates unique constraint "receipt_outcomes_pkey"
+provider-1  | 2026-10-11T04:50:04.197168820Z DETAIL:  Key (receipt_id)=(1) already exists.

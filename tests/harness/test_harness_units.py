@@ -16,7 +16,7 @@ from harness.audit_run import audit
 from harness.driver import Driver, DriverConfig
 
 WL = workload.WorkloadConfig(n_actions=200, arrival_rate_per_s=10, duplicate_fraction=0.2, duplicate_copies=3)
-TIMING = fault_plan.Timing(attempt_ms=1500, margin_ms=100, lookup_lag_ms=500, key_ttl_ms=3000)
+TIMING = fault_plan.Timing(attempt_ms=1500, margin_ms=100, client_timeout_ms=600, lookup_lag_ms=500, key_ttl_ms=3000)
 
 
 def test_workload_is_deterministic_and_seed_sensitive() -> None:
@@ -53,7 +53,10 @@ def test_fault_parameters_follow_shared_timing() -> None:
     intents = workload.generate(1, WL, "ns")
     f4 = fault_plan.generate(1, intents, "F4", 1.0, TIMING, "ns")
     delay = f4.provider_rules[0]["params"]["delay_ms"]
-    assert TIMING.attempt_ms - TIMING.margin_ms < delay < TIMING.attempt_ms, "commit after client timeout, before d"
+    assert TIMING.client_timeout_ms < delay < TIMING.attempt_ms, "commit after client timeout, before d"
+    f9 = fault_plan.generate(1, intents, "F9", 1.0, TIMING, "ns")
+    hold = f9.provider_rules[0]["params"]["hold_ms"]
+    assert TIMING.client_timeout_ms < hold < TIMING.attempt_ms, "held past the timeout (retry can overtake) but before d"
     f3 = fault_plan.generate(1, intents, "F3", 1.0, TIMING, "ns")
     assert f3.provider_rules[0]["params"]["stall_ms"] > TIMING.attempt_ms
     f7 = fault_plan.generate(1, intents, "F7", 1.0, TIMING, "ns")

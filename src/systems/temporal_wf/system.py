@@ -31,7 +31,8 @@ class TemporalSystem:
     def _input(self, action_key: str, payload: PaymentPayload, profile_id: str) -> dict:
         c = self.config
         return {"variant": c.variant, "system_id": c.system_id, "action_key": action_key, "payload": payload.model_dump(),
-                "attempt_ms": c.attempt_ms, "margin_ms": c.margin_ms, "max_dispatch": c.max_dispatch,
+                "attempt_ms": c.attempt_ms, "margin_ms": c.margin_ms, "client_timeout_ms": c.client_timeout_ms,
+                "max_dispatch": c.max_dispatch,
                 "backoff_base_ms": c.backoff_base_ms, "max_backoff_ms": c.max_backoff_ms,
                 # documented lookup lag of the provider profile (all B3L knows about the provider)
                 "lookup_lag_ms": self.profiles[profile_id].capability.lookup_lag_ms}

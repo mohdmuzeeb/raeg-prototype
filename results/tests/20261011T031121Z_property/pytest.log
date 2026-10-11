@@ -1,8 +1,8 @@
-$ /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/.venv/bin/python -m pytest -v -rA --tb=long --junitxml=/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/results/tests/20261011T031121Z_property/junit.xml tests/property -q -s
+$ <repo>/.venv/bin/python -m pytest -v -rA --tb=long --junitxml=<repo>/results/tests/20261011T031121Z_property/junit.xml tests/property -q -s
 
 ============================= test session starts ==============================
 platform darwin -- Python 3.12.7, pytest-9.1.1, pluggy-1.6.0
-rootdir: /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup
+rootdir: <repo>
 configfile: pyproject.toml
 plugins: hypothesis-6.168.5, asyncio-1.4.0, anyio-4.15.1
 asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
@@ -16,7 +16,7 @@ tests/property/test_safety_model.py ...counterexample(s): false NO_EFFECT | SAFE
 ..
 
 ==================================== PASSES ====================================
-- generated xml file: /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/results/tests/20261011T031121Z_property/junit.xml -
+- generated xml file: <repo>/results/tests/20261011T031121Z_property/junit.xml -
 =========================== short test summary info ============================
 PASSED tests/property/test_safety_model.py::test_tier_s_strict_is_safe_under_arbitrary_pauses_and_delays
 PASSED tests/property/test_safety_model.py::test_tier_b_bounded_is_safe_when_b1_holds

@@ -20,7 +20,8 @@ STATE_TO_NATIVE = {State.SUCCEEDED: OK, State.DECLINED: DECLINED, State.NOT_EXEC
 
 
 def policy_for(config: SystemConfig) -> Policy:
-    return Policy(**{"attempt_ms": config.attempt_ms, "margin_ms": config.margin_ms, "max_dispatch": config.max_dispatch,
+    return Policy(**{"attempt_ms": config.attempt_ms, "margin_ms": config.margin_ms,
+                     "client_timeout_ms": config.client_timeout_ms, "max_dispatch": config.max_dispatch,
                      "backoff_base_ms": config.backoff_base_ms, "max_backoff_ms": config.max_backoff_ms,
                      "send_deadline": config.send_deadline, "system_id": config.system_id, **config.policy})
 

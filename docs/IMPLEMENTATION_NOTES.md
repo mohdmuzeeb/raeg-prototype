@@ -66,3 +66,11 @@ These are recorded as they arise. Each entry gives the milestone, what differs f
 | N43 | Experiment runs start Temporal (compose profile `temporal`) only for B3/B3L systems, and run on fresh volumes with the provider reset endpoint **off**. | Runtime, and §8.2 isolation. |
 | N44 | `audit.json` anchors the RAEG hash chains: it records every action's last event hash plus a SHA-256 over all heads. | Addresses the M3 risk "chain not anchored externally" for every experiment run. |
 | N45 | **Harness bug fixed: crash hooks are now one-shot per armed plan, durably.** A fired `(action_key, attempt_no)` is appended (with fsync, before any crash) to `hooks.json.fired` in the shared volume, and never fires again in any process. `audit.json` adds a mandatory `hooks_one_shot` check. | In run `20261011T042207Z_m6-faults_P4-FM-r040_B1_s1`, B1 restarted its attempt numbering after each crash, so one planned CP2 crash fired **four** times (RAEG and B3 keep their attempt numbers and fired once). That broke fault equivalence across systems (§6.3). The affected `m6-faults` runs are kept as evidence and are excluded from the paper by configuration. |
+
+## M7 (pilot)
+| # | Deviation / clarification | Reason |
+|---|---|---|
+| N46 | Shared `client_timeout_ms` = 600 ms for every system (B1/B2 HTTP timeout, B3/B3L activity HTTP timeout, RAEG `Policy.client_timeout_ms`). It is applied as `min(client_timeout, remaining budget − m)`. | Q2 decision; DESIGN §8.4 / §0b E8. |
+| N47 | F4 delay = (timeout + `T_att`)/2; F9 hold = timeout + 400 ms (< `T_att` − m). F9 is again "overtaken before `d`", superseding N37. | Fault parameters must follow the shared timing. |
+| N48 | Runs record per-phase wall-clock (`bring_up`, `driver`, `drain`, `collect`, `audit`) and SHA-256 hashes of the resolved config, experiment file, `systems.yaml`, profile, workload and fault plan. The image is built once per runner invocation; every run still uses fresh volumes. | Timing measurements and configuration hashes (M7 instructions). |
+| N49 | Raw results are archived locally by `scripts/archive_raw.py` into read-only `results/archive/<name>.tar.gz`, with a SHA256SUMS of every file, a `.sha256` of the archive, and a row in `docs/EXPERIMENT_LOG.md`. Archives are not in git. | Q1 decision. A curated GitHub Release comes only after verification and approval. |

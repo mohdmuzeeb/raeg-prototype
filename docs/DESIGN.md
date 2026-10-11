@@ -1,6 +1,6 @@
 # RAEG Prototype — Design for Review
 
-Status: **v0.3.1. Approved v0.3, plus corrections found during M4/M5 implementation (§0b). M0–M4 approved; M5 under review.**
+Status: **v0.3.1. Approved v0.3, plus corrections found during M4–M7 (§0b). M0–M6 approved; M7 (pilot) in progress.**
 Paper: *RAEG: A Recovery-Aware Execution Gateway for Fault-Tolerant AI Agents in Financial Microservices* (`ICIYTA_2026_Paper1.pdf`).
 Previous versions: `docs/archive/DESIGN-v0.1.md`, `-v0.2.md`, and `-v0.3.md` (the approved text). §12 records the decisions.
 
@@ -16,6 +16,7 @@ Previous versions: `docs/archive/DESIGN-v0.1.md`, `-v0.2.md`, and `-v0.3.md` (th
 | E4 | (M5) Pessimistic rescoring maps "gave up" to a distinct claim, `NO_EFFECT(assumed_by_agent)`. | An agent's assumption must not be counted as a provider-confirmed decline. | §6.2 |
 | E6 | (M6) F9 is redefined: the original is held past its own deadline (`T_att + 1500 ms`). The v0.3 wording ("delay < d − send, so that the retry arrives first") cannot occur with the shared timing (IMPLEMENTATION_NOTES N37). | Retries come after the client timeout, which is only `m` before `d`. | §6.3 |
 | E7 | (M6) Fault keying: provider faults by `(client_reference, kind, ingress index)`; client hooks by `(k, attempt_no)` (N2). | As implemented since M2. | §6.3 |
+| E8 | (M7) Shared `client_timeout_ms` = 600 ms, below `T_att` (Q2). F9 returns to its v0.3 meaning (overtaken before `d`), superseding E6. See §8.4. | Makes B3L-δ and B3L-horizon distinguishable and F4/F9 meaningful. | §8.4 |
 | E5 | (M5) The systems' deployment and native-outcome details (one service, route per system; B3 workflows return outcomes rather than failing) are recorded in IMPLEMENTATION_NOTES N27–N36. | Implementation detail; the definitions in §5.4 are unchanged. | §5.4 |
 
 ## 0a. Changes from v0.2
@@ -589,6 +590,23 @@ Not every cell is meaningful; for example, F7 against B1 only exercises the agen
   3. reducing the matrix (dropping cells) is allowed only if decided and documented before `eval-freeze`, never after seeing main results.
 - The pilot's measured cost per cell and the projection are saved in `results/raw/pilot-*/projection.json`.
 - The chosen values, the hypotheses, and the metric code are frozen in a commit tagged `eval-freeze` before the main runs.
+
+### 8.4 Timing parameters (M7, Q2 decision)
+All systems share these values (`config/systems.yaml` `common`; a test enforces equality). They are time-compressed and synthetic (§2.7a).
+
+| Parameter | Value | Reason |
+|---|---|---|
+| `T_att` (attempt deadline) | 1500 ms | Far above provider latency (lognormal, median 20 ms); keeps each action's recovery within seconds, so a 200-action run fits the budget. |
+| `client_timeout_ms` (HTTP timeout per attempt) | 600 ms | Well below `T_att` (Q2). B3L-δ looks up at about timeout + δ ≈ 1.1 s, *before* `d`, while B3L-horizon looks up at `d + δ` ≈ 2.0 s, so the two are observably different. It still leaves 30× headroom over the median provider latency, so F0 does not time out spuriously. It is also identical for every system. |
+| `m` (margin) | 100 ms | TTL-guard safety margin (§2.6) and send-budget slack. Unchanged. |
+| `ε` (clock skew bound) | 50 ms | Every container shares one VM kernel clock; 50 ms is generous. |
+| `δ` declared / actual | 500 / 200 ms | Lookup lag with 300 ms headroom for L2 (§2.5). |
+| `τ` (P2, P7) | 3000 ms | Short enough for retention to bind during recovery (that is P2's purpose). |
+| backoff | 100 ms × 2ⁿ⁻¹, max 1000 ms | Same for all systems. |
+| `max_dispatch` / `max_verify` | 3 / 4 | Same dispatch budget for all systems; RAEG's verify budget follows VB1 (§2.10a). |
+| Fault parameters | F3 stall = `T_att + 1000`; F4 delay = (timeout + `T_att`)/2 = 1050 ms; F9 hold = timeout + 400 = 1000 ms; F7 pause = `T_att + 3500` | Derived from the shared timing so that each fault means the same thing for every system. With the new timeout, F4's window (after the timeout, before `d`) is 900 ms wide, and F9 can genuinely be overtaken by a quick retry before `d`. That restores the v0.3 intent of F9 (superseding §0b E6 / note N37). |
+| Agent driver | timeout 30 s, restart backoff 1 s, ≤ 5 resubmits, horizon 60 s, drain 5 s | Horizon ≥ RAEG's `W_max` (≈ 52 s). Drain ≥ 2× the longest provider-side delay in the pilot faults. |
+| Arrival rate | 10 actions/s (open loop) | Keeps a 200-action run's arrival window at about 20 s. The F0 cells check that the stack is not saturated. |
 
 ---
 

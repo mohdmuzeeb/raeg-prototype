@@ -36,6 +36,7 @@ class Policy:
     verify_lease_ms: int = 2000
     lookup_timeout_ms: int = 1000
     margin_ms: int = 100  # m
+    client_timeout_ms: int | None = None  # HTTP timeout per attempt; None = remaining budget − m
     clock_skew_ms: int = 50  # ε (RAEG DB clock vs provider clock)
     max_settle_wait_ms: int = 10_000
     backoff_base_ms: int = 100

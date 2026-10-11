@@ -1,10 +1,10 @@
-$ /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/.venv/bin/python -m pytest -v -rA --tb=long --junitxml=/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/results/tests/20261011T022736Z_unit/junit.xml tests/unit
+$ <repo>/.venv/bin/python -m pytest -v -rA --tb=long --junitxml=<repo>/results/tests/20261011T022736Z_unit/junit.xml tests/unit
 
 ============================= test session starts ==============================
-platform darwin -- Python 3.12.7, pytest-9.1.1, pluggy-1.6.0 -- /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/.venv/bin/python
+platform darwin -- Python 3.12.7, pytest-9.1.1, pluggy-1.6.0 -- <repo>/.venv/bin/python
 cachedir: .pytest_cache
 hypothesis profile 'default'
-rootdir: /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup
+rootdir: <repo>
 configfile: pyproject.toml
 plugins: hypothesis-6.168.5, asyncio-1.4.0, anyio-4.15.1
 asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
@@ -73,7 +73,7 @@ tests/unit/test_provider_client.py::test_cp2_crashes_while_request_in_flight PAS
 tests/unit/test_provider_client.py::test_lookup_parsing PASSED           [100%]
 
 ==================================== PASSES ====================================
-- generated xml file: /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/results/tests/20261011T022736Z_unit/junit.xml -
+- generated xml file: <repo>/results/tests/20261011T022736Z_unit/junit.xml -
 =========================== short test summary info ============================
 PASSED tests/unit/test_fault_engine.py::test_ingress_indices_are_per_reference_and_kind
 PASSED tests/unit/test_fingerprint.py::test_appendix_b_numbers[0000000000000000-0]

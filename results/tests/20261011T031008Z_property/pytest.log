@@ -1,8 +1,8 @@
-$ /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/.venv/bin/python -m pytest -v -rA --tb=long --junitxml=/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/results/tests/20261011T031008Z_property/junit.xml tests/property -q
+$ <repo>/.venv/bin/python -m pytest -v -rA --tb=long --junitxml=<repo>/results/tests/20261011T031008Z_property/junit.xml tests/property -q
 
 ============================= test session starts ==============================
 platform darwin -- Python 3.12.7, pytest-9.1.1, pluggy-1.6.0
-rootdir: /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup
+rootdir: <repo>
 configfile: pyproject.toml
 plugins: hypothesis-6.168.5, asyncio-1.4.0, anyio-4.15.1
 asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
@@ -13,21 +13,21 @@ tests/property/test_safety_model.py ...FFFFF.                            [100%]
 =================================== FAILURES ===================================
 ___________ test_necessity_b1_bounded_mode_without_b1_can_duplicate ____________
   + Exception Group Traceback (most recent call last):
-  |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 86, in test_necessity_b1_bounded_mode_without_b1_can_duplicate
+  |   File "<repo>/tests/property/test_safety_model.py", line 86, in test_necessity_b1_bounded_mode_without_b1_can_duplicate
   |     must_find_violation(t)
-  |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 72, in must_find_violation
+  |   File "<repo>/tests/property/test_safety_model.py", line 72, in must_find_violation
   |     test()
-  |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 83, in t
+  |   File "<repo>/tests/property/test_safety_model.py", line 83, in t
   |     @given(data=st.data())
   |                ^^^
-  |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/.venv/lib/python3.12/site-packages/hypothesis/core.py", line 2295, in wrapped_test
+  |   File "<repo>/.venv/lib/python3.12/site-packages/hypothesis/core.py", line 2295, in wrapped_test
   |     raise the_error_hypothesis_found
   | ExceptionGroup: Hypothesis found 2 distinct failures. (2 sub-exceptions)
   +-+---------------- 1 ----------------
     | Traceback (most recent call last):
-    |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 85, in t
+    |   File "<repo>/tests/property/test_safety_model.py", line 85, in t
     |     check_all(Sim(P4N, Policy(mode="BOUNDED"), data, Violations(b1=False)))
-    |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 39, in check_all
+    |   File "<repo>/tests/property/test_safety_model.py", line 39, in check_all
     |     assert e == 0, f"false NO_EFFECT\n{sim.explain()}"
     | AssertionError: false NO_EFFECT
     |   t=0 claim attempt 1 basis=INITIAL d=1500
@@ -65,9 +65,9 @@ ___________ test_necessity_b1_bounded_mode_without_b1_can_duplicate ____________
     | Draw 18 (response_delay): 0  # or any other generated value
     +---------------- 2 ----------------
     | Traceback (most recent call last):
-    |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 85, in t
+    |   File "<repo>/tests/property/test_safety_model.py", line 85, in t
     |     check_all(Sim(P4N, Policy(mode="BOUNDED"), data, Violations(b1=False)))
-    |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 35, in check_all
+    |   File "<repo>/tests/property/test_safety_model.py", line 35, in check_all
     |     assert e <= 1, f"SAFETY VIOLATION E={e}\n{sim.explain()}"
     | AssertionError: SAFETY VIOLATION E=2
     |   t=0 claim attempt 1 basis=INITIAL d=1500
@@ -105,21 +105,21 @@ ___________ test_necessity_b1_bounded_mode_without_b1_can_duplicate ____________
     +------------------------------------
 ___________ test_necessity_horizon_no_horizon_ablation_can_duplicate ___________
   + Exception Group Traceback (most recent call last):
-  |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 94, in test_necessity_horizon_no_horizon_ablation_can_duplicate
+  |   File "<repo>/tests/property/test_safety_model.py", line 94, in test_necessity_horizon_no_horizon_ablation_can_duplicate
   |     must_find_violation(t)
-  |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 72, in must_find_violation
+  |   File "<repo>/tests/property/test_safety_model.py", line 72, in must_find_violation
   |     test()
-  |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 91, in t
+  |   File "<repo>/tests/property/test_safety_model.py", line 91, in t
   |     @given(data=st.data())
   |                ^^^
-  |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/.venv/lib/python3.12/site-packages/hypothesis/core.py", line 2295, in wrapped_test
+  |   File "<repo>/.venv/lib/python3.12/site-packages/hypothesis/core.py", line 2295, in wrapped_test
   |     raise the_error_hypothesis_found
   | ExceptionGroup: Hypothesis found 2 distinct failures. (2 sub-exceptions)
   +-+---------------- 1 ----------------
     | Traceback (most recent call last):
-    |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 93, in t
+    |   File "<repo>/tests/property/test_safety_model.py", line 93, in t
     |     check_all(Sim(P4, Policy(mode="STRICT", no_horizon=True), data))
-    |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 39, in check_all
+    |   File "<repo>/tests/property/test_safety_model.py", line 39, in check_all
     |     assert e == 0, f"false NO_EFFECT\n{sim.explain()}"
     | AssertionError: false NO_EFFECT
     |   t=0 claim attempt 1 basis=INITIAL d=1500
@@ -152,9 +152,9 @@ ___________ test_necessity_horizon_no_horizon_ablation_can_duplicate ___________
     | Draw 16 (response_delay): 0
     +---------------- 2 ----------------
     | Traceback (most recent call last):
-    |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 93, in t
+    |   File "<repo>/tests/property/test_safety_model.py", line 93, in t
     |     check_all(Sim(P4, Policy(mode="STRICT", no_horizon=True), data))
-    |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 35, in check_all
+    |   File "<repo>/tests/property/test_safety_model.py", line 35, in check_all
     |     assert e <= 1, f"SAFETY VIOLATION E={e}\n{sim.explain()}"
     | AssertionError: SAFETY VIOLATION E=2
     |   t=0 claim attempt 1 basis=INITIAL d=1500
@@ -188,21 +188,21 @@ ___________ test_necessity_horizon_no_horizon_ablation_can_duplicate ___________
     +------------------------------------
 __________________ test_necessity_v1_lookup_lag_beyond_delta ___________________
   + Exception Group Traceback (most recent call last):
-  |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 102, in test_necessity_v1_lookup_lag_beyond_delta
+  |   File "<repo>/tests/property/test_safety_model.py", line 102, in test_necessity_v1_lookup_lag_beyond_delta
   |     must_find_violation(t)
-  |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 72, in must_find_violation
+  |   File "<repo>/tests/property/test_safety_model.py", line 72, in must_find_violation
   |     test()
-  |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 99, in t
+  |   File "<repo>/tests/property/test_safety_model.py", line 99, in t
   |     @given(data=st.data())
   |                ^^^
-  |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/.venv/lib/python3.12/site-packages/hypothesis/core.py", line 2295, in wrapped_test
+  |   File "<repo>/.venv/lib/python3.12/site-packages/hypothesis/core.py", line 2295, in wrapped_test
   |     raise the_error_hypothesis_found
   | ExceptionGroup: Hypothesis found 2 distinct failures. (2 sub-exceptions)
   +-+---------------- 1 ----------------
     | Traceback (most recent call last):
-    |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 101, in t
+    |   File "<repo>/tests/property/test_safety_model.py", line 101, in t
     |     check_all(Sim(P4, Policy(mode="STRICT"), data, Violations(lookup_lag_factor=8)))
-    |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 39, in check_all
+    |   File "<repo>/tests/property/test_safety_model.py", line 39, in check_all
     |     assert e == 0, f"false NO_EFFECT\n{sim.explain()}"
     | AssertionError: false NO_EFFECT
     |   t=0 claim attempt 1 basis=INITIAL d=1500
@@ -240,9 +240,9 @@ __________________ test_necessity_v1_lookup_lag_beyond_delta ___________________
     | Draw 18 (response_delay): 0  # or any other generated value
     +---------------- 2 ----------------
     | Traceback (most recent call last):
-    |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 101, in t
+    |   File "<repo>/tests/property/test_safety_model.py", line 101, in t
     |     check_all(Sim(P4, Policy(mode="STRICT"), data, Violations(lookup_lag_factor=8)))
-    |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 35, in check_all
+    |   File "<repo>/tests/property/test_safety_model.py", line 35, in check_all
     |     assert e <= 1, f"SAFETY VIOLATION E={e}\n{sim.explain()}"
     | AssertionError: SAFETY VIOLATION E=2
     |   t=0 claim attempt 1 basis=INITIAL d=1500
@@ -281,21 +281,21 @@ __________________ test_necessity_v1_lookup_lag_beyond_delta ___________________
     +------------------------------------
 ___________________ test_necessity_v2_deadline_not_enforced ____________________
   + Exception Group Traceback (most recent call last):
-  |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 110, in test_necessity_v2_deadline_not_enforced
+  |   File "<repo>/tests/property/test_safety_model.py", line 110, in test_necessity_v2_deadline_not_enforced
   |     must_find_violation(t)
-  |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 72, in must_find_violation
+  |   File "<repo>/tests/property/test_safety_model.py", line 72, in must_find_violation
   |     test()
-  |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 107, in t
+  |   File "<repo>/tests/property/test_safety_model.py", line 107, in t
   |     @given(data=st.data())
   |                ^^^
-  |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/.venv/lib/python3.12/site-packages/hypothesis/core.py", line 2295, in wrapped_test
+  |   File "<repo>/.venv/lib/python3.12/site-packages/hypothesis/core.py", line 2295, in wrapped_test
   |     raise the_error_hypothesis_found
   | ExceptionGroup: Hypothesis found 2 distinct failures. (2 sub-exceptions)
   +-+---------------- 1 ----------------
     | Traceback (most recent call last):
-    |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 109, in t
+    |   File "<repo>/tests/property/test_safety_model.py", line 109, in t
     |     check_all(Sim(P4, Policy(mode="STRICT"), data, Violations(ignore_deadline=True)))
-    |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 39, in check_all
+    |   File "<repo>/tests/property/test_safety_model.py", line 39, in check_all
     |     assert e == 0, f"false NO_EFFECT\n{sim.explain()}"
     | AssertionError: false NO_EFFECT
     |   t=0 claim attempt 1 basis=INITIAL d=1500
@@ -332,9 +332,9 @@ ___________________ test_necessity_v2_deadline_not_enforced ____________________
     | Draw 18 (response_delay): 0
     +---------------- 2 ----------------
     | Traceback (most recent call last):
-    |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 109, in t
+    |   File "<repo>/tests/property/test_safety_model.py", line 109, in t
     |     check_all(Sim(P4, Policy(mode="STRICT"), data, Violations(ignore_deadline=True)))
-    |   File "/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/tests/property/test_safety_model.py", line 35, in check_all
+    |   File "<repo>/tests/property/test_safety_model.py", line 35, in check_all
     |     assert e <= 1, f"SAFETY VIOLATION E={e}\n{sim.explain()}"
     | AssertionError: SAFETY VIOLATION E=2
     |   t=0 claim attempt 1 basis=INITIAL d=1500
@@ -392,7 +392,7 @@ E       Failed: DID NOT RAISE any of (AssertionError, Flaky)
 
 tests/property/test_safety_model.py:71: Failed
 ==================================== PASSES ====================================
-- generated xml file: /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/results/tests/20261011T031008Z_property/junit.xml -
+- generated xml file: <repo>/results/tests/20261011T031008Z_property/junit.xml -
 =========================== short test summary info ============================
 PASSED tests/property/test_safety_model.py::test_tier_s_strict_is_safe_under_arbitrary_pauses_and_delays
 PASSED tests/property/test_safety_model.py::test_tier_b_bounded_is_safe_when_b1_holds

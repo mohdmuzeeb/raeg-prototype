@@ -1,8 +1,8 @@
-$ /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/.venv/bin/python -m pytest -v -rA --tb=long --junitxml=/Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/results/tests/20261011T031544Z_integration/junit.xml tests/integration -q
+$ <repo>/.venv/bin/python -m pytest -v -rA --tb=long --junitxml=<repo>/results/tests/20261011T031544Z_integration/junit.xml tests/integration -q
 
 ============================= test session starts ==============================
 platform darwin -- Python 3.12.7, pytest-9.1.1, pluggy-1.6.0
-rootdir: /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup
+rootdir: <repo>
 configfile: pyproject.toml
 plugins: hypothesis-6.168.5, asyncio-1.4.0, anyio-4.15.1
 asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
@@ -17,7 +17,7 @@ _________ test_concurrent_engines_process_shared_backlog_exactly_once __________
 provider = <tests.conformance.conftest.Provider object at 0x1089558b0>
 store = <raeg_gateway.store.GatewayStore object at 0x108956b10>
 admin = <asyncpg.connection.Connection object at 0x1087b9950>
-tmp_path = PosixPath('/private/var/folders/wx/p0dw96j103n3ly6_v5r5hzx40000gn/T/pytest-of-muzeebmohammad/pytest-9/test_concurrent_engines_proces0')
+tmp_path = PosixPath('<tmp>/pytest-of-<user>/pytest-9/test_concurrent_engines_proces0')
 
     async def test_concurrent_engines_process_shared_backlog_exactly_once(provider, store, admin, tmp_path) -> None:
         keys = [f"cc-{uuid.uuid4().hex[:8]}" for _ in range(20)]
@@ -202,7 +202,7 @@ E           raeg_gateway.transitions.IllegalTransition: T6 not allowed from VERI
 
 src/raeg_gateway/transitions.py:90: IllegalTransition
 ==================================== PASSES ====================================
-- generated xml file: /Users/muzeebmohammad/Documents/EB1A_New_Opportunities/ICICYTA2026/Paper1_Agentic_auto-recovery/Paper1_Practical_setup/results/tests/20261011T031544Z_integration/junit.xml -
+- generated xml file: <repo>/results/tests/20261011T031544Z_integration/junit.xml -
 =========================== short test summary info ============================
 PASSED tests/integration/test_crash_zombie_concurrency.py::test_real_process_crash_then_recovery[CP1-P1]
 PASSED tests/integration/test_crash_zombie_concurrency.py::test_real_process_crash_then_recovery[CP1-P4]

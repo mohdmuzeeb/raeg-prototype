@@ -4,7 +4,9 @@
 
 common:
   attempt_ms: 1500        # T_att: per-attempt deadline d = start + T_att (sent as Request-Deadline)
-  margin_ms: 100          # client HTTP timeout = remaining budget - margin
+  margin_ms: 100          # m: safety margin (TTL guard; send budget)
+  client_timeout_ms: 600  # HTTP timeout per attempt, all systems (M7: well below T_att so that
+                          # B3L-delta's lookup (timeout + δ ≈ 1.1 s) precedes d, while B3L-horizon's (d + δ) follows it)
   max_dispatch: 3         # dispatch attempts per action, all systems
   backoff_base_ms: 100    # retry backoff: min(base * 2^(n-1), max)
   max_backoff_ms: 1000

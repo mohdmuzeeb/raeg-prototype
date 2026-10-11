@@ -23,3 +23,6 @@ results/raw/*
 !results/raw/.gitkeep
 results/derived/*
 !results/derived/.gitkeep
+
+# Local immutable archives of raw results (M7 Q1: kept locally, not in git)
+results/archive/
