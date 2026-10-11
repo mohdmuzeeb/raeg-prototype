@@ -10,8 +10,12 @@ import pytest
 
 from raeg_gateway.store import GatewayStore, create_pool, migrate
 
-ADMIN_DSN = os.environ.get("RAEG_DB_ADMIN_DSN", "postgresql://postgres:postgres@127.0.0.1:55432/raeg")
-APP_DSN = os.environ.get("RAEG_DB_APP_DSN", "postgresql://raeg_app:raeg_app@127.0.0.1:55432/raeg")
+# Tests use their own database (raeg_test) on the raeg-db server: the live `systems` service keeps
+# `raeg`, so test TRUNCATEs never contend with its background loops (deadlock seen in run
+# 20261011T035247Z_gateway).
+SERVER_DSN = os.environ.get("RAEG_DB_SERVER_DSN", "postgresql://postgres:postgres@127.0.0.1:55432/postgres")
+ADMIN_DSN = os.environ.get("RAEG_DB_ADMIN_DSN", "postgresql://postgres:postgres@127.0.0.1:55432/raeg_test")
+APP_DSN = os.environ.get("RAEG_DB_APP_DSN", "postgresql://raeg_app:raeg_app@127.0.0.1:55432/raeg_test")
 TABLES = "executions, submissions, attempts, evidence, decisions, execution_events, anomalies"
 
 pytestmark = pytest.mark.gateway
@@ -21,9 +25,19 @@ CAPABILITY = {"idempotency": True, "key_ttl_ms": None, "lookup": "by_client_ref"
 POLICY = {"mode": "STRICT", "max_dispatch": 3, "max_verify": 3}
 
 
+async def ensure_test_database() -> None:
+    server = await asyncpg.connect(SERVER_DSN)
+    try:
+        if not await server.fetchval("SELECT 1 FROM pg_database WHERE datname = 'raeg_test'"):
+            await server.execute("CREATE DATABASE raeg_test")
+    finally:
+        await server.close()
+
+
 @pytest.fixture
 async def admin():
     try:
+        await ensure_test_database()
         conn = await asyncpg.connect(ADMIN_DSN)
     except (OSError, asyncpg.PostgresError) as exc:
         pytest.fail(f"raeg-db not reachable — run `make up-test` first ({exc})")

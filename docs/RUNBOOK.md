@@ -20,6 +20,7 @@ make up-test       # builds raeg/python:dev; starts provider-db, raeg-db, provid
 | `make test-gateway` | `tests/gateway`: M3 store transitions, concurrency, auditability, projection rebuild (needs raeg-db) | `results/tests/<UTC>_gateway/` |
 | `make test-property` | `tests/property`: model-based safety checks of the controller (Hypothesis; no Docker) | `results/tests/<UTC>_property/` |
 | `make test-integration` | `tests/integration`: engine + store + provider scenarios, real-process crashes (CP1–CP3), zombies (F7), concurrent engines | `results/tests/<UTC>_integration/` (+ `compose.log`) |
+| `make test-systems` | `tests/systems`: F0 smoke for every registered system, baseline-definition checks, and the CP3 crash hook across B1, B3, and RAEG (needs `make up-systems`) | `results/tests/<UTC>_systems/` (+ `compose.log`) |
 
 `tests/conformance/test_provider_restart.py` SIGKILLs and restarts the provider container (K7). It is part of `make test-conformance`.
 
@@ -37,6 +38,8 @@ Failed runs are kept. Nothing under `results/` is edited or deleted by tooling. 
 | 19001 | provider oracle/admin (`/oracle/*`, `/admin/*`; header `x-oracle-token`) |
 | 55433 | provider Postgres |
 | 55432 | RAEG Postgres (gateway store; the app connects as `raeg_app`) |
+| 18080 | systems service: `/s/{system_id}/v1/actions` (M5; `make up-systems`) |
+| 17233 | Temporal frontend (M5) |
 
 ## Clock note
 The colima VM clock is not synchronised with the macOS host clock; an offset of roughly 1.5 s was observed on 2026-10-11. Every service runs in the same VM and therefore shares one kernel clock. Host-side tests and harness code must take times from `/oracle/now` (the provider clock), never from the host.

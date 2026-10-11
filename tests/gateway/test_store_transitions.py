@@ -218,3 +218,20 @@ async def test_stale_version_is_recorded_rejection_not_exception(store, admin) -
     loser = await store.transition(key, "T6", worker_id="b", rule_id="R-V", lease_ms=5000, expected_version=v)
     assert not loser.applied and loser.reason == "VERSION_MISMATCH"
     await assert_clean(admin)
+
+
+async def test_sweeper_scoped_to_its_system(store, admin) -> None:
+    """N32: a system's sweeper must not touch another system's leases."""
+    from .conftest import CAPABILITY, PAYLOAD
+
+    mine = "a-mine-" + str(id(store))
+    other = "a-other-" + str(id(store))
+    for key, sid in ((mine, "SYS-A"), (other, "SYS-B")):
+        await store.submit(key, PAYLOAD, "fp", "P1", CAPABILITY, {"system_id": sid}, "w")
+        await store.claim(key, worker_id="w", attempt_ms=20, basis=Basis.INITIAL)
+    await asyncio.sleep(0.1)
+    swept = await store.sweep_expired("sweeper-A", system_id="SYS-A")
+    assert len(swept) == 1
+    assert (await store.snapshot(mine))["state"] == "UNKNOWN"
+    assert (await store.snapshot(other))["state"] == "DISPATCHING"
+    await assert_clean(admin)

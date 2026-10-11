@@ -1,0 +1,65 @@
+# Systems under test (DESIGN §5.4). Every system uses the same shared provider client, the same
+# transport/timing values from `common`, and the same budgets. Only recovery logic differs.
+# Values are time-compressed and provisional until the M7 pilot calibration.
+
+common:
+  attempt_ms: 1500        # T_att: per-attempt deadline d = start + T_att (sent as Request-Deadline)
+  margin_ms: 100          # client HTTP timeout = remaining budget - margin
+  max_dispatch: 3         # dispatch attempts per action, all systems
+  backoff_base_ms: 100    # retry backoff: min(base * 2^(n-1), max)
+  max_backoff_ms: 1000
+  send_deadline: true     # /noDL variants override this
+
+systems:
+  B1:
+    kind: retry
+    idempotency_key: false
+    description: "Naive retry: re-send on ambiguity, no idempotency key, in-memory state"
+  B2:
+    kind: retry
+    idempotency_key: true
+    description: "Idempotency-only: re-send with Idempotency-Key = k, in-memory state"
+  B3:
+    kind: temporal
+    variant: plain
+    description: "Temporal: activity RetryPolicy, key = k, workflow id = k"
+  B3-noDL:
+    kind: temporal
+    variant: plain
+    send_deadline: false
+    description: "Temporal without Request-Deadline (control)"
+  B3L-delta:
+    kind: temporal
+    variant: lookup_delta
+    description: "Temporal + lookup-before-retry after the documented lag delta"
+  B3L-horizon:
+    kind: temporal
+    variant: lookup_horizon
+    description: "Temporal + lookup-before-retry after max(d_j) + delta (stronger baseline)"
+  B3L-horizon-noDL:
+    kind: temporal
+    variant: lookup_horizon
+    send_deadline: false
+    description: "B3L-horizon without Request-Deadline (control)"
+  RAEG-strict:
+    kind: raeg
+    policy: {mode: STRICT}
+  RAEG-bounded:
+    kind: raeg
+    policy: {mode: BOUNDED}
+  RAEG-strict-noDL:
+    kind: raeg
+    policy: {mode: STRICT}
+    send_deadline: false
+  RAEG-strict-no-verify:
+    kind: raeg
+    policy: {mode: STRICT, no_verify: true}
+  RAEG-strict-no-ttl:
+    kind: raeg
+    policy: {mode: STRICT, no_ttl: true}
+  RAEG-strict-retry-first:
+    kind: raeg
+    policy: {mode: STRICT, order: retry_first}
+  RAEG-strict-no-horizon:
+    kind: raeg
+    policy: {mode: STRICT, no_horizon: true}

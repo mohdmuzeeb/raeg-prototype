@@ -1,0 +1,191 @@
+systems-1  | 2026-10-11T03:58:34.875487230Z /app/src/systems/serve.py:49: DeprecationWarning: 
+systems-1  | 2026-10-11T03:58:34.875536607Z         on_event is deprecated, use lifespan event handlers instead.
+systems-1  | 2026-10-11T03:58:34.875539316Z 
+systems-1  | 2026-10-11T03:58:34.875540358Z         Read more about it in the
+systems-1  | 2026-10-11T03:58:34.875541524Z         [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+systems-1  | 2026-10-11T03:58:34.875542566Z         
+systems-1  | 2026-10-11T03:58:34.875543400Z   @app.on_event("startup")
+systems-1          | 2026-10-11T03:59:09.763738852Z /app/src/systems/serve.py:49: DeprecationWarning: 
+systems-1          | 2026-10-11T03:59:09.763827436Z         on_event is deprecated, use lifespan event handlers instead.
+temporal-worker-1  | 2026-10-11T03:58:34.520734080Z temporal worker ready
+systems-1          | 2026-10-11T03:59:09.763834061Z 
+temporal-worker-1  | 2026-10-11T03:58:42.828917697Z Completing activity as failed ({'activity_id': '1', 'activity_type': 'dispatch_payment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'raeg-baselines', 'workflow_id': 'm5-B3-d86c37d1', 'workflow_run_id': '01a1291c-e792-7574-a9fa-c7c7dfc82f70', 'workflow_type': 'PaymentWorkflow'})
+temporal-worker-1  | 2026-10-11T03:58:42.830547853Z Traceback (most recent call last):
+temporal-worker-1  | 2026-10-11T03:58:42.830559187Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+temporal-worker-1  | 2026-10-11T03:58:42.830563520Z     result = await self._execute_activity(
+temporal-worker-1  | 2026-10-11T03:58:42.830564562Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:58:42.830565479Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+temporal-worker-1  | 2026-10-11T03:58:42.830566520Z     return await impl.execute_activity(input)
+temporal-worker-1  | 2026-10-11T03:58:42.830567437Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:58:42.830568395Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+temporal-worker-1  | 2026-10-11T03:58:42.830571354Z     return await input.fn(*input.args)
+temporal-worker-1  | 2026-10-11T03:58:42.830575354Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:58:42.830576354Z   File "/app/src/systems/temporal_wf/activities.py", line 52, in dispatch_payment
+temporal-worker-1  | 2026-10-11T03:58:42.830577396Z     raise ApplicationError(f"ambiguous: {r.error_class or r.observation.value}", type=r.observation.value)
+temporal-worker-1  | 2026-10-11T03:58:42.830578437Z temporalio.exceptions.ApplicationError: AMBIGUOUS: ambiguous: RemoteProtocolError
+temporal-worker-1  | 2026-10-11T03:58:44.277884316Z Completing activity as failed ({'activity_id': '1', 'activity_type': 'dispatch_payment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'raeg-baselines', 'workflow_id': 'm5-B3-a1089be4', 'workflow_run_id': '01a1291c-edee-7585-a689-3433eb2b35bd', 'workflow_type': 'PaymentWorkflow'})
+temporal-worker-1  | 2026-10-11T03:58:44.277932860Z Traceback (most recent call last):
+temporal-worker-1  | 2026-10-11T03:58:44.277938735Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+temporal-worker-1  | 2026-10-11T03:58:44.277940360Z     result = await self._execute_activity(
+temporal-worker-1  | 2026-10-11T03:58:44.277941693Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:58:44.277942943Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+temporal-worker-1  | 2026-10-11T03:58:44.277944777Z     return await impl.execute_activity(input)
+temporal-worker-1  | 2026-10-11T03:58:44.277945985Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:58:44.277947194Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+temporal-worker-1  | 2026-10-11T03:58:44.277948527Z     return await input.fn(*input.args)
+temporal-worker-1  | 2026-10-11T03:58:44.277949735Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:58:44.277950902Z   File "/app/src/systems/temporal_wf/activities.py", line 49, in dispatch_payment
+temporal-worker-1  | 2026-10-11T03:58:44.277958152Z     raise ApplicationError("declined by provider", {"http_status": r.http_status}, type="Declined", non_retryable=True)
+temporal-worker-1  | 2026-10-11T03:58:44.277959611Z temporalio.exceptions.ApplicationError: Declined: declined by provider
+temporal-worker-1  | 2026-10-11T03:58:44.733699805Z Completing activity as failed ({'activity_id': '1', 'activity_type': 'dispatch_payment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'raeg-baselines', 'workflow_id': 'm5-B3-289c1103', 'workflow_run_id': '01a1291c-efc4-72e7-9c65-27d33764c176', 'workflow_type': 'PaymentWorkflow'})
+temporal-worker-1  | 2026-10-11T03:58:44.733715014Z Traceback (most recent call last):
+temporal-worker-1  | 2026-10-11T03:58:44.733716931Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+temporal-worker-1  | 2026-10-11T03:58:44.733718472Z     result = await self._execute_activity(
+temporal-worker-1  | 2026-10-11T03:58:44.733719472Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:58:44.733720472Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+temporal-worker-1  | 2026-10-11T03:58:44.733721681Z     return await impl.execute_activity(input)
+temporal-worker-1  | 2026-10-11T03:58:44.733722639Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:58:44.733723598Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+temporal-worker-1  | 2026-10-11T03:58:44.733724764Z     return await input.fn(*input.args)
+temporal-worker-1  | 2026-10-11T03:58:44.733725723Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:58:44.733726681Z   File "/app/src/systems/temporal_wf/activities.py", line 52, in dispatch_payment
+temporal-worker-1  | 2026-10-11T03:58:44.733727806Z     raise ApplicationError(f"ambiguous: {r.error_class or r.observation.value}", type=r.observation.value)
+temporal-worker-1  | 2026-10-11T03:58:44.733728973Z temporalio.exceptions.ApplicationError: AMBIGUOUS: ambiguous: AMBIGUOUS
+temporal-worker-1  | 2026-10-11T03:58:45.760517151Z Completing activity as failed ({'activity_id': '1', 'activity_type': 'dispatch_payment', 'attempt': 2, 'namespace': 'default', 'task_queue': 'raeg-baselines', 'workflow_id': 'm5-B3-289c1103', 'workflow_run_id': '01a1291c-efc4-72e7-9c65-27d33764c176', 'workflow_type': 'PaymentWorkflow'})
+temporal-worker-1  | 2026-10-11T03:58:45.760617113Z Traceback (most recent call last):
+systems-1          | 2026-10-11T03:59:09.763836311Z         Read more about it in the
+systems-1          | 2026-10-11T03:59:09.763837561Z         [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+temporal-worker-1  | 2026-10-11T03:58:45.760624488Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+temporal-worker-1  | 2026-10-11T03:58:45.760627822Z     result = await self._execute_activity(
+temporal-worker-1  | 2026-10-11T03:58:45.760630072Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:58:45.760632114Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+temporal-worker-1  | 2026-10-11T03:58:45.760634739Z     return await impl.execute_activity(input)
+temporal-worker-1  | 2026-10-11T03:58:45.760636739Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:58:45.760638781Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+temporal-worker-1  | 2026-10-11T03:58:45.760641281Z     return await input.fn(*input.args)
+temporal-worker-1  | 2026-10-11T03:58:45.760677157Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:58:45.760682407Z   File "/app/src/systems/temporal_wf/activities.py", line 52, in dispatch_payment
+systems-1          | 2026-10-11T03:59:09.763838770Z         
+temporal-worker-1  | 2026-10-11T03:58:45.760684783Z     raise ApplicationError(f"ambiguous: {r.error_class or r.observation.value}", type=r.observation.value)
+temporal-worker-1  | 2026-10-11T03:58:45.760687324Z temporalio.exceptions.ApplicationError: AMBIGUOUS: ambiguous: AMBIGUOUS
+temporal-worker-1  | 2026-10-11T03:58:46.745181905Z Completing activity as failed ({'activity_id': '1', 'activity_type': 'dispatch_payment', 'attempt': 3, 'namespace': 'default', 'task_queue': 'raeg-baselines', 'workflow_id': 'm5-B3-289c1103', 'workflow_run_id': '01a1291c-efc4-72e7-9c65-27d33764c176', 'workflow_type': 'PaymentWorkflow'})
+systems-1          | 2026-10-11T03:59:09.763839895Z   @app.on_event("startup")
+temporal-worker-1  | 2026-10-11T03:58:46.745215657Z Traceback (most recent call last):
+systems-1          | 2026-10-11T03:59:26.754549446Z /app/src/systems/serve.py:49: DeprecationWarning: 
+temporal-worker-1  | 2026-10-11T03:58:46.745219032Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+temporal-worker-1  | 2026-10-11T03:58:46.745220782Z     result = await self._execute_activity(
+temporal-worker-1  | 2026-10-11T03:58:46.745222282Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:58:46.745243074Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+temporal-worker-1  | 2026-10-11T03:58:46.745245450Z     return await impl.execute_activity(input)
+temporal-worker-1  | 2026-10-11T03:58:46.745246575Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:58:46.745247700Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+temporal-worker-1  | 2026-10-11T03:58:46.745248950Z     return await input.fn(*input.args)
+systems-1          | 2026-10-11T03:59:26.754660696Z         on_event is deprecated, use lifespan event handlers instead.
+systems-1          | 2026-10-11T03:59:26.754664821Z 
+systems-1          | 2026-10-11T03:59:26.754666113Z         Read more about it in the
+systems-1          | 2026-10-11T03:59:26.754667363Z         [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+systems-1          | 2026-10-11T03:59:26.754668613Z         
+systems-1          | 2026-10-11T03:59:26.754669821Z   @app.on_event("startup")
+temporal-worker-1  | 2026-10-11T03:58:46.745250033Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:58:46.745251075Z   File "/app/src/systems/temporal_wf/activities.py", line 52, in dispatch_payment
+temporal-worker-1  | 2026-10-11T03:58:46.745252325Z     raise ApplicationError(f"ambiguous: {r.error_class or r.observation.value}", type=r.observation.value)
+temporal-worker-1  | 2026-10-11T03:58:46.745253617Z temporalio.exceptions.ApplicationError: AMBIGUOUS: ambiguous: AMBIGUOUS
+temporal-worker-1  | 2026-10-11T03:58:48.745388839Z Completing activity as failed ({'activity_id': '1', 'activity_type': 'dispatch_payment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'raeg-baselines', 'workflow_id': 'm5-B3L-delta-ca2abffa', 'workflow_run_id': '01a1291c-fa10-7f16-80e7-cbad1cf86f06', 'workflow_type': 'PaymentWorkflow'})
+temporal-worker-1  | 2026-10-11T03:58:48.745442966Z Traceback (most recent call last):
+temporal-worker-1  | 2026-10-11T03:58:48.745450799Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+temporal-worker-1  | 2026-10-11T03:58:48.745454424Z     result = await self._execute_activity(
+temporal-worker-1  | 2026-10-11T03:58:48.745457133Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:58:48.745459758Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+temporal-worker-1  | 2026-10-11T03:58:48.745462800Z     return await impl.execute_activity(input)
+temporal-worker-1  | 2026-10-11T03:58:48.745465341Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:58:48.745467925Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+temporal-worker-1  | 2026-10-11T03:58:48.745499718Z     return await input.fn(*input.args)
+temporal-worker-1  | 2026-10-11T03:58:48.745502843Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:58:48.745505259Z   File "/app/src/systems/temporal_wf/activities.py", line 52, in dispatch_payment
+temporal-worker-1  | 2026-10-11T03:58:48.745508093Z     raise ApplicationError(f"ambiguous: {r.error_class or r.observation.value}", type=r.observation.value)
+temporal-worker-1  | 2026-10-11T03:58:48.745511010Z temporalio.exceptions.ApplicationError: AMBIGUOUS: ambiguous: ReadTimeout
+temporal-worker-1  | 2026-10-11T03:58:51.686111680Z Completing activity as failed ({'activity_id': '1', 'activity_type': 'dispatch_payment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'raeg-baselines', 'workflow_id': 'm5-B3L-horizon-c2eae676', 'workflow_run_id': '01a1291d-0592-7766-9957-d1d8ff3e92f0', 'workflow_type': 'PaymentWorkflow'})
+temporal-worker-1  | 2026-10-11T03:58:51.686218392Z Traceback (most recent call last):
+temporal-worker-1  | 2026-10-11T03:58:51.686224225Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+temporal-worker-1  | 2026-10-11T03:58:51.686230684Z     result = await self._execute_activity(
+temporal-worker-1  | 2026-10-11T03:58:51.686233892Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:58:51.686237309Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+temporal-worker-1  | 2026-10-11T03:58:51.686240976Z     return await impl.execute_activity(input)
+temporal-worker-1  | 2026-10-11T03:58:51.686244018Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:58:51.686247018Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+temporal-worker-1  | 2026-10-11T03:58:51.686250726Z     return await input.fn(*input.args)
+temporal-worker-1  | 2026-10-11T03:58:51.686253726Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:58:51.686256643Z   File "/app/src/systems/temporal_wf/activities.py", line 52, in dispatch_payment
+temporal-worker-1  | 2026-10-11T03:58:51.686259852Z     raise ApplicationError(f"ambiguous: {r.error_class or r.observation.value}", type=r.observation.value)
+temporal-worker-1  | 2026-10-11T03:58:51.686263185Z temporalio.exceptions.ApplicationError: AMBIGUOUS: ambiguous: ReadTimeout
+temporal-worker-1  | 2026-10-11T03:58:53.513898492Z Completing activity as failed ({'activity_id': '1', 'activity_type': 'dispatch_payment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'raeg-baselines', 'workflow_id': 'm5-B3L-delta-19f5c464', 'workflow_run_id': '01a1291d-11fd-77e8-9921-ce47c2234d7f', 'workflow_type': 'PaymentWorkflow'})
+temporal-worker-1  | 2026-10-11T03:58:53.513973411Z Traceback (most recent call last):
+temporal-worker-1  | 2026-10-11T03:58:53.513976744Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+temporal-worker-1  | 2026-10-11T03:58:53.513978327Z     result = await self._execute_activity(
+temporal-worker-1  | 2026-10-11T03:58:53.513979619Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:58:53.513980786Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+temporal-worker-1  | 2026-10-11T03:58:53.514020037Z     return await impl.execute_activity(input)
+temporal-worker-1  | 2026-10-11T03:58:53.514022787Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:58:53.514023662Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+temporal-worker-1  | 2026-10-11T03:58:53.514024746Z     return await input.fn(*input.args)
+temporal-worker-1  | 2026-10-11T03:58:53.514025662Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:58:53.514026496Z   File "/app/src/systems/temporal_wf/activities.py", line 52, in dispatch_payment
+temporal-worker-1  | 2026-10-11T03:58:53.514027496Z     raise ApplicationError(f"ambiguous: {r.error_class or r.observation.value}", type=r.observation.value)
+temporal-worker-1  | 2026-10-11T03:58:53.514028662Z temporalio.exceptions.ApplicationError: AMBIGUOUS: ambiguous: RemoteProtocolError
+temporal-worker-1  | 2026-10-11T03:58:55.024669320Z Completing activity as failed ({'activity_id': '1', 'activity_type': 'dispatch_payment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'raeg-baselines', 'workflow_id': 'm5-B3L-horizon-69ac2824', 'workflow_run_id': '01a1291d-17fe-739d-8bcb-860c7a349c2d', 'workflow_type': 'PaymentWorkflow'})
+temporal-worker-1  | 2026-10-11T03:58:55.024696363Z Traceback (most recent call last):
+temporal-worker-1  | 2026-10-11T03:58:55.024698446Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+temporal-worker-1  | 2026-10-11T03:58:55.024699988Z     result = await self._execute_activity(
+temporal-worker-1  | 2026-10-11T03:58:55.024701155Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:58:55.024702238Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+temporal-worker-1  | 2026-10-11T03:58:55.024703488Z     return await impl.execute_activity(input)
+temporal-worker-1  | 2026-10-11T03:58:55.024704530Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:58:55.024705655Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+temporal-worker-1  | 2026-10-11T03:58:55.024706988Z     return await input.fn(*input.args)
+temporal-worker-1  | 2026-10-11T03:58:55.024713238Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:58:55.024714322Z   File "/app/src/systems/temporal_wf/activities.py", line 52, in dispatch_payment
+temporal-worker-1  | 2026-10-11T03:58:55.024715488Z     raise ApplicationError(f"ambiguous: {r.error_class or r.observation.value}", type=r.observation.value)
+temporal-worker-1  | 2026-10-11T03:58:55.024716738Z temporalio.exceptions.ApplicationError: AMBIGUOUS: ambiguous: RemoteProtocolError
+temporal-worker-1  | 2026-10-11T03:58:59.005169703Z Completing activity as failed ({'activity_id': '1', 'activity_type': 'dispatch_payment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'raeg-baselines', 'workflow_id': 'm5-B3L-horizon-36b640e5', 'workflow_run_id': '01a1291d-2220-78ea-8f65-6d25cf39eb75', 'workflow_type': 'PaymentWorkflow'})
+temporal-worker-1  | 2026-10-11T03:58:59.005257955Z Traceback (most recent call last):
+temporal-worker-1  | 2026-10-11T03:58:59.005263789Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+temporal-worker-1  | 2026-10-11T03:58:59.005265497Z     result = await self._execute_activity(
+temporal-worker-1  | 2026-10-11T03:58:59.005283664Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:58:59.005285873Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+temporal-worker-1  | 2026-10-11T03:58:59.005286998Z     return await impl.execute_activity(input)
+temporal-worker-1  | 2026-10-11T03:58:59.005287914Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:58:59.005288790Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+temporal-worker-1  | 2026-10-11T03:58:59.005289915Z     return await input.fn(*input.args)
+temporal-worker-1  | 2026-10-11T03:58:59.005290790Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:58:59.005291665Z   File "/app/src/systems/temporal_wf/activities.py", line 52, in dispatch_payment
+temporal-worker-1  | 2026-10-11T03:58:59.005292665Z     raise ApplicationError(f"ambiguous: {r.error_class or r.observation.value}", type=r.observation.value)
+temporal-worker-1  | 2026-10-11T03:58:59.005293706Z temporalio.exceptions.ApplicationError: AMBIGUOUS: ambiguous: ReadTimeout
+temporal-worker-1  | 2026-10-11T03:59:01.544881907Z Completing activity as failed ({'activity_id': '3', 'activity_type': 'dispatch_payment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'raeg-baselines', 'workflow_id': 'm5-B3L-horizon-36b640e5', 'workflow_run_id': '01a1291d-2220-78ea-8f65-6d25cf39eb75', 'workflow_type': 'PaymentWorkflow'})
+temporal-worker-1  | 2026-10-11T03:59:01.544961700Z Traceback (most recent call last):
+temporal-worker-1  | 2026-10-11T03:59:01.544969992Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+temporal-worker-1  | 2026-10-11T03:59:01.544974451Z     result = await self._execute_activity(
+temporal-worker-1  | 2026-10-11T03:59:01.544975742Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:59:01.544976951Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+temporal-worker-1  | 2026-10-11T03:59:01.544978326Z     return await impl.execute_activity(input)
+temporal-worker-1  | 2026-10-11T03:59:01.544979451Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:59:01.544980618Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+temporal-worker-1  | 2026-10-11T03:59:01.544981909Z     return await input.fn(*input.args)
+temporal-worker-1  | 2026-10-11T03:59:01.544983034Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:59:01.544984243Z   File "/app/src/systems/temporal_wf/activities.py", line 52, in dispatch_payment
+temporal-worker-1  | 2026-10-11T03:59:01.544985534Z     raise ApplicationError(f"ambiguous: {r.error_class or r.observation.value}", type=r.observation.value)
+temporal-worker-1  | 2026-10-11T03:59:01.544986826Z temporalio.exceptions.ApplicationError: AMBIGUOUS: ambiguous: ReadTimeout
+temporal-worker-1  | 2026-10-11T03:59:04.105252609Z Completing activity as failed ({'activity_id': '5', 'activity_type': 'dispatch_payment', 'attempt': 1, 'namespace': 'default', 'task_queue': 'raeg-baselines', 'workflow_id': 'm5-B3L-horizon-36b640e5', 'workflow_run_id': '01a1291d-2220-78ea-8f65-6d25cf39eb75', 'workflow_type': 'PaymentWorkflow'})
+temporal-worker-1  | 2026-10-11T03:59:04.105318610Z Traceback (most recent call last):
+temporal-worker-1  | 2026-10-11T03:59:04.105324068Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 351, in _handle_start_activity_task
+temporal-worker-1  | 2026-10-11T03:59:04.105359944Z     result = await self._execute_activity(
+temporal-worker-1  | 2026-10-11T03:59:04.105364111Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:59:04.105365069Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 681, in _execute_activity
+temporal-worker-1  | 2026-10-11T03:59:04.105366153Z     return await impl.execute_activity(input)
+temporal-worker-1  | 2026-10-11T03:59:04.105367028Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:59:04.105367903Z   File "/usr/local/lib/python3.12/site-packages/temporalio/worker/_activity.py", line 889, in execute_activity
+temporal-worker-1  | 2026-10-11T03:59:04.105368944Z     return await input.fn(*input.args)
+temporal-worker-1  | 2026-10-11T03:59:04.105369819Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+temporal-worker-1  | 2026-10-11T03:59:04.105370694Z   File "/app/src/systems/temporal_wf/activities.py", line 52, in dispatch_payment
+temporal-worker-1  | 2026-10-11T03:59:04.105371694Z     raise ApplicationError(f"ambiguous: {r.error_class or r.observation.value}", type=r.observation.value)
+temporal-worker-1  | 2026-10-11T03:59:04.105372778Z temporalio.exceptions.ApplicationError: AMBIGUOUS: ambiguous: ReadTimeout
+temporal-worker-1  | 2026-10-11T03:59:13.311289639Z temporal worker ready

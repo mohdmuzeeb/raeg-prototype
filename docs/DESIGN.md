@@ -1,6 +1,6 @@
 # RAEG Prototype — Design for Review
 
-Status: **v0.3.1. Approved v0.3, plus corrections found during M4 implementation (§0b). M0–M3 implemented; M4 under review.**
+Status: **v0.3.1. Approved v0.3, plus corrections found during M4/M5 implementation (§0b). M0–M4 approved; M5 under review.**
 Paper: *RAEG: A Recovery-Aware Execution Gateway for Fault-Tolerant AI Agents in Financial Microservices* (`ICIYTA_2026_Paper1.pdf`).
 Previous versions: `docs/archive/DESIGN-v0.1.md`, `-v0.2.md`, and `-v0.3.md` (the approved text). §12 records the decisions.
 
@@ -13,6 +13,8 @@ Previous versions: `docs/archive/DESIGN-v0.1.md`, `-v0.2.md`, and `-v0.3.md` (th
 | E1 | **B1 is restated to bound the effect (commit), not the arrival.** v0.3 bounded only "claim → provider arrival ≤ d_j". | The M4 model checker found Tier B duplicates under the v0.3 wording. Without D, a request that arrives before `d_j` can still commit after `d_j` through slow processing, after RAEG has "proven" absence (`tests/property`, run `20261011T031143Z_property`). B2 is folded into the new B1. Tier S is unaffected, because D is enforced at commit time. | §2.7, §11.2 |
 | E2 | The same-state transitions `TW` (UNKNOWN → UNKNOWN, scheduled wait) and `TA` (SUCCEEDED → SUCCEEDED, duplicate annotation) are added. | `WAIT` (VB1) and the DS duplicate annotation need an auditable record but no state change. Their patches are whitelisted to `next_action_at` and `duplicate_detected` respectively. | §3.2 |
 | E3 | Late evidence is consumed by the engine before `decide()` runs, instead of being checked inside it. Consumption is marked by a decision that cites the evidence id. | Keeps `decide()` pure. Equivalent ordering. | §2.10 |
+| E4 | (M5) Pessimistic rescoring maps "gave up" to a distinct claim, `NO_EFFECT(assumed_by_agent)`. | An agent's assumption must not be counted as a provider-confirmed decline. | §6.2 |
+| E5 | (M5) The systems' deployment and native-outcome details (one service, route per system; B3 workflows return outcomes rather than failing) are recorded in IMPLEMENTATION_NOTES N27–N36. | Implementation detail; the definitions in §5.4 are unchanged. | §5.4 |
 
 ## 0a. Changes from v0.2
 
@@ -495,7 +497,7 @@ None of these may be reported in isolation. A system that avoids duplicates by e
 
 **Trade-off figure.** For each profile, plot the duplicate-effect rate (y-axis) against the unresolved rate (x-axis), with one point per system and seed-level confidence intervals. The paper discusses the frontier explicitly: RAEG-strict is expected to trade unresolved outcomes for safety on P4n and P6, and the size of that cost is reported, not hidden. Recovery completion is also broken down by profile, because it is bounded by what the capabilities allow. On P6, for example, no safe strategy can complete an ambiguous action.
 
-**Secondary, labelled "pessimistic-agent rescoring":** `UNRESOLVED(gave_up_ambiguous)` is treated as `NO_EFFECT`. This models agents that read errors as failures. It is reported in a separate table and never merged with the primary metrics.
+**Secondary, labelled "pessimistic-agent rescoring":** `UNRESOLVED(gave_up_ambiguous)` is treated as `NO_EFFECT(assumed_by_agent)` (v0.3.1: a distinct label, never merged with provider-confirmed `NO_EFFECT`). This models agents that read errors as failures. It is reported in a separate table and never merged with the primary metrics.
 
 ### 6.3 Faults
 Faults are deterministic. `fault_plan.json` is generated per `(seed, workload)` and keyed by `(k, attempt_no)`, or by provider receipt index for faults injected at the provider. It is replayed identically for every system.

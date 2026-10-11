@@ -73,3 +73,25 @@ class HookPlan:
     @staticmethod
     async def pause(action: HookAction) -> None:
         await asyncio.sleep(action.pause_ms / 1000)
+
+
+class ReloadingHookPlan(HookPlan):
+    """A plan backed by a file that is re-read whenever its mtime changes (a missing file = no hooks).
+    Lets a harness arm hooks in long-running containers without restarting them."""
+
+    def __init__(self, path: str | Path, exit_fn: Callable[[], None] = _hard_exit) -> None:
+        super().__init__({}, exit_fn)
+        self._path = Path(path)
+        self._mtime: float | None = None
+
+    def lookup(self, action_key: str, attempt_no: int) -> HookAction | None:
+        try:
+            mtime = self._path.stat().st_mtime
+        except FileNotFoundError:
+            self._entries, self._mtime = {}, None
+            return None
+        if mtime != self._mtime:
+            self._entries = HookPlan.from_file(self._path, self._exit_fn)._entries
+            self._mtime = mtime
+        return super().lookup(action_key, attempt_no)
+

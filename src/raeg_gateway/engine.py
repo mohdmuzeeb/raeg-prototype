@@ -36,10 +36,11 @@ def _parse_ts(value: str | None) -> datetime | None:
 
 
 class RecoveryEngine:
-    def __init__(self, store: GatewayStore, client: ProviderClient, worker_id: str) -> None:
+    def __init__(self, store: GatewayStore, client: ProviderClient, worker_id: str, system_id: str | None = None) -> None:
         self.store = store
         self.client = client
         self.worker_id = worker_id
+        self.system_id = system_id  # background passes only touch this system's actions (None = all)
 
     # ------------------------------------------------------------------ entry points
 
@@ -64,16 +65,16 @@ class RecoveryEngine:
         return state
 
     async def sweep(self) -> int:
-        return len([r for r in await self.store.sweep_expired(self.worker_id) if r.applied])
+        return len([r for r in await self.store.sweep_expired(self.worker_id, system_id=self.system_id) if r.applied])
 
     async def run_once(self, limit: int = 50) -> int:
         """One background-worker pass: sweep, late evidence, due actions, duplicate audits."""
         n = await self.sweep()
         n += await self.consume_late_evidence()
-        for key in await self.store.due_actions(limit):
+        for key in await self.store.due_actions(limit, system_id=self.system_id):
             if (await self.step(key)).progressed:
                 n += 1
-        for key in await self.store.audit_candidates(limit):
+        for key in await self.store.audit_candidates(limit, system_id=self.system_id):
             if (await self.step(key)).progressed:
                 n += 1
         return n
@@ -209,7 +210,7 @@ class RecoveryEngine:
 
     async def consume_late_evidence(self) -> int:
         n = 0
-        for ev in await self.store.unconsumed_late_evidence():
+        for ev in await self.store.unconsumed_late_evidence(system_id=self.system_id):
             row = await self.store.snapshot(ev["action_key"])
             if await self._consume_one(row, ev):
                 n += 1

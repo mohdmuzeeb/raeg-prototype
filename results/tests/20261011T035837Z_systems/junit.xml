@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="36" time="51.409" timestamp="2026-10-10T23:58:37.720909-04:00" hostname="MacBookAir"><testcase classname="tests.systems.test_baseline_definitions" name="test_b1_resends_without_key" time="0.642" /><testcase classname="tests.systems.test_baseline_definitions" name="test_b2_resends_with_key_and_gets_replay" time="0.549" /><testcase classname="tests.systems.test_baseline_definitions" name="test_b2_key_is_ignored_by_provider_without_idempotency" time="0.582" /><testcase classname="tests.systems.test_baseline_definitions" name="test_retry_baselines_give_up_with_error_after_budget" time="1.603" /><testcase classname="tests.systems.test_baseline_definitions" name="test_retry_baselines_stop_on_decline" time="0.902" /><testcase classname="tests.systems.test_baseline_definitions" name="test_b1_has_no_local_deduplication" time="0.139" /><testcase classname="tests.systems.test_baseline_definitions" name="test_b3_activity_retry_reuses_key" time="1.703" /><testcase classname="tests.systems.test_baseline_definitions" name="test_b3_decline_is_non_retryable" time="0.503" /><testcase classname="tests.systems.test_baseline_definitions" name="test_b3_retry_policy_exhausts_after_max_dispatch" time="2.470" /><testcase classname="tests.systems.test_baseline_definitions" name="test_b3_workflow_id_deduplicates_submissions" time="0.163" /><testcase classname="tests.systems.test_baseline_definitions" name="test_b3l_delta_waits_delta_then_redispatches_after_miss" time="2.945" /><testcase classname="tests.systems.test_baseline_definitions" name="test_b3l_horizon_waits_until_deadline_plus_delta" time="2.923" /><testcase classname="tests.systems.test_baseline_definitions" name="test_b3l_finds_lost_response_without_redispatch" time="4.325" /><testcase classname="tests.systems.test_baseline_definitions" name="test_b3l_believes_misses_and_reports_not_found" time="8.068" /><testcase classname="tests.systems.test_baseline_definitions" name="test_raeg_concurrent_submissions_create_one_effect" time="0.200" /><testcase classname="tests.systems.test_baseline_definitions" name="test_raeg_escalation_maps_to_unresolved" time="0.421" /><testcase classname="tests.systems.test_contract_smoke" name="test_f0_every_system[B1]" time="0.123" /><testcase classname="tests.systems.test_contract_smoke" name="test_f0_every_system[B2]" time="0.108" /><testcase classname="tests.systems.test_contract_smoke" name="test_f0_every_system[B3]" time="0.202" /><testcase classname="tests.systems.test_contract_smoke" name="test_f0_every_system[B3-noDL]" time="0.243" /><testcase classname="tests.systems.test_contract_smoke" name="test_f0_every_system[B3L-delta]" time="0.150" /><testcase classname="tests.systems.test_contract_smoke" name="test_f0_every_system[B3L-horizon]" time="0.160" /><testcase classname="tests.systems.test_contract_smoke" name="test_f0_every_system[B3L-horizon-noDL]" time="0.144" /><testcase classname="tests.systems.test_contract_smoke" name="test_f0_every_system[RAEG-bounded]" time="0.144" /><testcase classname="tests.systems.test_contract_smoke" name="test_f0_every_system[RAEG-strict]" time="0.115" /><testcase classname="tests.systems.test_contract_smoke" name="test_f0_every_system[RAEG-strict-no-horizon]" time="0.121" /><testcase classname="tests.systems.test_contract_smoke" name="test_f0_every_system[RAEG-strict-no-ttl]" time="0.132" /><testcase classname="tests.systems.test_contract_smoke" name="test_f0_every_system[RAEG-strict-no-verify]" time="0.140" /><testcase classname="tests.systems.test_contract_smoke" name="test_f0_every_system[RAEG-strict-noDL]" time="0.123" /><testcase classname="tests.systems.test_contract_smoke" name="test_f0_every_system[RAEG-strict-retry-first]" time="0.127" /><testcase classname="tests.systems.test_contract_smoke" name="test_unknown_system_is_404" time="0.010" /><testcase classname="tests.systems.test_contract_smoke" name="test_registry_timing_is_identical_across_systems" time="0.000" /><testcase classname="tests.systems.test_contract_smoke" name="test_systems_use_only_the_shared_client" time="0.013" /><testcase classname="tests.systems.test_hooks_across_systems" name="test_cp3_b1_in_memory_state_is_lost" time="3.653" /><testcase classname="tests.systems.test_hooks_across_systems" name="test_cp3_b3_worker_crash_is_retried_by_temporal" time="13.612" /><testcase classname="tests.systems.test_hooks_across_systems" name="test_cp3_raeg_recovers_after_restart_without_traffic" time="3.561"><failure message="httpx.ConnectError: All connection attempts failed">@contextlib.contextmanager
+    def map_httpcore_exceptions() -&gt; typing.Iterator[None]:
+        global HTTPCORE_EXC_MAP
+        if len(HTTPCORE_EXC_MAP) == 0:
+            HTTPCORE_EXC_MAP = _load_httpcore_exceptions()
+        try:
+&gt;           yield
+
+.venv/lib/python3.12/site-packages/httpx/_transports/default.py:101: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;httpx.AsyncHTTPTransport object at 0x10805e7e0&gt;
+request = &lt;Request('GET', 'http://127.0.0.1:18080/s/RAEG-strict/v1/actions/m5-RAEG-strict-af9df1e6')&gt;
+
+    async def handle_async_request(
+        self,
+        request: Request,
+    ) -&gt; Response:
+        assert isinstance(request.stream, AsyncByteStream)
+        import httpcore
+    
+        req = httpcore.Request(
+            method=request.method,
+            url=httpcore.URL(
+                scheme=request.url.raw_scheme,
+                host=request.url.raw_host,
+                port=request.url.port,
+                target=request.url.raw_path,
+            ),
+            headers=request.headers.raw,
+            content=request.stream,
+            extensions=request.extensions,
+        )
+        with map_httpcore_exceptions():
+&gt;           resp = await self._pool.handle_async_request(req)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/httpx/_transports/default.py:394: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;AsyncConnectionPool [Requests: 0 active, 0 queued | Connections: 0 active, 0 idle]&gt;
+request = &lt;Request [b'GET']&gt;
+
+    async def handle_async_request(self, request: Request) -&gt; Response:
+        """
+        Send an HTTP request, and return an HTTP response.
+    
+        This is the core implementation that is called into by `.request()` or `.stream()`.
+        """
+        scheme = request.url.scheme.decode()
+        if scheme == "":
+            raise UnsupportedProtocol(
+                "Request URL is missing an 'http://' or 'https://' protocol."
+            )
+        if scheme not in ("http", "https", "ws", "wss"):
+            raise UnsupportedProtocol(
+                f"Request URL has an unsupported protocol '{scheme}://'."
+            )
+    
+        timeouts = request.extensions.get("timeout", {})
+        timeout = timeouts.get("pool", None)
+    
+        with self._optional_thread_lock:
+            # Add the incoming request to our request queue.
+            pool_request = AsyncPoolRequest(request)
+            self._requests.append(pool_request)
+    
+        try:
+            while True:
+                with self._optional_thread_lock:
+                    # Assign incoming requests to available connections,
+                    # closing or creating new connections as required.
+                    closing = self._assign_requests_to_connections()
+                await self._close_connections(closing)
+    
+                # Wait until this request has an assigned connection.
+                connection = await pool_request.wait_for_connection(timeout=timeout)
+    
+                try:
+                    # Send the request on the assigned connection.
+                    response = await connection.handle_async_request(
+                        pool_request.request
+                    )
+                except ConnectionNotAvailable:
+                    # In some cases a connection may initially be available to
+                    # handle a request, but then become unavailable.
+                    #
+                    # In this case we clear the connection and try again.
+                    pool_request.clear_connection()
+                else:
+                    break  # pragma: nocover
+    
+        except BaseException as exc:
+            with self._optional_thread_lock:
+                # For any exception or cancellation we remove the request from
+                # the queue, and then re-assign requests to connections.
+                self._requests.remove(pool_request)
+                closing = self._assign_requests_to_connections()
+    
+            await self._close_connections(closing)
+&gt;           raise exc from None
+
+.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py:256: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;AsyncConnectionPool [Requests: 0 active, 0 queued | Connections: 0 active, 0 idle]&gt;
+request = &lt;Request [b'GET']&gt;
+
+    async def handle_async_request(self, request: Request) -&gt; Response:
+        """
+        Send an HTTP request, and return an HTTP response.
+    
+        This is the core implementation that is called into by `.request()` or `.stream()`.
+        """
+        scheme = request.url.scheme.decode()
+        if scheme == "":
+            raise UnsupportedProtocol(
+                "Request URL is missing an 'http://' or 'https://' protocol."
+            )
+        if scheme not in ("http", "https", "ws", "wss"):
+            raise UnsupportedProtocol(
+                f"Request URL has an unsupported protocol '{scheme}://'."
+            )
+    
+        timeouts = request.extensions.get("timeout", {})
+        timeout = timeouts.get("pool", None)
+    
+        with self._optional_thread_lock:
+            # Add the incoming request to our request queue.
+            pool_request = AsyncPoolRequest(request)
+            self._requests.append(pool_request)
+    
+        try:
+            while True:
+                with self._optional_thread_lock:
+                    # Assign incoming requests to available connections,
+                    # closing or creating new connections as required.
+                    closing = self._assign_requests_to_connections()
+                await self._close_connections(closing)
+    
+                # Wait until this request has an assigned connection.
+                connection = await pool_request.wait_for_connection(timeout=timeout)
+    
+                try:
+                    # Send the request on the assigned connection.
+&gt;                   response = await connection.handle_async_request(
+                        pool_request.request
+                    )
+
+.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py:236: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;AsyncHTTPConnection [CONNECTION FAILED]&gt;, request = &lt;Request [b'GET']&gt;
+
+    async def handle_async_request(self, request: Request) -&gt; Response:
+        if not self.can_handle_request(request.url.origin):
+            raise RuntimeError(
+                f"Attempted to send request to {request.url.origin} on connection to {self._origin}"
+            )
+    
+        try:
+            async with self._request_lock:
+                if self._connection is None:
+                    stream = await self._connect(request)
+    
+                    ssl_object = stream.get_extra_info("ssl_object")
+                    http2_negotiated = (
+                        ssl_object is not None
+                        and ssl_object.selected_alpn_protocol() == "h2"
+                    )
+                    if http2_negotiated or (self._http2 and not self._http1):
+                        from .http2 import AsyncHTTP2Connection
+    
+                        self._connection = AsyncHTTP2Connection(
+                            origin=self._origin,
+                            stream=stream,
+                            keepalive_expiry=self._keepalive_expiry,
+                        )
+                    else:
+                        self._connection = AsyncHTTP11Connection(
+                            origin=self._origin,
+                            stream=stream,
+                            keepalive_expiry=self._keepalive_expiry,
+                        )
+        except BaseException as exc:
+            self._connect_failed = True
+&gt;           raise exc
+
+.venv/lib/python3.12/site-packages/httpcore/_async/connection.py:101: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;AsyncHTTPConnection [CONNECTION FAILED]&gt;, request = &lt;Request [b'GET']&gt;
+
+    async def handle_async_request(self, request: Request) -&gt; Response:
+        if not self.can_handle_request(request.url.origin):
+            raise RuntimeError(
+                f"Attempted to send request to {request.url.origin} on connection to {self._origin}"
+            )
+    
+        try:
+            async with self._request_lock:
+                if self._connection is None:
+&gt;                   stream = await self._connect(request)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/httpcore/_async/connection.py:78: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;AsyncHTTPConnection [CONNECTION FAILED]&gt;, request = &lt;Request [b'GET']&gt;
+
+    async def _connect(self, request: Request) -&gt; AsyncNetworkStream:
+        timeouts = request.extensions.get("timeout", {})
+        sni_hostname = request.extensions.get("sni_hostname", None)
+        timeout = timeouts.get("connect", None)
+    
+        retries_left = self._retries
+        delays = exponential_backoff(factor=RETRIES_BACKOFF_FACTOR)
+    
+        while True:
+            try:
+                if self._uds is None:
+                    kwargs = {
+                        "host": self._origin.host.decode("ascii"),
+                        "port": self._origin.port,
+                        "local_address": self._local_address,
+                        "timeout": timeout,
+                        "socket_options": self._socket_options,
+                    }
+                    async with Trace("connect_tcp", logger, request, kwargs) as trace:
+&gt;                       stream = await self._network_backend.connect_tcp(**kwargs)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/httpcore/_async/connection.py:124: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;httpcore._backends.auto.AutoBackend object at 0x10805dd60&gt;
+host = '127.0.0.1', port = 18080, timeout = 90, local_address = None
+socket_options = None
+
+    async def connect_tcp(
+        self,
+        host: str,
+        port: int,
+        timeout: float | None = None,
+        local_address: str | None = None,
+        socket_options: typing.Iterable[SOCKET_OPTION] | None = None,
+    ) -&gt; AsyncNetworkStream:
+        await self._init_backend()
+&gt;       return await self._backend.connect_tcp(
+            host,
+            port,
+            timeout=timeout,
+            local_address=local_address,
+            socket_options=socket_options,
+        )
+
+.venv/lib/python3.12/site-packages/httpcore/_backends/auto.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;httpcore.AnyIOBackend object at 0x108064fb0&gt;, host = '127.0.0.1'
+port = 18080, timeout = 90, local_address = None, socket_options = []
+
+    async def connect_tcp(
+        self,
+        host: str,
+        port: int,
+        timeout: float | None = None,
+        local_address: str | None = None,
+        socket_options: typing.Iterable[SOCKET_OPTION] | None = None,
+    ) -&gt; AsyncNetworkStream:  # pragma: nocover
+        if socket_options is None:
+            socket_options = []
+        exc_map = {
+            TimeoutError: ConnectTimeout,
+            OSError: ConnectError,
+            anyio.BrokenResourceError: ConnectError,
+        }
+&gt;       with map_exceptions(exc_map):
+             ^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/httpcore/_backends/anyio.py:113: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;contextlib._GeneratorContextManager object at 0x108054a10&gt;
+typ = &lt;class 'OSError'&gt;, value = OSError('All connection attempts failed')
+traceback = &lt;traceback object at 0x10805ba00&gt;
+
+    def __exit__(self, typ, value, traceback):
+        if typ is None:
+            try:
+                next(self.gen)
+            except StopIteration:
+                return False
+            else:
+                try:
+                    raise RuntimeError("generator didn't stop")
+                finally:
+                    self.gen.close()
+        else:
+            if value is None:
+                # Need to force instantiation so we can reliably
+                # tell if we get the same exception back
+                value = typ()
+            try:
+&gt;               self.gen.throw(value)
+
+/opt/local/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/contextlib.py:158: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+map = {&lt;class 'TimeoutError'&gt;: &lt;class 'httpcore.ConnectTimeout'&gt;, &lt;class 'OSError'&gt;: &lt;class 'httpcore.ConnectError'&gt;, &lt;class 'anyio.BrokenResourceError'&gt;: &lt;class 'httpcore.ConnectError'&gt;}
+
+    @contextlib.contextmanager
+    def map_exceptions(map: ExceptionMapping) -&gt; typing.Iterator[None]:
+        try:
+            yield
+        except Exception as exc:  # noqa: PIE786
+            for from_exc, to_exc in map.items():
+                if isinstance(exc, from_exc):
+&gt;                   raise to_exc(exc) from exc
+E                   httpcore.ConnectError: All connection attempts failed
+
+.venv/lib/python3.12/site-packages/httpcore/_exceptions.py:14: ConnectError
+
+The above exception was the direct cause of the following exception:
+
+systems = &lt;httpx.AsyncClient object at 0x10805eea0&gt;
+provider = &lt;tests.conformance.conftest.Provider object at 0x108066570&gt;
+
+    async def test_cp3_raeg_recovers_after_restart_without_traffic(systems, provider) -&gt; None:
+        key = new_key("RAEG-strict")
+        await configure(provider, "P1", key)
+        arm_hooks([{"action_key": key, "attempt_no": 1, "point": "CP3"}])
+        with pytest.raises(httpx.TransportError):
+            await submit(systems, "RAEG-strict", key, "P1")
+        disarm_hooks()
+        await wait_healthy("systems")
+        assert [e["point"] for e in await crash_hooks_fired("RAEG-strict", key)] == ["CP3"]
+        for _ in range(120):  # the background loop (started at boot) sweeps the lease and verifies
+&gt;           status = (await systems.get(f"/s/RAEG-strict/v1/actions/{key}")).json()
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/systems/test_hooks_across_systems.py:63: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;httpx.AsyncClient object at 0x10805eea0&gt;
+url = '/s/RAEG-strict/v1/actions/m5-RAEG-strict-af9df1e6', params = None
+headers = None, cookies = None
+auth = &lt;httpx._client.UseClientDefault object at 0x1067f00e0&gt;
+follow_redirects = &lt;httpx._client.UseClientDefault object at 0x1067f00e0&gt;
+timeout = &lt;httpx._client.UseClientDefault object at 0x1067f00e0&gt;
+extensions = None
+
+    async def get(
+        self,
+        url: URL | str,
+        *,
+        params: QueryParamTypes | None = None,
+        headers: HeaderTypes | None = None,
+        cookies: CookieTypes | None = None,
+        auth: AuthTypes | UseClientDefault | None = USE_CLIENT_DEFAULT,
+        follow_redirects: bool | UseClientDefault = USE_CLIENT_DEFAULT,
+        timeout: TimeoutTypes | UseClientDefault = USE_CLIENT_DEFAULT,
+        extensions: RequestExtensions | None = None,
+    ) -&gt; Response:
+        """
+        Send a `GET` request.
+    
+        **Parameters**: See `httpx.request`.
+        """
+&gt;       return await self.request(
+            "GET",
+            url,
+            params=params,
+            headers=headers,
+            cookies=cookies,
+            auth=auth,
+            follow_redirects=follow_redirects,
+            timeout=timeout,
+            extensions=extensions,
+        )
+
+.venv/lib/python3.12/site-packages/httpx/_client.py:1768: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;httpx.AsyncClient object at 0x10805eea0&gt;, method = 'GET'
+url = '/s/RAEG-strict/v1/actions/m5-RAEG-strict-af9df1e6', content = None
+data = None, files = None, json = None, params = None, headers = None
+cookies = None, auth = &lt;httpx._client.UseClientDefault object at 0x1067f00e0&gt;
+follow_redirects = &lt;httpx._client.UseClientDefault object at 0x1067f00e0&gt;
+timeout = &lt;httpx._client.UseClientDefault object at 0x1067f00e0&gt;
+extensions = None
+
+    async def request(
+        self,
+        method: str,
+        url: URL | str,
+        *,
+        content: RequestContent | None = None,
+        data: RequestData | None = None,
+        files: RequestFiles | None = None,
+        json: typing.Any | None = None,
+        params: QueryParamTypes | None = None,
+        headers: HeaderTypes | None = None,
+        cookies: CookieTypes | None = None,
+        auth: AuthTypes | UseClientDefault | None = USE_CLIENT_DEFAULT,
+        follow_redirects: bool | UseClientDefault = USE_CLIENT_DEFAULT,
+        timeout: TimeoutTypes | UseClientDefault = USE_CLIENT_DEFAULT,
+        extensions: RequestExtensions | None = None,
+    ) -&gt; Response:
+        """
+        Build and send a request.
+    
+        Equivalent to:
+    
+        ```python
+        request = client.build_request(...)
+        response = await client.send(request, ...)
+        ```
+    
+        See `AsyncClient.build_request()`, `AsyncClient.send()`
+        and [Merging of configuration][0] for how the various parameters
+        are merged with client-level configuration.
+    
+        [0]: /advanced/clients/#merging-of-configuration
+        """
+    
+        if cookies is not None:  # pragma: no cover
+            message = (
+                "Setting per-request cookies=&lt;...&gt; is being deprecated, because "
+                "the expected behaviour on cookie persistence is ambiguous. Set "
+                "cookies directly on the client instance instead."
+            )
+            warnings.warn(message, DeprecationWarning, stacklevel=2)
+    
+        request = self.build_request(
+            method=method,
+            url=url,
+            content=content,
+            data=data,
+            files=files,
+            json=json,
+            params=params,
+            headers=headers,
+            cookies=cookies,
+            timeout=timeout,
+            extensions=extensions,
+        )
+&gt;       return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/httpx/_client.py:1540: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;httpx.AsyncClient object at 0x10805eea0&gt;
+request = &lt;Request('GET', 'http://127.0.0.1:18080/s/RAEG-strict/v1/actions/m5-RAEG-strict-af9df1e6')&gt;
+stream = False, auth = &lt;httpx.Auth object at 0x10805c500&gt;
+follow_redirects = False
+
+    async def send(
+        self,
+        request: Request,
+        *,
+        stream: bool = False,
+        auth: AuthTypes | UseClientDefault | None = USE_CLIENT_DEFAULT,
+        follow_redirects: bool | UseClientDefault = USE_CLIENT_DEFAULT,
+    ) -&gt; Response:
+        """
+        Send a request.
+    
+        The request is sent as-is, unmodified.
+    
+        Typically you'll want to build one with `AsyncClient.build_request()`
+        so that any client-level configuration is merged into the request,
+        but passing an explicit `httpx.Request()` is supported as well.
+    
+        See also: [Request instances][0]
+    
+        [0]: /advanced/clients/#request-instances
+        """
+        if self._state == ClientState.CLOSED:
+            raise RuntimeError("Cannot send a request, as the client has been closed.")
+    
+        self._state = ClientState.OPENED
+        follow_redirects = (
+            self.follow_redirects
+            if isinstance(follow_redirects, UseClientDefault)
+            else follow_redirects
+        )
+    
+        self._set_timeout(request)
+    
+        auth = self._build_request_auth(request, auth)
+    
+&gt;       response = await self._send_handling_auth(
+            request,
+            auth=auth,
+            follow_redirects=follow_redirects,
+            history=[],
+        )
+
+.venv/lib/python3.12/site-packages/httpx/_client.py:1629: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;httpx.AsyncClient object at 0x10805eea0&gt;
+request = &lt;Request('GET', 'http://127.0.0.1:18080/s/RAEG-strict/v1/actions/m5-RAEG-strict-af9df1e6')&gt;
+auth = &lt;httpx.Auth object at 0x10805c500&gt;, follow_redirects = False
+history = []
+
+    async def _send_handling_auth(
+        self,
+        request: Request,
+        auth: Auth,
+        follow_redirects: bool,
+        history: list[Response],
+    ) -&gt; Response:
+        auth_flow = auth.async_auth_flow(request)
+        try:
+            request = await auth_flow.__anext__()
+    
+            while True:
+&gt;               response = await self._send_handling_redirects(
+                    request,
+                    follow_redirects=follow_redirects,
+                    history=history,
+                )
+
+.venv/lib/python3.12/site-packages/httpx/_client.py:1657: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;httpx.AsyncClient object at 0x10805eea0&gt;
+request = &lt;Request('GET', 'http://127.0.0.1:18080/s/RAEG-strict/v1/actions/m5-RAEG-strict-af9df1e6')&gt;
+follow_redirects = False, history = []
+
+    async def _send_handling_redirects(
+        self,
+        request: Request,
+        follow_redirects: bool,
+        history: list[Response],
+    ) -&gt; Response:
+        while True:
+            if len(history) &gt; self.max_redirects:
+                raise TooManyRedirects(
+                    "Exceeded maximum allowed redirects.", request=request
+                )
+    
+            for hook in self._event_hooks["request"]:
+                await hook(request)
+    
+&gt;           response = await self._send_single_request(request)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/httpx/_client.py:1694: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;httpx.AsyncClient object at 0x10805eea0&gt;
+request = &lt;Request('GET', 'http://127.0.0.1:18080/s/RAEG-strict/v1/actions/m5-RAEG-strict-af9df1e6')&gt;
+
+    async def _send_single_request(self, request: Request) -&gt; Response:
+        """
+        Sends a single request, without handling any redirections.
+        """
+        transport = self._transport_for_url(request.url)
+        start = time.perf_counter()
+    
+        if not isinstance(request.stream, AsyncByteStream):
+            raise RuntimeError(
+                "Attempted to send an sync request with an AsyncClient instance."
+            )
+    
+        with request_context(request=request):
+&gt;           response = await transport.handle_async_request(request)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/httpx/_client.py:1730: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;httpx.AsyncHTTPTransport object at 0x10805e7e0&gt;
+request = &lt;Request('GET', 'http://127.0.0.1:18080/s/RAEG-strict/v1/actions/m5-RAEG-strict-af9df1e6')&gt;
+
+    async def handle_async_request(
+        self,
+        request: Request,
+    ) -&gt; Response:
+        assert isinstance(request.stream, AsyncByteStream)
+        import httpcore
+    
+        req = httpcore.Request(
+            method=request.method,
+            url=httpcore.URL(
+                scheme=request.url.raw_scheme,
+                host=request.url.raw_host,
+                port=request.url.port,
+                target=request.url.raw_path,
+            ),
+            headers=request.headers.raw,
+            content=request.stream,
+            extensions=request.extensions,
+        )
+&gt;       with map_httpcore_exceptions():
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv/lib/python3.12/site-packages/httpx/_transports/default.py:393: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;contextlib._GeneratorContextManager object at 0x108054410&gt;
+typ = &lt;class 'httpcore.ConnectError'&gt;
+value = ConnectError(OSError('All connection attempts failed'))
+traceback = &lt;traceback object at 0x108059700&gt;
+
+    def __exit__(self, typ, value, traceback):
+        if typ is None:
+            try:
+                next(self.gen)
+            except StopIteration:
+                return False
+            else:
+                try:
+                    raise RuntimeError("generator didn't stop")
+                finally:
+                    self.gen.close()
+        else:
+            if value is None:
+                # Need to force instantiation so we can reliably
+                # tell if we get the same exception back
+                value = typ()
+            try:
+&gt;               self.gen.throw(value)
+
+/opt/local/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/contextlib.py:158: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    @contextlib.contextmanager
+    def map_httpcore_exceptions() -&gt; typing.Iterator[None]:
+        global HTTPCORE_EXC_MAP
+        if len(HTTPCORE_EXC_MAP) == 0:
+            HTTPCORE_EXC_MAP = _load_httpcore_exceptions()
+        try:
+            yield
+        except Exception as exc:
+            mapped_exc = None
+    
+            for from_exc, to_exc in HTTPCORE_EXC_MAP.items():
+                if not isinstance(exc, from_exc):
+                    continue
+                # We want to map to the most specific exception we can find.
+                # Eg if `exc` is an `httpcore.ReadTimeout`, we want to map to
+                # `httpx.ReadTimeout`, not just `httpx.TimeoutException`.
+                if mapped_exc is None or issubclass(to_exc, mapped_exc):
+                    mapped_exc = to_exc
+    
+            if mapped_exc is None:  # pragma: no cover
+                raise
+    
+            message = str(exc)
+&gt;           raise mapped_exc(message) from exc
+E           httpx.ConnectError: All connection attempts failed
+
+.venv/lib/python3.12/site-packages/httpx/_transports/default.py:118: ConnectError</failure></testcase></testsuite></testsuites>

@@ -478,14 +478,15 @@ class GatewayStore:
 
     # ------------------------------------------------------------------ sweeper (T5 / T11 on lease expiry)
 
-    async def sweep_expired(self, worker_id: str, limit: int = 100) -> list[TransitionResult]:
+    async def sweep_expired(self, worker_id: str, limit: int = 100, system_id: str | None = None) -> list[TransitionResult]:
         results = []
         async with self.pool.acquire() as conn, conn.transaction():
             rows = await conn.fetch(
                 """SELECT * FROM executions
                    WHERE state IN ('DISPATCHING', 'VERIFYING') AND lease_expires_at < now()
+                     AND ($2::text IS NULL OR policy->>'system_id' = $2)
                    ORDER BY lease_expires_at LIMIT $1 FOR UPDATE SKIP LOCKED""",
-                limit,
+                limit, system_id,
             )
             now: datetime = await conn.fetchval("SELECT now()")
             for row in rows:
@@ -567,36 +568,39 @@ class GatewayStore:
         return [dict(r) for r in await self.pool.fetch(
             "SELECT * FROM attempts WHERE action_key = $1 ORDER BY attempt_no", action_key)]
 
-    async def due_actions(self, limit: int = 100) -> list[str]:
+    async def due_actions(self, limit: int = 100, system_id: str | None = None) -> list[str]:
         """Actions the controller should look at: lease-free, non-terminal, and due."""
         rows = await self.pool.fetch(
             """SELECT action_key FROM executions
                WHERE state IN ('PREPARED', 'UNKNOWN', 'RETRY_WAIT')
                  AND (next_action_at IS NULL OR next_action_at <= now())
+                 AND ($2::text IS NULL OR policy->>'system_id' = $2)
                ORDER BY coalesce(next_action_at, updated_at) LIMIT $1""",
-            limit,
+            limit, system_id,
         )
         return [r["action_key"] for r in rows]
 
-    async def audit_candidates(self, limit: int = 100) -> list[str]:
+    async def audit_candidates(self, limit: int = 100, system_id: str | None = None) -> list[str]:
         """SUCCEEDED actions with >1 attempt and no duplicate audit yet (rule DS; the engine filters further)."""
         rows = await self.pool.fetch(
             """SELECT x.action_key FROM executions x
                WHERE x.state = 'SUCCEEDED' AND NOT x.duplicate_detected AND x.attempt_count > 1
                  AND NOT EXISTS (SELECT 1 FROM evidence e WHERE e.action_key = x.action_key AND e.kind = 'duplicate_audit')
+                 AND ($2::text IS NULL OR x.policy->>'system_id' = $2)
                ORDER BY x.updated_at LIMIT $1""",
-            limit,
+            limit, system_id,
         )
         return [r["action_key"] for r in rows]
 
-    async def unconsumed_late_evidence(self, limit: int = 100) -> list[dict[str, Any]]:
+    async def unconsumed_late_evidence(self, limit: int = 100, system_id: str | None = None) -> list[dict[str, Any]]:
         """Late responses not yet cited by any decision (applied or not)."""
         rows = await self.pool.fetch(
-            """SELECT e.* FROM evidence e
+            """SELECT e.* FROM evidence e JOIN executions x USING (action_key)
                WHERE e.kind = 'late_response'
                  AND NOT EXISTS (SELECT 1 FROM decisions d WHERE d.action_key = e.action_key AND e.id = ANY (d.evidence_ids))
+                 AND ($2::text IS NULL OR x.policy->>'system_id' = $2)
                ORDER BY e.id LIMIT $1""",
-            limit,
+            limit, system_id,
         )
         return [dict(r) for r in rows]
 

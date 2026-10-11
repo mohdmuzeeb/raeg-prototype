@@ -167,3 +167,5 @@ class Claim(str, enum.Enum):
     UNRESOLVED_ESCALATED = "UNRESOLVED(escalated)"
     UNRESOLVED_GAVE_UP = "UNRESOLVED(gave_up_ambiguous)"
     UNRESOLVED_HORIZON = "UNRESOLVED(horizon)"
+    # Secondary "pessimistic-agent rescoring" only (DESIGN §6.2): never a system's own claim.
+    NO_EFFECT_ASSUMED = "NO_EFFECT(assumed_by_agent)"

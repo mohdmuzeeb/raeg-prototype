@@ -180,3 +180,22 @@ async def test_lookup_parsing(tmp_path: Path) -> None:
     await client.aclose()
     assert ok.ok and ok.as_of and ok.records == [OK_BODY]
     assert not bad.ok and bad.error_class == "HTTP_501"
+
+
+def test_reloading_hook_plan_picks_up_file_changes(tmp_path: Path) -> None:
+    import os
+    import time
+
+    from raeg_common.hooks import ReloadingHookPlan
+
+    path = tmp_path / "hooks.json"
+    plan = ReloadingHookPlan(path)
+    assert plan.lookup("k1", 1) is None, "missing file = no hooks"
+    path.write_text(json.dumps({"hooks": [{"action_key": "k1", "attempt_no": 1, "point": "CP3"}]}))
+    assert plan.lookup("k1", 1).point is HookPoint.CP3
+    path.write_text(json.dumps({"hooks": []}))
+    later = time.time() + 5
+    os.utime(path, (later, later))  # force a distinct mtime on coarse-grained filesystems
+    assert plan.lookup("k1", 1) is None
+    path.unlink()
+    assert plan.lookup("k1", 1) is None

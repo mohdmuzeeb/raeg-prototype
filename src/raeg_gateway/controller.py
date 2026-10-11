@@ -46,6 +46,7 @@ class Policy:
     no_ttl: bool = False  # ablation
     no_horizon: bool = False  # ablation
     version: str = "raeg-policy-v0.3"
+    system_id: str = "RAEG"  # which configured system owns actions submitted with this policy
 
     def __post_init__(self) -> None:
         if self.mode not in ("STRICT", "BOUNDED") or self.order not in ("verify_first", "retry_first"):

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="50" time="11.551" timestamp="2026-10-10T23:51:53.574675-04:00" hostname="MacBookAir"><testcase classname="tests.gateway.test_auditability" name="test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-submissions]" time="0.291" /><testcase classname="tests.gateway.test_auditability" name="test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-attempts]" time="0.115" /><testcase classname="tests.gateway.test_auditability" name="test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-evidence]" time="0.103" /><testcase classname="tests.gateway.test_auditability" name="test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-decisions]" time="0.123" /><testcase classname="tests.gateway.test_auditability" name="test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-execution_events]" time="0.150" /><testcase classname="tests.gateway.test_auditability" name="test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-anomalies]" time="0.142" /><testcase classname="tests.gateway.test_auditability" name="test_app_role_cannot_mutate_evidence[DELETE FROM {t}-submissions]" time="0.157" /><testcase classname="tests.gateway.test_auditability" name="test_app_role_cannot_mutate_evidence[DELETE FROM {t}-attempts]" time="0.115" /><testcase classname="tests.gateway.test_auditability" name="test_app_role_cannot_mutate_evidence[DELETE FROM {t}-evidence]" time="0.112" /><testcase classname="tests.gateway.test_auditability" name="test_app_role_cannot_mutate_evidence[DELETE FROM {t}-decisions]" time="0.150" /><testcase classname="tests.gateway.test_auditability" name="test_app_role_cannot_mutate_evidence[DELETE FROM {t}-execution_events]" time="0.309" /><testcase classname="tests.gateway.test_auditability" name="test_app_role_cannot_mutate_evidence[DELETE FROM {t}-anomalies]" time="1.216" /><testcase classname="tests.gateway.test_auditability" name="test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-submissions]" time="0.114" /><testcase classname="tests.gateway.test_auditability" name="test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-attempts]" time="0.112" /><testcase classname="tests.gateway.test_auditability" name="test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-evidence]" time="0.114" /><testcase classname="tests.gateway.test_auditability" name="test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-decisions]" time="0.094" /><testcase classname="tests.gateway.test_auditability" name="test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-execution_events]" time="0.126" /><testcase classname="tests.gateway.test_auditability" name="test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-anomalies]" time="0.136" /><testcase classname="tests.gateway.test_auditability" name="test_app_role_cannot_change_identity_or_delete_executions[UPDATE executions SET fingerprint = 'x']" time="0.107" /><testcase classname="tests.gateway.test_auditability" name="test_app_role_cannot_change_identity_or_delete_executions[UPDATE executions SET payload = '{}']" time="0.098" /><testcase classname="tests.gateway.test_auditability" name="test_app_role_cannot_change_identity_or_delete_executions[UPDATE executions SET capability = '{}']" time="0.092" /><testcase classname="tests.gateway.test_auditability" name="test_app_role_cannot_change_identity_or_delete_executions[DELETE FROM executions]" time="0.096" /><testcase classname="tests.gateway.test_auditability" name="test_app_role_cannot_change_identity_or_delete_executions[TRUNCATE executions CASCADE]" time="0.111" /><testcase classname="tests.gateway.test_auditability" name="test_triggers_bind_even_the_owner_role[submissions]" time="0.112" /><testcase classname="tests.gateway.test_auditability" name="test_triggers_bind_even_the_owner_role[attempts]" time="0.115" /><testcase classname="tests.gateway.test_auditability" name="test_triggers_bind_even_the_owner_role[evidence]" time="0.109" /><testcase classname="tests.gateway.test_auditability" name="test_triggers_bind_even_the_owner_role[decisions]" time="0.090" /><testcase classname="tests.gateway.test_auditability" name="test_triggers_bind_even_the_owner_role[execution_events]" time="0.089" /><testcase classname="tests.gateway.test_auditability" name="test_triggers_bind_even_the_owner_role[anomalies]" time="0.086" /><testcase classname="tests.gateway.test_auditability" name="test_tampered_event_is_detected" time="0.097" /><testcase classname="tests.gateway.test_auditability" name="test_deleted_event_breaks_the_chain" time="0.100" /><testcase classname="tests.gateway.test_auditability" name="test_projection_rebuild_matches_and_detects_drift" time="0.156" /><testcase classname="tests.gateway.test_concurrency" name="test_concurrent_identical_submissions_create_once" time="0.520" /><testcase classname="tests.gateway.test_concurrency" name="test_concurrent_conflicting_fingerprints" time="0.359" /><testcase classname="tests.gateway.test_concurrency" name="test_concurrent_claims_grant_exactly_one_attempt" time="1.045" /><testcase classname="tests.gateway.test_concurrency" name="test_concurrent_sweepers_expire_each_lease_once" time="0.641"><failure message="assert 0 == 40&#10; +  where 0 = len([])">store = &lt;raeg_gateway.store.GatewayStore object at 0x1098c6030&gt;
+admin = &lt;asyncpg.connection.Connection object at 0x1097dfb50&gt;
+
+    async def test_concurrent_sweepers_expire_each_lease_once(store, admin) -&gt; None:
+        keys = [(await submit(store))[0] for _ in range(40)]
+        for key in keys:
+            await store.claim(key, worker_id="w", attempt_ms=20, basis=Basis.INITIAL)
+        await asyncio.sleep(0.1)
+        results = await asyncio.gather(*(store.sweep_expired(f"sweeper-{i}", limit=7) for i in range(12)))
+        applied = [r for batch in results for r in batch if r.applied]
+&gt;       assert len(applied) == 40
+E       assert 0 == 40
+E        +  where 0 = len([])
+
+tests/gateway/test_concurrency.py:64: AssertionError</failure></testcase><testcase classname="tests.gateway.test_concurrency" name="test_owner_completion_races_sweeper" time="0.797"><failure message="AssertionError: every action left DISPATCHING exactly once&#10;assert (0 + 0) == 40">store = &lt;raeg_gateway.store.GatewayStore object at 0x1098c7b30&gt;
+admin = &lt;asyncpg.connection.Connection object at 0x1097df450&gt;
+
+    async def test_owner_completion_races_sweeper(store, admin) -&gt; None:
+        keys = [(await submit(store))[0] for _ in range(40)]
+        claims = {}
+        for key in keys:
+            claims[key] = await store.claim(key, worker_id="owner", attempt_ms=30, basis=Basis.INITIAL)
+        await asyncio.sleep(0.04)
+    
+        async def owner(key: str):
+            return await store.transition(key, "T3", worker_id="owner", rule_id="RESP",
+                                          fence=OwnerFence("owner", claims[key].lease_token, 1))
+    
+        async def sweeper(i: int):
+            return await store.sweep_expired(f"sweeper-{i}", limit=50)
+    
+        tasks = [owner(k) for k in keys] + [sweeper(i) for i in range(4)]
+        random.Random(7).shuffle(tasks)
+        results = await asyncio.gather(*tasks)
+        owner_applied = sum(1 for r in results if not isinstance(r, list) and r.applied)
+        swept = sum(1 for r in results if isinstance(r, list) for x in r if x.applied)
+&gt;       assert owner_applied + swept == 40, "every action left DISPATCHING exactly once"
+E       AssertionError: every action left DISPATCHING exactly once
+E       assert (0 + 0) == 40
+
+tests/gateway/test_concurrency.py:88: AssertionError</failure></testcase><testcase classname="tests.gateway.test_concurrency" name="test_randomized_stress" time="1.250" /><testcase classname="tests.gateway.test_store_transitions" name="test_t1_created_duplicate_conflict" time="0.108" /><testcase classname="tests.gateway.test_store_transitions" name="test_happy_path_and_write_ahead" time="0.109" /><testcase classname="tests.gateway.test_store_transitions" name="test_illegal_transitions_are_refused_before_any_write" time="0.108" /><testcase classname="tests.gateway.test_store_transitions" name="test_owner_fence_rejects_stale_holders" time="0.109" /><testcase classname="tests.gateway.test_store_transitions" name="test_sweeper_expires_leases_and_fences_late_owner" time="0.262"><failure message="AssertionError: assert [] == [&lt;State.UNKNOWN: 'UNKNOWN'&gt;]&#10;  &#10;  Right contains one more item: &lt;State.UNKNOWN: 'UNKNOWN'&gt;&#10;  &#10;  Full diff:&#10;  + []&#10;  - [&#10;  -     &lt;State.UNKNOWN: 'UNKNOWN'&gt;,&#10;  - ]">store = &lt;raeg_gateway.store.GatewayStore object at 0x1098a8890&gt;
+admin = &lt;asyncpg.connection.Connection object at 0x109a1e450&gt;
+
+    async def test_sweeper_expires_leases_and_fences_late_owner(store, admin) -&gt; None:
+        key, _ = await submit(store)
+        keep, _ = await submit(store)
+        claim = await store.claim(key, worker_id="w1", attempt_ms=50, basis=Basis.INITIAL)
+        await store.claim(keep, worker_id="w1", attempt_ms=60_000, basis=Basis.INITIAL)
+        await asyncio.sleep(0.15)
+        swept = await store.sweep_expired("sweeper")
+&gt;       assert [r.state for r in swept] == [State.UNKNOWN]
+E       AssertionError: assert [] == [&lt;State.UNKNOWN: 'UNKNOWN'&gt;]
+E         
+E         Right contains one more item: &lt;State.UNKNOWN: 'UNKNOWN'&gt;
+E         
+E         Full diff:
+E         + []
+E         - [
+E         -     &lt;State.UNKNOWN: 'UNKNOWN'&gt;,
+E         - ]
+
+tests/gateway/test_store_transitions.py:96: AssertionError</failure></testcase><testcase classname="tests.gateway.test_store_transitions" name="test_expired_fence_refuses_live_lease" time="0.130" /><testcase classname="tests.gateway.test_store_transitions" name="test_segments_anchor_and_max_deadline" time="0.140" /><testcase classname="tests.gateway.test_store_transitions" name="test_claim_guard_failure_is_t13a_and_not_due_is_refused" time="0.140" /><testcase classname="tests.gateway.test_store_transitions" name="test_terminal_states_are_absorbing_and_escalation_is_operator_only" time="0.148" /><testcase classname="tests.gateway.test_store_transitions" name="test_anomaly_and_fenced_evidence_are_recorded" time="0.082" /><testcase classname="tests.gateway.test_store_transitions" name="test_same_state_transitions_are_whitelisted_and_audited" time="0.143" /><testcase classname="tests.gateway.test_store_transitions" name="test_stale_version_is_recorded_rejection_not_exception" time="0.127" /></testsuite></testsuites>

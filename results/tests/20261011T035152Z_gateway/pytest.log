@@ -1,0 +1,191 @@
+$ <repo>/.venv/bin/python -m pytest -v -rA --tb=long --junitxml=<repo>/results/tests/20261011T035152Z_gateway/junit.xml tests/gateway
+
+============================= test session starts ==============================
+platform darwin -- Python 3.12.7, pytest-9.1.1, pluggy-1.6.0 -- <repo>/.venv/bin/python
+cachedir: .pytest_cache
+hypothesis profile 'default'
+rootdir: <repo>
+configfile: pyproject.toml
+plugins: hypothesis-6.168.5, asyncio-1.4.0, anyio-4.15.1
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
+collecting ... collected 50 items
+
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-submissions] PASSED [  2%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-attempts] PASSED [  4%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-evidence] PASSED [  6%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-decisions] PASSED [  8%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-execution_events] PASSED [ 10%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-anomalies] PASSED [ 12%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-submissions] PASSED [ 14%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-attempts] PASSED [ 16%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-evidence] PASSED [ 18%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-decisions] PASSED [ 20%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-execution_events] PASSED [ 22%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-anomalies] PASSED [ 24%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-submissions] PASSED [ 26%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-attempts] PASSED [ 28%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-evidence] PASSED [ 30%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-decisions] PASSED [ 32%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-execution_events] PASSED [ 34%]
+tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-anomalies] PASSED [ 36%]
+tests/gateway/test_auditability.py::test_app_role_cannot_change_identity_or_delete_executions[UPDATE executions SET fingerprint = 'x'] PASSED [ 38%]
+tests/gateway/test_auditability.py::test_app_role_cannot_change_identity_or_delete_executions[UPDATE executions SET payload = '{}'] PASSED [ 40%]
+tests/gateway/test_auditability.py::test_app_role_cannot_change_identity_or_delete_executions[UPDATE executions SET capability = '{}'] PASSED [ 42%]
+tests/gateway/test_auditability.py::test_app_role_cannot_change_identity_or_delete_executions[DELETE FROM executions] PASSED [ 44%]
+tests/gateway/test_auditability.py::test_app_role_cannot_change_identity_or_delete_executions[TRUNCATE executions CASCADE] PASSED [ 46%]
+tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[submissions] PASSED [ 48%]
+tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[attempts] PASSED [ 50%]
+tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[evidence] PASSED [ 52%]
+tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[decisions] PASSED [ 54%]
+tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[execution_events] PASSED [ 56%]
+tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[anomalies] PASSED [ 58%]
+tests/gateway/test_auditability.py::test_tampered_event_is_detected PASSED [ 60%]
+tests/gateway/test_auditability.py::test_deleted_event_breaks_the_chain PASSED [ 62%]
+tests/gateway/test_auditability.py::test_projection_rebuild_matches_and_detects_drift PASSED [ 64%]
+tests/gateway/test_concurrency.py::test_concurrent_identical_submissions_create_once PASSED [ 66%]
+tests/gateway/test_concurrency.py::test_concurrent_conflicting_fingerprints PASSED [ 68%]
+tests/gateway/test_concurrency.py::test_concurrent_claims_grant_exactly_one_attempt PASSED [ 70%]
+tests/gateway/test_concurrency.py::test_concurrent_sweepers_expire_each_lease_once FAILED [ 72%]
+tests/gateway/test_concurrency.py::test_owner_completion_races_sweeper FAILED [ 74%]
+tests/gateway/test_concurrency.py::test_randomized_stress PASSED         [ 76%]
+tests/gateway/test_store_transitions.py::test_t1_created_duplicate_conflict PASSED [ 78%]
+tests/gateway/test_store_transitions.py::test_happy_path_and_write_ahead PASSED [ 80%]
+tests/gateway/test_store_transitions.py::test_illegal_transitions_are_refused_before_any_write PASSED [ 82%]
+tests/gateway/test_store_transitions.py::test_owner_fence_rejects_stale_holders PASSED [ 84%]
+tests/gateway/test_store_transitions.py::test_sweeper_expires_leases_and_fences_late_owner FAILED [ 86%]
+tests/gateway/test_store_transitions.py::test_expired_fence_refuses_live_lease PASSED [ 88%]
+tests/gateway/test_store_transitions.py::test_segments_anchor_and_max_deadline PASSED [ 90%]
+tests/gateway/test_store_transitions.py::test_claim_guard_failure_is_t13a_and_not_due_is_refused PASSED [ 92%]
+tests/gateway/test_store_transitions.py::test_terminal_states_are_absorbing_and_escalation_is_operator_only PASSED [ 94%]
+tests/gateway/test_store_transitions.py::test_anomaly_and_fenced_evidence_are_recorded PASSED [ 96%]
+tests/gateway/test_store_transitions.py::test_same_state_transitions_are_whitelisted_and_audited PASSED [ 98%]
+tests/gateway/test_store_transitions.py::test_stale_version_is_recorded_rejection_not_exception PASSED [100%]
+
+=================================== FAILURES ===================================
+_______________ test_concurrent_sweepers_expire_each_lease_once ________________
+
+store = <raeg_gateway.store.GatewayStore object at 0x1098c6030>
+admin = <asyncpg.connection.Connection object at 0x1097dfb50>
+
+    async def test_concurrent_sweepers_expire_each_lease_once(store, admin) -> None:
+        keys = [(await submit(store))[0] for _ in range(40)]
+        for key in keys:
+            await store.claim(key, worker_id="w", attempt_ms=20, basis=Basis.INITIAL)
+        await asyncio.sleep(0.1)
+        results = await asyncio.gather(*(store.sweep_expired(f"sweeper-{i}", limit=7) for i in range(12)))
+        applied = [r for batch in results for r in batch if r.applied]
+>       assert len(applied) == 40
+E       assert 0 == 40
+E        +  where 0 = len([])
+
+tests/gateway/test_concurrency.py:64: AssertionError
+_____________________ test_owner_completion_races_sweeper ______________________
+
+store = <raeg_gateway.store.GatewayStore object at 0x1098c7b30>
+admin = <asyncpg.connection.Connection object at 0x1097df450>
+
+    async def test_owner_completion_races_sweeper(store, admin) -> None:
+        keys = [(await submit(store))[0] for _ in range(40)]
+        claims = {}
+        for key in keys:
+            claims[key] = await store.claim(key, worker_id="owner", attempt_ms=30, basis=Basis.INITIAL)
+        await asyncio.sleep(0.04)
+    
+        async def owner(key: str):
+            return await store.transition(key, "T3", worker_id="owner", rule_id="RESP",
+                                          fence=OwnerFence("owner", claims[key].lease_token, 1))
+    
+        async def sweeper(i: int):
+            return await store.sweep_expired(f"sweeper-{i}", limit=50)
+    
+        tasks = [owner(k) for k in keys] + [sweeper(i) for i in range(4)]
+        random.Random(7).shuffle(tasks)
+        results = await asyncio.gather(*tasks)
+        owner_applied = sum(1 for r in results if not isinstance(r, list) and r.applied)
+        swept = sum(1 for r in results if isinstance(r, list) for x in r if x.applied)
+>       assert owner_applied + swept == 40, "every action left DISPATCHING exactly once"
+E       AssertionError: every action left DISPATCHING exactly once
+E       assert (0 + 0) == 40
+
+tests/gateway/test_concurrency.py:88: AssertionError
+______________ test_sweeper_expires_leases_and_fences_late_owner _______________
+
+store = <raeg_gateway.store.GatewayStore object at 0x1098a8890>
+admin = <asyncpg.connection.Connection object at 0x109a1e450>
+
+    async def test_sweeper_expires_leases_and_fences_late_owner(store, admin) -> None:
+        key, _ = await submit(store)
+        keep, _ = await submit(store)
+        claim = await store.claim(key, worker_id="w1", attempt_ms=50, basis=Basis.INITIAL)
+        await store.claim(keep, worker_id="w1", attempt_ms=60_000, basis=Basis.INITIAL)
+        await asyncio.sleep(0.15)
+        swept = await store.sweep_expired("sweeper")
+>       assert [r.state for r in swept] == [State.UNKNOWN]
+E       AssertionError: assert [] == [<State.UNKNOWN: 'UNKNOWN'>]
+E         
+E         Right contains one more item: <State.UNKNOWN: 'UNKNOWN'>
+E         
+E         Full diff:
+E         + []
+E         - [
+E         -     <State.UNKNOWN: 'UNKNOWN'>,
+E         - ]
+
+tests/gateway/test_store_transitions.py:96: AssertionError
+==================================== PASSES ====================================
+____________________________ test_randomized_stress ____________________________
+----------------------------- Captured stdout call -----------------------------
+stress counters: {'applied': 253, 'rejected': 93, 'illegal': 0, 'absorbing_refused': 579}
+- generated xml file: <repo>/results/tests/20261011T035152Z_gateway/junit.xml -
+=========================== short test summary info ============================
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-submissions]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-attempts]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-evidence]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-decisions]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-execution_events]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[UPDATE {t} SET action_key = action_key-anomalies]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-submissions]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-attempts]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-evidence]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-decisions]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-execution_events]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[DELETE FROM {t}-anomalies]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-submissions]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-attempts]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-evidence]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-decisions]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-execution_events]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_mutate_evidence[TRUNCATE {t} CASCADE-anomalies]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_change_identity_or_delete_executions[UPDATE executions SET fingerprint = 'x']
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_change_identity_or_delete_executions[UPDATE executions SET payload = '{}']
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_change_identity_or_delete_executions[UPDATE executions SET capability = '{}']
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_change_identity_or_delete_executions[DELETE FROM executions]
+PASSED tests/gateway/test_auditability.py::test_app_role_cannot_change_identity_or_delete_executions[TRUNCATE executions CASCADE]
+PASSED tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[submissions]
+PASSED tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[attempts]
+PASSED tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[evidence]
+PASSED tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[decisions]
+PASSED tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[execution_events]
+PASSED tests/gateway/test_auditability.py::test_triggers_bind_even_the_owner_role[anomalies]
+PASSED tests/gateway/test_auditability.py::test_tampered_event_is_detected
+PASSED tests/gateway/test_auditability.py::test_deleted_event_breaks_the_chain
+PASSED tests/gateway/test_auditability.py::test_projection_rebuild_matches_and_detects_drift
+PASSED tests/gateway/test_concurrency.py::test_concurrent_identical_submissions_create_once
+PASSED tests/gateway/test_concurrency.py::test_concurrent_conflicting_fingerprints
+PASSED tests/gateway/test_concurrency.py::test_concurrent_claims_grant_exactly_one_attempt
+PASSED tests/gateway/test_concurrency.py::test_randomized_stress
+PASSED tests/gateway/test_store_transitions.py::test_t1_created_duplicate_conflict
+PASSED tests/gateway/test_store_transitions.py::test_happy_path_and_write_ahead
+PASSED tests/gateway/test_store_transitions.py::test_illegal_transitions_are_refused_before_any_write
+PASSED tests/gateway/test_store_transitions.py::test_owner_fence_rejects_stale_holders
+PASSED tests/gateway/test_store_transitions.py::test_expired_fence_refuses_live_lease
+PASSED tests/gateway/test_store_transitions.py::test_segments_anchor_and_max_deadline
+PASSED tests/gateway/test_store_transitions.py::test_claim_guard_failure_is_t13a_and_not_due_is_refused
+PASSED tests/gateway/test_store_transitions.py::test_terminal_states_are_absorbing_and_escalation_is_operator_only
+PASSED tests/gateway/test_store_transitions.py::test_anomaly_and_fenced_evidence_are_recorded
+PASSED tests/gateway/test_store_transitions.py::test_same_state_transitions_are_whitelisted_and_audited
+PASSED tests/gateway/test_store_transitions.py::test_stale_version_is_recorded_rejection_not_exception
+FAILED tests/gateway/test_concurrency.py::test_concurrent_sweepers_expire_each_lease_once
+FAILED tests/gateway/test_concurrency.py::test_owner_completion_races_sweeper
+FAILED tests/gateway/test_store_transitions.py::test_sweeper_expires_leases_and_fences_late_owner
+======================== 3 failed, 47 passed in 11.55s =========================

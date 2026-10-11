@@ -1,0 +1,19 @@
+$ <repo>/.venv/bin/python -m pytest -v -rA --tb=long --junitxml=<repo>/results/tests/20261011T040000Z_systems/junit.xml tests/systems/test_hooks_across_systems.py -q
+
+============================= test session starts ==============================
+platform darwin -- Python 3.12.7, pytest-9.1.1, pluggy-1.6.0
+rootdir: <repo>
+configfile: pyproject.toml
+plugins: hypothesis-6.168.5, asyncio-1.4.0, anyio-4.15.1
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
+collected 3 items
+
+tests/systems/test_hooks_across_systems.py ...                           [100%]
+
+==================================== PASSES ====================================
+- generated xml file: <repo>/results/tests/20261011T040000Z_systems/junit.xml -
+=========================== short test summary info ============================
+PASSED tests/systems/test_hooks_across_systems.py::test_cp3_b1_in_memory_state_is_lost
+PASSED tests/systems/test_hooks_across_systems.py::test_cp3_b3_worker_crash_is_retried_by_temporal
+PASSED tests/systems/test_hooks_across_systems.py::test_cp3_raeg_recovers_after_restart_without_traffic
+============================== 3 passed in 18.66s ==============================

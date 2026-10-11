@@ -57,6 +57,72 @@ services:
       timeout: 3s
       retries: 30
 
+  # ---------------------------------------------------------------- M5: systems under test
+  # Started with `make up-systems` (compose profile "systems").
+  temporal-db:
+    <<: *postgres
+    profiles: [systems]
+    environment:
+      POSTGRES_USER: temporal
+      POSTGRES_PASSWORD: temporal
+    volumes: [temporal-db:/var/lib/postgresql/data]
+
+  temporal:
+    image: temporalio/auto-setup:1.28.1@sha256:607d68caa111338d754771efb876c92dfcdae06d056e4530bb31cd0f37406e6a
+    profiles: [systems]
+    depends_on:
+      temporal-db: {condition: service_healthy}
+    environment:
+      DB: postgres12
+      DB_PORT: "5432"
+      POSTGRES_USER: temporal
+      POSTGRES_PWD: temporal
+      POSTGRES_SEEDS: temporal-db
+    ports: ["127.0.0.1:17233:7233"]
+    restart: unless-stopped
+
+  temporal-worker:
+    image: raeg/python:dev
+    profiles: [systems]
+    command: ["python", "-m", "systems.temporal_wf.worker"]
+    depends_on: [temporal, provider]
+    environment:
+      TEMPORAL_ADDRESS: temporal:7233
+      PROVIDER_URL: http://provider:8001
+      EXCHANGE_LOG_DIR: /exchange-logs
+      HOOK_PLAN: /exchange-logs/hooks.json   # re-read on change; absent = no hooks
+    volumes: [exchange-logs:/exchange-logs]
+    restart: unless-stopped   # a crash hook (os._exit) kills the worker; Temporal retries the activity
+
+  systems:
+    image: raeg/python:dev
+    profiles: [systems]
+    command: ["python", "-m", "systems.serve"]
+    depends_on:
+      provider: {condition: service_healthy}
+      raeg-db: {condition: service_healthy}
+      temporal: {condition: service_started}
+    environment:
+      PROVIDER_URL: http://provider:8001
+      RAEG_DB_APP_DSN: postgresql://raeg_app:raeg_app@raeg-db:5432/raeg
+      RAEG_DB_ADMIN_DSN: postgresql://postgres:postgres@raeg-db:5432/raeg
+      TEMPORAL_ADDRESS: temporal:7233
+      EXCHANGE_LOG_DIR: /exchange-logs
+      HOOK_PLAN: /exchange-logs/hooks.json   # re-read on change; absent = no hooks
+      CODE_SHA: ${CODE_SHA:-unknown}
+      SYSTEMS: ${SYSTEMS:-}
+      PORT: "8080"
+    ports: ["127.0.0.1:18080:8080"]
+    volumes: [exchange-logs:/exchange-logs]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/healthz', timeout=2)"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
 volumes:
   provider-db:
   raeg-db:
+  temporal-db:
+  exchange-logs:

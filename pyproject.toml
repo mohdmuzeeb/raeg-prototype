@@ -10,6 +10,7 @@ dependencies = [
     "httpx>=0.27",
     "pydantic>=2.7",
     "pyyaml>=6.0",
+    "temporalio>=1.9",
 ]
 
 [dependency-groups]
@@ -24,7 +25,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/raeg_common", "src/raeg_gateway", "src/payment_provider", "src/harness"]
+packages = ["src/raeg_common", "src/raeg_gateway", "src/payment_provider", "src/systems", "src/analysis", "src/harness"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -36,4 +37,5 @@ markers = [
     "gateway: requires raeg-db (docker compose) to be running",
     "restart: restarts the provider container (needs docker)",
     "integration: engine + gateway store + provider (needs the full stack)",
+    "systems: systems under test via their HTTP contract (needs make up-systems)",
 ]

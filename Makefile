@@ -2,7 +2,7 @@
 export DOCKER_CONTEXT ?= colima
 COMPOSE := docker compose -f docker-compose.yml
 
-.PHONY: lock up up-test down clean test-unit test-property test-conformance test-gateway test-integration test
+.PHONY: lock up up-test down clean test-unit test-property test-conformance test-gateway test-integration test-systems up-systems test
 
 lock:            ## re-lock Python deps and export hashed requirements for images
 	uv lock
@@ -15,10 +15,13 @@ up-test:         ## start the stack with the test-only reset endpoint enabled
 	PROVIDER_ALLOW_RESET=1 $(COMPOSE) up -d --build --wait
 
 down:
-	$(COMPOSE) down
+	$(COMPOSE) --profile systems down
+
+up-systems:      ## M5: also start Temporal, its worker, and the systems service (reset endpoint ON)
+	PROVIDER_ALLOW_RESET=1 CODE_SHA=$$(git rev-parse HEAD) $(COMPOSE) --profile systems up -d --build --wait
 
 clean:           ## remove containers AND volumes (fresh state)
-	$(COMPOSE) down -v
+	$(COMPOSE) --profile systems down -v
 
 test-unit:       ## unit tests; logs saved under results/tests/
 	uv run python scripts/run_tests.py unit -- tests/unit
@@ -32,7 +35,10 @@ test-property:   ## M4 model-based safety checks of the controller (no Docker)
 test-integration: up-test  ## M4 engine + store + provider: scenarios, real-process crashes, zombies, concurrency
 	uv run python scripts/run_tests.py integration --compose-logs provider -- tests/integration
 
-test: test-unit test-property test-conformance test-gateway test-integration
+test-systems: up-systems  ## M5: F0 smoke + definition-conformance tests of every system via its HTTP contract
+	uv run python scripts/run_tests.py systems --compose-logs systems temporal-worker -- tests/systems
+
+test: test-unit test-property test-conformance test-gateway test-integration test-systems
 
 test-gateway: up-test  ## M3 gateway store: transitions, concurrency, auditability, projection rebuild
 	uv run python scripts/run_tests.py gateway --compose-logs raeg-db -- tests/gateway

@@ -1,0 +1,54 @@
+$ <repo>/.venv/bin/python -m pytest -v -rA --tb=long --junitxml=<repo>/results/tests/20261011T034157Z_systems/junit.xml tests/systems -q
+
+============================= test session starts ==============================
+platform darwin -- Python 3.12.7, pytest-9.1.1, pluggy-1.6.0
+rootdir: <repo>
+configfile: pyproject.toml
+plugins: hypothesis-6.168.5, asyncio-1.4.0, anyio-4.15.1
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
+collected 36 items
+
+tests/systems/test_baseline_definitions.py ................              [ 44%]
+tests/systems/test_contract_smoke.py .................                   [ 91%]
+tests/systems/test_hooks_across_systems.py ...                           [100%]
+
+==================================== PASSES ====================================
+- generated xml file: <repo>/results/tests/20261011T034157Z_systems/junit.xml -
+=========================== short test summary info ============================
+PASSED tests/systems/test_baseline_definitions.py::test_b1_resends_without_key
+PASSED tests/systems/test_baseline_definitions.py::test_b2_resends_with_key_and_gets_replay
+PASSED tests/systems/test_baseline_definitions.py::test_b2_key_is_ignored_by_provider_without_idempotency
+PASSED tests/systems/test_baseline_definitions.py::test_retry_baselines_give_up_with_error_after_budget
+PASSED tests/systems/test_baseline_definitions.py::test_retry_baselines_stop_on_decline
+PASSED tests/systems/test_baseline_definitions.py::test_b1_has_no_local_deduplication
+PASSED tests/systems/test_baseline_definitions.py::test_b3_activity_retry_reuses_key
+PASSED tests/systems/test_baseline_definitions.py::test_b3_decline_is_non_retryable
+PASSED tests/systems/test_baseline_definitions.py::test_b3_retry_policy_exhausts_after_max_dispatch
+PASSED tests/systems/test_baseline_definitions.py::test_b3_workflow_id_deduplicates_submissions
+PASSED tests/systems/test_baseline_definitions.py::test_b3l_delta_waits_delta_then_redispatches_after_miss
+PASSED tests/systems/test_baseline_definitions.py::test_b3l_horizon_waits_until_deadline_plus_delta
+PASSED tests/systems/test_baseline_definitions.py::test_b3l_finds_lost_response_without_redispatch
+PASSED tests/systems/test_baseline_definitions.py::test_b3l_believes_misses_and_reports_not_found
+PASSED tests/systems/test_baseline_definitions.py::test_raeg_concurrent_submissions_create_one_effect
+PASSED tests/systems/test_baseline_definitions.py::test_raeg_escalation_maps_to_unresolved
+PASSED tests/systems/test_contract_smoke.py::test_f0_every_system[B1]
+PASSED tests/systems/test_contract_smoke.py::test_f0_every_system[B2]
+PASSED tests/systems/test_contract_smoke.py::test_f0_every_system[B3]
+PASSED tests/systems/test_contract_smoke.py::test_f0_every_system[B3-noDL]
+PASSED tests/systems/test_contract_smoke.py::test_f0_every_system[B3L-delta]
+PASSED tests/systems/test_contract_smoke.py::test_f0_every_system[B3L-horizon]
+PASSED tests/systems/test_contract_smoke.py::test_f0_every_system[B3L-horizon-noDL]
+PASSED tests/systems/test_contract_smoke.py::test_f0_every_system[RAEG-bounded]
+PASSED tests/systems/test_contract_smoke.py::test_f0_every_system[RAEG-strict]
+PASSED tests/systems/test_contract_smoke.py::test_f0_every_system[RAEG-strict-no-horizon]
+PASSED tests/systems/test_contract_smoke.py::test_f0_every_system[RAEG-strict-no-ttl]
+PASSED tests/systems/test_contract_smoke.py::test_f0_every_system[RAEG-strict-no-verify]
+PASSED tests/systems/test_contract_smoke.py::test_f0_every_system[RAEG-strict-noDL]
+PASSED tests/systems/test_contract_smoke.py::test_f0_every_system[RAEG-strict-retry-first]
+PASSED tests/systems/test_contract_smoke.py::test_unknown_system_is_404
+PASSED tests/systems/test_contract_smoke.py::test_registry_timing_is_identical_across_systems
+PASSED tests/systems/test_contract_smoke.py::test_systems_use_only_the_shared_client
+PASSED tests/systems/test_hooks_across_systems.py::test_cp3_b1_in_memory_state_is_lost
+PASSED tests/systems/test_hooks_across_systems.py::test_cp3_b3_worker_crash_is_retried_by_temporal
+PASSED tests/systems/test_hooks_across_systems.py::test_cp3_raeg_recovers_after_restart_without_traffic
+============================= 36 passed in 49.57s ==============================
