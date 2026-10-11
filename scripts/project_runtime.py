@@ -73,7 +73,7 @@ def main() -> int:
     fc_worker = measured_cell("FC-worker")
     fc_api = measured_cell("FC-api")
 
-    def secs(cell_id: str, fam: str) -> float:
+    def run_secs(cell_id: str, fam: str) -> float:
         rec = measured[(cell_id, fam)]
         if bring_up is None:
             return rec["wall_clock_s"]
@@ -83,12 +83,12 @@ def main() -> int:
     def source(cell: dict, fam: str) -> float:
         """Conservative: F0 -> measured F0; FC-* -> measured FC-*; F1/FM -> max over measured FM cells."""
         if cell["fault"] == "F0":
-            return secs(f0_cell, fam), [f0_cell]
+            return run_secs(f0_cell, fam), [f0_cell]
         if cell["fault"] == "FC-worker":
-            return secs(fc_worker, fam), [fc_worker]
+            return run_secs(fc_worker, fam), [fc_worker]
         if cell["fault"] == "FC-api":
-            return secs(fc_api, fam), [fc_api]
-        vals = [(secs(c, fam), c) for c in fm_cells]
+            return run_secs(fc_api, fam), [fc_api]
+        vals = [(run_secs(c, fam), c) for c in fm_cells]
         best = max(vals)
         return best[0], [best[1]]
 
